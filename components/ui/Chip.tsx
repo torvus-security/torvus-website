@@ -1,14 +1,57 @@
-type Tone = "now" | "beta" | "planned" | "neutral"
+// components/ui/chip.tsx
+// Minimal Chip component to satisfy "@/components/ui/chip" imports.
+// Drop this file at components/ui/chip.tsx
 
-export function Chip({ label, tone = "neutral" }: { label: string; tone?: Tone }) {
-  const chipClasses = {
-    now: "bg-[color:var(--color-lagoon)]/12 border-[color:var(--color-lagoon)]/30 text-[13px] leading-tight text-[color:var(--color-lagoon)]",
-    beta: "bg-[color:var(--color-lapis)]/12 border-[color:var(--color-lapis)]/30 text-[13px] leading-tight text-[color:var(--color-lapis)]",
-    planned:
-      "bg-[color:var(--color-cranberry)]/12 border-[color:var(--color-cranberry)]/35 text-[13px] leading-tight text-[color:var(--color-cranberry)]",
-    neutral:
-      "bg-[color:var(--color-mist)] border-[color:var(--color-thunder)]/20 text-[13px] leading-tight text-[color:var(--ink-on-light)]",
-  }
+import * as React from "react";
 
-  return <span className={`inline-block px-2 py-1 rounded-lg border ${chipClasses[tone]}`}>{label}</span>
+type Variant = "default" | "secondary" | "success" | "destructive" | "outline";
+type Size = "sm" | "md";
+
+export interface ChipProps extends React.HTMLAttributes<HTMLSpanElement> {
+  variant?: Variant;
+  size?: Size;
+  leadingIcon?: React.ReactNode;
+  trailingIcon?: React.ReactNode;
 }
+
+function cx(...classes: Array<string | false | null | undefined>) {
+  return classes.filter(Boolean).join(" ");
+}
+
+const variantClasses: Record<Variant, string> = {
+  default: "bg-gray-900 text-white",
+  secondary: "bg-gray-100 text-gray-900",
+  success: "bg-emerald-600 text-white",
+  destructive: "bg-rose-600 text-white",
+  outline: "border border-gray-300 text-gray-800",
+};
+
+const sizeClasses: Record<Size, string> = {
+  sm: "text-xs px-2.5 py-1 rounded-full",
+  md: "text-sm px-3 py-1.5 rounded-full",
+};
+
+export const Chip = React.forwardRef<HTMLSpanElement, ChipProps>(
+  ({ variant = "secondary", size = "sm", leadingIcon, trailingIcon, className, children, ...props }, ref) => {
+    return (
+      <span
+        ref={ref}
+        className={cx(
+          "inline-flex items-center gap-1.5 select-none",
+          variantClasses[variant],
+          sizeClasses[size],
+          className
+        )}
+        {...props}
+      >
+        {leadingIcon ? <span className="-ml-0.5">{leadingIcon}</span> : null}
+        <span>{children}</span>
+        {trailingIcon ? <span className="-mr-0.5">{trailingIcon}</span> : null}
+      </span>
+    );
+  }
+);
+
+Chip.displayName = "Chip";
+
+export default Chip;

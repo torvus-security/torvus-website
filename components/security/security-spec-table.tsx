@@ -1,4 +1,4 @@
-import { Chip } from "@/components/ui/Chip"
+import { Chip } from "@/components/ui/chip"
 import type { ReactNode } from "react"
 
 type Item = {

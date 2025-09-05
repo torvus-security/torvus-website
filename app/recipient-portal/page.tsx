@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useMemo, useState } from "react"
-import { Card } from "@/components/ui/Card"
-import { PageHeader } from "@/components/ui/PageHeader"
+import { Card } from "@/components/ui/card"
+import { PageHeader } from "@/components/ui/pageheader"
 import { getDemoPolicy } from "@/lib/demoPolicy"
 
 type ReleaseItem = { id: string; title: string; kind: "document" | "note" }

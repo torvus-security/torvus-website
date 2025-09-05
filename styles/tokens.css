@@ -1,0 +1,1104 @@
+:root {
+  --color-storm: #0b1220;
+  --color-thunder: #1f2937;
+  --color-lapis: #26619c; /* primary */
+  --color-cranberry: #d61f69; /* destructive */
+  --color-lagoon: #1aae9f; /* success */
+  --color-mist: #e5e7eb; /* surfaces */
+  --color-white: #ffffff;
+  /* Added border token for consistent border styling */
+  --color-border: #e2e8f0; /* borders/dividers */
+  /* Shadow color biased toward Storm; tweak if needed */
+  --shadow-rgb: 11, 18, 32; /* approx Storm */
+  --shadow-sm: 0 2px 6px rgba(var(--shadow-rgb), 0.07), 0 1px 1px rgba(var(--shadow-rgb), 0.05);
+  --shadow-md: 0 6px 18px rgba(var(--shadow-rgb), 0.1), 0 2px 4px rgba(var(--shadow-rgb), 0.06);
+  --shadow-lg: 0 12px 32px rgba(var(--shadow-rgb), 0.14), 0 4px 8px rgba(var(--shadow-rgb), 0.08);
+
+  --font-display: "Satoshi", system-ui, -apple-system, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+  --font-sans: "Erode", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Updated semantic tokens to match exact specification */
+  /* readable text colours */
+  --ink-on-light: var(--color-thunder);
+  --ink-on-dark: var(--color-white);
+
+  /* safe pairs */
+  --primary-bg: var(--color-lapis);
+  --primary-ink: var(--color-white);
+  --success-bg: var(--color-lagoon);
+  --success-ink: var(--color-thunder);
+  --alert-bg: var(--color-cranberry);
+  --alert-ink: var(--color-white);
+
+  /* Added shadow utility classes for consistent elevation */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.14);
+
+  /* Adding pastel color variables */
+  --pastel-lemon: #fff8d8;
+  --pastel-mint: #e8fbf3;
+  --pastel-sky: #eef6ff;
+  --pastel-blush: #ffe9f1;
+  --pastel-lilac: #f3ecff;
+  --pastel-sand: #fdf3e6;
+}
+
+html,
+body {
+  background: var(--color-mist);
+  color: var(--color-thunder);
+  font-family: var(--font-sans);
+}
+
+/* Typography utility classes for consistent text styling */
+/* Updated typography classes with larger, more comfortable scale */
+.h1 {
+  font: 700 clamp(36px, 7vw, 56px) / 1.2 var(--font-display);
+  letter-spacing: -0.01em;
+  text-align: left;
+}
+.h2 {
+  font: 700 clamp(28px, 4.5vw, 40px) / 1.25 var(--font-display);
+  text-align: left;
+}
+.h3 {
+  font: 600 clamp(22px, 3vw, 26px) / 1.3 var(--font-sans);
+  text-align: left;
+}
+.h4 {
+  font: 600 clamp(19px, 2.4vw, 22px) / 1.3 var(--font-sans);
+  text-align: left;
+}
+/* Updated body text minimum size from 17px to 18px for better readability */
+.body {
+  font: 400 clamp(18px, 2vw, 20px) / 1.6 var(--font-sans);
+  max-width: 72ch;
+}
+/* Updated small text from 15px to 16px to keep labels legible */
+.small {
+  font: 400 16px / 1.5 var(--font-sans);
+}
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: left;
+}
+h3,
+h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+}
+a {
+  color: var(--color-lapis);
+  font-weight: 600;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  text-align: center;
+}
+.btn-primary {
+  background: var(--primary-bg);
+  color: var(--primary-ink);
+}
+.btn-success {
+  background: var(--success-bg);
+  color: var(--success-ink);
+}
+.btn-danger {
+  background: var(--alert-bg);
+  color: var(--alert-ink);
+}
+.btn-secondary {
+  background: var(--color-white);
+  color: var(--color-thunder);
+  border-color: var(--color-thunder);
+}
+.badge {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.badge.info {
+  background: var(--primary-bg);
+  color: var(--primary-ink);
+}
+.badge.success {
+  background: var(--success-bg);
+  color: var(--success-ink);
+}
+.badge.alert {
+  background: var(--alert-bg);
+  color: var(--alert-ink);
+}
+
+/* Adding semantic surface classes with proper ink colors */
+/* Surfaces */
+.surface--light {
+  background: var(--color-white);
+  color: var(--ink-on-light);
+  /* Using border token instead of hardcoded hex */
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+}
+.surface--mist {
+  background: var(--color-mist);
+  color: var(--ink-on-light);
+  border-radius: 0.75rem; /* Added missing border-radius to surface--mist */
+}
+.surface--dark {
+  background: var(--color-storm);
+  color: var(--ink-on-dark);
+  border-radius: 0.75rem; /* Added missing border-radius to surface--dark */
+}
+
+/* Adding pastel surface classes */
+.surface--lemon {
+  background: var(--pastel-lemon);
+  --card-bg: var(--pastel-lemon);
+}
+.surface--mint {
+  background: var(--pastel-mint);
+  --card-bg: var(--pastel-mint);
+}
+.surface--sky {
+  background: var(--pastel-sky);
+  --card-bg: var(--pastel-sky);
+}
+.surface--blush {
+  background: var(--pastel-blush);
+  --card-bg: var(--pastel-blush);
+}
+.surface--lilac {
+  background: var(--pastel-lilac);
+  --card-bg: var(--pastel-lilac);
+}
+.surface--sand {
+  background: var(--pastel-sand);
+  --card-bg: var(--pastel-sand);
+}
+
+/* Never render lapis text on storm */
+.on-dark a,
+.on-dark .muted {
+  color: var(--ink-on-dark);
+}
+
+/* Adding icon color utilities */
+/* Icons and strokes */
+.icon.on-dark {
+  color: var(--ink-on-dark);
+} /* e.g., hero glyphs on dark */
+.icon.on-light {
+  color: var(--ink-on-light);
+}
+
+/* Added text-wrap properties for better readability */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
+}
+
+/* Adding spacing and prose utilities for better content layout */
+.stack-lg > * + * {
+  margin-top: clamp(16px, 3.5vh, 28px);
+}
+
+.prose {
+  max-width: 72ch;
+}
+
+/* Adding prose list, caption, and code styling for better content formatting */
+.prose ul,
+.prose ol {
+  padding-inline-start: 1.2em;
+}
+.prose li {
+  margin-block: .35em;
+}
+.prose figcaption {
+  font: 400 15px / 1.5 var(--font-sans);
+  opacity: 0.8;
+}
+.prose code,
+.prose kbd {
+  font: 500 0.95em / 1.3 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+}
+
+/* Adding focus-visible accessibility rule with Lapis outline */
+*:focus-visible {
+  outline: 2px solid var(--color-lapis);
+  outline-offset: 2px;
+}
+
+/* Adding reduced motion accessibility rule for users who prefer less animation */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Page container: consistent max width + responsive side padding */
+.container-page {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+}
+
+.container-narrow {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 3vw, 24px);
+}
+
+/* Link styling inside readable copy blocks */
+.prose a {
+  color: var(--color-lapis);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose a:hover {
+  opacity: 0.9;
+}
+
+/* On dark surfaces, avoid Lapis text — use white links */
+.surface--dark .prose a {
+  color: var(--color-white);
+}
+.surface--dark .prose a:hover {
+  opacity: 0.9;
+}
+
+/* Recharts defaults without hex selectors */
+.chart :where(.recharts-cartesian-grid line) {
+  stroke: var(--color-border) !important;
+}
+.chart :where(.recharts-cartesian-axis-tick text) {
+  fill: var(--ink-on-light) !important;
+}
+.chart :where(.recharts-tooltip-wrapper) {
+  background: var(--color-white) !important;
+  color: var(--ink-on-light) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: .5rem !important;
+}
+
+/* Adding empty state and skeleton loading styles */
+.empty {
+  text-align: center;
+  color: var(--ink-on-light);
+}
+.empty .icon {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--color-mist);
+  margin-bottom: .5rem;
+}
+
+.skeleton {
+  border-radius: .5rem;
+  background: linear-gradient(90deg, var(--color-mist), var(--color-white), var(--color-mist));
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite linear;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Ensure icons/text on dark surfaces inherit readable ink */
+.surface--dark svg,
+.surface--dark .icon {
+  color: var(--ink-on-dark);
+  fill: currentColor;
+}
+
+/* Links on dark use white instead of Lapis */
+.surface--dark a {
+  color: var(--color-white);
+}
+.surface--dark a:hover {
+  opacity: 0.9;
+}
+
+/* Adding form field styling classes for consistent input styling */
+.field {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: .75rem;
+  padding: .6rem .8rem;
+  color: var(--ink-on-light);
+}
+.field:focus-visible {
+  outline: 2px solid var(--color-lapis);
+  outline-offset: 2px;
+}
+.field--error {
+  border-color: var(--color-cranberry);
+}
+.field--success {
+  border-color: var(--color-lagoon);
+}
+.help {
+  color: var(--ink-on-light);
+  opacity: 0.8;
+}
+.help.error {
+  color: var(--color-cranberry);
+}
+.help.success {
+  color: var(--color-lagoon);
+}
+
+/* Adding table styling classes for consistent table formatting */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  /* increased padding from .75rem to .9rem for better spacing */
+  padding: .9rem;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
+.table thead th {
+  font-weight: 700;
+  color: var(--ink-on-light);
+}
+.table tbody tr:nth-child(even) {
+  background: color-mix(in oklab, var(--color-mist) 45%, var(--color-white));
+}
+
+/* Updating table--compact with new values */
+.table--compact {
+  font-size: 14px;
+  line-height: 1.45;
+}
+.table--compact th,
+.table--compact td {
+  padding: .5rem .6rem;
+}
+
+/* Shadow utility classes */
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Security page specific styling classes */
+.section-accent {
+  border-inline-start: 4px solid var(--color-lapis);
+  padding-inline-start: 1rem;
+}
+.section-accent--success {
+  border-color: var(--color-lagoon);
+}
+.section-accent--alert {
+  border-color: var(--color-cranberry);
+}
+.section-accent--mist {
+  background: var(--color-mist);
+}
+.band {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--color-lapis) 18%, var(--color-white)),
+    color-mix(in oklab, var(--color-lagoon) 18%, var(--color-white))
+  );
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+}
+/* Cards used for individual controls */
+.spec-card {
+  background: var(--card-bg, var(--color-white));
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  padding: 1rem;
+  height: 100%;
+}
+.spec-card h3 {
+  margin: 0 0 .25rem;
+}
+.spec-card .tech {
+  font: 500 15px / 1.5
+    var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+  word-break: break-word; /* Security tech line readability */
+}
+.spec-card .plain {
+  margin-top: .35rem;
+}
+.status-legend {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.kpi {
+  text-align: center;
+  padding: 1rem;
+  border-radius: .75rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-mist);
+}
+.kpi .num {
+  font: 700 clamp(22px, 3vw, 28px) / 1.1 var(--font-display);
+}
+.kpi .lab {
+  font: 400 14px / 1.4 var(--font-sans);
+  opacity: 0.9;
+}
+/* Two-column layout on xl: sticky anchors */
+.sec-layout {
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 1200px) {
+  .sec-layout {
+    grid-template-columns: 260px 1fr;
+    align-items: start;
+  }
+  .sec-anchors {
+    position: sticky;
+    top: 96px;
+  }
+  .sec-anchors a {
+    display: block;
+    padding: .35rem .25rem;
+    border-left: 2px solid transparent;
+  }
+  .sec-anchors a[aria-current="true"] {
+    color: var(--color-lapis);
+    border-left-color: var(--color-lapis);
+    font-weight: 600;
+  }
+}
+
+/* Brand lockup text (header/site chrome only) */
+.brand {
+  font: 700 clamp(18px, 2.2vw, 22px) / 1.2 var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--ink-on-light);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand:hover {
+  opacity: 0.9;
+}
+.surface--dark .brand {
+  color: var(--ink-on-dark);
+}
+
+/* ===== Two-colour gradient ink for largest headings ===== */
+/* Base: supply --grad-from / --grad-to and this will render gradient text */
+.ink2 {
+  background-image: linear-gradient(90deg, var(--grad-from), var(--grad-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* reveal gradient through text */
+}
+.ink-shadow {
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark surfaces: brighten gradient for contrast */
+.surface--dark .ink2 {
+  background-image: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--grad-from) 80%, white),
+    color-mix(in oklab, var(--grad-to) 80%, white)
+  );
+}
+
+/* High-contrast & forced-colors: fall back to solid ink */
+@media (prefers-contrast: more) {
+  .ink2 {
+    color: var(--ink-on-light);
+    background: none;
+  }
+  .surface--dark .ink2 {
+    color: var(--ink-on-dark);
+  }
+}
+@media (forced-colors: active) {
+  .ink2 {
+    color: CanvasText;
+    background: none;
+  }
+}
+
+/* Preconfigured brand pairs (two-colour only) */
+.ink2--lapis-lagoon {
+  --grad-from: var(--color-lapis);
+  --grad-to: var(--color-lagoon);
+}
+.ink2--lapis-cranberry {
+  --grad-from: var(--color-lapis);
+  --grad-to: var(--color-cranberry);
+}
+.ink2--cranberry-lagoon {
+  --grad-from: var(--color-cranberry);
+  --grad-to: var(--color-lagoon);
+}
+.ink2--storm-lapis {
+  --grad-from: var(--color-storm);
+  --grad-to: var(--color-lapis);
+}
+.ink2--storm-cranberry {
+  --grad-from: var(--color-storm);
+  --grad-to: var(--color-cranberry);
+}
+.ink2--storm-lagoon {
+  --grad-from: var(--color-storm);
+  --grad-to: var(--color-lagoon);
+}
+.ink2--thunder-lapis {
+  --grad-from: var(--color-thunder);
+  --grad-to: var(--color-lapis);
+}
+.ink2--thunder-cranberry {
+  --grad-from: var(--color-thunder);
+  --grad-to: var(--color-cranberry);
+}
+.ink2--thunder-lagoon {
+  --grad-from: var(--color-thunder);
+  --grad-to: var(--color-lagoon);
+}
+
+/* Convenience: apply to .h1 without changing its size/weight */
+.h1--ink2 {
+  /* compose with .h1 */
+  background-image: linear-gradient(90deg, var(--grad-from), var(--grad-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.surface--dark .h1--ink2 {
+  background-image: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--grad-from) 80%, white),
+    color-mix(in oklab, var(--grad-to) 80%, white)
+  );
+}
+
+/* Adding compact feature cards and muted icon chips with color variants */
+/* === Small feature card (compact) === */
+.feature-sm {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  padding: 1rem; /* smaller than p-6/p-8 */
+}
+.feature-sm .h4 {
+  margin: 0;
+}
+.feature-sm .small {
+  margin-top: .25rem;
+}
+
+/* === Muted icon chips with tiny dark border === */
+.icon-chip {
+  width: 44px;
+  height: 44px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--chip-bg);
+  color: var(--chip-fg);
+  /* tiny darker ring */
+  box-shadow: inset 0 0 0 1px var(--chip-border);
+}
+.icon-chip svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Blue (from Lapis, muted) */
+.icon-chip--blue {
+  --chip-bg: color-mix(in oklab, var(--color-lapis) 24%, var(--color-mist));
+  --chip-border: color-mix(in oklab, var(--color-lapis) 72%, var(--color-storm));
+  --chip-fg: color-mix(in oklab, var(--color-lapis) 90%, black);
+}
+/* Green (from Lagoon, muted) */
+.icon-chip--green {
+  --chip-bg: color-mix(in oklab, var(--color-lagoon) 24%, var(--color-mist));
+  --chip-border: color-mix(in oklab, var(--color-lagoon) 70%, var(--color-storm));
+  --chip-fg: color-mix(in oklab, var(--color-lagoon) 90%, black);
+}
+/* Purple (blend of Lapis + Cranberry, muted) */
+.icon-chip--purple {
+  --chip-bg: color-mix(in oklab, var(--color-cranberry) 45%, var(--color-lapis));
+  --chip-bg: color-mix(in oklab, var(--chip-bg) 55%, var(--color-mist)); /* soften */
+  --chip-border: color-mix(in oklab, var(--color-cranberry) 55%, var(--color-storm));
+  --chip-fg: color-mix(in oklab, var(--color-cranberry) 85%, black);
+}
+/* Orange (warm from Cranberry, muted) */
+.icon-chip--orange {
+  --chip-bg: color-mix(in oklab, var(--color-cranberry) 30%, var(--color-white));
+  --chip-border: color-mix(in oklab, var(--color-cranberry) 65%, var(--color-storm));
+  --chip-fg: color-mix(in oklab, var(--color-cranberry) 85%, black);
+}
+
+/* Dark panels: lift chip backgrounds slightly so they don't sink */
+.surface--dark .icon-chip {
+  --chip-bg: color-mix(in oklab, var(--chip-bg) 80%, var(--color-white));
+}
+
+/* ==== How it works: flow utilities ==== */
+.flow-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+@media (min-width: 640px) {
+  .flow-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .flow-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+/* Added complete step styling with 1rem padding for better clearance */
+.step {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: .75rem;
+  padding: 1rem;
+  height: 100%; /* cards stretch to equal height per row */
+}
+
+.duo {
+  display: grid;
+  gap: .75rem;
+}
+@media (min-width: 768px) {
+  .duo {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.duo-list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.duo-list li {
+  margin: .25rem 0;
+}
+
+/* What you do / What Torvus does compact table */
+.duo-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: .75rem;
+  padding: 1rem;
+}
+.duo-card h3 {
+  margin: .2rem 0 .4rem;
+}
+.duo-list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.duo-list li {
+  margin: .25rem 0;
+}
+
+/* Section accent band (subtle colour cue) */
+.section-accent {
+  border-inline-start: 4px solid var(--color-lapis);
+  padding-inline-start: 1rem;
+}
+.section-accent--green {
+  border-color: var(--color-lagoon);
+}
+.section-accent--rose {
+  border-color: var(--color-cranberry);
+}
+
+/* Reuse existing icon-chip sizes but a bit smaller in flows */
+.icon-chip.icon-chip--sm {
+  width: 36px;
+  height: 36px;
+}
+.icon-chip.icon-chip--sm svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ===== Homepage Hero ===== */
+.hero {
+  position: relative;
+  /* changed overflow from clip to visible to prevent clipping mockup decorative elements */
+  overflow: visible;
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+  background: radial-gradient(
+      1200px 480px at -10% 0%,
+      color-mix(in oklab, var(--color-lapis) 12%, var(--color-white)) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 420px at 110% 80%,
+      color-mix(in oklab, var(--color-lagoon) 12%, var(--color-white)) 0%,
+      transparent 65%
+    ), var(--color-white);
+  box-shadow: var(--shadow-md);
+}
+.hero__inner {
+  padding: clamp(24px, 4vw, 56px);
+  display: grid;
+  gap: 1.25rem;
+}
+@media (min-width: 1024px) {
+  .hero__inner {
+    grid-template-columns: 1.05fr .95fr;
+    align-items: center;
+  }
+}
+
+/* Optional decorative mesh behind content (very subtle) */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: conic-gradient(
+    from 180deg at 70% 40%,
+    color-mix(in oklab, var(--color-lapis) 9%, transparent),
+    transparent 25%,
+    color-mix(in oklab, var(--color-lagoon) 9%, transparent) 50%,
+    transparent 75%,
+    color-mix(in oklab, var(--color-cranberry) 7%, transparent)
+  );
+  filter: blur(48px) saturate(105%);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--color-mist);
+  border: 1px solid var(--color-border);
+  color: var(--ink-on-light);
+  border-radius: 999px;
+  padding: .4rem .65rem;
+}
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: .35rem;
+}
+.hero-bullets {
+  margin-top: .25rem;
+}
+.hero-bullets li {
+  margin: .25rem 0;
+}
+.hero-figure {
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--color-lapis) 10%, var(--color-white)),
+    color-mix(in oklab, var(--color-lagoon) 10%, var(--color-white))
+  );
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Adding cranberry hero variant and mockup styling */
+/* Variant: subtle Cranberry accent in the hero background */
+.hero--cranberry::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    700px 360px at 85% 20%,
+    color-mix(in oklab, var(--color-cranberry) 20%, transparent) 0%,
+    transparent 70%
+  );
+  opacity: 0.55;
+}
+
+/* Ensure hero body text is crisp and readable */
+.hero .body {
+  color: var(--ink-on-light);
+  max-width: 62ch;
+}
+
+/* Mockup container (keeps the device visible at all breakpoints) */
+.hero-mockup {
+  position: relative;
+  border-radius: 1rem;
+  background: var(--color-white);
+  /* thin gradient ring with Cranberry hint */
+  box-shadow: inset 0 0 0 1px var(--color-border), 0 8px 28px rgba(0, 0, 0, 0.1);
+}
+.hero-mockup__frame {
+  border-radius: 1rem;
+  /* changed overflow from hidden to visible to prevent clipping mockup decorative elements */
+  overflow: visible;
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--color-cranberry) 9%, var(--color-white)),
+    color-mix(in oklab, var(--color-lapis) 7%, var(--color-white))
+  );
+  border: 1px solid var(--color-border);
+}
+.hero-mockup__screen {
+  aspect-ratio: 3 / 5; /* mobile-ish */
+  background: var(--color-white);
+}
+
+/* Layout sizing for the mockup */
+.hero-mockup {
+  padding: .6rem;
+}
+.hero-mockup__screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* On small screens, keep the mockup visible under the copy */
+@media (max-width: 1023px) {
+  .hero__inner {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-mockup {
+    margin-top: .5rem;
+  }
+}
+
+/* ===== Security page presentation ===== */
+.sec-hero {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+  background: radial-gradient(
+      1000px 420px at -10% 0%,
+      color-mix(in oklab, var(--color-lapis) 12%, var(--color-white)) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      800px 360px at 110% 90%,
+      color-mix(in oklab, var(--color-lagoon) 12%, var(--color-white)) 0%,
+      transparent 70%
+    ), var(--color-white);
+}
+.sec-hero__inner {
+  padding: clamp(24px, 4vw, 56px);
+}
+
+/* ===== Elevation (proportional, subtle) ===== */
+.elev-0 {
+  box-shadow: none;
+}
+.elev-1 {
+  box-shadow: var(--shadow-sm);
+}
+.elev-2 {
+  box-shadow: var(--shadow-md);
+}
+.elev-3 {
+  box-shadow: var(--shadow-lg);
+}
+
+.elev-transition {
+  transition: box-shadow 180ms ease;
+}
+
+/* Dark panels: keep shadows subtle and rely on borders for separation */
+.surface--dark .elev-1 {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.12);
+}
+.surface--dark .elev-2 {
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+/* Safety: avoid double shadows when elements get focused */
+.elev-ring {
+  box-shadow: var(--shadow-sm), 0 0 0 2px var(--color-ring);
+}
+
+/* Safety: avoid double shadows when elements get focused */
+.card-hover:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Safety: avoid double shadows when elements get focused */
+@media (max-width: 420px) {
+  .elev-2 {
+    box-shadow: var(--shadow-sm);
+  }
+  .elev-3 {
+    box-shadow: var(--shadow-md);
+  }
+}
+
+/* Adding section rhythm for gentle separation between adjacent sections */
+.section + .section {
+  margin-top: clamp(24px, 4vw, 56px);
+}
+
+/* Adding FAQ shell & item shells for differentiation */
+.faq-section {
+  background: var(--color-mist);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+}
+.faq-item {
+  background: var(--card-bg, var(--color-white));
+  border: 1px solid var(--color-border);
+  border-radius: .75rem;
+}
+
+/* Adding About hero card styling */
+.about-hero {
+  border: 1px solid var(--color-border);
+  border-radius: 1.25rem;
+  background: radial-gradient(
+      900px 360px at -10% 0%,
+      color-mix(in oklab, var(--color-lapis) 12%, var(--color-white)) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      700px 320px at 110% 90%,
+      color-mix(in oklab, var(--color-cranberry) 12%, var(--color-white)) 0%,
+      transparent 70%
+    ), var(--color-white);
+}
+.about-hero__inner {
+  padding: clamp(24px, 4vw, 56px);
+}
+
+/* Adding alternating tints for card grids to create subtle visual variety */
+/* ===== Alternating tints for card grids ===== */
+/* Use on any grid that contains .spec-card children */
+.spec-grid > .spec-card {
+  background: var(--card-bg, var(--color-white));
+}
+
+/* Light/darkness delta kept small for elegance; tweak % to taste */
+.spec-grid > .spec-card:nth-child(odd) {
+  --card-bg: color-mix(in oklab, var(--card-bg) 92%, white 8%);
+}
+.spec-grid > .spec-card:nth-child(even) {
+  --card-bg: color-mix(in oklab, var(--card-bg) 84%, white 16%);
+}
+
+/* Optionally make the contrast a touch stronger on large screens */
+@media (min-width: 1024px) {
+  .spec-grid > .spec-card:nth-child(odd) {
+    --card-bg: color-mix(in oklab, var(--card-bg) 90%, white 10%);
+  }
+  .spec-grid > .spec-card:nth-child(even) {
+    --card-bg: color-mix(in oklab, var(--card-bg) 80%, white 20%);
+  }
+}
+
+/* Adding generic A/B tinting system for flexible card list styling */
+/* ===== Generic A/B tinting for card lists ===== */
+/* Cards opt in via .tintable so we don't affect all cards globally */
+.tintable {
+  background: var(--card-bg, var(--color-white));
+}
+
+/* Apply to any grid that contains .tintable children */
+.tint-grid > .tintable:nth-child(odd) {
+  --card-bg: color-mix(in oklab, var(--card-bg, var(--color-white)) 92%, white 8%);
+}
+.tint-grid > .tintable:nth-child(even) {
+  --card-bg: color-mix(in oklab, var(--card-bg, var(--color-white)) 84%, white 16%);
+}
+
+/* Slightly stronger alternation on large screens */
+@media (min-width: 1024px) {
+  .tint-grid > .tintable:nth-child(odd) {
+    --card-bg: color-mix(in oklab, var(--card-bg, var(--color-white)) 90%, white 10%);
+  }
+  .tint-grid > .tintable:nth-child(even) {
+    --card-bg: color-mix(in oklab, var(--card-bg, var(--color-white)) 80%, white 20%);
+  }
+}
+
+/* Neutral preset (white / mist) when you don't want a hue base */
+.tint-grid--neutral > .tintable {
+  --card-bg: var(--color-white);
+}
+.tint-grid--neutral > .tintable:nth-child(even) {
+  --card-bg: var(--color-mist);
+}
+
+/* Optional hue presets (use if you want non-neutral lists elsewhere) */
+.tint-base--sky {
+  --card-bg: var(--pastel-sky);
+}
+.tint-base--mint {
+  --card-bg: var(--pastel-mint);
+}
+.tint-base--lemon {
+  --card-bg: var(--pastel-lemon);
+}
+.tint-base--blush {
+  --card-bg: var(--pastel-blush);
+}
+.tint-base--lilac {
+  --card-bg: var(--pastel-lilac);
+}
+.tint-base--sand {
+  --card-bg: var(--pastel-sand);
+}
+
+/* ===== Micro type for subtext ===== */
+.micro {
+  font-size: 13px;
+  line-height: 1.45;
+}

@@ -1,0 +1,110 @@
+/* Satoshi Variable Font */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/webfonts/Satoshi-100-900-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Erode Static Weights */
+@font-face {
+  font-family: "Erode";
+  src: url("/webfonts/Erode-300-normal.woff2") format("woff2"), url("/webfonts/Erode-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/webfonts/Erode-300-italic.woff2") format("woff2"), url("/webfonts/Erode-LightItalic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/webfonts/Erode-400-normal.woff2") format("woff2"), url("/webfonts/Erode-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/webfonts/Erode-400-italic.woff2") format("woff2"), url("/webfonts/Erode-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/webfonts/Erode-500-normal.woff2") format("woff2"), url("/webfonts/Erode-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/webfonts/Erode-500-italic.woff2") format("woff2"), url("/webfonts/Erode-MediumItalic.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/webfonts/Erode-600-normal.woff2") format("woff2"), url("/webfonts/Erode-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/webfonts/Erode-600-italic.woff2") format("woff2"), url("/webfonts/Erode-SemiboldItalic.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/webfonts/Erode-700-normal.woff2") format("woff2"), url("/webfonts/Erode-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode";
+  src: url("/webfonts/Erode-700-italic.woff2") format("woff2"), url("/webfonts/Erode-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Erode Variable Fonts */
+@font-face {
+  font-family: "Erode Variable";
+  src: url("/webfonts/Erode-Variable.woff2") format("woff2"), url("/webfonts/Erode-variable-normal.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Erode Variable";
+  src: url("/webfonts/Erode-VariableItalic.woff") format("woff"), url("/webfonts/Erode-variable-italic.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}

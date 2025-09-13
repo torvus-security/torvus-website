@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* optional small polish */
+:root { scroll-behavior: smooth; }
+html, body { height: 100%; }

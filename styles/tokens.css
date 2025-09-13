@@ -1,0 +1,57 @@
+/* OKLCH design tokens used by Tailwind via CSS variables */
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(0.99 0.01 255);
+  --foreground: oklch(0.18 0.02 255);
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+
+  --muted: oklch(0.96 0.01 255);
+  --muted-foreground: oklch(0.45 0.02 255);
+
+  --border: oklch(0.90 0.01 255);
+  --input: var(--border);
+  --ring: oklch(0.65 0.15 250);
+
+  --primary: oklch(0.35 0.05 255);
+  --primary-foreground: oklch(0.985 0.004 255);
+
+  --secondary: oklch(0.97 0.01 255);
+  --secondary-foreground: oklch(0.22 0.02 255);
+
+  --accent: oklch(0.96 0.03 25);
+  --accent-foreground: oklch(0.22 0.02 255);
+
+  --destructive: oklch(0.56 0.20 25);
+  --destructive-foreground: oklch(0.985 0.004 255);
+}
+
+/* Dark theme overrides (if you toggle .dark on <html>) */
+.dark {
+  --background: oklch(0.16 0.02 255);
+  --foreground: oklch(0.96 0.01 255);
+
+  --card: oklch(0.19 0.02 255);
+  --card-foreground: oklch(0.96 0.01 255);
+
+  --muted: oklch(0.24 0.02 255);
+  --muted-foreground: oklch(0.80 0.02 255);
+
+  --border: oklch(0.28 0.02 255);
+  --input: var(--border);
+  --ring: oklch(0.75 0.14 250);
+
+  --primary: oklch(0.98 0.01 255);
+  --primary-foreground: oklch(0.20 0.02 255);
+
+  --secondary: oklch(0.26 0.02 255);
+  --secondary-foreground: oklch(0.96 0.01 255);
+
+  --accent: oklch(0.30 0.03 25);
+  --accent-foreground: oklch(0.98 0.01 255);
+
+  --destructive: oklch(0.60 0.20 25);
+  --destructive-foreground: oklch(0.98 0.01 255);
+}

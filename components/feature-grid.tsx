@@ -1,90 +1,69 @@
 // components/feature-grid.tsx
 import {
   ShieldCheck,
-  Timer,
   FileClock,
-  KeySquare,
-  Vault,
-  Link as LinkIcon,
+  Link2,
+  KeyRound,
+  BadgeCheck,
+  Stamp,
 } from "lucide-react";
 
-type Feature = {
-  title: string;
-  description: string;
-  icon: React.ComponentType<{ className?: string }>;
-};
-
-const FEATURES: Feature[] = [
+const items = [
   {
-    title: "Rules-based release",
-    description:
-      "Define exactly who can access materials, when, and under what conditions.",
-    icon: Timer,
-  },
-  {
-    title: "Torvus Vault",
-    description:
-      "Store sensitive files in an encrypted vault designed for zero-trust workflows.",
-    icon: Vault,
-  },
-  {
-    title: "Tamper-evident proof",
-    description:
-      "Every action is hashed and signed so you can prove what happened and when.",
-    icon: FileClock,
-  },
-  {
-    title: "Passkeys & WebAuthn",
-    description:
-      "Phishing-resistant authentication for accounts and recipient access.",
-    icon: KeySquare,
-  },
-  {
-    title: "Fine-grained links",
-    description:
-      "Issue single-use or expiring links, watermark views, and revoke at any time.",
-    icon: LinkIcon,
-  },
-  {
-    title: "Policy guardrails",
-    description:
-      "Enforce organization-wide controls and audit everything centrally.",
     icon: ShieldCheck,
+    title: "Rules-based release",
+    desc:
+      "Define exactly who can access materials, when, and under what conditions.",
+  },
+  {
+    icon: Stamp,
+    title: "Tamper-evident proof",
+    desc:
+      "Every action is hashed and signed so you can prove what happened and when.",
+  },
+  {
+    icon: KeyRound,
+    title: "Passkeys & WebAuthn",
+    desc:
+      "Phishing-resistant authentication for accounts and recipient access.",
+  },
+  {
+    icon: FileClock,
+    title: "Torvus Vault",
+    desc: "Store sensitive files in an encrypted vault designed for zero-trust workflows.",
+  },
+  {
+    icon: Link2,
+    title: "Fine-grained links",
+    desc:
+      "Issue single-use or expiring links, watermark views, and revoke at any time.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Policy guardrails",
+    desc: "Enforce org-wide controls and audit everything centrally.",
   },
 ];
 
-export default function FeatureGrid() {
+export function FeatureGrid() {
   return (
-    <section aria-labelledby="features-heading" className="mt-10 md:mt-12 lg:mt-14">
-      <h2
-        id="features-heading"
-        className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white"
-      >
-        What you get with Torvus
-      </h2>
-
-      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {FEATURES.map(({ title, description, icon: Icon }) => (
-          <div
-            key={title}
-            className="relative overflow-hidden rounded-2xl border border-black/10 bg-white/70 p-5 shadow-sm ring-1 ring-black/5 backdrop-blur dark:border-white/10 dark:bg-neutral-900/60 dark:ring-white/10"
-          >
-            <div className="flex items-start gap-4">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-rose-500/10 ring-1 ring-rose-500/30">
-                <Icon className="h-5 w-5 text-rose-600" />
-              </span>
-              <div>
-                <h3 className="text-base font-semibold text-neutral-900 dark:text-white">
-                  {title}
-                </h3>
-                <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-                  {description}
-                </p>
-              </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+      {items.map(({ icon: Icon, title, desc }) => (
+        <div
+          key={title}
+          className="rounded-2xl border border-border/70 bg-background p-4 shadow-[0_1px_2px_rgba(0,0,0,.06)]"
+        >
+          <div className="flex items-start gap-3">
+            <span className="inline-grid size-9 place-items-center rounded-xl bg-rose-50 border border-rose-200/60 text-rose-600">
+              <Icon className="size-5" />
+            </span>
+            <div>
+              <h3 className="font-semibold">{title}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
             </div>
           </div>
-        ))}
-      </div>
-    </section>
+        </div>
+      ))}
+    </div>
   );
 }

@@ -49,10 +49,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PRODUCT TAGS */}
-      <section className="relative">
-        <LogosRow />
-      </section>
+
 
       {/* FEATURES */}
       <section className="relative">

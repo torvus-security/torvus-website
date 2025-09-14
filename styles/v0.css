@@ -1,111 +1,48 @@
-/* styles/v0.css */
+/* styles/v0.css
+   - No @layer blocks (fixes Vercel build complaining about @layer base)
+   - Uses Tailwind utilities via @apply
+   - Works alongside app/globals.css which already has:
+       @tailwind base; @tailwind components; @tailwind utilities;
+*/
 
-/* Base tokens */
-@layer base {
-  :root {
-    /* spacing rhythm for sections */
-    --section-x: 1.25rem; /* container padding x */
-    --section-y: 3.5rem;  /* vertical gap */
-  }
+/* Light/dark hint */
+:root { color-scheme: light dark; }
 
-  /* fonts */
-  html {
-    font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
-      Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
-      "Segoe UI Emoji";
-  }
-  .font-display {
-    font-family: var(--font-display), var(--font-sans), ui-sans-serif,
-      system-ui;
-  }
+/* Generic primitives */
+.section { @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8; }
+.section-py { @apply py-8 sm:py-12 lg:py-16; }
 
-  /* A11y focus */
-  :focus-visible {
-    outline: 2px solid rgb(234 88 12 / 0.7);
-    outline-offset: 2px;
-    border-radius: 6px;
-  }
-}
+.section-heading { @apply text-lg font-semibold text-slate-900; }
+.section-subtitle { @apply mt-2 max-w-2xl text-sm leading-6 text-slate-600; }
 
-/* Shared UI primitives */
-@layer components {
-  /* App container with comfy width */
-  .container-v0 {
-    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
-  }
+/* Buttons */
+.btn { @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium tracking-tight transition-colors; }
+.btn-primary { @apply bg-slate-900 text-white hover:bg-slate-800; }
+.btn-secondary { @apply bg-slate-100 text-slate-900 hover:bg-slate-200; }
+.btn-outline { @apply border border-slate-300 text-slate-800 hover:bg-slate-50; }
 
-  /* Framed panel (soft border, big radius, subtle shadow) */
-  .framed {
-    @apply rounded-3xl border border-slate-200/80 bg-white shadow-[0_8px_24px_rgba(2,6,23,.06)];
-  }
+/* Frames / cards */
+.frame { @apply rounded-2xl border border-slate-200 bg-white shadow-sm; }
+.card  { @apply rounded-xl border border-slate-200/70 bg-white/70 p-4 shadow-sm backdrop-blur; }
+.card:hover { @apply border-slate-300 shadow; }
 
-  /* Framed panel with soft gradient halo */
-  .framed-soft {
-    @apply relative rounded-3xl border border-slate-200/80 bg-white shadow-[0_8px_24px_rgba(2,6,23,.06)];
-  }
-  .framed-soft::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: 1.5rem;
-    background: radial-gradient(
-        1200px 400px at 85% 30%,
-        rgba(236, 72, 153, 0.18),
-        transparent 70%
-      ),
-      radial-gradient(
-        900px 300px at 10% 40%,
-        rgba(14, 165, 233, 0.16),
-        transparent 65%
-      );
-    z-index: -1;
-    filter: blur(6px);
-  }
+/* Framed panel (used around hero) */
+.panel-with-frame      { @apply relative rounded-2xl border border-slate-200 bg-white/60 backdrop-blur; }
+.panel-with-frame::before { content: ""; @apply absolute inset-0 -z-10 rounded-[inherit] bg-gradient-to-br from-rose-50 via-teal-50/60 to-sky-50; }
+.panel                  { @apply relative rounded-[inherit] border border-white/50 bg-white shadow-[0_12px_40px_-20px_rgba(2,6,23,0.3)]; }
 
-  /* Section chrome */
-  .section {
-    @apply container-v0 py-14 sm:py-16 lg:py-20;
-  }
-  .section-tight {
-    @apply container-v0 py-10 sm:py-12;
-  }
+/* Pills / chips */
+.pill { @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-600 shadow-sm; }
+.pill-dot { @apply size-1.5 rounded-full bg-rose-500; }
 
-  /* Section headers */
-  .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-medium text-slate-600 shadow-sm;
-  }
-  .section-title {
-    @apply font-display text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 sm:text-4xl lg:text-5xl;
-  }
-  .section-kicker {
-    @apply text-slate-600/90;
-  }
+/* Small icon “token” */
+.icon-pill { @apply inline-flex size-8 items-center justify-center rounded-full border border-rose-200/80 bg-rose-50 text-rose-600; }
 
-  /* Buttons */
-  .btn {
-    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition;
-  }
-  .btn-primary {
-    @apply bg-slate-900 text-white hover:opacity-90;
-  }
-  .btn-outline {
-    @apply border border-slate-200 bg-white text-slate-900 hover:bg-slate-50;
-  }
+/* Decorative helpers */
+.hero-sheen { @apply absolute inset-0 -z-10 rounded-[inherit] bg-[radial-gradient(60%_60%_at_15%_20%,rgba(244,63,94,0.1),transparent_60%),radial-gradient(60%_60%_at_90%_35%,rgba(56,189,248,0.12),transparent_60%)]; }
+.soft-shadow { box-shadow: 0 10px 30px -10px rgba(2,6,23,.2), 0 2px 8px rgba(2,6,23,.06); }
+.edge-fade   { mask-image: radial-gradient(60% 70% at 50% 20%, black, transparent 70%); }
 
-  /* Subtle card for items */
-  .card {
-    @apply rounded-2xl border border-slate-200 bg-white p-5 shadow-sm;
-  }
-
-  /* Pill icon container */
-  .icon-pill {
-    @apply inline-flex size-9 items-center justify-center rounded-full bg-rose-50 text-rose-600 ring-1 ring-inset ring-rose-200/70;
-  }
-}
-
-/* Utilities specific to this design */
-@layer utilities {
-  .shadow-v0 {
-    box-shadow: 0 6px 20px rgba(2, 6, 23, 0.08);
-  }
-}
+/* Tag row (logos row on homepage) */
+.tag-row { @apply flex flex-wrap gap-3; }
+.tag     { @apply rounded-lg border border-slate-200 bg-white/70 px-4 py-2 text-sm text-slate-700 shadow-sm; }

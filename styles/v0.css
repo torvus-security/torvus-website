@@ -1,30 +1,44 @@
-/* Torvus site additions (no @layer usage here to keep Vercel happy) */
+/* --- Sections & headings --- */
 
-/* Softer framed container used around hero and similar panels */
-.framed-panel {
-  /* remove dark borders; use soft glassy surface + gentle shadow */
-  @apply relative rounded-[28px] bg-white/70 dark:bg-slate-900/40 backdrop-blur-xl
-  shadow-[0_1px_0_0_rgba(2,6,23,0.04),0_20px_60px_-20px_rgba(2,6,23,0.30)];
+.section-space { @apply my-24 md:my-28 lg:my-32; }
+
+.section-headline {
+  @apply text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground;
 }
 
-/* Optional faint rainbow glow around framed panels */
-.framed-panel::after {
-  content: "";
-  @apply pointer-events-none absolute inset-0 rounded-[28px];
-  background:
-    radial-gradient(80% 40% at 15% 0%, rgba(255,182,193,0.22), transparent 60%),
-    radial-gradient(60% 50% at 95% 70%, rgba(147,197,253,0.18), transparent 60%),
-    radial-gradient(70% 60% at 0% 100%, rgba(16,185,129,0.12), transparent 70%);
-}
-
-/* Reusable elevated card surface for grids/steps/pillars */
-.card {
-  @apply rounded-2xl bg-white/80 dark:bg-slate-900/40 backdrop-blur-md
-  shadow-[0_1px_0_0_rgba(2,6,23,0.04),0_10px_30px_-10px_rgba(2,6,23,0.25)]
-  ring-1 ring-black/5;
-}
-
-/* Gradient word helper for headings (used when splitting a word) */
+/* Gradient word helper (use on one or two words within a heading) */
 .gradient-word {
   @apply bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent;
 }
+
+/* --- Framed hero surface (no visible border) --- */
+
+.framed-panel {
+  /* No borders or rings — just a soft, glassy surface with glow */
+  @apply relative rounded-[28px] bg-white/75 dark:bg-slate-900/40 backdrop-blur-xl
+  shadow-[0_1px_0_0_rgba(2,6,23,0.04),0_24px_80px_-30px_rgba(2,6,23,0.35)];
+}
+
+.framed-panel::before {
+  content: "";
+  @apply absolute inset-0 rounded-[28px] pointer-events-none;
+  background:
+    radial-gradient(90% 60% at 10% 0%, rgba(255,182,193,0.32), transparent 60%),
+    radial-gradient(70% 60% at 100% 80%, rgba(147,197,253,0.22), transparent 60%),
+    radial-gradient(80% 70% at 0% 100%, rgba(16,185,129,0.15), transparent 70%);
+}
+
+/* --- Card surface used in grids/steps/pillars --- */
+
+.card {
+  /* very subtle edge, not a dark outline */
+  @apply rounded-2xl bg-white/80 dark:bg-slate-900/40 backdrop-blur
+  shadow-[0_1px_0_0_rgba(2,6,23,0.04),0_14px_40px_-20px_rgba(2,6,23,0.30)]
+  ring-1 ring-black/5;
+}
+
+/* --- Buttons --- */
+
+.btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all; }
+.btn-primary { @apply bg-foreground text-background hover:opacity-90; }
+.btn-outline { @apply border border-black/10 bg-transparent text-foreground hover:bg-muted; }

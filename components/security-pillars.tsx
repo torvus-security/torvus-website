@@ -1,62 +1,56 @@
 // components/security-pillars.tsx
-import { Layers3, KeyRound, FileSearch2 } from "lucide-react";
+import { Shield, Fingerprint, ScrollText } from "lucide-react";
 
-const pillars = [
+const PILLARS = [
   {
     title: "Defense-in-depth",
     body:
       "Isolation by design, scoped secrets, signed releases, and default-deny access.",
-    Icon: Layers3,
-    accent: { bg: "bg-rose-50", text: "text-rose-600", ring: "ring-rose-200/70" },
+    icon: Shield,
+    tint: "bg-rose-50 text-rose-600 ring-rose-100",
   },
   {
     title: "Modern auth",
     body:
       "Passkeys (WebAuthn) and TOTP options for strong, phishing-resistant user login.",
-    Icon: KeyRound,
-    accent: { bg: "bg-sky-50", text: "text-sky-600", ring: "ring-sky-200/70" },
+    icon: Fingerprint,
+    tint: "bg-sky-50 text-sky-600 ring-sky-100",
   },
   {
     title: "Provenance & audit",
     body:
       "Cryptographic logs so you can demonstrate integrity and verify timelines.",
-    Icon: FileSearch2,
-    accent: {
-      bg: "bg-violet-50",
-      text: "text-violet-600",
-      ring: "ring-violet-200/70",
-    },
+    icon: ScrollText,
+    tint: "bg-emerald-50 text-emerald-600 ring-emerald-100",
   },
 ];
 
 export default function SecurityPillars() {
   return (
-    <section
-      aria-labelledby="security-heading"
-      className="mx-auto mt-16 w-full max-w-7xl px-4 sm:mt-20 sm:px-6 lg:mt-24 lg:px-8"
-    >
-      <h2
-        id="security-heading"
-        className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.5rem] lg:leading-[2.75rem]"
-      >
-        <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-          Built for security from day one
-        </span>
-      </h2>
+    <section className="section space-y-8 md:space-y-10">
+      {/* Single heading with subtle gradient */}
+      <div className="text-center">
+        <h2 className="text-3xl md:text-5xl font-semibold tracking-tight">
+          <span className="bg-gradient-to-r from-slate-800 to-slate-600 dark:from-slate-100 dark:to-slate-300 bg-clip-text text-transparent">
+            Built for security from day one
+          </span>
+        </h2>
+      </div>
 
-      <div className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-3">
-        {pillars.map(({ title, body, Icon, accent }) => (
+      <div className="grid gap-5 md:grid-cols-3">
+        {PILLARS.map(({ title, body, icon: Icon, tint }) => (
           <div
             key={title}
-            className="rounded-2xl border border-slate-200/70 bg-white p-6 shadow-[0_8px_24px_-12px_rgba(15,23,42,.2)] ring-1 ring-black/5"
+            className="rounded-2xl border border-border/70 bg-card/60 shadow-sm p-6"
           >
             <div
-              className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full ${accent.bg} ${accent.text} ring-1 ${accent.ring}`}
+              className={`inline-flex size-10 items-center justify-center rounded-full ring-1 ${tint}`}
+              aria-hidden
             >
-              <Icon className="h-5 w-5" strokeWidth={2} />
+              <Icon className="size-5" />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600">{body}</p>
+            <h3 className="mt-4 text-lg font-semibold text-foreground">{title}</h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{body}</p>
           </div>
         ))}
       </div>

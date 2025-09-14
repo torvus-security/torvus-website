@@ -1,58 +1,64 @@
 // components/how-it-works.tsx
-type Step = { title: string; body: string };
+import { CircleDashed, Settings2, Share2 } from "lucide-react";
 
-const steps: Step[] = [
+const STEPS = [
   {
-    title: "Add materials",
+    n: "01",
+    name: "Add materials",
     body:
       "Upload files or collect evidence directly. Everything is encrypted at rest and in transit.",
+    tint: "bg-rose-50 text-rose-600 ring-rose-100",
+    icon: CircleDashed,
   },
   {
-    title: "Set the rules",
+    n: "02",
+    name: "Set the rules",
     body:
       "Choose recipients, timing windows, and safeguards like single-use, watermarking, or revocation.",
+    tint: "bg-sky-50 text-sky-600 ring-sky-100",
+    icon: Settings2,
   },
   {
-    title: "Share & prove",
+    n: "03",
+    name: "Share & prove",
     body:
       "Send controlled access links and export tamper-evident proof for audits or disputes.",
+    tint: "bg-emerald-50 text-emerald-600 ring-emerald-100",
+    icon: Share2,
   },
 ];
 
-const dots = [
-  "bg-rose-500",
-  "bg-sky-500",
-  "bg-emerald-500",
-] as const;
-
 export default function HowItWorks() {
   return (
-    <section
-      aria-labelledby="how-heading"
-      className="mx-auto mt-16 w-full max-w-7xl px-4 sm:mt-20 sm:px-6 lg:mt-24 lg:px-8"
-    >
-      <h2
-        id="how-heading"
-        className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.5rem] lg:leading-[2.75rem]"
-      >
-        <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-          How it works
-        </span>
-      </h2>
+    <section className="section space-y-8 md:space-y-10">
+      {/* Single prominent heading – no duplicate eyebrow */}
+      <div className="text-center">
+        <h2 className="text-3xl md:text-5xl font-semibold tracking-tight">
+          <span className="bg-gradient-to-r from-slate-800 to-slate-600 dark:from-slate-100 dark:to-slate-300 bg-clip-text text-transparent">
+            How it works
+          </span>
+        </h2>
+      </div>
 
-      <div className="mt-8 grid gap-6 lg:mt-10 lg:grid-cols-3">
-        {steps.map((s, i) => (
+      <div className="grid gap-5 md:grid-cols-3">
+        {STEPS.map(({ n, name, body, tint, icon: Icon }) => (
           <div
-            key={s.title}
-            className="rounded-2xl border border-slate-200/70 bg-white p-6 shadow-[0_8px_24px_-12px_rgba(15,23,42,.2)] ring-1 ring-black/5"
+            key={n}
+            className="rounded-2xl border border-border/70 bg-card/60 shadow-sm p-6"
           >
-            <div className="mb-4 flex items-center gap-3">
-              <span className={`inline-flex h-9 w-9 items-center justify-center rounded-full ${dots[i]} text-white`}>
-                {String(i + 1).padStart(2, "0")}
+            <div className="flex items-center gap-3">
+              <span
+                className={`inline-flex size-10 items-center justify-center rounded-full ring-1 ${tint}`}
+                aria-hidden
+              >
+                <Icon className="size-5" />
               </span>
-              <h3 className="text-lg font-semibold text-slate-900">{s.title}</h3>
+              <span className="text-sm font-medium text-muted-foreground">
+                {n}
+              </span>
             </div>
-            <p className="text-sm leading-6 text-slate-600">{s.body}</p>
+            <h3 className="mt-4 text-lg font-semibold text-foreground">{name}</h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{body}</p>
           </div>
         ))}
       </div>

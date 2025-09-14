@@ -46,3 +46,16 @@
 /* Tag row (logos row on homepage) */
 .tag-row { @apply flex flex-wrap gap-3; }
 .tag     { @apply rounded-lg border border-slate-200 bg-white/70 px-4 py-2 text-sm text-slate-700 shadow-sm; }
+
+/* --- layout hardening helpers (append to v0.css) --- */
+
+.section-heading { @apply text-lg font-semibold text-slate-900; }
+.section-subtitle { @apply text-sm text-slate-600; }
+
+/* Ensure panels don't visually sit on top of following content */
+.panel-with-frame,
+.panel,
+.card { @apply relative; }
+
+/* Defensive: never pull sections upward by collapsing margins */
+main > section > * { @apply mt-0; }

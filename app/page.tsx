@@ -1,82 +1,89 @@
 // app/page.tsx
+import React from "react";
 import PhoneMock from "@/components/phone-mock";
 import FeatureGrid from "@/components/feature-grid";
 import HowItWorks from "@/components/how-it-works";
 import SecurityPillars from "@/components/security-pillars";
-import LogosRow from "@/components/logos-row";
+import SectionHeading, { Accent } from "@/components/section-heading";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16 grid gap-y-14 sm:gap-y-16 lg:gap-y-20">
-      {/* HERO */}
-      <section className="relative">
-        <div className="panel-with-frame p-2">
-          <div className="panel hero-sheen">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 p-6 sm:p-8 lg:p-12 pb-12 sm:pb-16 lg:pb-20">
-              <div className="max-w-xl">
-                <div className="pill mb-6">
-                  <span className="pill-dot" />
-                  Built for security
-                </div>
+    <main className="space-y-section">
+      {/* Hero */}
+      <section className="section-pad">
+        <div className="container">
+          <div className="framed-panel overflow-hidden bg-[radial-gradient(1200px_500px_at_0%_0%,rgba(244,114,182,0.12),transparent),radial-gradient(1200px_500px_at_100%_100%,rgba(56,189,248,0.12),transparent)]">
+            <div className="grid items-center gap-10 lg:grid-cols-2">
+              <div className="py-8 sm:py-12">
+                <span className="chip">Built for security</span>
 
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900">
+                <h1 className="mt-6 text-5xl/tight sm:text-6xl/tight font-extrabold tracking-tight text-foreground">
                   Your materials. Your rules.{" "}
-                  <span className="text-teal-500">Your timeline.</span>
+                  <span className="bg-gradient-to-r from-teal-400 via-emerald-500 to-sky-500 bg-clip-text text-transparent">
+                    Your timeline.
+                  </span>
                 </h1>
 
-                <p className="mt-6 text-slate-600 leading-7">
-                  Safeguard private materials, set release rules, and prove what
-                  happened.
+                <p className="mt-5 max-w-xl text-muted-foreground">
+                  Safeguard private materials, set release rules, and prove what happened.
                 </p>
 
-                <div className="mt-8 flex items-center gap-3">
-                  <a className="btn btn-primary" href="/demo">
-                    See the demo
-                  </a>
-                  <a className="btn btn-outline" href="/contact">
-                    Talk to us
-                  </a>
+                <div className="mt-6 flex items-center gap-3">
+                  <a href="/demo" className="btn btn-primary">See the demo</a>
+                  <a href="/contact" className="btn btn-outline">Talk to us</a>
                 </div>
               </div>
 
-              <div className="relative">
-                {/* subtle glow */}
-                <div className="absolute -inset-6 -z-10 blur-3xl opacity-40 bg-gradient-to-br from-rose-300/30 via-teal-300/30 to-sky-300/30 rounded-3xl" />
-                <PhoneMock />
+              <div className="mx-auto w-full max-w-[520px]">
+                <div className="rounded-[28px] border border-white/70 bg-white shadow-2xl ring-1 ring-black/5">
+                  <PhoneMock />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-
-
-      {/* FEATURES */}
-      <section className="relative">
-        <header className="mb-3">
-          <h2 className="section-heading">What you get with Torvus</h2>
-          <p className="section-subtitle">
-            A secure way to prepare, protect, share, and verify sensitive
-            materials.
-          </p>
-        </header>
-        <FeatureGrid />
+      {/* Features */}
+      <section className="section-pad">
+        <div className="container">
+          <SectionHeading
+            eyebrow="What you get with Torvus"
+            title={<>What you get with <Accent>Torvus</Accent></>}
+            description="A secure way to prepare, protect, share, and verify sensitive materials."
+          />
+          <div className="mt-10">
+            <FeatureGrid />
+          </div>
+        </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="relative">
-        <header className="mb-3">
-          <h2 className="section-heading">How it works</h2>
-        </header>
-        <HowItWorks />
+      {/* How it works */}
+      <section className="section-pad">
+        <div className="container">
+          <SectionHeading
+            eyebrow="How it works"
+            title={<>How it <Accent>works</Accent></>}
+            description="Add materials, set the rules, then share and prove using tamper-evident exports."
+          />
+          <div className="mt-10">
+            <HowItWorks />
+          </div>
+        </div>
       </section>
 
-      {/* SECURITY PILLARS */}
-      <section className="relative">
-        <header className="mb-3">
-          <h2 className="section-heading">Built for security from day one</h2>
-        </header>
-        <SecurityPillars />
+      {/* Security */}
+      <section className="section-pad">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Built for security from day one"
+            title={<>Built for <Accent>security</Accent> from day one</>}
+            description="Defense-in-depth, modern authentication, and cryptographic auditability."
+          />
+          <div className="mt-10">
+            <SecurityPillars />
+          </div>
+        </div>
       </section>
     </main>
   );

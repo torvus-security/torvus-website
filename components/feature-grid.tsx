@@ -1,73 +1,89 @@
 // components/feature-grid.tsx
+"use client";
+
 import {
   ShieldCheck,
   FileCheck2,
   Landmark,
   Link2,
+  Vault,
   ScrollText,
-  LockKeyhole,
 } from "lucide-react";
 
-const features = [
+type Feature = {
+  title: string;
+  desc: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  badgeClass: string;
+};
+
+const FEATURES: Feature[] = [
   {
-    icon: ShieldCheck,
     title: "Rules-based release",
     desc:
       "Define exactly who can access materials, when, and under what conditions.",
-    tint: "from-rose-400/20 to-rose-500/10 text-rose-600",
+    icon: ShieldCheck,
+    badgeClass: "bg-rose-50 text-rose-500 ring-1 ring-rose-200",
   },
   {
-    icon: FileCheck2,
     title: "Torvus Vault",
     desc:
       "Store sensitive files in an encrypted vault designed for zero-trust workflows.",
-    tint: "from-sky-400/20 to-sky-500/10 text-sky-600",
+    icon: Vault,
+    badgeClass: "bg-sky-50 text-sky-500 ring-1 ring-sky-200",
   },
   {
-    icon: Landmark,
     title: "Tamper-evident proof",
     desc:
       "Every action is hashed and signed so you can prove what happened and when.",
-    tint: "from-emerald-400/20 to-emerald-500/10 text-emerald-600",
+    icon: Landmark,
+    badgeClass: "bg-emerald-50 text-emerald-600 ring-1 ring-emerald-200",
   },
   {
-    icon: LockKeyhole,
     title: "Passkeys & WebAuthn",
     desc:
       "Phishing-resistant authentication for accounts and recipient access. TOTP supported.",
-    tint: "from-amber-400/20 to-amber-500/10 text-amber-600",
+    icon: ScrollText,
+    badgeClass: "bg-amber-50 text-amber-500 ring-1 ring-amber-200",
   },
   {
-    icon: Link2,
     title: "Fine-grained links",
     desc:
       "Issue single-use or expiring links, watermark views, and revoke at any time.",
-    tint: "from-violet-400/20 to-violet-500/10 text-violet-600",
+    icon: Link2,
+    badgeClass: "bg-violet-50 text-violet-500 ring-1 ring-violet-200",
   },
   {
-    icon: ScrollText,
     title: "Policy guardrails",
     desc:
       "Enforce organization-wide controls and audit everything centrally.",
-    tint: "from-pink-400/20 to-pink-500/10 text-pink-600",
+    icon: FileCheck2,
+    badgeClass: "bg-pink-50 text-pink-500 ring-1 ring-pink-200",
   },
 ];
 
 export default function FeatureGrid() {
+  // ⬅️ No section heading here (the page supplies it)
   return (
-    <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-3">
-      {features.map(({ icon: Icon, title, desc, tint }) => (
+    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {FEATURES.map(({ title, desc, icon: Icon, badgeClass }) => (
         <div
           key={title}
-          className="rounded-2xl border border-border bg-card p-6 shadow-sm ring-1 ring-black/0 hover:shadow-md transition"
+          className="card p-6 hover:shadow-xl transition-shadow"
         >
-          <div
-            className={`mb-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-b ${tint}`}
-          >
-            <Icon className="h-4 w-4 opacity-80" />
+          <div className="flex items-start gap-4">
+            <span
+              className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${badgeClass}`}
+            >
+              <Icon className="h-5 w-5" aria-hidden />
+            </span>
+            <div>
+              <h3 className="text-base font-semibold text-foreground">
+                {title}
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
+            </div>
           </div>
-          <h3 className="text-lg font-semibold">{title}</h3>
-          <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
         </div>
       ))}
     </div>

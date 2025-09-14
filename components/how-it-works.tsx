@@ -1,53 +1,65 @@
 // components/how-it-works.tsx
-import { Gauge, SlidersHorizontal, Share2 } from "lucide-react";
+"use client";
 
-const steps = [
+import { GaugeCircle, SlidersHorizontal, Share2 } from "lucide-react";
+
+type Step = {
+  k: string;
+  title: string;
+  desc: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  badgeClass: string;
+};
+
+const STEPS: Step[] = [
   {
-    icon: Gauge,
-    label: "01",
+    k: "01",
     title: "Add materials",
     desc:
       "Upload files or collect evidence directly. Everything is encrypted at rest and in transit.",
-    tint: "from-rose-400/20 to-rose-500/10 text-rose-600",
+    icon: GaugeCircle,
+    badgeClass: "bg-rose-50 text-rose-500 ring-1 ring-rose-200",
   },
   {
-    icon: SlidersHorizontal,
-    label: "02",
+    k: "02",
     title: "Set the rules",
     desc:
       "Choose recipients, timing windows, and safeguards like single-use, watermarking, or revocation.",
-    tint: "from-sky-400/20 to-sky-500/10 text-sky-600",
+    icon: SlidersHorizontal,
+    badgeClass: "bg-sky-50 text-sky-500 ring-1 ring-sky-200",
   },
   {
-    icon: Share2,
-    label: "03",
+    k: "03",
     title: "Share & prove",
     desc:
       "Send controlled access links and export tamper-evident proof for audits or disputes.",
-    tint: "from-emerald-400/20 to-emerald-500/10 text-emerald-600",
+    icon: Share2,
+    badgeClass: "bg-emerald-50 text-emerald-600 ring-1 ring-emerald-200",
   },
 ];
 
 export default function HowItWorks() {
+  // ⬅️ No section heading here (the page supplies it)
   return (
-    <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 sm:grid-cols-3 sm:px-6">
-      {steps.map(({ icon: Icon, label, title, desc, tint }) => (
-        <div
-          key={label}
-          className="rounded-2xl border border-border bg-card p-6 shadow-sm hover:shadow-md transition"
-        >
-          <div className="mb-4 flex items-center gap-3">
-            <div
-              className={`inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-b ${tint}`}
+    <div className="grid gap-6 md:grid-cols-3">
+      {STEPS.map(({ k, title, desc, icon: Icon, badgeClass }) => (
+        <div key={k} className="card p-6">
+          <div className="flex items-start gap-4">
+            <span
+              className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${badgeClass}`}
             >
-              <Icon className="h-4 w-4 opacity-80" />
-            </div>
-            <span className="text-sm font-semibold text-muted-foreground">
-              {label}
+              <Icon className="h-5 w-5" aria-hidden />
             </span>
+            <div className="min-w-0">
+              <div className="text-sm font-medium text-muted-foreground">
+                {k}
+              </div>
+              <h3 className="mt-1 text-base font-semibold text-foreground">
+                {title}
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
+            </div>
           </div>
-          <h3 className="text-lg font-semibold">{title}</h3>
-          <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
         </div>
       ))}
     </div>

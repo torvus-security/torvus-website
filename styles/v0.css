@@ -1,24 +1,17 @@
-/* --- Sections & headings --- */
-
+/* --- Section rhythm --- */
 .section-space { @apply my-24 md:my-28 lg:my-32; }
+/* Smaller top gap under the header for the hero only */
+.section-space-first { @apply mt-10 md:mt-12 lg:mt-14 mb-24 md:mb-28 lg:mb-32; }
 
-.section-headline {
-  @apply text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground;
-}
+/* --- Headings --- */
+.section-headline { @apply text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground; }
+.gradient-word { @apply bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent; }
 
-/* Gradient word helper (use on one or two words within a heading) */
-.gradient-word {
-  @apply bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent;
-}
-
-/* --- Framed hero surface (no visible border) --- */
-
+/* --- Framed hero surface (no dark border) --- */
 .framed-panel {
-  /* No borders or rings — just a soft, glassy surface with glow */
   @apply relative rounded-[28px] bg-white/75 dark:bg-slate-900/40 backdrop-blur-xl
   shadow-[0_1px_0_0_rgba(2,6,23,0.04),0_24px_80px_-30px_rgba(2,6,23,0.35)];
 }
-
 .framed-panel::before {
   content: "";
   @apply absolute inset-0 rounded-[28px] pointer-events-none;
@@ -28,17 +21,17 @@
     radial-gradient(80% 70% at 0% 100%, rgba(16,185,129,0.15), transparent 70%);
 }
 
-/* --- Card surface used in grids/steps/pillars --- */
-
+/* --- Cards (features, steps, pillars) + hover interaction --- */
 .card {
-  /* very subtle edge, not a dark outline */
   @apply rounded-2xl bg-white/80 dark:bg-slate-900/40 backdrop-blur
   shadow-[0_1px_0_0_rgba(2,6,23,0.04),0_14px_40px_-20px_rgba(2,6,23,0.30)]
   ring-1 ring-black/5;
 }
+.card-hover { @apply transition-transform duration-300 ease-out will-change-transform; }
+.card-hover:hover { @apply -translate-y-1 scale-[1.0125] shadow-[0_10px_40px_rgba(2,6,23,0.10)] ring-black/10; }
+.card-hover:focus-visible { @apply outline-none ring-2 ring-sky-400/40; }
 
 /* --- Buttons --- */
-
 .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all; }
 .btn-primary { @apply bg-foreground text-background hover:opacity-90; }
-.btn-outline { @apply border border-black/10 bg-transparent text-foreground hover:bg-muted; }
+.btn-outline { @apply border border-black/10 bg-transparent text-foreground hover:bg-black/[0.04]; }

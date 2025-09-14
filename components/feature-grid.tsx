@@ -3,7 +3,7 @@ import {
   ShieldCheck,
   FileCheck2,
   Link2,
-  Safe,
+  Vault,
   Landmark,
   ScrollText,
 } from "lucide-react";
@@ -34,7 +34,7 @@ const items = [
     title: "Torvus Vault",
     body:
       "Store sensitive files in an encrypted vault designed for zero-trust workflows.",
-    icon: Safe,
+    icon: Vault,
   },
   {
     title: "Tamper-evident proof",
@@ -50,12 +50,14 @@ const items = [
   },
   {
     title: "Fine-grained links",
-    body: "Issue single-use or expiring links, watermark views, and revoke at any time.",
+    body:
+      "Issue single-use or expiring links, watermark views, and revoke at any time.",
     icon: Link2,
   },
   {
     title: "Policy guardrails",
-    body: "Enforce organization-wide controls and audit everything centrally.",
+    body:
+      "Enforce organization-wide controls and audit everything centrally.",
     icon: ScrollText,
   },
 ];
@@ -97,7 +99,9 @@ export default function FeatureGrid() {
               <h3 className="text-lg font-semibold text-slate-900">
                 {item.title}
               </h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{item.body}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                {item.body}
+              </p>
             </div>
           );
         })}

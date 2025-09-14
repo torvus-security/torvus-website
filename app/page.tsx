@@ -1,90 +1,78 @@
 // app/page.tsx
-import Section from "@/components/section";
-import { PhoneMock } from "@/components/phone-mock";
+import PhoneMock from "@/components/phone-mock";
 import FeatureGrid from "@/components/feature-grid";
-import Steps from "@/components/steps";
-import SecurityPills from "@/components/security-pills";
+import HowItWorks from "@/components/how-it-works";
+import SecurityPillars from "@/components/security-pillars";
+import LogosRow from "@/components/logos-row";
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <main>
-
+    <main className="section section-py space-y-12 sm:space-y-14 lg:space-y-16">
       {/* HERO */}
-      <Section variant="panel" eyebrow="Built for security" className="overflow-hidden">
-        <div className="grid items-center gap-8 lg:grid-cols-2">
-          {/* left copy */}
-          <div>
-            <h1 className="section-title">
-              <span>Your materials. Your rules. </span>
-              <span className="bg-gradient-to-r from-emerald-500 to-cyan-600 bg-clip-text text-transparent">
-                Your timeline.
-              </span>
-            </h1>
-            <p className="section-kicker mt-4 max-w-2xl">
-              Safeguard private materials, set release rules, and prove what
-              happened.
-            </p>
+      <section className="panel-with-frame p-2">
+        <div className="panel hero-sheen">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 p-6 sm:p-8 lg:p-12">
+            <div className="max-w-xl">
+              <div className="pill mb-6">
+                <span className="pill-dot" />
+                Built for security
+              </div>
 
-            <div className="mt-6 flex items-center gap-3">
-              <a className="btn btn-primary" href="/demo">
-                See the demo
-              </a>
-              <a className="btn btn-outline" href="/contact">
-                Talk to us
-              </a>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900">
+                Your materials. Your rules.{" "}
+                <span className="text-teal-500">Your timeline.</span>
+              </h1>
+
+              <p className="mt-6 text-slate-600 leading-7">
+                Safeguard private materials, set release rules, and prove what
+                happened.
+              </p>
+
+              <div className="mt-8 flex items-center gap-3">
+                <a className="btn btn-primary" href="/demo">
+                  See the demo
+                </a>
+                <a className="btn btn-outline" href="/contact">
+                  Talk to us
+                </a>
+              </div>
             </div>
-          </div>
 
-          {/* right mock in its own framed inset */}
-          <div className="relative">
-            <div className="mx-auto w-full max-w-[380px] rounded-[2rem] border border-slate-200 bg-white p-3 shadow-v0">
+            <div className="relative">
+              {/* subtle glow */}
+              <div className="absolute -inset-6 -z-10 blur-3xl opacity-40 bg-gradient-to-br from-rose-300/30 via-teal-300/30 to-sky-300/30 rounded-3xl" />
               <PhoneMock />
             </div>
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* Product “tracks” chips (optional small bar) */}
-      <Section tight variant="plain" className="bg-transparent p-0">
-        <div className="framed flex flex-wrap items-center justify-center gap-3 p-3 text-xs text-slate-600">
-          {["Aegis", "Monarch", "Northwind", "Contour", "Helios"].map((name) => (
-            <span
-              key={name}
-              className="rounded-xl border border-slate-200 bg-white px-4 py-1 shadow-sm"
-            >
-              {name}
-            </span>
-          ))}
-        </div>
-      </Section>
+      {/* PRODUCT TAGS */}
+      <section>
+        <LogosRow />
+      </section>
 
-      {/* Features */}
-      <Section
-        variant="plain"
-        eyebrow="What you get with Torvus"
-        title="Controls that adapt to the way you share."
-        description="Mix and match recipient rules, verification, and audit so every release has the right safeguards."
-      >
+      {/* FEATURES */}
+      <section className="space-y-3">
+        <h2 className="section-heading">What you get with Torvus</h2>
+        <p className="section-subtitle">
+          A secure way to prepare, protect, share, and verify sensitive
+          materials.
+        </p>
         <FeatureGrid />
-      </Section>
+      </section>
 
-      {/* How it works */}
-      <Section
-        variant="panel"
-        eyebrow="How it works"
-        title="From upload to proof in three steps."
-      >
-        <Steps />
-      </Section>
+      {/* HOW IT WORKS */}
+      <section className="space-y-3">
+        <h2 className="section-heading">How it works</h2>
+        <HowItWorks />
+      </section>
 
-      {/* Security */}
-      <Section
-        variant="panel"
-        eyebrow="Built for security from day one"
-        title="Zero-trust foundations."
-      >
-        <SecurityPills />
-      </Section>
+      {/* SECURITY PILLARS */}
+      <section className="space-y-3">
+        <h2 className="section-heading">Built for security from day one</h2>
+        <SecurityPillars />
+      </section>
     </main>
   );
 }

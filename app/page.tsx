@@ -1,98 +1,90 @@
 // app/page.tsx
-import type { Metadata } from "next";
-import Link from "next/link";
-import { FeatureGrid } from "@/components/feature-grid";
-import { Steps } from "@/components/steps";
-import { SecurityPillars } from "@/components/security-pillars";
+import Section from "@/components/section";
 import { PhoneMock } from "@/components/phone-mock";
-
-export const metadata: Metadata = {
-  title: "Torvus Security — Your materials. Your rules. Your timeline.",
-  description:
-    "Safeguard private materials, set release rules, and prove what happened.",
-};
+import FeatureGrid from "@/components/feature-grid";
+import Steps from "@/components/steps";
+import SecurityPills from "@/components/security-pills";
 
 export default function HomePage() {
   return (
-    <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16 md:space-y-24">
-      {/* HERO */}
-      <section
-        aria-labelledby="hero-heading"
-        className="mt-8 sm:mt-10 rounded-3xl border border-border/70 bg-gradient-to-br from-[hsl(210,50%,98%)] via-[hsl(0,0%,100%)] to-[hsl(340,80%,98%)] shadow-[0_2px_0_hsl(0_0%_100%),0_1px_2px_rgba(0,0,0,.06),0_12px_40px_-8px_rgba(203,0,97,.18)]"
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 p-6 sm:p-8 md:p-10 lg:p-12">
-          <div className="max-w-xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-rose-200/60 bg-rose-50 px-3 py-1 text-xs font-medium text-rose-700">
-              <span className="size-1.5 rounded-full bg-rose-500" />
-              Built for security
-            </span>
+    <main>
 
-            <h1
-              id="hero-heading"
-              className="mt-5 text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tight"
-            >
-              Your materials. Your rules.{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500">
+      {/* HERO */}
+      <Section variant="panel" eyebrow="Built for security" className="overflow-hidden">
+        <div className="grid items-center gap-8 lg:grid-cols-2">
+          {/* left copy */}
+          <div>
+            <h1 className="section-title">
+              <span>Your materials. Your rules. </span>
+              <span className="bg-gradient-to-r from-emerald-500 to-cyan-600 bg-clip-text text-transparent">
                 Your timeline.
               </span>
             </h1>
-
-            <p className="mt-5 max-w-prose text-[16px] leading-7 text-muted-foreground">
+            <p className="section-kicker mt-4 max-w-2xl">
               Safeguard private materials, set release rules, and prove what
               happened.
             </p>
 
-            <div className="mt-7 flex items-center gap-3">
-              <Link
-                href="/demo"
-                className="btn btn-primary px-4 py-2 rounded-lg"
-              >
+            <div className="mt-6 flex items-center gap-3">
+              <a className="btn btn-primary" href="/demo">
                 See the demo
-              </Link>
-              <Link
-                href="/contact"
-                className="btn btn-secondary px-4 py-2 rounded-lg"
-              >
+              </a>
+              <a className="btn btn-outline" href="/contact">
                 Talk to us
-              </Link>
+              </a>
             </div>
           </div>
 
-          {/* Framed phone mock, with subtle outer frame */}
+          {/* right mock in its own framed inset */}
           <div className="relative">
-            <div className="rounded-[28px] border border-border/70 bg-background shadow-[0_2px_0_hsl(0_0%_100%),0_1px_2px_rgba(0,0,0,.06),0_24px_60px_-24px_rgba(16,24,40,.25)] p-3 sm:p-4">
+            <div className="mx-auto w-full max-w-[380px] rounded-[2rem] border border-slate-200 bg-white p-3 shadow-v0">
               <PhoneMock />
             </div>
-
-            {/* soft aura */}
-            <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[36px] blur-2xl opacity-40 bg-[radial-gradient(120px_120px_at_85%_15%,#f0a,#0000),radial-gradient(140px_140px_at_15%_85%,#22d3ee,#0000)]" />
           </div>
         </div>
-      </section>
+      </Section>
 
-      {/* WHAT YOU GET */}
-      <section aria-labelledby="features-heading" className="space-y-6">
-        <h2 id="features-heading" className="text-xl font-semibold">
-          What you get with Torvus
-        </h2>
+      {/* Product “tracks” chips (optional small bar) */}
+      <Section tight variant="plain" className="bg-transparent p-0">
+        <div className="framed flex flex-wrap items-center justify-center gap-3 p-3 text-xs text-slate-600">
+          {["Aegis", "Monarch", "Northwind", "Contour", "Helios"].map((name) => (
+            <span
+              key={name}
+              className="rounded-xl border border-slate-200 bg-white px-4 py-1 shadow-sm"
+            >
+              {name}
+            </span>
+          ))}
+        </div>
+      </Section>
+
+      {/* Features */}
+      <Section
+        variant="plain"
+        eyebrow="What you get with Torvus"
+        title="Controls that adapt to the way you share."
+        description="Mix and match recipient rules, verification, and audit so every release has the right safeguards."
+      >
         <FeatureGrid />
-      </section>
+      </Section>
 
-      {/* HOW IT WORKS */}
-      <section aria-labelledby="how-heading" className="space-y-6">
-        <h2 id="how-heading" className="text-xl font-semibold">
-          How it works
-        </h2>
+      {/* How it works */}
+      <Section
+        variant="panel"
+        eyebrow="How it works"
+        title="From upload to proof in three steps."
+      >
         <Steps />
-      </section>
+      </Section>
 
-      {/* SECURITY (only once) */}
-      <section aria-labelledby="security-heading" className="space-y-6">
-        <h2 id="security-heading" className="text-xl font-semibold">
-          Built for security from day one
-        </h2>
-        <SecurityPillars />
-      </section>
+      {/* Security */}
+      <Section
+        variant="panel"
+        eyebrow="Built for security from day one"
+        title="Zero-trust foundations."
+      >
+        <SecurityPills />
+      </Section>
     </main>
   );
 }

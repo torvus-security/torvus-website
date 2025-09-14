@@ -1,35 +1,111 @@
-/* Tokens first (OKLCH vars) */
-@import "./tokens.css";
+/* styles/v0.css */
 
-/* ---- Base ---- */
-:root { color-scheme: light dark; }
+/* Base tokens */
+@layer base {
+  :root {
+    /* spacing rhythm for sections */
+    --section-x: 1.25rem; /* container padding x */
+    --section-y: 3.5rem;  /* vertical gap */
+  }
 
-* { @apply border-border; }
+  /* fonts */
+  html {
+    font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
+      Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+      "Segoe UI Emoji";
+  }
+  .font-display {
+    font-family: var(--font-display), var(--font-sans), ui-sans-serif,
+      system-ui;
+  }
 
-html, body {
-  @apply bg-background text-foreground antialiased;
+  /* A11y focus */
+  :focus-visible {
+    outline: 2px solid rgb(234 88 12 / 0.7);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
 }
 
-/* ---- Minimal components ---- */
-.btn {
-  @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors
-         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
-         disabled:pointer-events-none disabled:opacity-50;
+/* Shared UI primitives */
+@layer components {
+  /* App container with comfy width */
+  .container-v0 {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+  }
+
+  /* Framed panel (soft border, big radius, subtle shadow) */
+  .framed {
+    @apply rounded-3xl border border-slate-200/80 bg-white shadow-[0_8px_24px_rgba(2,6,23,.06)];
+  }
+
+  /* Framed panel with soft gradient halo */
+  .framed-soft {
+    @apply relative rounded-3xl border border-slate-200/80 bg-white shadow-[0_8px_24px_rgba(2,6,23,.06)];
+  }
+  .framed-soft::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 1.5rem;
+    background: radial-gradient(
+        1200px 400px at 85% 30%,
+        rgba(236, 72, 153, 0.18),
+        transparent 70%
+      ),
+      radial-gradient(
+        900px 300px at 10% 40%,
+        rgba(14, 165, 233, 0.16),
+        transparent 65%
+      );
+    z-index: -1;
+    filter: blur(6px);
+  }
+
+  /* Section chrome */
+  .section {
+    @apply container-v0 py-14 sm:py-16 lg:py-20;
+  }
+  .section-tight {
+    @apply container-v0 py-10 sm:py-12;
+  }
+
+  /* Section headers */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-medium text-slate-600 shadow-sm;
+  }
+  .section-title {
+    @apply font-display text-3xl font-semibold leading-tight tracking-[-0.02em] text-slate-900 sm:text-4xl lg:text-5xl;
+  }
+  .section-kicker {
+    @apply text-slate-600/90;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition;
+  }
+  .btn-primary {
+    @apply bg-slate-900 text-white hover:opacity-90;
+  }
+  .btn-outline {
+    @apply border border-slate-200 bg-white text-slate-900 hover:bg-slate-50;
+  }
+
+  /* Subtle card for items */
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white p-5 shadow-sm;
+  }
+
+  /* Pill icon container */
+  .icon-pill {
+    @apply inline-flex size-9 items-center justify-center rounded-full bg-rose-50 text-rose-600 ring-1 ring-inset ring-rose-200/70;
+  }
 }
 
-/* NOTE:
-   For CSS-variable colors, Tailwind can't do `bg-.../90`.
-   Use a hover opacity instead.
-*/
-.btn-primary   { @apply bg-foreground text-background hover:opacity-90; }
-.btn-secondary { @apply bg-secondary text-secondary-foreground hover:opacity-90; }
-.btn-outline   { @apply border border-border bg-transparent text-foreground hover:bg-muted; }
-
-.chip { @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs bg-muted text-muted-foreground; }
-
-/* ---- Utilities ---- */
-.hero-gradient {
-  background-image:
-    radial-gradient(1200px 600px at 10% 10%, oklch(0.97 0.03 330 / .7), transparent 60%),
-    radial-gradient(800px 400px at 90% 20%, oklch(0.95 0.05 20 / .5), transparent 60%);
+/* Utilities specific to this design */
+@layer utilities {
+  .shadow-v0 {
+    box-shadow: 0 6px 20px rgba(2, 6, 23, 0.08);
+  }
 }

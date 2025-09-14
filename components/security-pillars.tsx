@@ -1,42 +1,50 @@
-// components/security-pillars.tsx
-import { ShieldCheck, KeyRound, FileCheck2 } from "lucide-react";
+// components/security-pills.tsx
+import { ShieldCheck, KeyRound, ScrollText } from "lucide-react";
 
-const pillars = [
-  {
-    icon: ShieldCheck,
-    title: "Defense-in-depth",
-    desc:
-      "Isolation by design, scoped secrets, signed releases, and default-deny access.",
-  },
-  {
-    icon: KeyRound,
-    title: "Modern auth",
-    desc: "Passkeys (WebAuthn) and TOTP options for strong, phishing-resistant login.",
-  },
-  {
-    icon: FileCheck2,
-    title: "Provenance & audit",
-    desc:
-      "Cryptographic logs so you can demonstrate integrity and verify timelines.",
-  },
+const rows = [
+  [
+    {
+      icon: ShieldCheck,
+      title: "Defense-in-depth",
+      body:
+        "Isolation by design, scoped secrets, signed releases, and default-deny access.",
+    },
+    {
+      icon: KeyRound,
+      title: "Modern auth",
+      body: "Passkeys (WebAuthn) and TOTP for phishing-resistant login.",
+    },
+    {
+      icon: ScrollText,
+      title: "Provenance & audit",
+      body:
+        "Cryptographic logs so you can demonstrate integrity and verify timelines.",
+    },
+  ],
+  // You can add another row later; keeping a single row prevents repetition.
 ];
 
-export function SecurityPillars() {
+export default function SecurityPills() {
   return (
-    <div className="rounded-3xl border border-border/70 bg-background p-5 md:p-6 shadow-[0_1px_2px_rgba(0,0,0,.06)]">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {pillars.map(({ icon: Icon, title, desc }) => (
-          <div key={title} className="flex items-start gap-4">
-            <span className="inline-grid size-10 shrink-0 place-items-center rounded-xl bg-rose-50 border border-rose-200/60 text-rose-600">
-              <Icon className="size-5" />
-            </span>
-            <div>
-              <h3 className="font-semibold">{title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{desc}</p>
+    <div className="space-y-4">
+      {rows.map((row, i) => (
+        <div
+          key={i}
+          className="grid grid-cols-1 gap-4 sm:grid-cols-3"
+        >
+          {row.map(({ icon: Icon, title, body }) => (
+            <div key={title} className="card">
+              <div className="icon-pill">
+                <Icon size={18} strokeWidth={2} />
+              </div>
+              <h3 className="mt-3 text-base font-semibold text-slate-900">
+                {title}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{body}</p>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }

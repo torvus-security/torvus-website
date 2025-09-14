@@ -1,70 +1,65 @@
 // components/section-heading.tsx
-import * as React from "react";
-import clsx from "clsx";
+// Server component (no hooks) that renders an optional eyebrow,
+// a single H2 with a gradient-highlighted substring, and an optional subtext.
 
-export function Accent({ children, className }: { children: React.ReactNode; className?: string }) {
-  // Subtle teal/sky gradient like v0
+type Props = {
+  label?: string;           // small eyebrow above the heading
+  title: string;            // full heading text
+  highlight?: string;       // substring of `title` to gradient-highlight (case-insensitive)
+  subtext?: string;         // short paragraph under the heading
+  align?: "left" | "center";
+  className?: string;
+};
+
+function Highlight({ children }: { children: React.ReactNode }) {
   return (
-    <span
-      className={clsx(
-        "bg-gradient-to-r from-teal-400 via-emerald-500 to-sky-500",
-        "bg-clip-text text-transparent",
-        className
-      )}
-    >
+    <span className="bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
       {children}
     </span>
   );
 }
 
-type SectionHeadingProps = {
-  eyebrow?: string;               // small line above the big title
-  title: React.ReactNode;         // allow JSX so we can wrap a word with <Accent>
-  description?: string;
-  align?: "left" | "center";
-  id?: string;
-  className?: string;
-};
+function renderWithHighlight(title: string, highlight?: string) {
+  if (!highlight) return title;
+  const i = title.toLowerCase().indexOf(highlight.toLowerCase());
+  if (i < 0) return title;
+
+  const before = title.slice(0, i);
+  const hit = title.slice(i, i + highlight.length);
+  const after = title.slice(i + highlight.length);
+
+  return (
+    <>
+      {before}
+      <Highlight>{hit}</Highlight>
+      {after}
+    </>
+  );
+}
 
 export default function SectionHeading({
-  eyebrow,
+  label,
   title,
-  description,
+  highlight,
+  subtext,
   align = "center",
-  id,
-  className,
-}: SectionHeadingProps) {
-  const isCenter = align === "center";
+  className = "",
+}: Props) {
+  const base =
+    "mx-auto max-w-4xl " + (align === "center" ? "text-center" : "text-left");
   return (
-    <header
-      className={clsx(
-        "mx-auto w-full max-w-5xl",
-        isCenter ? "text-center" : "text-left",
-        "space-y-3 sm:space-y-4",
-        className
+    <header className={`${base} ${className}`}>
+      {label && (
+        <p className="mb-3 text-sm font-medium text-muted-foreground">
+          {label}
+        </p>
       )}
-    >
-      {eyebrow ? (
-        <p className={clsx("text-sm font-medium text-muted-foreground", isCenter && "mx-auto")}>
-          {eyebrow}
-        </p>
-      ) : null}
-
-      <h2
-        id={id}
-        className={clsx(
-          "font-extrabold tracking-tight text-foreground",
-          "text-4xl sm:text-5xl"
-        )}
-      >
-        {title}
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.08] tracking-tight text-foreground">
+        {renderWithHighlight(title, highlight)}
       </h2>
-
-      {description ? (
-        <p className={clsx("text-base sm:text-lg text-muted-foreground", isCenter && "mx-auto max-w-3xl")}>
-          {description}
-        </p>
-      ) : null}
+      {subtext && (
+        <p className="mt-4 text-lg text-muted-foreground">{subtext}</p>
+      )}
     </header>
   );
 }

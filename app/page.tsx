@@ -1,98 +1,95 @@
 // app/page.tsx
+import PhoneMock from "@/components/phone-mock";
 import SectionHeading from "@/components/section-heading";
 import FeatureGrid from "@/components/feature-grid";
 import HowItWorks from "@/components/how-it-works";
 import SecurityPillars from "@/components/security-pillars";
-import PhoneMock from "@/components/phone-mock";
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <main className="space-y-[clamp(3rem,6vw,5rem)]">
-      {/* Hero (framed panel with gradient + phone mock) */}
-      <section className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-gradient-to-br from-rose-50 via-fuchsia-50/60 to-indigo-50/40 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-900 ring-1 ring-black/5 shadow-[0_10px_40px_-15px_rgba(0,0,0,.25)]">
-          <div className="grid items-center gap-8 lg:grid-cols-2">
-            {/* Left copy */}
-            <div className="px-6 pb-10 pt-12 sm:px-10 sm:pt-14 lg:pb-16">
-              <p className="inline-flex items-center gap-2 rounded-full border bg-white/70 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-sm">
-                <span className="inline-block size-2 rounded-full bg-rose-400" />
+    <main className="pb-section">
+      {/* HERO */}
+      <section className="mx-auto mt-10 max-w-6xl px-4 sm:px-6">
+        <div className="rounded-[28px] border border-border bg-gradient-to-br from-rose-50 via-white to-fuchsia-50/70 p-6 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.18)] md:p-10">
+          <div className="grid items-center gap-10 md:grid-cols-2">
+            <div>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-sm text-muted-foreground shadow-sm">
+                <span className="h-2 w-2 rounded-full bg-rose-500" />
                 Built for security
-              </p>
-
-              <h1 className="mt-6 text-[clamp(2rem,7vw,4.2rem)] font-extrabold leading-[1.02] tracking-tight">
-                <span className="block text-foreground">Your materials.</span>
-                <span className="block text-foreground">Your rules.</span>
-                <span className="block bg-gradient-to-r from-teal-500 via-sky-500 to-cyan-500 bg-clip-text text-transparent">
+              </div>
+              <h1 className="text-5xl font-extrabold leading-tight tracking-tight text-foreground sm:text-6xl">
+                Your materials.
+                <br />
+                Your rules.{" "}
+                <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
                   Your timeline.
                 </span>
               </h1>
-
-              <p className="mt-6 max-w-prose text-base/7 text-muted-foreground">
+              <p className="mt-4 max-w-xl text-muted-foreground">
                 Safeguard private materials, set release rules, and prove what
                 happened.
               </p>
-
               <div className="mt-6 flex gap-3">
                 <a
-                  href="#demo"
-                  className="btn btn-primary rounded-xl px-4 py-2 text-sm"
+                  href="/demo"
+                  className="btn btn-primary px-4 py-2"
                 >
                   See the demo
                 </a>
                 <a
                   href="/contact"
-                  className="btn btn-outline rounded-xl px-4 py-2 text-sm"
+                  className="btn btn-outline px-4 py-2"
                 >
                   Talk to us
                 </a>
               </div>
             </div>
 
-            {/* Right phone mock */}
-            <div className="relative mx-auto max-w-md px-6 pb-12 pt-4 sm:px-10 lg:pb-16">
-              {/* faint outer frame for depth */}
-              <div className="pointer-events-none absolute -inset-x-6 -inset-y-8 rounded-[28px] bg-gradient-to-br from-emerald-300/25 via-cyan-300/20 to-fuchsia-300/25 blur-2xl" />
-              <PhoneMock />
+            <div className="relative">
+              <div className="pointer-events-none absolute -inset-6 rounded-[28px] bg-gradient-to-br from-emerald-200/30 via-cyan-200/30 to-fuchsia-200/30 blur-2xl" />
+              <div className="relative">
+                <PhoneMock />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* What you get */}
-      <section className="mx-auto max-w-6xl px-4 sm:px-6">
+      {/* FEATURES */}
+      <section className="mt-section">
         <SectionHeading
-          label="What you get with Torvus"
+          eyebrow="What you get with Torvus"
           title="What you get with Torvus"
           highlight="Torvus"
-          subtext="A secure way to prepare, protect, share, and verify sensitive materials."
+          summary="A secure way to prepare, protect, share, and verify sensitive materials."
         />
-        <div className="mt-10">
+        <div className="mt-8">
           <FeatureGrid />
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="mx-auto max-w-6xl px-4 sm:px-6">
+      {/* HOW IT WORKS */}
+      <section className="mt-section">
         <SectionHeading
-          label="How it works"
+          eyebrow="How it works"
           title="How it works"
           highlight="works"
-          subtext="Add materials, set the rules, then share and prove using tamper-evident exports."
+          summary="Add materials, set the rules, then share and prove using tamper-evident exports."
         />
-        <div className="mt-10">
+        <div className="mt-8">
           <HowItWorks />
         </div>
       </section>
 
-      {/* Security pillars */}
-      <section className="mx-auto max-w-6xl px-4 sm:px-6">
+      {/* SECURITY PILLARS */}
+      <section className="mt-section">
         <SectionHeading
-          label="Built for security from day one"
+          eyebrow="Built for security from day one"
           title="Built for security from day one"
           highlight="security"
-          subtext="Defense-in-depth, modern authentication, and cryptographic auditability."
+          summary="Defense-in-depth, modern authentication, and cryptographic auditability."
         />
-        <div className="mt-10">
+        <div className="mt-8">
           <SecurityPillars />
         </div>
       </section>

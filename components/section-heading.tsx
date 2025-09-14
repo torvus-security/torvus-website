@@ -1,65 +1,50 @@
 // components/section-heading.tsx
-// Server component (no hooks) that renders an optional eyebrow,
-// a single H2 with a gradient-highlighted substring, and an optional subtext.
+import React from "react";
 
 type Props = {
-  label?: string;           // small eyebrow above the heading
-  title: string;            // full heading text
-  highlight?: string;       // substring of `title` to gradient-highlight (case-insensitive)
-  subtext?: string;         // short paragraph under the heading
-  align?: "left" | "center";
+  eyebrow?: string;
+  title: string;
+  /** The word inside `title` to render with a gradient. If omitted, no highlight. */
+  highlight?: string;
+  /** Optional subtitle/summary below the title. */
+  summary?: string;
   className?: string;
 };
 
-function Highlight({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
-      {children}
-    </span>
-  );
-}
-
-function renderWithHighlight(title: string, highlight?: string) {
-  if (!highlight) return title;
-  const i = title.toLowerCase().indexOf(highlight.toLowerCase());
-  if (i < 0) return title;
-
-  const before = title.slice(0, i);
-  const hit = title.slice(i, i + highlight.length);
-  const after = title.slice(i + highlight.length);
-
-  return (
-    <>
-      {before}
-      <Highlight>{hit}</Highlight>
-      {after}
-    </>
-  );
-}
-
 export default function SectionHeading({
-  label,
+  eyebrow,
   title,
   highlight,
-  subtext,
-  align = "center",
-  className = "",
+  summary,
+  className,
 }: Props) {
-  const base =
-    "mx-auto max-w-4xl " + (align === "center" ? "text-center" : "text-left");
+  const split = highlight && title.includes(highlight)
+    ? title.split(highlight)
+    : [title];
+
   return (
-    <header className={`${base} ${className}`}>
-      {label && (
-        <p className="mb-3 text-sm font-medium text-muted-foreground">
-          {label}
+    <div className={["mx-auto max-w-6xl px-4 sm:px-6 text-center", className].filter(Boolean).join(" ")}>
+      {eyebrow && (
+        <div className="mb-4 text-sm font-semibold text-muted-foreground">{eyebrow}</div>
+      )}
+      <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+        {highlight && split.length === 2 ? (
+          <>
+            {split[0]}
+            <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+              {highlight}
+            </span>
+            {split[1]}
+          </>
+        ) : (
+          title
+        )}
+      </h2>
+      {summary && (
+        <p className="mx-auto mt-3 max-w-3xl text-balance text-muted-foreground">
+          {summary}
         </p>
       )}
-      <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.08] tracking-tight text-foreground">
-        {renderWithHighlight(title, highlight)}
-      </h2>
-      {subtext && (
-        <p className="mt-4 text-lg text-muted-foreground">{subtext}</p>
-      )}
-    </header>
+    </div>
   );
 }

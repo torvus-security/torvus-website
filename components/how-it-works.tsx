@@ -1,67 +1,55 @@
 // components/how-it-works.tsx
-import { CircleDashed, Settings2, Share2 } from "lucide-react";
+import { Gauge, SlidersHorizontal, Share2 } from "lucide-react";
 
-const STEPS = [
+const steps = [
   {
-    n: "01",
-    name: "Add materials",
-    body:
+    icon: Gauge,
+    label: "01",
+    title: "Add materials",
+    desc:
       "Upload files or collect evidence directly. Everything is encrypted at rest and in transit.",
-    tint: "bg-rose-50 text-rose-600 ring-rose-100",
-    icon: CircleDashed,
+    tint: "from-rose-400/20 to-rose-500/10 text-rose-600",
   },
   {
-    n: "02",
-    name: "Set the rules",
-    body:
+    icon: SlidersHorizontal,
+    label: "02",
+    title: "Set the rules",
+    desc:
       "Choose recipients, timing windows, and safeguards like single-use, watermarking, or revocation.",
-    tint: "bg-sky-50 text-sky-600 ring-sky-100",
-    icon: Settings2,
+    tint: "from-sky-400/20 to-sky-500/10 text-sky-600",
   },
   {
-    n: "03",
-    name: "Share & prove",
-    body:
-      "Send controlled access links and export tamper-evident proof for audits or disputes.",
-    tint: "bg-emerald-50 text-emerald-600 ring-emerald-100",
     icon: Share2,
+    label: "03",
+    title: "Share & prove",
+    desc:
+      "Send controlled access links and export tamper-evident proof for audits or disputes.",
+    tint: "from-emerald-400/20 to-emerald-500/10 text-emerald-600",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section className="section space-y-8 md:space-y-10">
-      {/* Single prominent heading – no duplicate eyebrow */}
-      <div className="text-center">
-        <h2 className="text-3xl md:text-5xl font-semibold tracking-tight">
-          <span className="bg-gradient-to-r from-slate-800 to-slate-600 dark:from-slate-100 dark:to-slate-300 bg-clip-text text-transparent">
-            How it works
-          </span>
-        </h2>
-      </div>
-
-      <div className="grid gap-5 md:grid-cols-3">
-        {STEPS.map(({ n, name, body, tint, icon: Icon }) => (
-          <div
-            key={n}
-            className="rounded-2xl border border-border/70 bg-card/60 shadow-sm p-6"
-          >
-            <div className="flex items-center gap-3">
-              <span
-                className={`inline-flex size-10 items-center justify-center rounded-full ring-1 ${tint}`}
-                aria-hidden
-              >
-                <Icon className="size-5" />
-              </span>
-              <span className="text-sm font-medium text-muted-foreground">
-                {n}
-              </span>
+    <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 sm:grid-cols-3 sm:px-6">
+      {steps.map(({ icon: Icon, label, title, desc, tint }) => (
+        <div
+          key={label}
+          className="rounded-2xl border border-border bg-card p-6 shadow-sm hover:shadow-md transition"
+        >
+          <div className="mb-4 flex items-center gap-3">
+            <div
+              className={`inline-flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-b ${tint}`}
+            >
+              <Icon className="h-4 w-4 opacity-80" />
             </div>
-            <h3 className="mt-4 text-lg font-semibold text-foreground">{name}</h3>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">{body}</p>
+            <span className="text-sm font-semibold text-muted-foreground">
+              {label}
+            </span>
           </div>
-        ))}
-      </div>
-    </section>
+          <h3 className="text-lg font-semibold">{title}</h3>
+          <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
+        </div>
+      ))}
+    </div>
   );
 }

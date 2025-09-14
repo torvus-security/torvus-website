@@ -1,5 +1,5 @@
 // components/feature-grid.tsx
-import { FileCheck2, Landmark, Link2, ScrollText, ShieldCheck, Safe } from "lucide-react";
+import { FileCheck2, Landmark, Link2, ScrollText, ShieldCheck, Lock } from "lucide-react";
 
 const FEATURES = [
   {
@@ -9,7 +9,7 @@ const FEATURES = [
     tint: "bg-rose-400/15 text-rose-600",
   },
   {
-    icon: Safe,
+    icon: Lock, // swapped from Safe -> Lock
     title: "Torvus Vault",
     body: "Store sensitive files in an encrypted vault designed for zero-trust workflows.",
     tint: "bg-sky-400/15 text-sky-600",

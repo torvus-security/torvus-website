@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import FeatureModal from "./feature-modal";
+import FeatureModal from "@/components/feature-modal";
 import { Shield, Fingerprint, FileSearch2 } from "lucide-react";
 
 type Pillar = {
@@ -54,9 +54,7 @@ export default function SecurityPillars() {
                        transition hover:-translate-y-0.5 hover:shadow-lg focus:shadow-lg focus:-translate-y-0.5"
           >
             <div className="flex items-start gap-3">
-              <span
-                className={`inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${p.tint}`}
-              >
+              <span className={`inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${p.tint}`}>
                 <p.Icon className="h-5 w-5" />
               </span>
               <h3 className="text-base font-semibold leading-6">{p.title}</h3>
@@ -75,9 +73,7 @@ export default function SecurityPillars() {
         title={open?.title ?? ""}
         icon={
           open ? (
-            <span
-              className={`mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${open.tint}`}
-            >
+            <span className={`mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${open.tint}`}>
               <open.Icon className="h-5 w-5" />
             </span>
           ) : null

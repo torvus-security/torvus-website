@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import FeatureModal from "./feature-modal";
+import FeatureModal from "@/components/feature-modal";
 import { BadgeCheck, Settings2, Share2 } from "lucide-react";
 
 type Step = {
@@ -58,9 +58,7 @@ export default function HowItWorks() {
                        transition hover:-translate-y-0.5 hover:shadow-lg focus:shadow-lg focus:-translate-y-0.5"
           >
             <div className="flex items-start gap-3">
-              <span
-                className={`inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${s.tint}`}
-              >
+              <span className={`inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${s.tint}`}>
                 <s.Icon className="h-5 w-5" />
               </span>
               <div>
@@ -82,9 +80,7 @@ export default function HowItWorks() {
         title={open?.title ?? ""}
         icon={
           open ? (
-            <span
-              className={`mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${open.tint}`}
-            >
+            <span className={`mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${open.tint}`}>
               <open.Icon className="h-5 w-5" />
             </span>
           ) : null

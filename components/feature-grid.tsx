@@ -10,14 +10,14 @@ import {
   Fingerprint,
 } from "lucide-react";
 import { useState } from "react";
-import FeatureModal from "./feature-modal";
+import FeatureModal from "@/components/feature-modal";
 
 type Feature = {
   key: string;
   title: string;
   body: string;
   Icon: any;
-  tint: string; // tailwind color token for icon background
+  tint: string;
 };
 
 const FEATURES: Feature[] = [
@@ -80,9 +80,7 @@ export default function FeatureGrid() {
         {FEATURES.map(({ key, title, body, Icon, tint }) => (
           <button
             key={key}
-            onClick={() =>
-              setActive({ key, title, body, Icon, tint })
-            }
+            onClick={() => setActive({ key, title, body, Icon, tint })}
             className="group rounded-2xl border border-border/70 bg-card text-left shadow-sm transition
                        hover:shadow-lg focus:shadow-lg focus-visible:outline-none
                        hover:-translate-y-0.5 focus:-translate-y-0.5
@@ -90,16 +88,12 @@ export default function FeatureGrid() {
                        p-5 md:p-6"
           >
             <div className="flex items-start gap-3">
-              <span
-                className={`inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${tint}`}
-              >
+              <span className={`inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${tint}`}>
                 <Icon className="h-5 w-5" />
               </span>
               <h3 className="text-base font-semibold leading-6">{title}</h3>
             </div>
-            <p className="mt-3 text-sm leading-6 text-muted-foreground">
-              {body}
-            </p>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">{body}</p>
             <div className="mt-4 text-xs font-medium text-foreground/70 opacity-0 transition group-hover:opacity-100">
               Learn more →
             </div>
@@ -112,9 +106,7 @@ export default function FeatureGrid() {
         title={active?.title ?? ""}
         icon={
           active ? (
-            <span
-              className={`mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${active.tint}`}
-            >
+            <span className={`mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${active.tint}`}>
               <active.Icon className="h-5 w-5" />
             </span>
           ) : null

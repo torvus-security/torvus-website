@@ -1,45 +1,105 @@
 // components/how-it-works.tsx
-import { BadgeCheck, Cog, Share2 } from "lucide-react";
+"use client";
 
-const STEPS = [
+import { useState } from "react";
+import FeatureModal from "./feature-modal";
+import { BadgeCheck, Settings2, Share2 } from "lucide-react";
+
+type Step = {
+  key: string;
+  n: string;
+  title: string;
+  blurb: string;
+  Icon: any;
+  tint: string;
+};
+
+const STEPS: Step[] = [
   {
+    key: "add",
     n: "01",
-    icon: BadgeCheck,
-    tint: "bg-rose-400/15 text-rose-600",
     title: "Add materials",
-    body: "Upload files or collect evidence directly. Everything is encrypted at rest and in transit.",
+    blurb:
+      "Upload files or collect evidence directly. Everything is encrypted at rest and in transit.",
+    Icon: BadgeCheck,
+    tint: "bg-rose-50 text-rose-600 ring-rose-200",
   },
   {
+    key: "rules",
     n: "02",
-    icon: Cog,
-    tint: "bg-sky-400/15 text-sky-600",
     title: "Set the rules",
-    body: "Choose recipients, timing windows, and safeguards like single-use, watermarking, or revocation.",
+    blurb:
+      "Choose recipients, timing windows, and safeguards like single-use, watermarking, or revocation.",
+    Icon: Settings2,
+    tint: "bg-sky-50 text-sky-600 ring-sky-200",
   },
   {
+    key: "share",
     n: "03",
-    icon: Share2,
-    tint: "bg-emerald-400/15 text-emerald-600",
     title: "Share & prove",
-    body: "Send controlled access links and export tamper-evident proof for audits or disputes.",
+    blurb:
+      "Send controlled access links and export tamper-evident proof for audits or disputes.",
+    Icon: Share2,
+    tint: "bg-emerald-50 text-emerald-600 ring-emerald-200",
   },
 ];
 
 export default function HowItWorks() {
+  const [open, setOpen] = useState<Step | null>(null);
+
   return (
-    <div className="grid gap-6 md:grid-cols-3">
-      {STEPS.map(({ n, icon: Icon, tint, title, body }) => (
-        <div key={n} className="card card-hover p-6">
-          <div className="flex items-center gap-3">
-            <div className={`inline-flex h-9 w-9 items-center justify-center rounded-full ${tint}`}>
-              <Icon className="h-4 w-4" />
+    <>
+      <div className="grid gap-5 md:grid-cols-3">
+        {STEPS.map((s) => (
+          <button
+            key={s.key}
+            onClick={() => setOpen(s)}
+            className="group rounded-2xl border border-border/70 bg-card p-5 text-left shadow-sm
+                       transition hover:-translate-y-0.5 hover:shadow-lg focus:shadow-lg focus:-translate-y-0.5"
+          >
+            <div className="flex items-start gap-3">
+              <span
+                className={`inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${s.tint}`}
+              >
+                <s.Icon className="h-5 w-5" />
+              </span>
+              <div>
+                <div className="text-xs font-semibold text-muted-foreground">{s.n}</div>
+                <h3 className="text-base font-semibold leading-6">{s.title}</h3>
+              </div>
             </div>
-            <span className="text-sm font-semibold text-foreground/70">{n}</span>
-          </div>
-          <h3 className="mt-3 text-lg font-semibold">{title}</h3>
-          <p className="mt-2 text-sm text-muted-foreground">{body}</p>
-        </div>
-      ))}
-    </div>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">{s.blurb}</p>
+            <div className="mt-4 text-xs font-medium text-foreground/70 opacity-0 transition group-hover:opacity-100">
+              Details →
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <FeatureModal
+        open={!!open}
+        onClose={() => setOpen(null)}
+        title={open?.title ?? ""}
+        icon={
+          open ? (
+            <span
+              className={`mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ${open.tint}`}
+            >
+              <open.Icon className="h-5 w-5" />
+            </span>
+          ) : null
+        }
+      >
+        <p className="mb-3">{open?.blurb}</p>
+        <p className="mb-2">
+          Torvus builds a verifiable trail as you go, giving you confidence in critical moments.
+        </p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>Automatic audit logs and immutable event history.</li>
+          <li>Configurable release rules and safe rollbacks.</li>
+          <li>Recipient experience that works without special software.</li>
+        </ul>
+      </FeatureModal>
+    </>
   );
 }

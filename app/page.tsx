@@ -82,3 +82,11 @@ export default function Page() {
     </main>
   );
 }
+// near the end of <main> on the home page:
+import CTASignup from "@/components/cta-signup";
+
+// …
+
+<section className="section mb-section">
+  <CTASignup />
+</section>

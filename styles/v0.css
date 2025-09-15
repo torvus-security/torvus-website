@@ -1,90 +1,58 @@
 /* styles/v0.css
-   Pure CSS helpers (no @layer usage).
-   Typography gradients + hover effects + slightly larger default text.
+   Pure CSS helpers (no @layer / no @tailwind to keep Vercel happy).
+   Two-colour gradients only + typography + hover effects.
 */
 
-/* ---- Tokens (no layout changes) --------------------------------------- */
-:root {
-  /* v0-style text gradients */
-  --grad-hero-from: #7c3aed;   /* purple-600 */
-  --grad-hero-mid:  #ec4899;   /* fuchsia-500 */
-  --grad-hero-to:   #fb7185;   /* rose-400  */
+/* ---- Tokens ------------------------------------------------------------ */
+:root{
+  /* two-colour text gradients */
+  --grad-hero-from:#7c3aed;   /* purple-600  */
+  --grad-hero-to:#fb7185;     /* rose-400    */
 
-  --grad-accent-from: #22d3ee; /* cyan-400   */
-  --grad-accent-to:   #10b981; /* emerald-500*/
+  --grad-accent-from:#22d3ee; /* cyan-400    */
+  --grad-accent-to:#10b981;   /* emerald-500 */
 
   /* subtle elevation */
-  --shadow-soft: 0 1px 2px rgba(2, 6, 23, 0.08),
-                 0 8px 28px rgba(2, 6, 23, 0.10);
+  --shadow-soft:0 1px 2px rgba(2,6,23,.08),0 8px 28px rgba(2,6,23,.10);
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.25),
-                   0 10px 30px rgba(0, 0, 0, 0.45);
-  }
+@media (prefers-color-scheme:dark){
+  :root{ --shadow-soft:0 1px 2px rgba(0,0,0,.25),0 10px 30px rgba(0,0,0,.45); }
 }
 
 /* ---- Base sizing (keeps layout intact) -------------------------------- */
-body {
-  font-size: 17px;          /* a touch larger */
-  line-height: 1.7;         /* easier reading */
-}
+body{ font-size:17px; line-height:1.7; }
 
-/* ---- Automatic heading styling ---------------------------------------- */
+/* ---- Automatic heading styling (two-colour only) ---------------------- */
 main h1:first-of-type,
-main .hero h1:first-of-type {
-  background-image: linear-gradient(90deg, var(--grad-hero-from), var(--grad-hero-mid), var(--grad-hero-to));
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-
-  font-family: var(--font-erode), var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
-  letter-spacing: -0.01em;
-  font-variation-settings: "wght" 725;
+main .hero h1:first-of-type{
+  background-image:linear-gradient(90deg,var(--grad-hero-from),var(--grad-hero-to));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  font-family:var(--font-erode),var(--font-satoshi),ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:-.01em; font-variation-settings:"wght" 725;
+}
+section>h2,.section-title{
+  background-image:linear-gradient(90deg,var(--grad-accent-from),var(--grad-accent-to));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  font-family:var(--font-erode),var(--font-satoshi),ui-sans-serif,system-ui,sans-serif;
+  letter-spacing:-.01em; font-variation-settings:"wght" 680;
 }
 
-section > h2,
-.section-title {
-  background-image: linear-gradient(90deg, var(--grad-accent-from), var(--grad-accent-to));
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
+/* ---- Utility classes (opt-in) ---------------------------------------- */
+.text-gradient-hero{
+  background-image:linear-gradient(90deg,var(--grad-hero-from),var(--grad-hero-to));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.text-gradient-accent{
+  background-image:linear-gradient(90deg,var(--grad-accent-from),var(--grad-accent-to));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.heading-tight{ letter-spacing:-.01em; }
+.font-display{ font-family:var(--font-erode),var(--font-satoshi),ui-sans-serif,system-ui,sans-serif; font-variation-settings:"wght" 720; }
 
-  font-family: var(--font-erode), var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
-  letter-spacing: -0.01em;
-  font-variation-settings: "wght" 680;
-}
+/* Hover/tap affordances for cards & pills */
+.hover-card{ transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease; will-change:transform; }
+.hover-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-soft); border-color:hsl(215 16% 82% / .55); }
+.pressable{ transition:transform .12s ease; } .pressable:active{ transform:translateY(0) scale(.99); }
 
-/* ---- Utility classes (opt-in if needed) ------------------------------- */
-.text-gradient-hero {
-  background-image: linear-gradient(90deg, var(--grad-hero-from), var(--grad-hero-mid), var(--grad-hero-to));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-.text-gradient-accent {
-  background-image: linear-gradient(90deg, var(--grad-accent-from), var(--grad-accent-to));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-.heading-tight { letter-spacing: -0.01em; }
-.font-display  { font-family: var(--font-erode), var(--font-satoshi), ui-sans-serif, system-ui, sans-serif; font-variation-settings: "wght" 720; }
-
-/* Hover/tap affordances for existing cards & pills */
-.hover-card {
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  will-change: transform;
-}
-.hover-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-soft);
-  border-color: hsl(215 16% 82% / .55);
-}
-.pressable { transition: transform .12s ease; }
-.pressable:active { transform: translateY(0) scale(.99); }
-
-/* Optional: nicer keyboard focus ring */
-.focus-ring {
-  outline: none;
-  box-shadow:
-    0 0 0 2px rgb(255 255 255 / .9),
-    0 0 0 4px rgb(59 130 246 / .55);
-}
+/* Keyboard focus ring */
+.focus-ring{ outline:none; box-shadow:0 0 0 2px rgb(255 255 255 /.9),0 0 0 4px rgb(59 130 246 /.55); }

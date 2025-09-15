@@ -1,92 +1,77 @@
 // app/page.tsx
-import Link from "next/link";
 import PhoneMock from "@/components/phone-mock";
 import FeatureGrid from "@/components/feature-grid";
-import HowItWorks from "@/components/how-it-works";
 import SecurityPillars from "@/components/security-pillars";
 
-export default function Page() {
+export const metadata = {
+  title: "Torvus — Conditional Release, Built Securely",
+  description:
+    "Torvus protects what matters and releases it only when your conditions are met — with zero-knowledge encryption and a tamper-evident audit trail.",
+};
+
+export default function HomePage() {
   return (
-    <main className="container mx-auto px-4">
-      {/* HERO (reduced top spacing) */}
-      <section className="section-space-first">
-        <div className="framed-panel overflow-hidden px-6 py-10 md:px-10 md:py-14 lg:px-16 lg:py-16">
-          <div className="grid items-center gap-10 md:grid-cols-2">
-            <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs text-foreground/70 backdrop-blur">
-                <span className="inline-block h-2 w-2 rounded-full bg-rose-500" />
-                Built for security
-              </div>
-
-              <h1 className="mt-6 text-5xl font-extrabold leading-[1.05] tracking-tight text-foreground md:text-6xl lg:text-7xl">
-                Your materials.
-                <br />
-                Your rules. <span className="gradient-word">Your timeline.</span>
-              </h1>
-
-              <p className="mt-5 text-base text-muted-foreground md:text-lg">
-                Safeguard private materials, set release rules, and prove what happened.
-              </p>
-
-              <div className="mt-6 flex gap-3">
-                <Link href="/demo" className="btn btn-primary">See the demo</Link>
-                <Link href="/contact" className="btn btn-outline">Talk to us</Link>
-              </div>
-            </div>
-
-            <div className="relative">
-              <PhoneMock />
-            </div>
+    <main className="mx-auto max-w-7xl px-6">
+      {/* Hero */}
+      <section className="hero mx-auto grid max-w-5xl grid-cols-1 items-center gap-10 py-10 md:grid-cols-2 md:py-12">
+        <div>
+          <h1 className="mb-4 text-4xl font-display heading-tight sm:text-5xl md:text-6xl">
+            Your<span className="block">instructions,</span>{" "}
+            <span className="text-gradient-hero">only when it’s right</span>
+          </h1>
+          <p className="max-w-prose text-zinc-600 dark:text-zinc-400">
+            Torvus is a secure vault with a conditional-release engine. Encrypt locally,
+            set your conditions, and know that only the right people get the right things at the right time.
+          </p>
+          <div className="mt-6 flex gap-3">
+            <a
+              href="/signup"
+              className="pressable inline-flex items-center justify-center rounded-xl bg-rose-600 px-4 py-2 text-sm font-medium text-white hover:opacity-90"
+            >
+              Sign up for updates
+            </a>
+            <a
+              href="/security"
+              className="pressable inline-flex items-center justify-center rounded-xl border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-white/10 dark:bg-zinc-900 dark:text-zinc-200"
+            >
+              See how it’s secured
+            </a>
           </div>
         </div>
-      </section>
-
-      {/* WHAT YOU GET */}
-      <section className="section-space">
-        <h2 className="section-headline text-center">
-          What you get with <span className="gradient-word">Torvus</span>
-        </h2>
-        <p className="mt-3 text-center text-muted-foreground">
-          A secure way to prepare, protect, share, and verify sensitive materials.
-        </p>
-        <div className="mt-10">
-          <FeatureGrid />
+        <div className="justify-self-center">
+          <PhoneMock src="/phone-hero.png" alt="Torvus app preview" />
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="section-space">
-        <h2 className="section-headline text-center">
-          How it <span className="gradient-word">works</span>
-        </h2>
-        <p className="mt-3 text-center text-muted-foreground">
-          Add materials, set the rules, then share and prove using tamper-evident exports.
-        </p>
-        <div className="mt-10">
-          <HowItWorks />
-        </div>
+      {/* What you get */}
+      <section className="py-10 md:py-12">
+        <h2 className="section-title mb-6 text-2xl font-display">What you get with Torvus</h2>
+        <FeatureGrid />
       </section>
 
-      {/* SECURITY PILLARS */}
-      <section className="section-space">
-        <h2 className="section-headline text-center">
-          Built for <span className="gradient-word">security</span> from day one
-        </h2>
-        <p className="mt-3 text-center text-muted-foreground">
-          Defense-in-depth, modern authentication, and cryptographic auditability.
-        </p>
-        <div className="mt-10">
-          <SecurityPillars />
+      {/* Security pillars */}
+      <section className="py-10 md:py-12">
+        <h2 className="section-title mb-6 text-2xl font-display">How Torvus keeps you safe</h2>
+        <SecurityPillars />
+      </section>
+
+      {/* Simple CTA */}
+      <section className="py-10 md:py-12">
+        <div className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-zinc-900">
+          <h3 className="mb-2 text-xl font-display">Want early access?</h3>
+          <p className="text-zinc-600 dark:text-zinc-400">
+            Join the waitlist and we’ll let you know when Torvus is ready for you.
+          </p>
+          <div className="mt-4">
+            <a
+              href="/signup"
+              className="pressable inline-flex items-center justify-center rounded-xl bg-rose-600 px-4 py-2 text-sm font-medium text-white hover:opacity-90"
+            >
+              Sign up for updates
+            </a>
+          </div>
         </div>
       </section>
     </main>
   );
 }
-// near the end of <main> on the home page:
-import CTASignup from "@/components/cta-signup";
-
-// …
-
-<section className="section mb-section">
-  <CTASignup />
-</section>

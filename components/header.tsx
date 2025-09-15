@@ -2,99 +2,102 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import clsx from "clsx";
+import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import clsx from "clsx";
 
 const NAV = [
   { href: "/product", label: "Product" },
   { href: "/security", label: "Security" },
+  { href: "/faqs", label: "FAQs" },
   { href: "/about", label: "About" },
-  { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
-  { href: "/signup", label: "Get Early Access" }, // CTA keeps the same route
+  { href: "/signup", label: "Sign up" }, // only “Sign up”, no “demo”
 ];
 
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  // close the mobile menu when route changes
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="inline-flex h-4 w-4 rotate-45 bg-rose-500" aria-hidden />
-          <span className="text-sm font-semibold tracking-tight">Torvus Security</span>
+    <header className="sticky top-0 z-40 w-full bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:bg-zinc-950/70">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3">
+        {/* Brand with SHARP diamond */}
+        <Link href="/" className="group inline-flex items-center gap-2">
+          <span className="inline-block h-2.5 w-2.5 rotate-45 bg-rose-600 shadow-sm group-hover:opacity-90" />
+          <span className="text-sm font-medium tracking-wide text-zinc-700 dark:text-zinc-300">
+            Torvus Security
+          </span>
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden items-center gap-6 md:flex">
-          {NAV.slice(0, 5).map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={clsx(
-                "text-sm text-muted-foreground transition hover:text-foreground",
-                pathname === item.href && "text-foreground"
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-          {/* CTA */}
-          <Link
-            href={NAV[5].href}
-            className="rounded-xl border border-border bg-foreground px-3 py-1.5 text-sm font-semibold text-background shadow-sm transition hover:opacity-90"
-          >
-            {NAV[5].label}
-          </Link>
-        </nav>
-
-        {/* Mobile hamburger */}
+        {/* Hamburger is always shown (no inline nav) */}
         <button
-          aria-label="Menu"
-          onClick={() => setOpen((v) => !v)}
-          className="inline-flex items-center justify-center rounded-lg border border-border bg-background p-2 text-foreground md:hidden"
+          aria-label="Open menu"
+          onClick={() => setOpen(true)}
+          className="rounded-lg p-2 ring-inset transition hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:hover:bg-zinc-900 dark:focus:ring-zinc-600"
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          <span className="sr-only">Open navigation</span>
+          <div className="flex flex-col gap-[5px]">
+            <span className="block h-[2px] w-6 bg-zinc-600/80 dark:bg-zinc-300/80"></span>
+            <span className="block h-[2px] w-6 bg-zinc-600/80 dark:bg-zinc-300/80"></span>
+            <span className="block h-[2px] w-6 bg-zinc-600/80 dark:bg-zinc-300/80"></span>
+          </div>
         </button>
       </div>
 
-      {/* Mobile sheet */}
-      <div
-        className={clsx(
-          "md:hidden",
-          open ? "pointer-events-auto" : "pointer-events-none"
-        )}
-      >
-        <div
-          className={clsx(
-            "border-t border-border/60 bg-background/95 backdrop-blur transition-[max-height] duration-300",
-            open ? "max-h-[420px]" : "max-h-0 overflow-hidden"
-          )}
-        >
-          <div className="mx-auto grid max-w-7xl gap-1 px-4 py-3 sm:px-6 lg:px-8">
-            {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={clsx(
-                  "rounded-lg px-3 py-2 text-sm transition hover:bg-muted",
-                  pathname === item.href ? "font-semibold text-foreground" : "text-muted-foreground"
-                )}
+      {/* Slide-over menu (global) */}
+      {open && (
+        <div className="fixed inset-0 z-50">
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setOpen(false)}
+            aria-hidden="true"
+          />
+          <aside
+            className="absolute right-0 top-0 h-full w-[320px] max-w-[90vw] border-l border-zinc-200 bg-white shadow-xl dark:border-white/10 dark:bg-zinc-950"
+            role="dialog"
+            aria-label="Site navigation"
+          >
+            <div className="flex items-center justify-between px-5 py-4">
+              <div className="inline-flex items-center gap-2">
+                <span className="inline-block h-2.5 w-2.5 rotate-45 bg-rose-600" />
+                <span className="text-sm font-medium text-zinc-700 dark:text-zinc-200">Torvus Security</span>
+              </div>
+              <button
+                aria-label="Close menu"
+                onClick={() => setOpen(false)}
+                className="rounded-md p-2 hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:hover:bg-zinc-900 dark:focus:ring-zinc-600"
               >
-                {item.label}
-              </Link>
-            ))}
-          </div>
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <nav className="px-3 pb-6 pt-2">
+              <ul className="space-y-1.5">
+                {NAV.map((item) => {
+                  const active = pathname === item.href;
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={() => setOpen(false)}
+                        className={clsx(
+                          "flex items-center justify-between rounded-lg px-3 py-2 text-sm transition hover:bg-zinc-100 dark:hover:bg-zinc-900",
+                          active
+                            ? "text-rose-600"
+                            : "text-zinc-700 dark:text-zinc-300"
+                        )}
+                      >
+                        {item.label}
+                        {active && <span className="h-1.5 w-1.5 rotate-45 bg-rose-600" />}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </aside>
         </div>
-      </div>
+      )}
     </header>
   );
 }

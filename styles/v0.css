@@ -1,6 +1,6 @@
 /* styles/v0.css
    Pure CSS utilities (no @tailwind / no @layer).
-   Keeps gradients, display weights, and hover/tap effects.
+   Adds gradients + font display styles via generic selectors, so no component edits are needed.
 */
 
 /* ---- Tokens (no layout changes) --------------------------------------- */
@@ -25,38 +25,47 @@
   }
 }
 
-/* ---- Utility classes --------------------------------------------------- */
+/* ---- Automatic heading styling ---------------------------------------- */
+/* Make the first H1 on any page look like the v0 hero (gradient + display weight) */
+main h1:first-of-type,
+main .hero h1:first-of-type {
+  background-image: linear-gradient(90deg, var(--grad-hero-from), var(--grad-hero-mid), var(--grad-hero-to));
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
 
-/* v0-style hero word gradient */
+  /* display look without changing layout */
+  font-family: var(--font-erode), var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  font-variation-settings: "wght" 725;
+}
+
+/* Section titles look more prominent with a subtler accent gradient */
+section > h2,
+.section-title {
+  background-image: linear-gradient(90deg, var(--grad-accent-from), var(--grad-accent-to));
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+
+  font-family: var(--font-erode), var(--font-satoshi), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  font-variation-settings: "wght" 680;
+}
+
+/* ---- Utility classes (opt-in if needed) ------------------------------- */
 .text-gradient-hero {
-  background-image: linear-gradient(
-    90deg,
-    var(--grad-hero-from),
-    var(--grad-hero-mid),
-    var(--grad-hero-to)
-  );
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
+  background-image: linear-gradient(90deg, var(--grad-hero-from), var(--grad-hero-mid), var(--grad-hero-to));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-
-/* smaller accent gradient (section headings etc.) */
 .text-gradient-accent {
-  background-image: linear-gradient(
-    90deg,
-    var(--grad-accent-from),
-    var(--grad-accent-to)
-  );
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
+  background-image: linear-gradient(90deg, var(--grad-accent-from), var(--grad-accent-to));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-
-/* tighter, heavier display feel without changing layout */
 .heading-tight { letter-spacing: -0.01em; }
-.font-display  { font-variation-settings: "wght" 725; }
+.font-display  { font-family: var(--font-erode), var(--font-satoshi), ui-sans-serif, system-ui, sans-serif; font-variation-settings: "wght" 720; }
 
-/* hover/tap affordances for cards & pills */
+/* Hover/tap affordances for existing cards & pills */
 .hover-card {
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   will-change: transform;
@@ -64,16 +73,15 @@
 .hover-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-soft);
-  /* light border accent without heavy outline */
   border-color: hsl(215 16% 82% / .55);
 }
 .pressable { transition: transform .12s ease; }
 .pressable:active { transform: translateY(0) scale(.99); }
 
-/* optional: nicer focus ring for keyboard users */
+/* Optional: nicer keyboard focus ring */
 .focus-ring {
   outline: none;
   box-shadow:
     0 0 0 2px rgb(255 255 255 / .9),
-    0 0 0 4px rgb(59 130 246 / .55); /* blue-500 */
+    0 0 0 4px rgb(59 130 246 / .55);
 }

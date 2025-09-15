@@ -1,37 +1,64 @@
-/* --- Section rhythm --- */
-.section-space { @apply my-24 md:my-28 lg:my-32; }
-/* Smaller top gap under the header for the hero only */
-.section-space-first { @apply mt-10 md:mt-12 lg:mt-14 mb-24 md:mb-28 lg:mb-32; }
+/* styles/v0.css */
 
-/* --- Headings --- */
-.section-headline { @apply text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground; }
-.gradient-word { @apply bg-gradient-to-r from-sky-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent; }
+/* --------------------------------------------- */
+/* Base tokens (kept minimal; no layout changes) */
+/* --------------------------------------------- */
+@layer base {
+  :root {
+    /* v0 text gradient stops (purple ➜ fuchsia ➜ rose) */
+    --v0-grad-from: #6B4DFF;
+    --v0-grad-via: #B5179E;
+    --v0-grad-to:  #FF4D6D;
 
-/* --- Framed hero surface (no dark border) --- */
-.framed-panel {
-  @apply relative rounded-[28px] bg-white/75 dark:bg-slate-900/40 backdrop-blur-xl
-  shadow-[0_1px_0_0_rgba(2,6,23,0.04),0_24px_80px_-30px_rgba(2,6,23,0.35)];
+    /* Slightly deeper default foreground for contrast on large headings */
+    --heading-color: oklch(22% 0.04 262); /* deep slate/navy */
+  }
+
+  /* Global heading feel — heavier + Erode as display face.
+     These rules ONLY affect default <h1-3> typography, not layout. */
+  h1, h2, h3 {
+    @apply font-display tracking-tight text-[--heading-color];
+  }
+  h1 { @apply font-black; }
+  h2 { @apply font-extrabold; }
+  h3 { @apply font-semibold; }
 }
-.framed-panel::before {
-  content: "";
-  @apply absolute inset-0 rounded-[28px] pointer-events-none;
-  background:
-    radial-gradient(90% 60% at 10% 0%, rgba(255,182,193,0.32), transparent 60%),
-    radial-gradient(70% 60% at 100% 80%, rgba(147,197,253,0.22), transparent 60%),
-    radial-gradient(80% 70% at 0% 100%, rgba(16,185,129,0.15), transparent 70%);
+
+/* --------------------------------------------------------- */
+/* Utilities to apply v0-like gradient + thicker presentation */
+/* --------------------------------------------------------- */
+@layer components {
+  /* Gradient text utility (drop-in replacement for prior .text-gradient) */
+  .text-gradient {
+    background-image: linear-gradient(90deg, var(--v0-grad-from), var(--v0-grad-via), var(--v0-grad-to));
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+  }
+
+  /* For hero “big words”: heavier weight without touching layout */
+  .heading-hero {
+    /* use display font + heavy weight; sizing is left to existing classes */
+    @apply font-display font-black leading-tight;
+  }
+
+  /* Section titles: slightly lighter than hero, still punchy */
+  .heading-section {
+    @apply font-display font-extrabold;
+  }
+
+  /* Optional: thin subhead text feel */
+  .subhead-muted {
+    @apply text-muted-foreground/90;
+  }
 }
 
-/* --- Cards (features, steps, pillars) + hover interaction --- */
-.card {
-  @apply rounded-2xl bg-white/80 dark:bg-slate-900/40 backdrop-blur
-  shadow-[0_1px_0_0_rgba(2,6,23,0.04),0_14px_40px_-20px_rgba(2,6,23,0.30)]
-  ring-1 ring-black/5;
+/* --------------------------------------------------------- */
+/* Optional: nicer selection + emphasis, no structural change */
+/* --------------------------------------------------------- */
+@layer utilities {
+  ::selection {
+    background: color-mix(in oklab, var(--v0-grad-to) 25%, white);
+    color: #0b0e13;
+  }
 }
-.card-hover { @apply transition-transform duration-300 ease-out will-change-transform; }
-.card-hover:hover { @apply -translate-y-1 scale-[1.0125] shadow-[0_10px_40px_rgba(2,6,23,0.10)] ring-black/10; }
-.card-hover:focus-visible { @apply outline-none ring-2 ring-sky-400/40; }
-
-/* --- Buttons --- */
-.btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all; }
-.btn-primary { @apply bg-foreground text-background hover:opacity-90; }
-.btn-outline { @apply border border-black/10 bg-transparent text-foreground hover:bg-black/[0.04]; }

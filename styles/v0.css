@@ -1,64 +1,83 @@
-/* styles/v0.css */
+/* styles/v0.css
+   Safe for Vercel: no @layer base usage; utilities only.
+   Keeps typography gradients + hover/tap effects.
+*/
 
-/* --------------------------------------------- */
-/* Base tokens (kept minimal; no layout changes) */
-/* --------------------------------------------- */
-@layer base {
-  :root {
-    /* v0 text gradient stops (purple ➜ fuchsia ➜ rose) */
-    --v0-grad-from: #6B4DFF;
-    --v0-grad-via: #B5179E;
-    --v0-grad-to:  #FF4D6D;
+/* Satisfy Tailwind when this file is compiled standalone on Vercel */
+@tailwind base;
 
-    /* Slightly deeper default foreground for contrast on large headings */
-    --heading-color: oklch(22% 0.04 262); /* deep slate/navy */
-  }
+/* ---- Tokens (no layout changes) --------------------------------------- */
+:root {
+  /* v0-style text gradients */
+  --grad-hero-from: #7c3aed;   /* purple-600 */
+  --grad-hero-mid:  #ec4899;   /* fuchsia-500 */
+  --grad-hero-to:   #fb7185;   /* rose-400  */
 
-  /* Global heading feel — heavier + Erode as display face.
-     These rules ONLY affect default <h1-3> typography, not layout. */
-  h1, h2, h3 {
-    @apply font-display tracking-tight text-[--heading-color];
-  }
-  h1 { @apply font-black; }
-  h2 { @apply font-extrabold; }
-  h3 { @apply font-semibold; }
+  --grad-accent-from: #22d3ee; /* cyan-400   */
+  --grad-accent-to:   #10b981; /* emerald-500*/
+
+  /* subtle elevation */
+  --shadow-soft: 0 1px 2px rgba(2, 6, 23, 0.08),
+                 0 8px 28px rgba(2, 6, 23, 0.10);
 }
 
-/* --------------------------------------------------------- */
-/* Utilities to apply v0-like gradient + thicker presentation */
-/* --------------------------------------------------------- */
-@layer components {
-  /* Gradient text utility (drop-in replacement for prior .text-gradient) */
-  .text-gradient {
-    background-image: linear-gradient(90deg, var(--v0-grad-from), var(--v0-grad-via), var(--v0-grad-to));
+@media (prefers-color-scheme: dark) {
+  :root {
+    --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.25),
+                   0 10px 30px rgba(0, 0, 0, 0.45);
+  }
+}
+
+/* ---- Utilities only ---------------------------------------------------- */
+@layer utilities {
+  /* v0-style hero word gradient */
+  .text-gradient-hero {
+    background-image: linear-gradient(
+      90deg,
+      var(--grad-hero-from),
+      var(--grad-hero-mid),
+      var(--grad-hero-to)
+    );
     -webkit-background-clip: text;
             background-clip: text;
     color: transparent;
   }
 
-  /* For hero “big words”: heavier weight without touching layout */
-  .heading-hero {
-    /* use display font + heavy weight; sizing is left to existing classes */
-    @apply font-display font-black leading-tight;
+  /* smaller accent gradient (section headings etc.) */
+  .text-gradient-accent {
+    background-image: linear-gradient(
+      90deg,
+      var(--grad-accent-from),
+      var(--grad-accent-to)
+    );
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
   }
 
-  /* Section titles: slightly lighter than hero, still punchy */
-  .heading-section {
-    @apply font-display font-extrabold;
-  }
+  /* tighter, heavier display feel without changing layout */
+  .heading-tight { letter-spacing: -0.01em; }
+  .font-display  { font-variation-settings: "wght" 725; }
 
-  /* Optional: thin subhead text feel */
-  .subhead-muted {
-    @apply text-muted-foreground/90;
+  /* hover/tap affordances for cards & pills */
+  .hover-card {
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    will-change: transform;
   }
-}
+  .hover-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+    /* light border accent without heavy outline */
+    border-color: hsl(215 16% 82% / .55);
+  }
+  .pressable { transition: transform .12s ease; }
+  .pressable:active { transform: translateY(0) scale(.99); }
 
-/* --------------------------------------------------------- */
-/* Optional: nicer selection + emphasis, no structural change */
-/* --------------------------------------------------------- */
-@layer utilities {
-  ::selection {
-    background: color-mix(in oklab, var(--v0-grad-to) 25%, white);
-    color: #0b0e13;
+  /* optional: nicer focus ring for keyboard users */
+  .focus-ring {
+    outline: none;
+    box-shadow:
+      0 0 0 2px rgb(255 255 255 / .9),
+      0 0 0 4px rgb(59 130 246 / .55); /* blue-500 */
   }
 }

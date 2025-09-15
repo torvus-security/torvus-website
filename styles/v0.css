@@ -1,58 +1,78 @@
 /* styles/v0.css
-   Pure CSS helpers (no @layer / no @tailwind to keep Vercel happy).
-   Two-colour gradients only + typography + hover effects.
+   Utilities + tokens only. No @layer/@tailwind so Vercel won't complain.
+   Enforces TWO-TONE gradients only (brand palette).
 */
 
-/* ---- Tokens ------------------------------------------------------------ */
-:root{
-  /* two-colour text gradients */
-  --grad-hero-from:#7c3aed;   /* purple-600  */
-  --grad-hero-to:#fb7185;     /* rose-400    */
+/* ---- Brand tokens ---------------------------------------------------- */
+:root {
+  /* Primary text gradient (cyan → emerald) */
+  --grad-primary-from: #06b6d4; /* cyan-500  */
+  --grad-primary-to:   #10b981; /* emerald-500 */
 
-  --grad-accent-from:#22d3ee; /* cyan-400    */
-  --grad-accent-to:#10b981;   /* emerald-500 */
+  /* Secondary text gradient (violet → pink) */
+  --grad-secondary-from: #8b5cf6; /* violet-500 */
+  --grad-secondary-to:   #ec4899; /* pink-500   */
 
-  /* subtle elevation */
-  --shadow-soft:0 1px 2px rgba(2,6,23,.08),0 8px 28px rgba(2,6,23,.10);
-}
-@media (prefers-color-scheme:dark){
-  :root{ --shadow-soft:0 1px 2px rgba(0,0,0,.25),0 10px 30px rgba(0,0,0,.45); }
-}
-
-/* ---- Base sizing (keeps layout intact) -------------------------------- */
-body{ font-size:17px; line-height:1.7; }
-
-/* ---- Automatic heading styling (two-colour only) ---------------------- */
-main h1:first-of-type,
-main .hero h1:first-of-type{
-  background-image:linear-gradient(90deg,var(--grad-hero-from),var(--grad-hero-to));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  font-family:var(--font-erode),var(--font-satoshi),ui-sans-serif,system-ui,sans-serif;
-  letter-spacing:-.01em; font-variation-settings:"wght" 725;
-}
-section>h2,.section-title{
-  background-image:linear-gradient(90deg,var(--grad-accent-from),var(--grad-accent-to));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  font-family:var(--font-erode),var(--font-satoshi),ui-sans-serif,system-ui,sans-serif;
-  letter-spacing:-.01em; font-variation-settings:"wght" 680;
+  /* Soft elevation for hover */
+  --shadow-soft: 0 1px 2px rgba(2, 6, 23, .06),
+                 0 10px 30px rgba(2, 6, 23, .10);
 }
 
-/* ---- Utility classes (opt-in) ---------------------------------------- */
-.text-gradient-hero{
-  background-image:linear-gradient(90deg,var(--grad-hero-from),var(--grad-hero-to));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --shadow-soft: 0 1px 2px rgba(0, 0, 0, .25),
+                   0 10px 30px rgba(0, 0, 0, .45);
+  }
 }
-.text-gradient-accent{
-  background-image:linear-gradient(90deg,var(--grad-accent-from),var(--grad-accent-to));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
+
+/* ---- Typography helpers --------------------------------------------- */
+.text-gradient-primary {
+  background-image: linear-gradient(90deg, var(--grad-primary-from), var(--grad-primary-to));
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
 }
-.heading-tight{ letter-spacing:-.01em; }
-.font-display{ font-family:var(--font-erode),var(--font-satoshi),ui-sans-serif,system-ui,sans-serif; font-variation-settings:"wght" 720; }
 
-/* Hover/tap affordances for cards & pills */
-.hover-card{ transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease; will-change:transform; }
-.hover-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-soft); border-color:hsl(215 16% 82% / .55); }
-.pressable{ transition:transform .12s ease; } .pressable:active{ transform:translateY(0) scale(.99); }
+.text-gradient-secondary {
+  background-image: linear-gradient(90deg, var(--grad-secondary-from), var(--grad-secondary-to));
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
 
-/* Keyboard focus ring */
-.focus-ring{ outline:none; box-shadow:0 0 0 2px rgb(255 255 255 /.9),0 0 0 4px rgb(59 130 246 /.55); }
+/* Keep existing class names working (map to two-tone) */
+.text-gradient-hero,
+.text-gradient-accent {
+  background-image: linear-gradient(90deg, var(--grad-primary-from), var(--grad-primary-to));
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
+
+.heading-tight { letter-spacing: -0.01em; }
+.font-display  { font-variation-settings: "wght" 725; }
+
+/* ---- Hover / press effects for cards & pills ------------------------ */
+.hover-card {
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background-color .18s ease;
+  will-change: transform;
+}
+.hover-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+  border-color: rgb(203 213 225 / .55); /* slate-300-ish */
+}
+.pressable { transition: transform .12s ease; }
+.pressable:active { transform: translateY(0) scale(.99); }
+
+/* ---- Focus ring (keyboard-friendly) --------------------------------- */
+.focus-ring {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgb(255 255 255 / .9),
+    0 0 0 4px rgb(59 130 246 / .55);
+}
+
+/* ---- Modal readability fixes ---------------------------------------- */
+.v0-modal-overlay { background-color: rgb(15 23 42 / .60); } /* slate-900/60 */
+.v0-modal-panel   { background-color: #ffffff; }            /* fully opaque */

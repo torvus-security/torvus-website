@@ -1,24 +1,18 @@
-// app/layout.tsx
-import type { Metadata } from "next";
 import "./globals.css";
-import "../styles/v0.css";
-
-import { satoshi, erode } from "./fonts";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import "../styles/v0.css"; // <-- ensure this line exists and remains AFTER globals
+import type { Metadata } from "next";
+import { satoshi, erode } from "./fonts"; // your fonts.ts
 
 export const metadata: Metadata = {
   title: "Torvus Security",
-  description: "Proof, release, and a tamper-evident trail — only when conditions are met.",
+  description: "Your instructions—only when it’s right.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${satoshi.variable} ${erode.variable} antialiased`}>
-      <body className="font-sans bg-background text-foreground">
-        <Header />
+    <html lang="en" className={`${satoshi.variable} ${erode.variable}`}>
+      <body className="font-sans text-[17px] text-slate-800 antialiased">
         {children}
-        <Footer />
       </body>
     </html>
   );

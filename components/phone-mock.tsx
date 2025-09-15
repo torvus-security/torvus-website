@@ -1,125 +1,47 @@
 // components/phone-mock.tsx
+import Image from "next/image";
 
-// Pure UI — no client hooks needed
-export function PhoneMock() {
+type Props = {
+  src?: string;
+  alt?: string;
+};
+
+/**
+ * A slimmer phone frame (≈ 9:19.5 ratio) so it reads like a real device.
+ * Drop-in replacement; props are optional.
+ */
+export default function PhoneMock({ src, alt = "App preview" }: Props) {
   return (
     <div
-      aria-label="Torvus mobile mock"
-      className="mx-auto w-full max-w-[360px] rounded-[28px] border border-border/70 bg-white shadow-[0_4px_12px_rgba(16,24,40,.14),0_24px_60px_-24px_rgba(16,24,40,.28)]"
+      className="relative mx-auto w-[220px] sm:w-[250px] md:w-[280px] lg:w-[300px] rounded-[2rem] border border-zinc-200/70 bg-zinc-900 shadow-2xl dark:border-white/10"
+      style={{ aspectRatio: "9 / 19.5" }}
+      aria-label="Mobile phone mockup"
     >
-      {/* Status bar */}
-      <div className="rounded-t-[28px] bg-gradient-to-br from-[#ff2f86] via-[#ff4fa0] to-[#a855f7] px-4 pt-4 pb-3 text-white">
-        <div className="flex items-center justify-between text-[10px] opacity-90">
-          <span>9:41</span>
-          <span className="inline-flex items-center gap-1">
-            <span className="inline-block size-1.5 rounded-full bg-white/90" />
-            <span className="inline-block size-1.5 rounded-full bg-white/90" />
-            <span className="inline-block size-1.5 rounded-full bg-white/90" />
-          </span>
-        </div>
+      {/* Outer highlight */}
+      <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-black/5 dark:ring-white/5" />
 
-        <div className="mt-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="inline-block rotate-45 size-2 rounded-[2px] bg-white shadow-sm" />
-            <div className="leading-tight">
-              <div className="text-sm font-semibold">Torvus</div>
-              <div className="text-[10px] opacity-90">Digital Guardian</div>
-            </div>
-          </div>
-          <span className="inline-grid size-5 place-items-center rounded-full border border-white/50">
-            <span className="size-2 rounded-full bg-white/90" />
-          </span>
-        </div>
+      {/* Notch */}
+      <div className="absolute inset-x-1/2 top-2 h-4 w-28 -translate-x-1/2 rounded-full bg-black/70" />
+
+      {/* Screen */}
+      <div className="absolute inset-[10px] overflow-hidden rounded-[1.6rem] bg-white dark:bg-zinc-950">
+        {src ? (
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 250px, 300px"
+            priority
+          />
+        ) : (
+          <div className="h-full w-full bg-gradient-to-b from-white to-zinc-100 dark:from-zinc-900 dark:to-zinc-950" />
+        )}
       </div>
 
-      {/* Body */}
-      <div className="p-3 sm:p-4">
-        {/* Stats row */}
-        <div className="grid grid-cols-2 gap-2">
-          <div className="rounded-xl border border-gray-200 bg-white px-3 py-2">
-            <div className="flex items-center gap-2 text-[11px] text-gray-600">
-              <span className="inline-block size-1.5 rounded-full bg-rose-500" />
-              Vault
-            </div>
-            <div className="mt-1 flex items-baseline gap-1">
-              <span className="text-base font-semibold">24</span>
-              <span className="text-[11px] text-gray-500">Files secured</span>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-gray-200 bg-white px-3 py-2">
-            <div className="flex items-center gap-2 text-[11px] text-gray-600">
-              <span className="inline-block size-1.5 rounded-full bg-pink-500" />
-              Check-ins
-            </div>
-            <div className="mt-1 flex items-baseline gap-1">
-              <span className="text-base font-semibold">3</span>
-              <span className="text-[11px] text-gray-500">Active plans</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Quick actions */}
-        <div className="mt-3 rounded-xl border border-gray-200 bg-white">
-          <div className="border-b border-gray-200 px-3 py-2 text-[11px] font-medium text-gray-700">
-            Quick Actions
-          </div>
-
-          <button
-            type="button"
-            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-800 hover:bg-rose-50/60"
-          >
-            <span className="inline-block size-2 rounded-[3px] bg-rose-500" />
-            Upload Document
-          </button>
-
-          <div className="border-t border-gray-200" />
-          <button
-            type="button"
-            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-gray-800 hover:bg-gray-50"
-          >
-            <span className="inline-block size-2 rounded-full bg-gray-500" />
-            Add Recipient
-          </button>
-        </div>
-
-        {/* Recent activity */}
-        <div className="mt-3 rounded-xl border border-gray-200 bg-white">
-          <div className="border-b border-gray-200 px-3 py-2 text-[11px] font-medium text-gray-700">
-            Recent Activity
-          </div>
-
-          <div className="px-3 py-2 text-sm">
-            <div className="flex items-start gap-2">
-              <span className="mt-1 inline-block size-2 rounded-full bg-green-500" />
-              <div>
-                <div className="text-gray-800">Check-in completed</div>
-                <div className="text-[11px] text-gray-500">2 hours ago</div>
-              </div>
-            </div>
-
-            <div className="mt-2 flex items-start gap-2">
-              <span className="mt-1 inline-block size-2 rounded-full bg-rose-500" />
-              <div>
-                <div className="text-gray-800">Document uploaded</div>
-                <div className="text-[11px] text-gray-500">1 day ago</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom nav */}
-        <div className="mt-3 rounded-xl border border-gray-200 bg-white px-3 py-2">
-          <div className="flex items-center justify-between text-[11px] text-gray-600">
-            <span className="text-rose-600 font-medium">Dashboard</span>
-            <span>Vault</span>
-            <span>Recipients</span>
-            <span>Settings</span>
-          </div>
-        </div>
-      </div>
+      {/* Side buttons */}
+      <div className="absolute left-0 top-20 h-16 w-[3px] rounded-r bg-zinc-700/80" />
+      <div className="absolute right-0 top-28 h-10 w-[3px] rounded-l bg-zinc-700/80" />
     </div>
   );
 }
-
-export default PhoneMock;

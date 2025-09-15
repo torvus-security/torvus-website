@@ -1,10 +1,7 @@
 /* styles/v0.css
-   Safe for Vercel: no @layer base usage; utilities only.
-   Keeps typography gradients + hover/tap effects.
+   Pure CSS utilities (no @tailwind / no @layer).
+   Keeps gradients, display weights, and hover/tap effects.
 */
-
-/* Satisfy Tailwind when this file is compiled standalone on Vercel */
-@tailwind base;
 
 /* ---- Tokens (no layout changes) --------------------------------------- */
 :root {
@@ -28,56 +25,55 @@
   }
 }
 
-/* ---- Utilities only ---------------------------------------------------- */
-@layer utilities {
-  /* v0-style hero word gradient */
-  .text-gradient-hero {
-    background-image: linear-gradient(
-      90deg,
-      var(--grad-hero-from),
-      var(--grad-hero-mid),
-      var(--grad-hero-to)
-    );
-    -webkit-background-clip: text;
-            background-clip: text;
-    color: transparent;
-  }
+/* ---- Utility classes --------------------------------------------------- */
 
-  /* smaller accent gradient (section headings etc.) */
-  .text-gradient-accent {
-    background-image: linear-gradient(
-      90deg,
-      var(--grad-accent-from),
-      var(--grad-accent-to)
-    );
-    -webkit-background-clip: text;
-            background-clip: text;
-    color: transparent;
-  }
+/* v0-style hero word gradient */
+.text-gradient-hero {
+  background-image: linear-gradient(
+    90deg,
+    var(--grad-hero-from),
+    var(--grad-hero-mid),
+    var(--grad-hero-to)
+  );
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
 
-  /* tighter, heavier display feel without changing layout */
-  .heading-tight { letter-spacing: -0.01em; }
-  .font-display  { font-variation-settings: "wght" 725; }
+/* smaller accent gradient (section headings etc.) */
+.text-gradient-accent {
+  background-image: linear-gradient(
+    90deg,
+    var(--grad-accent-from),
+    var(--grad-accent-to)
+  );
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+}
 
-  /* hover/tap affordances for cards & pills */
-  .hover-card {
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    will-change: transform;
-  }
-  .hover-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-soft);
-    /* light border accent without heavy outline */
-    border-color: hsl(215 16% 82% / .55);
-  }
-  .pressable { transition: transform .12s ease; }
-  .pressable:active { transform: translateY(0) scale(.99); }
+/* tighter, heavier display feel without changing layout */
+.heading-tight { letter-spacing: -0.01em; }
+.font-display  { font-variation-settings: "wght" 725; }
 
-  /* optional: nicer focus ring for keyboard users */
-  .focus-ring {
-    outline: none;
-    box-shadow:
-      0 0 0 2px rgb(255 255 255 / .9),
-      0 0 0 4px rgb(59 130 246 / .55); /* blue-500 */
-  }
+/* hover/tap affordances for cards & pills */
+.hover-card {
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  will-change: transform;
+}
+.hover-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+  /* light border accent without heavy outline */
+  border-color: hsl(215 16% 82% / .55);
+}
+.pressable { transition: transform .12s ease; }
+.pressable:active { transform: translateY(0) scale(.99); }
+
+/* optional: nicer focus ring for keyboard users */
+.focus-ring {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgb(255 255 255 / .9),
+    0 0 0 4px rgb(59 130 246 / .55); /* blue-500 */
 }

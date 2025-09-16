@@ -24,8 +24,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (path.startsWith("/legal")) {
         const slug = path.split("/").pop() ?? "";
         const { frontmatter } = await loadLegalDocument(slug);
-        if (frontmatter?.updated) {
-          const parsed = new Date(frontmatter.updated as string);
+        if (frontmatter.updated) {
+          const parsed = new Date(frontmatter.updated);
           if (!Number.isNaN(parsed.getTime())) {
             lastModified = parsed;
           }

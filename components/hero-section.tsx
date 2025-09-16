@@ -4,12 +4,22 @@ import { PhoneMock } from "@/components/phone-mock";
 
 export default function HeroSection() {
   return (
-    <section className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-y-12 px-6 pb-14 pt-10 md:grid-cols-2 md:gap-x-10 md:pb-20 md:pt-16 lg:px-8">
+    <section className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-y-12 px-6 pb-16 pt-10 md:grid-cols-2 md:gap-x-10 md:pb-24 md:pt-16 lg:px-8">
       <div>
         <h1 className="font-display leading-[1.05] text-4xl tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
           Your instructions,
           <br />
-          <span className="block text-gradient-brand">only when it’s right</span>
+          <span
+            className="block heading-tight"
+            style={{
+              backgroundImage: "linear-gradient(90deg,#22d3ee,#10b981)", // two-tone only
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            only when it’s right
+          </span>
         </h1>
 
         <p className="mt-6 max-w-xl text-[17px] leading-7 text-slate-600">

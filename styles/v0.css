@@ -1,35 +1,38 @@
 /* styles/v0.css
-   Two-tone gradients (brand palette), display weights, and hover affordances.
-   No Tailwind @layer/@tailwind — safe for Vercel builds.
-*/
+   Two-tone brand gradients, gentle card hovers, solid modal backdrop,
+   and a no-image "phone" mock so the hero never breaks. No @tailwind/@layer here. */
 
-/* -------- Tokens ------------------------------------------------------- */
+/* Brand tokens (two-tone, brand palette only) */
 :root{
-  /* brand gradient: cyan -> emerald */
-  --grad-from:#22d3ee;  /* cyan-400  */
-  --grad-to:#10b981;    /* emerald-500 */
-
-  --shadow-soft:0 1px 2px rgba(2,6,23,.08),0 8px 28px rgba(2,6,23,.10);
-}
-@media (prefers-color-scheme:dark){
-  :root{ --shadow-soft:0 1px 2px rgba(0,0,0,.25),0 10px 30px rgba(0,0,0,.45); }
+  --brand-from:#06b6d4; /* cyan-500 */
+  --brand-to:#10b981;   /* emerald-500 */
+  --ring-soft: hsl(215 16% 82% / .55);
+  --shadow-soft: 0 1px 2px rgba(2,6,23,.08), 0 8px 28px rgba(2,6,23,.10);
 }
 
-/* -------- Utilities (class-based, no layout changes) ------------------ */
-.text-gradient-brand{
-  background-image:linear-gradient(90deg,var(--grad-from),var(--grad-to));
+/* === Typography helpers (two-tone only) === */
+.grad-text-brand{
+  background-image:linear-gradient(90deg,var(--brand-from),var(--brand-to));
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .heading-tight{ letter-spacing:-.01em; }
-.font-display{ font-variation-settings:"wght" 725; }
 
-.hover-card{
-  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
-  will-change:transform;
+/* === Cards & pills hover === */
+.hover-card{ transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.hover-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-soft); border-color:var(--ring-soft); }
+.pressable{ transition:transform .12s ease; } .pressable:active{ transform:translateY(0) scale(.99); }
+
+/* === Stronger, legible modal backdrop === */
+.backdrop-strong{ background:rgba(2,6,23,.60); backdrop-filter:saturate(110%) blur(2px); }
+
+/* === Phone mock that never needs an image === */
+.phone-frame{
+  border-radius:2.25rem; border:4px solid rgba(2,6,23,.06); box-shadow:inset 0 0 0 1px rgba(2,6,23,.06);
 }
-.hover-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-soft); border-color:hsl(215 16% 82% / .55); }
-.pressable{ transition:transform .12s ease; }
-.pressable:active{ transform:translateY(0) scale(.99); }
-
-/* nicer focus ring */
-.focus-ring{ outline:none; box-shadow:0 0 0 2px rgba(255,255,255,.9),0 0 0 4px rgba(59,130,246,.55); }
+.phone-screen{
+  border-radius:1.75rem; overflow:hidden; background:linear-gradient(180deg,#eef7fb,#e6fbf7 40%,#e3f7ec);
+}
+.phone-notch{
+  width:40%; height:6px; border-radius:9999px; background:rgba(2,6,23,.08);
+  position:absolute; top:10px; left:50%; transform:translateX(-50%);
+}

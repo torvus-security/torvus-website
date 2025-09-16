@@ -1,84 +1,76 @@
 import Link from "next/link";
-import type { Metadata } from "next";
-import { ShieldCheck, ScrollText, Landmark, Link2, FileCheck2 } from "lucide-react";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Solutions — Torvus Security",
   description: "Pick the path that matches how you’ll use Torvus.",
 };
 
-function Pill({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[13px] text-slate-600">
-      {children}
-    </span>
-  );
-}
-
-function Card({
-  title,
-  children,
-  icon: Icon,
-  cta,
-}: {
+type CardProps = {
   title: string;
-  children: React.ReactNode;
-  icon: React.ElementType;
-  cta?: React.ReactNode;
-}) {
+  bullets: string[];
+  ctaText: string;
+  ctaHref: string;
+  tint: string;
+  icon: React.ReactNode;
+  intro: string;
+};
+
+function Card({ title, bullets, ctaText, ctaHref, tint, icon, intro }: CardProps) {
   return (
-    <div className="hover-card rounded-2xl border border-slate-200 bg-white p-6">
-      <div className="mb-3 flex items-center gap-3">
-        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-rose-50 text-rose-600 ring-1 ring-rose-200/70">
-          <Icon className="h-4 w-4" />
-        </span>
-        <h3 className="font-semibold text-slate-800">{title}</h3>
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 hover-card">
+      <div className="mb-4 flex items-center gap-3">
+        <span className={`inline-flex h-10 w-10 items-center justify-center rounded-full ring-1 ${tint}`}>{icon}</span>
+        <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
       </div>
-      <div className="mb-5 text-slate-600">{children}</div>
-      {cta}
+      <p className="mb-4 text-slate-600">{intro}</p>
+      <ul className="mb-4 list-disc space-y-1 pl-5 text-slate-700">
+        {bullets.map((b) => (
+          <li key={b}>{b}</li>
+        ))}
+      </ul>
+      <Link href={ctaHref} className="rounded-lg border px-3 py-2 font-medium text-slate-700 hover:bg-slate-50">
+        {ctaText}
+      </Link>
     </div>
   );
 }
 
 export default function SolutionsPage() {
   return (
-    <main className="bg-white">
-      <section className="mx-auto max-w-5xl px-4 pb-10 pt-12 text-center">
-        <p className="mb-3 text-xs font-medium tracking-widest text-slate-500">SOLUTIONS</p>
-        <h1 className="heading-tight font-display text-4xl sm:text-5xl">
-          Built for <span className="text-gradient">real work.</span>
+    <main className="mx-auto max-w-6xl px-4">
+      <section className="py-12 text-center">
+        <p className="mb-3 text-xs font-semibold tracking-widest text-slate-500">SOLUTIONS</p>
+        <h1 className="heading-tight text-5xl font-extrabold tracking-tight text-slate-900 md:text-6xl">
+          Built for <span className="grad-text-brand">real work.</span>
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-slate-600">
           Pick the path that matches how you’ll use Torvus.
         </p>
-
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-          <Pill>Individuals</Pill>
-          <Pill>Journalists</Pill>
-          <Pill>Organizations</Pill>
-        </div>
       </section>
 
-      <section className="mx-auto grid max-w-5xl gap-6 px-4 pb-16 sm:grid-cols-2">
-        <Card title="Personal estates & legacy" icon={ScrollText}
-          cta={<Link href="/signup" className="rounded-md bg-slate-900 px-3 py-2 text-sm text-white hover:opacity-90">Sign up for updates</Link>}>
-          Store wills, instructions, and sensitive documents with release rules for the right moment.
-          <ul className="mt-3 space-y-1 text-sm text-slate-600">
-            <li>• Time-based and event-based releases</li>
-            <li>• Watermarked views for untrusted recipients</li>
-            <li>• Tamper-evident timeline</li>
-          </ul>
-        </Card>
-
-        <Card title="Private archives" icon={FileCheck2}
-          cta={<Link href="/contact" className="rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">Get in touch</Link>}>
-          Collect records, photos, and notes you want retained, but only revealed under clear conditions.
-          <ul className="mt-3 space-y-1 text-sm text-slate-600">
-            <li>• Encrypted vault</li>
-            <li>• Revocation at any time</li>
-            <li>• Access logs</li>
-          </ul>
-        </Card>
+      <section className="grid gap-6 pb-24 sm:grid-cols-2">
+        <Card
+          title="Personal estates & legacy"
+          intro="Store wills, instructions, and sensitive documents with release rules for the right moment."
+          bullets={[
+            "Time-based and event-based releases",
+            "Watermarked views for untrusted recipients",
+            "Tamper-evident timeline",
+          ]}
+          ctaText="Sign up for updates"
+          ctaHref="/signup"
+          tint="bg-rose-50 ring-rose-200 text-rose-600"
+          icon={<span className="inline-block h-2.5 w-2.5 rounded-full bg-rose-500" />}
+        />
+        <Card
+          title="Private archives"
+          intro="Collect records, photos, and notes you want retained, but only revealed under clear conditions."
+          bullets={["Encrypted vault", "Revocation at any time", "Access logs"]}
+          ctaText="Get in touch"
+          ctaHref="/contact"
+          tint="bg-rose-50 ring-rose-200 text-rose-600"
+          icon={<span className="inline-block h-2.5 w-2.5 rounded-full bg-rose-500" />}
+        />
       </section>
     </main>
   );

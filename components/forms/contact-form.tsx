@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 
 import {
   contactInitialState,
@@ -13,7 +14,7 @@ import { cn } from "@/lib/utils";
 export function ContactForm() {
   const [submittedAt, setSubmittedAt] = useState(() => Date.now().toString());
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [state, formAction, pending] = useActionState<ContactState, FormData>(
+  const [state, formAction] = useFormState<ContactState, FormData>(
     submitContactAction,
     contactInitialState,
   );
@@ -75,16 +76,7 @@ export function ContactForm() {
           We’ll respond within two business days. Please avoid sharing secrets or
           credentials here.
         </p>
-        <button
-          type="submit"
-          className={cn(
-            buttonClasses({ variant: "primary", size: "lg" }),
-            pending && "opacity-60",
-          )}
-          disabled={pending}
-        >
-          {pending ? "Sending…" : "Send message"}
-        </button>
+        <SubmitButton idleText="Send message" pendingText="Sending…" />
       </div>
       <div aria-live="polite" className="text-small text-thunder/80">
         {state.message}
@@ -107,7 +99,7 @@ export function ContactForm() {
 type FieldProps = {
   label: string;
   name: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 function Field({ label, name, children }: FieldProps) {
@@ -121,5 +113,28 @@ function Field({ label, name, children }: FieldProps) {
       </label>
       <div className="mt-2">{children}</div>
     </div>
+  );
+}
+
+function SubmitButton({
+  idleText,
+  pendingText,
+}: {
+  idleText: string;
+  pendingText: string;
+}) {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      className={cn(
+        buttonClasses({ variant: "primary", size: "lg" }),
+        pending && "opacity-60",
+      )}
+      disabled={pending}
+    >
+      {pending ? pendingText : idleText}
+    </button>
   );
 }

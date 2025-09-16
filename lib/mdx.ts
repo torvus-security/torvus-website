@@ -7,12 +7,17 @@ import remarkGfm from "remark-gfm";
 
 const LEGAL_DIR = path.join(process.cwd(), "content/legal");
 
+type LegalFrontmatter = {
+  title?: string;
+  updated?: string;
+};
+
 export async function loadLegalDocument(slug: string) {
   try {
     const filePath = path.join(LEGAL_DIR, `${slug}.mdx`);
     const source = await fs.readFile(filePath, "utf8");
 
-    const { frontmatter, content } = await compileMDX<{ title?: string }>({
+    const { frontmatter, content } = await compileMDX<LegalFrontmatter>({
       source,
       options: {
         parseFrontmatter: true,
@@ -22,8 +27,10 @@ export async function loadLegalDocument(slug: string) {
       },
     });
 
+    const safeFrontmatter: LegalFrontmatter = frontmatter ?? {};
+
     return {
-      frontmatter,
+      frontmatter: safeFrontmatter,
       Content: content,
     } as const;
   } catch (error) {

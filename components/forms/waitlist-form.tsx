@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 
 import {
   submitWaitlistAction,
@@ -13,7 +14,7 @@ import { cn } from "@/lib/utils";
 export function WaitlistForm() {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [submittedAt, setSubmittedAt] = useState(() => Date.now().toString());
-  const [state, formAction, pending] = useActionState<WaitlistState, FormData>(
+  const [state, formAction] = useFormState<WaitlistState, FormData>(
     submitWaitlistAction,
     waitlistInitialState,
   );
@@ -98,16 +99,7 @@ export function WaitlistForm() {
           Joining the waitlist keeps you in the loop on private beta milestones. We store
           only what you submit.
         </p>
-        <button
-          type="submit"
-          className={cn(
-            buttonClasses({ variant: "primary", size: "lg" }),
-            pending && "opacity-60",
-          )}
-          disabled={pending}
-        >
-          {pending ? "Submitting…" : "Request access"}
-        </button>
+        <SubmitButton idleText="Request access" pendingText="Submitting…" />
       </div>
       <div aria-live="polite" className="text-small text-thunder/80">
         {state.message}
@@ -130,7 +122,7 @@ export function WaitlistForm() {
 type FieldProps = {
   label: string;
   name: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 function Field({ label, name, children }: FieldProps) {
@@ -144,5 +136,28 @@ function Field({ label, name, children }: FieldProps) {
       </label>
       <div className="mt-2">{children}</div>
     </div>
+  );
+}
+
+function SubmitButton({
+  idleText,
+  pendingText,
+}: {
+  idleText: string;
+  pendingText: string;
+}) {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      className={cn(
+        buttonClasses({ variant: "primary", size: "lg" }),
+        pending && "opacity-60",
+      )}
+      disabled={pending}
+    >
+      {pending ? pendingText : idleText}
+    </button>
   );
 }

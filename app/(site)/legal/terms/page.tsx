@@ -14,7 +14,7 @@ export const metadata: Metadata = createMetadata({
 
 export default async function TermsPage() {
   const { Content, frontmatter } = await loadLegalDocument("terms");
-  const updated = frontmatter?.updated as string | undefined;
+  const updated = frontmatter.updated;
 
   return (
     <div className="pb-24">
@@ -24,7 +24,7 @@ export default async function TermsPage() {
             Legal
           </p>
           <h1 className="text-display font-semibold text-storm">
-            {frontmatter?.title ?? "Terms of Use"}
+            {frontmatter.title ?? "Terms of Use"}
           </h1>
           {updated ? (
             <p className="text-small text-thunder/70">Last updated {updated}</p>

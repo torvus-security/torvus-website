@@ -1,58 +1,57 @@
 "use client";
 
-import { ReactNode, useEffect } from "react";
 import { X } from "lucide-react";
-import clsx from "clsx";
+import { useEffect } from "react";
 
-export type FeatureModalProps = {
+type Props = {
   open: boolean;
   title: string;
-  icon?: ReactNode;
+  icon?: React.ReactNode;
   onClose: () => void;
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
-export default function FeatureModal({ open, title, icon, onClose, children }: FeatureModalProps) {
+export default function FeatureModal({ open, title, icon, onClose, children }: Props) {
   useEffect(() => {
-    if (!open) return;
-    const onEsc = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    document.addEventListener("keydown", onEsc);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onEsc);
-      document.body.style.overflow = "";
-    };
-  }, [open, onClose]);
+    if (open) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = prev; };
+    }
+  }, [open]);
+
+  if (!open) return null;
 
   return (
-    <div
-      className={clsx(
-        "fixed inset-0 z-50 transition-opacity",
-        open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-      )}
-      aria-hidden={!open}
-    >
-      <div className="v0-modal-overlay absolute inset-0" onClick={onClose} />
+    <div className="fixed inset-0 z-50">
+      {/* backdrop */}
+      <button
+        aria-label="Close"
+        className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
+        onClick={onClose}
+      />
+      {/* dialog */}
       <div
-        className={clsx(
-          "absolute inset-0 flex items-center justify-center p-4",
-          open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"
-        )}
+        role="dialog"
+        aria-modal="true"
+        className="pointer-events-auto absolute inset-x-4 top-[10vh] mx-auto max-w-xl rounded-2xl bg-white shadow-2xl ring-1 ring-black/10 md:inset-x-auto"
       >
-        <div className="v0-modal-panel w-full max-w-xl rounded-2xl border border-black/10 shadow-xl">
-          <div className="flex items-center gap-3 border-b border-black/5 p-4">
-            {icon ? <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/5">{icon}</span> : null}
-            <h3 className="text-lg font-semibold">{title}</h3>
-            <button
-              onClick={onClose}
-              className="ml-auto rounded-md p-2 hover:bg-black/5 pressable"
-              aria-label="Close"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
-          <div className="p-5 text-[15.5px] leading-7 text-slate-700">{children}</div>
+        <div className="flex items-start gap-3 p-5">
+          {icon ? (
+            <span className="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-slate-200 bg-slate-50">
+              {icon}
+            </span>
+          ) : null}
+          <h3 className="text-xl font-semibold leading-6 text-slate-900">{title}</h3>
+          <button
+            onClick={onClose}
+            className="ml-auto rounded-md p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+            aria-label="Close modal"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
+        <div className="px-5 pb-5 text-slate-700 leading-relaxed">{children}</div>
       </div>
     </div>
   );

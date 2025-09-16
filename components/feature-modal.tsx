@@ -1,60 +1,49 @@
+// components/feature-modal.tsx
 "use client";
-
 import { X } from "lucide-react";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 type Props = {
   open: boolean;
   title: string;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   onClose: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-export default function FeatureModal({
-  open,
-  title,
-  icon,
-  onClose,
-  children,
-}: Props) {
+export default function FeatureModal({ open, title, icon, onClose, children }: Props) {
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   if (!open) return null;
 
-  useEffect(() => {
-    const onEsc = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    document.addEventListener("keydown", onEsc);
-    return () => document.removeEventListener("keydown", onEsc);
-  }, [onClose]);
-
   return (
-    <div className="fixed inset-0 z-[60]">
-      <button
-        aria-label="Close"
-        onClick={onClose}
-        className="absolute inset-0 bg-slate-900/65 backdrop-blur-sm"
-      />
-      <div className="relative mx-auto mt-24 w-[min(92vw,680px)] rounded-2xl bg-white shadow-xl ring-1 ring-slate-200">
-        <div className="flex items-start gap-3 p-5 sm:p-6">
-          {icon && (
-            <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-slate-200 text-slate-600">
+    <>
+      <div className="modal-backdrop z-40" onClick={onClose} />
+      <div
+        role="dialog"
+        aria-modal="true"
+        className="fixed z-50 inset-0 grid place-items-center p-4"
+      >
+        <div className="w-full max-w-2xl rounded-2xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
               {icon}
-            </span>
-          )}
-          <div className="min-w-0 flex-1">
-            <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
-            <div className="mt-2 text-[15px] leading-6 text-slate-600">
-              {children}
+              <h3 className="font-display text-xl text-brand-ink">{title}</h3>
             </div>
+            <button
+              onClick={onClose}
+              aria-label="Close"
+              className="rounded-lg border border-slate-300 p-2 hover:bg-slate-50"
+            >
+              <X className="h-5 w-5" />
+            </button>
           </div>
-          <button
-            onClick={onClose}
-            aria-label="Close modal"
-            className="rounded-md p-2 text-slate-500 hover:bg-slate-100 hover:text-slate-700"
-          >
-            <X className="h-5 w-5" />
-          </button>
+          <div className="mt-4 text-slate-700">{children}</div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

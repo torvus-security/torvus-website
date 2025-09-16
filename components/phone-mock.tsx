@@ -1,17 +1,21 @@
 // components/phone-mock.tsx
-// Pure CSS phone – no external images. Export both default and named.
+import Image from "next/image";
 
-function PhoneMock() {
+type Props = { src?: string; alt?: string };
+
+export default function PhoneMock({ src, alt = "App preview" }: Props) {
   return (
-    <div
-      aria-hidden
-      className="relative mx-auto h-[560px] w-[302px] sm:h-[640px] sm:w-[342px] rounded-[32px] border border-slate-200/70 bg-white/85 shadow-[inset_0_0_0_8px_rgba(255,255,255,.95),0_12px_34px_rgba(2,6,23,.10)]"
-    >
-      <div className="absolute inset-[10px] rounded-[24px] border border-slate-100/60 bg-gradient-to-b from-cyan-50 to-emerald-50" />
-      <div className="absolute top-3 left-1/2 h-1.5 w-24 -translate-x-1/2 rounded-full bg-slate-200/80" />
-      <div className="absolute bottom-3 left-1/2 h-1 w-28 -translate-x-1/2 rounded-full bg-slate-200/70" />
+    <div className="relative mx-auto aspect-[9/19] w-[320px] sm:w-[360px] lg:w-[380px] rounded-[44px] border-[6px] border-white shadow-xl ring-1 ring-slate-200 bg-white">
+      <div className="absolute inset-[10px] rounded-[32px] ring-1 ring-slate-200 overflow-hidden">
+        {src ? (
+          <Image src={src} alt={alt} fill priority className="object-cover" />
+        ) : (
+          <div
+            aria-hidden
+            className="h-full w-full bg-gradient-to-b from-cyan-50 via-white to-emerald-50"
+          />
+        )}
+      </div>
     </div>
   );
 }
-export default PhoneMock;
-export { PhoneMock };

@@ -1,81 +1,73 @@
 // components/site-header.tsx
 "use client";
-
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { X, Menu } from "lucide-react";
 
-const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
-  <Link
-    href={href}
-    className="block px-4 py-2 text-[15px] font-medium text-slate-700 hover:text-slate-900"
-  >
-    {children}
-  </Link>
-);
+const NAV = [
+  { href: "/product", label: "Product" },
+  { href: "/security", label: "Security" },
+  { href: "/faqs", label: "FAQs" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+  { href: "/signup", label: "Sign up" },
+];
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-slate-200/60 header-blur">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          {/* Sharper diamond */}
-          <span className="inline-grid h-4 w-4 rotate-45 place-items-center rounded-[2px] bg-rose-500 ring-1 ring-rose-400/50" />
-          <span className="text-[15px] font-semibold tracking-tight text-slate-900">
-            Torvus Security
-          </span>
+          <span className="inline-block h-3 w-3 rotate-45 rounded-[2px] bg-rose-500" />
+          <span className="font-display text-lg text-brand-ink">Torvus Security</span>
         </Link>
 
-        {/* Always show hamburger */}
         <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="inline-flex items-center gap-2 rounded-lg border border-slate-300/70 bg-white px-3 py-1.5 text-[14px] font-medium text-slate-700 hover:bg-slate-50"
           aria-label="Open menu"
+          className="inline-flex items-center justify-center rounded-lg border border-slate-300 px-3 py-2 text-slate-700 hover:bg-slate-50"
+          onClick={() => setOpen(true)}
         >
-          <span className="sr-only">Open menu</span>
-          ☰
+          <Menu className="h-5 w-5" />
         </button>
       </div>
 
-      {/* Overlay menu */}
       {open && (
-        <div
-          className="fixed inset-0 z-50 bg-black/40"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setOpen(false)}
-        >
-          <div
-            className="absolute right-0 top-0 h-full w-[86%] max-w-sm bg-white shadow-xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between px-4 py-3 border-b border-slate-200/70">
-              <div className="flex items-center gap-2">
-                <span className="inline-grid h-4 w-4 rotate-45 place-items-center rounded-[2px] bg-rose-500 ring-1 ring-rose-400/50" />
-                <span className="text-[15px] font-semibold">Torvus Security</span>
-              </div>
+        <>
+          <div className="modal-backdrop" onClick={() => setOpen(false)} />
+          <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-white shadow-xl">
+            <div className="flex items-center justify-between border-b px-4 sm:px-6 h-16">
+              <Link onClick={() => setOpen(false)} href="/" className="flex items-center gap-2">
+                <span className="inline-block h-3 w-3 rotate-45 rounded-[2px] bg-rose-500" />
+                <span className="font-display text-lg text-brand-ink">Torvus Security</span>
+              </Link>
               <button
-                onClick={() => setOpen(false)}
-                className="rounded-md p-2 text-slate-500 hover:bg-slate-100"
                 aria-label="Close menu"
+                className="rounded-lg border border-slate-300 p-2 hover:bg-slate-50"
+                onClick={() => setOpen(false)}
               >
-                ✕
+                <X className="h-5 w-5" />
               </button>
             </div>
-
-            <nav className="px-2 py-2">
-              <NavLink href="/product">Product</NavLink>
-              <NavLink href="/security">Security</NavLink>
-              <NavLink href="/faqs">FAQs</NavLink>
-              <NavLink href="/about">About</NavLink>
-              <NavLink href="/contact">Contact</NavLink>
-              <div className="mt-1 border-t border-slate-200/70" />
-              <NavLink href="/signup">Sign up</NavLink>
+            <nav className="px-4 sm:px-6 py-4 space-y-1">
+              {NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="block rounded-lg px-3 py-3 text-slate-800 hover:bg-slate-50"
+                >
+                  {item.label}
+                </Link>
+              ))}
             </nav>
           </div>
-        </div>
+        </>
       )}
     </header>
   );

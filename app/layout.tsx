@@ -1,25 +1,20 @@
 // app/layout.tsx
-import type { Metadata } from "next";
-import "./globals.css"; // keep your Tailwind + base styles
-import "../styles/v0.css"; // if present – safe to keep; otherwise remove this line
+import "./globals.css";
+import { satoshi, erode } from "./fonts";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 
-// If you have app/fonts.ts, keep using it; otherwise the fallback fonts work fine.
-// import { satoshi, erode } from "@/app/fonts";
-
-export const metadata: Metadata = {
+export const metadata = {
   title: "Torvus Security",
-  description:
-    "Secure vault with conditional-release. Your instructions—only when it’s right.",
+  description: "Conditional-release vault with zero-knowledge encryption and provenance.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full bg-white">
-      <body className="min-h-full text-slate-900 antialiased">
+    <html lang="en" className={`${satoshi.variable} ${erode.variable}`}>
+      <body className="min-h-dvh flex flex-col">
         <SiteHeader />
-        <main className="min-h-[60vh]">{children}</main>
+        <main className="flex-1">{children}</main>
         <SiteFooter />
       </body>
     </html>

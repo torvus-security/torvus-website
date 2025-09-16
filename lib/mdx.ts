@@ -5,8 +5,6 @@ import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 
-import type { ComponentType } from "react";
-
 const LEGAL_DIR = path.join(process.cwd(), "content/legal");
 
 type LegalFrontmatter = {
@@ -30,11 +28,10 @@ export async function loadLegalDocument(slug: string) {
     });
 
     const safeFrontmatter: LegalFrontmatter = frontmatter ?? {};
-    const Content = content as ComponentType<Record<string, unknown>>;
 
     return {
       frontmatter: safeFrontmatter,
-      Content,
+      content,
     } as const;
   } catch (error) {
     console.error(`Failed to load MDX for slug ${slug}`, error);

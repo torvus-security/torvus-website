@@ -13,7 +13,7 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default async function PrivacyPage() {
-  const { Content, frontmatter } = await loadLegalDocument("privacy");
+  const { content, frontmatter } = await loadLegalDocument("privacy");
   const updated = frontmatter.updated;
 
   return (
@@ -30,9 +30,7 @@ export default async function PrivacyPage() {
             <p className="text-small text-thunder/70">Last updated {updated}</p>
           ) : null}
         </header>
-        <div className="prose prose-slate max-w-none">
-          <Content />
-        </div>
+        <div className="prose prose-slate max-w-none">{content}</div>
       </article>
     </div>
   );

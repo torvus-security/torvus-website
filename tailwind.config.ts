@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import type { PluginAPI } from "tailwindcss/types/config";
 import animate from "tailwindcss-animate";
 import typography from "@tailwindcss/typography";
 
@@ -88,7 +89,7 @@ const config: Config = {
       animation: {
         "fade-in": "fade-in 300ms cubic-bezier(0.16, 1, 0.3, 1)",
       },
-      typography: ({ theme }) => ({
+      typography: ({ theme }: PluginAPI) => ({
         DEFAULT: {
           css: {
             color: theme("colors.thunder"),

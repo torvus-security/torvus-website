@@ -1,17 +1,113 @@
-// components/site-footer.tsx
 import Link from "next/link";
+
+import { buttonClasses } from "@/components/ui/button";
+
+const currentYear = new Date().getFullYear();
+
+const productLinks = [
+  { href: "/features", label: "Features" },
+  { href: "/digital-legacy", label: "Digital Legacy" },
+  { href: "/security", label: "Security" },
+];
+
+const companyLinks = [
+  { href: "/contact", label: "Contact" },
+  { href: "/pricing", label: "Pricing" },
+];
+
+const legalLinks = [
+  { href: "/legal/privacy", label: "Privacy" },
+  { href: "/legal/terms", label: "Terms" },
+];
 
 export default function SiteFooter() {
   return (
-    <footer className="border-t border-slate-200/70 mt-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-        <p className="text-sm text-slate-500">© {new Date().getFullYear()} Torvus Security</p>
-        <nav className="flex gap-6 text-sm">
-          <Link href="/terms" className="text-slate-500 hover:text-slate-700">Terms</Link>
-          <Link href="/privacy" className="text-slate-500 hover:text-slate-700">Privacy</Link>
-          <Link href="/security" className="text-slate-500 hover:text-slate-700">Security</Link>
-        </nav>
+    <footer className="mt-24 border-t border-storm/10 bg-white">
+      <div className="container space-y-12 py-16">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,2fr)_repeat(3,minmax(0,1fr))]">
+          <div className="flex flex-col gap-6">
+            <div className="space-y-3">
+              <Link
+                href="/"
+                className="flex items-center gap-3"
+                aria-label="Torvus Security home"
+              >
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-lapis/90 text-white">
+                  <span className="text-lg font-semibold">T</span>
+                </span>
+                <span className="text-h4 font-semibold tracking-tight text-storm">
+                  Torvus Security
+                </span>
+              </Link>
+              <p className="max-w-sm text-small text-thunder/80">
+                Secure digital vaulting and conditional release engineered for the moments
+                that matter most.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-storm/10 bg-mist/60 p-5">
+              <h2 className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+                Join the waitlist
+              </h2>
+              <p className="mt-2 text-body text-thunder/90">
+                We’ll keep you posted on launch milestones and private previews. No spam.
+              </p>
+              <Link
+                href="/waitlist"
+                className={buttonClasses({
+                  variant: "primary",
+                  size: "md",
+                  className: "mt-4 w-full sm:w-auto",
+                })}
+              >
+                Join now
+              </Link>
+            </div>
+          </div>
+
+          <FooterColumn title="Product" links={productLinks} />
+          <FooterColumn title="Company" links={companyLinks} />
+          <FooterColumn title="Legal" links={legalLinks} />
+        </div>
+
+        <div className="flex flex-col items-start justify-between gap-4 border-t border-storm/10 pt-6 text-small text-thunder/70 sm:flex-row">
+          <p>© {currentYear} Torvus Security. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-6">
+            <Link href="/status" className="hover:text-storm">
+              Status
+            </Link>
+            <Link href="/security" className="hover:text-storm">
+              Security posture
+            </Link>
+            <Link href="mailto:hello@torvus.security" className="hover:text-storm">
+              hello@torvus.security
+            </Link>
+          </div>
+        </div>
       </div>
     </footer>
+  );
+}
+
+type FooterColumnProps = {
+  title: string;
+  links: { href: string; label: string }[];
+};
+
+function FooterColumn({ title, links }: FooterColumnProps) {
+  return (
+    <div className="space-y-4">
+      <h3 className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+        {title}
+      </h3>
+      <ul className="space-y-3 text-body text-thunder/90">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href} className="transition-colors hover:text-storm">
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

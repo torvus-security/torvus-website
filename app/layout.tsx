@@ -1,20 +1,61 @@
-// app/layout.tsx
-import "./globals.css";
-import { satoshi, erode } from "./fonts";
-import SiteHeader from "@/components/site-header";
+import "./(site)/fonts.css";
+import "./(site)/globals.css";
 import SiteFooter from "@/components/site-footer";
+import SiteHeader from "@/components/site-header";
+import { StructuredData } from "@/components/structured-data";
+import { siteConfig } from "@/lib/site-config";
 
-export const metadata = {
-  title: "Torvus Security",
-  description: "Conditional-release vault with zero-knowledge encryption and provenance.",
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.name,
+    template: "%s | Torvus Security",
+  },
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${satoshi.variable} ${erode.variable}`}>
-      <body className="min-h-dvh flex flex-col">
+    <html lang="en">
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/satoshi-bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/satoshi-regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/erode-regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <StructuredData />
+      </head>
+      <body className="flex min-h-dvh flex-col bg-white font-body text-thunder antialiased">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <SiteHeader />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
         <SiteFooter />
       </body>
     </html>

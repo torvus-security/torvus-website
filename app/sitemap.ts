@@ -1,0 +1,42 @@
+import { loadLegalDocument } from "@/lib/mdx";
+import { siteConfig, type SitePath } from "@/lib/site-config";
+
+import type { MetadataRoute } from "next";
+
+const staticPaths: SitePath[] = [
+  "/",
+  "/features",
+  "/security",
+  "/digital-legacy",
+  "/pricing",
+  "/waitlist",
+  "/contact",
+  "/status",
+  "/legal/privacy",
+  "/legal/terms",
+];
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const base = siteConfig.url;
+  const entries = await Promise.all(
+    staticPaths.map(async (path) => {
+      let lastModified = new Date();
+      if (path.startsWith("/legal")) {
+        const slug = path.split("/").pop() ?? "";
+        const { frontmatter } = await loadLegalDocument(slug);
+        if (frontmatter?.updated) {
+          const parsed = new Date(frontmatter.updated as string);
+          if (!Number.isNaN(parsed.getTime())) {
+            lastModified = parsed;
+          }
+        }
+      }
+      return {
+        url: new URL(path, base).toString(),
+        lastModified,
+      } satisfies MetadataRoute.Sitemap[0];
+    }),
+  );
+
+  return entries;
+}

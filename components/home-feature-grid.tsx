@@ -1,8 +1,16 @@
 // components/home-feature-grid.tsx
-import type { SVGProps } from "react";
-import { ShieldCheck, Flame, ScrollText, Landmark, BadgeCheck, Link2 } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
+import {
+  ShieldCheck,
+  Flame,
+  ScrollText,
+  Landmark,
+  BadgeCheck,
+  Link2,
+} from "lucide-react";
 
-type IconType = (props: SVGProps<SVGSVGElement>) => JSX.Element;
+// Lucide icons are forwardRef components; type them as generic component types
+type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 
 const ITEMS: { title: string; body: string; Icon: IconType }[] = [
   {
@@ -58,7 +66,7 @@ export default function HomeFeatureGrid() {
           >
             <div className="flex items-center gap-3">
               <span className="inline-grid h-9 w-9 place-items-center rounded-full bg-cyan-50 ring-1 ring-cyan-200">
-                <Icon className="h-5 w-5 text-cyan-600" />
+                <Icon className="h-5 w-5 text-cyan-600" aria-hidden="true" />
               </span>
               <h3 className="text-[15px] font-semibold text-slate-900">{title}</h3>
             </div>

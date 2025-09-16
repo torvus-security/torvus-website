@@ -1,37 +1,45 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import clsx from "clsx";
 
-type PhoneMockProps = {
-  /** Optional image path; defaults to your hero mock */
-  src?: string;
-  /** Accessible alt text for the mock */
-  alt?: string;
-  /** Extra utility classes for outer wrapper */
+/** Skinnier frame, graceful fallback if image is missing. */
+type Props = {
   className?: string;
+  /** Optional. If omitted or fails to load, we show a soft gradient. */
+  src?: string;
+  alt?: string;
 };
 
-export default function PhoneMock({
-  src = "/phone-hero.png",
-  alt = "Torvus mobile UI",
-  className = "",
-}: PhoneMockProps) {
+export default function PhoneMock({ className, src = "/phone-hero.png", alt = "Torvus app preview" }: Props) {
+  const [broken, setBroken] = useState(false);
+
   return (
-    <div className={clsx("relative mx-auto w-[300px] sm:w-[320px] lg:w-[360px]", className)}>
-      {/* Outer frame */}
-      <div className="rounded-[38px] border border-black/10 bg-white shadow-xl">
-        {/* Bezel notch */}
-        <div className="mx-auto my-3 h-1.5 w-24 rounded-full bg-black/10" />
-        {/* Tall phone screen (closer to real proportions) */}
-        <div className="relative mx-3 mb-3 aspect-[9/19.5] overflow-hidden rounded-[30px] ring-1 ring-black/5">
+    <div
+      className={clsx(
+        "relative mx-auto rounded-[36px] border border-black/10 bg-white shadow-sm",
+        "h-[560px] w-[280px] sm:h-[620px] sm:w-[310px] md:h-[680px] md:w-[340px]", // slimmer proportions
+        "before:absolute before:left-1/2 before:top-3 before:h-1.5 before:w-24 before:-translate-x-1/2 before:rounded-full before:bg-black/10",
+        className
+      )}
+      aria-hidden
+    >
+      <div className="absolute inset-[10px] overflow-hidden rounded-[24px] bg-white">
+        {!broken && src ? (
           <Image
             src={src}
             alt={alt}
             fill
-            priority
+            sizes="(max-width: 768px) 280px, 340px"
             className="object-cover"
-            sizes="(min-width: 1024px) 360px, (min-width: 640px) 320px, 300px"
+            onError={() => setBroken(true)}
+            priority
           />
-        </div>
+        ) : (
+          // Fallback: subtle brand gradient panel
+          <div className="h-full w-full bg-[radial-gradient(1200px_600px_at_80%_0%,#dbeafe,transparent_60%),linear-gradient(90deg,var(--brand-cyan),var(--brand-emerald))] opacity-[.18]" />
+        )}
       </div>
     </div>
   );

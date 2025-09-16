@@ -1,78 +1,41 @@
-/* styles/v0.css
-   Utilities + tokens only. No @layer/@tailwind so Vercel won't complain.
-   Enforces TWO-TONE gradients only (brand palette).
-*/
+/* v0 utilities — no @layer / @tailwind directives here */
 
-/* ---- Brand tokens ---------------------------------------------------- */
-:root {
-  /* Primary text gradient (cyan → emerald) */
-  --grad-primary-from: #06b6d4; /* cyan-500  */
-  --grad-primary-to:   #10b981; /* emerald-500 */
-
-  /* Secondary text gradient (violet → pink) */
-  --grad-secondary-from: #8b5cf6; /* violet-500 */
-  --grad-secondary-to:   #ec4899; /* pink-500   */
-
-  /* Soft elevation for hover */
-  --shadow-soft: 0 1px 2px rgba(2, 6, 23, .06),
-                 0 10px 30px rgba(2, 6, 23, .10);
+/* Brand tokens (two-tone only) */
+:root{
+  --brand-cyan:#22d3ee;    /* cyan-400 */
+  --brand-emerald:#10b981; /* emerald-500 */
+  --brand-ink:#0f172a;     /* slate-900 */
+  --brand-copy:#334155;    /* slate-700 */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --shadow-soft: 0 1px 2px rgba(0, 0, 0, .25),
-                   0 10px 30px rgba(0, 0, 0, .45);
-  }
+/* Slightly larger base copy (keeps layout intact) */
+html{ font-size: 17px; }      /* was effectively ~16px */
+@media (min-width: 1024px){
+  html{ font-size: 17.5px; }
 }
 
-/* ---- Typography helpers --------------------------------------------- */
-.text-gradient-primary {
-  background-image: linear-gradient(90deg, var(--grad-primary-from), var(--grad-primary-to));
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-}
-
-.text-gradient-secondary {
-  background-image: linear-gradient(90deg, var(--grad-secondary-from), var(--grad-secondary-to));
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-}
-
-/* Keep existing class names working (map to two-tone) */
+/* Two-tone text gradients (global) */
+.text-gradient,
 .text-gradient-hero,
-.text-gradient-accent {
-  background-image: linear-gradient(90deg, var(--grad-primary-from), var(--grad-primary-to));
+.text-gradient-accent{
+  background-image: linear-gradient(90deg,var(--brand-cyan),var(--brand-emerald));
   -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   color: transparent;
 }
 
-.heading-tight { letter-spacing: -0.01em; }
-.font-display  { font-variation-settings: "wght" 725; }
+/* Display helpers (no layout changes) */
+.heading-tight{ letter-spacing:-0.01em; }
+.font-display{ font-variation-settings: "wght" 725; }
 
-/* ---- Hover / press effects for cards & pills ------------------------ */
-.hover-card {
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background-color .18s ease;
+/* Card hover/tap */
+.hover-card{
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
   will-change: transform;
 }
-.hover-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-soft);
-  border-color: rgb(203 213 225 / .55); /* slate-300-ish */
-}
-.pressable { transition: transform .12s ease; }
-.pressable:active { transform: translateY(0) scale(.99); }
+.hover-card:hover{ transform: translateY(-2px); box-shadow: 0 8px 28px rgba(2,6,23,.08); border-color: rgb(226 232 240 / .6); }
+.pressable{ transition: transform .12s ease; }
+.pressable:active{ transform: translateY(0) scale(.99); }
 
-/* ---- Focus ring (keyboard-friendly) --------------------------------- */
-.focus-ring {
-  outline: none;
-  box-shadow:
-    0 0 0 2px rgb(255 255 255 / .9),
-    0 0 0 4px rgb(59 130 246 / .55);
-}
-
-/* ---- Modal readability fixes ---------------------------------------- */
-.v0-modal-overlay { background-color: rgb(15 23 42 / .60); } /* slate-900/60 */
-.v0-modal-panel   { background-color: #ffffff; }            /* fully opaque */
+/* Nicer focus ring */
+.focus-ring{ outline: none; box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(59,130,246,.55); }

@@ -54,9 +54,9 @@ export default function HomePage() {
           className="pointer-events-none absolute -left-32 top-12 h-64 w-64 rounded-full bg-cranberry/25 blur-[140px]"
           aria-hidden="true"
         />
-        <div className="container relative flex flex-col gap-16 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center">
-          <div className="order-2 space-y-7 rounded-xl border border-white/60 bg-white p-7 shadow-[0_20px_50px_rgba(11,18,32,0.12)] lg:order-1 lg:mr-14">
-            <p className="text-[0.95rem] font-semibold uppercase tracking-[0.26em] text-cranberry/80">
+        <div className="container relative flex flex-col gap-16 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+          <div className="order-1 space-y-7 rounded-xl border border-white/60 bg-white p-7 shadow-[0_20px_50px_rgba(11,18,32,0.12)] lg:mr-14">
+            <p className="text-[0.95rem] font-semibold uppercase tracking-[0.26em] text-cranberry">
               Policy-based vaulting
             </p>
             <h1 className="page-title-gradient max-w-[18ch] text-display font-semibold">
@@ -104,7 +104,7 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <div className="order-1 flex flex-col items-center gap-8 text-white lg:order-2 lg:items-end">
+          <div className="order-2 flex flex-col items-center gap-8 text-white lg:items-start">
             <div className="relative flex w-full max-w-[320px] justify-center rounded-xl border border-white/20 bg-white/10 p-6 shadow-soft-2 backdrop-blur">
               <div
                 className="pointer-events-none absolute inset-0 rounded-xl bg-grad-hero opacity-80"
@@ -112,34 +112,28 @@ export default function HomePage() {
               />
               <DevicePhoneV0 scheme="dark" accent="cranberry" />
             </div>
-            <div className="relative w-full max-w-[320px] overflow-hidden rounded-lg border border-white/20 bg-white/10 p-6 shadow-soft-1 backdrop-blur">
-              <div
-                className="pointer-events-none absolute inset-0 bg-grad-panel opacity-55"
-                aria-hidden="true"
-              />
-              <div className="relative space-y-4">
-                <p className="text-[0.8rem] font-semibold uppercase tracking-[0.3em] text-cranberry">
-                  Recipient portal
-                </p>
-                <h2 className="text-h3 font-semibold text-white">
-                  Recipients stay verified before anything unlocks
-                </h2>
-                <p className="max-w-[65ch] text-[1rem] text-white">
-                  Passkeys and lightweight proofing confirm identities before Torvus
-                  unwraps sealed keys. Every disclosure carries provenance your
-                  counterparts can trust.
-                </p>
-                <div className="space-y-2 text-[0.95rem] text-white">
-                  <IconChip tone="lagoon" icon="users">
-                    Multi-factor retrieval with device fingerprinting
-                  </IconChip>
-                  <IconChip tone="lapis" icon="check">
-                    Automatic provenance certificates for every release
-                  </IconChip>
-                  <IconChip tone="cranberry" icon="shield">
-                    Checklist mode that keeps executors aligned and accountable
-                  </IconChip>
-                </div>
+            <div className="relative w-full max-w-[320px] space-y-4 rounded-xl border border-white/60 bg-white p-6 shadow-[0_20px_50px_rgba(11,18,32,0.1)]">
+              <p className="text-[0.8rem] font-semibold uppercase tracking-[0.3em] text-cranberry">
+                Recipient portal
+              </p>
+              <h2 className="text-h3 font-semibold text-[#1F2937]">
+                Recipients stay verified before anything unlocks
+              </h2>
+              <p className="max-w-[65ch] text-[0.95rem] leading-relaxed text-[#1F2937]">
+                Passkeys and lightweight proofing confirm identities before Torvus unwraps
+                sealed keys. Every disclosure carries provenance your counterparts can
+                trust.
+              </p>
+              <div className="space-y-2 text-[0.95rem] text-[#1F2937]">
+                <IconChip tone="lagoon" icon="users">
+                  Multi-factor retrieval with device fingerprinting
+                </IconChip>
+                <IconChip tone="lapis" icon="check">
+                  Automatic provenance certificates for every release
+                </IconChip>
+                <IconChip tone="cranberry" icon="shield">
+                  Checklist mode that keeps executors aligned and accountable
+                </IconChip>
               </div>
             </div>
           </div>

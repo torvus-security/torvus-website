@@ -1,9 +1,8 @@
-import { CircleCheck, ShieldAlert, TimerReset, Users } from "lucide-react";
 import Link from "next/link";
 
 import DevicePhone from "@/components/device-phone";
-import { Check } from "@/components/icons";
 import { IconChip } from "@/components/icon-chip";
+import { Check, Key, Shield, Timer, Users } from "@/components/icons";
 import { SectionIntro } from "@/components/section-intro";
 import { buttonClasses } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,12 +14,12 @@ export const dynamic = "force-static";
 
 const featureHighlights = [
   {
-    icon: TimerReset,
+    icon: Timer,
     title: "Dead-man switch policies",
     body: "Compose inactivity windows, approval quorums, and conditional checks. If you don’t respond in time, Torvus can orchestrate controlled release without exposing plaintext to operators.",
   },
   {
-    icon: ShieldAlert,
+    icon: Shield,
     title: "Duress pause & safe fails",
     body: "Trigger a silent pause that freezes releases, serves decoy content, or alerts a trusted contact—without tipping off an observer. Every event is captured in tamper-evident logs.",
   },
@@ -30,7 +29,7 @@ const featureHighlights = [
     body: "Bind recipients to verified identities and enforce passkeys or TOTP fallback. Zero-knowledge retrieval flows make sure only intended parties unwrap sealed data.",
   },
   {
-    icon: CircleCheck,
+    icon: Key,
     title: "Digital Legacy orchestration",
     body: "Inventory critical artifacts, capture intent, and automate estate handover with policy-backed key splits. Executors get transparent checklists with provenance certificates.",
   },
@@ -51,7 +50,10 @@ export default function HomePage() {
         data-gridlines="storm"
         className="heading-band band-home relative overflow-hidden border-b border-white/10 pt-[var(--section-pt)] pb-[var(--section-pb)] text-white"
       >
-        <div className="pointer-events-none absolute -left-32 top-12 h-64 w-64 rounded-full bg-cranberry/25 blur-[140px]" aria-hidden="true" />
+        <div
+          className="pointer-events-none absolute -left-32 top-12 h-64 w-64 rounded-full bg-cranberry/25 blur-[140px]"
+          aria-hidden="true"
+        />
         <div className="container relative flex flex-col gap-16 lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center">
           <div className="order-2 space-y-8 lg:order-1 relative scrim-light">
             <p className="text-[0.95rem] font-semibold uppercase tracking-[0.26em] text-cranberry/80">
@@ -67,7 +69,11 @@ export default function HomePage() {
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
                 href="/waitlist"
-                className={buttonClasses({ variant: "primary", size: "lg", className: "whitespace-nowrap" })}
+                className={buttonClasses({
+                  variant: "primary",
+                  size: "lg",
+                  className: "whitespace-nowrap",
+                })}
               >
                 Join the waitlist
               </Link>
@@ -76,7 +82,8 @@ export default function HomePage() {
                 className={buttonClasses({
                   variant: "secondary",
                   size: "lg",
-                  className: "whitespace-nowrap focus-visible:ring-offset-storm hover:underline",
+                  className:
+                    "whitespace-nowrap focus-visible:ring-offset-storm hover:underline",
                 })}
               >
                 View the platform
@@ -113,11 +120,17 @@ export default function HomePage() {
           </div>
           <div className="order-1 flex flex-col items-center gap-8 lg:order-2 lg:items-end">
             <div className="relative flex w-full max-w-[360px] justify-center rounded-[2.9rem] border border-white/15 bg-white/5 p-8 shadow-soft-2 backdrop-blur">
-              <div className="pointer-events-none absolute inset-0 rounded-[2.9rem] bg-grad-hero opacity-85" aria-hidden="true" />
+              <div
+                className="pointer-events-none absolute inset-0 rounded-[2.9rem] bg-grad-hero opacity-85"
+                aria-hidden="true"
+              />
               <DevicePhone scheme="dark" accent="cranberry" float />
             </div>
             <div className="relative w-full max-w-[360px] overflow-hidden rounded-2xl border border-white/15 bg-white/10 p-8 shadow-soft-1 backdrop-blur">
-              <div className="pointer-events-none absolute inset-0 bg-grad-panel opacity-55" aria-hidden="true" />
+              <div
+                className="pointer-events-none absolute inset-0 bg-grad-panel opacity-55"
+                aria-hidden="true"
+              />
               <div className="relative space-y-4">
                 <p className="text-[0.8rem] font-semibold uppercase tracking-[0.3em] text-cranberry">
                   Recipient portal
@@ -126,20 +139,30 @@ export default function HomePage() {
                   Recipients stay verified before anything unlocks
                 </h2>
                 <p className="text-[1rem] text-white">
-                  Passkeys and lightweight proofing confirm identities before Torvus unwraps sealed
-                  keys. Every disclosure carries provenance your counterparts can trust.
+                  Passkeys and lightweight proofing confirm identities before Torvus
+                  unwraps sealed keys. Every disclosure carries provenance your
+                  counterparts can trust.
                 </p>
                 <ul className="space-y-2 text-[1rem] text-white">
                   <li className="flex items-start gap-2">
-                    <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-lagoon" aria-hidden="true" />
+                    <span
+                      className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-lagoon"
+                      aria-hidden="true"
+                    />
                     Multi-factor retrieval with device fingerprinting
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-lagoon" aria-hidden="true" />
+                    <span
+                      className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-lagoon"
+                      aria-hidden="true"
+                    />
                     Automatic provenance certificate for every release
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-lagoon" aria-hidden="true" />
+                    <span
+                      className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-lagoon"
+                      aria-hidden="true"
+                    />
                     Checklist mode for estate executors and teams
                   </li>
                 </ul>
@@ -157,10 +180,7 @@ export default function HomePage() {
             description="Every component—from encryption keys to approval oracles—is designed so no single actor can leak secrets. Policies are auditable, recoverable, and testable before they matter."
             align="center"
           />
-          <div
-            data-card-list="ab"
-            className="grid gap-6 md:grid-cols-2"
-          >
+          <div data-card-list="ab" className="grid gap-6 md:grid-cols-2">
             {featureHighlights.map((feature) => (
               <Card key={feature.title}>
                 <CardHeader className="flex flex-col gap-4">
@@ -171,9 +191,7 @@ export default function HomePage() {
                     {feature.title}
                   </CardTitle>
                 </CardHeader>
-                <CardDescription>
-                  {feature.body}
-                </CardDescription>
+                <CardDescription>{feature.body}</CardDescription>
               </Card>
             ))}
           </div>
@@ -181,18 +199,23 @@ export default function HomePage() {
       </section>
 
       <section className="relative overflow-hidden pt-[calc(var(--section-pt)*0.8)] pb-[calc(var(--section-pb)*0.8)]">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-grad-divider opacity-60" aria-hidden="true" />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-grad-divider opacity-60"
+          aria-hidden="true"
+        />
         <div className="container space-y-7 text-center">
           <p className="text-[0.95rem] font-semibold uppercase tracking-[0.24em] text-cranberry">
             Trusted partners
           </p>
           <p className="text-h3 font-semibold text-storm">
-            Working with journalists, NGOs, and professionals protecting critical missions.
+            Working with journalists, NGOs, and professionals protecting critical
+            missions.
           </p>
           <p className="mx-auto max-w-3xl text-lead text-thunder">
-            Torvus supports collaborative handover between teams, field operators, counsel, and
-            investigative partners operating under pressure. Policy-driven approvals, duress
-            controls, and provenance tie every release to the right story.
+            Torvus supports collaborative handover between teams, field operators,
+            counsel, and investigative partners operating under pressure. Policy-driven
+            approvals, duress controls, and provenance tie every release to the right
+            story.
           </p>
           <ul className="mx-auto flex max-w-2xl flex-wrap items-center justify-center gap-4 text-[0.95rem] text-thunder">
             {[
@@ -201,7 +224,10 @@ export default function HomePage() {
               "Critical infrastructure operators",
             ].map((item) => (
               <li key={item} className="flex items-center gap-2">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-cranberry" aria-hidden="true" />
+                <span
+                  className="inline-block h-1.5 w-1.5 rounded-full bg-cranberry"
+                  aria-hidden="true"
+                />
                 <span>{item}</span>
               </li>
             ))}
@@ -227,7 +253,8 @@ export default function HomePage() {
                   className={buttonClasses({
                     variant: "secondary",
                     size: "lg",
-                    className: "border-white/70 text-white hover:border-white hover:bg-white/10 focus-visible:ring-offset-storm",
+                    className:
+                      "border-white/70 text-white hover:border-white hover:bg-white/10 focus-visible:ring-offset-storm",
                   })}
                 >
                   Explore the security model

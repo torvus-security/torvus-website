@@ -78,12 +78,18 @@ const config: Config = {
         "grad-divider": "var(--grad-divider)",
       },
       fontSize: {
-        display: ["var(--fz-display)", { lineHeight: "var(--lh-display)", letterSpacing: "-0.03em" }],
+        display: [
+          "var(--fz-display)",
+          { lineHeight: "var(--lh-display)", letterSpacing: "-0.03em" },
+        ],
         h1: ["var(--fz-h1)", { lineHeight: "var(--lh-h1)", letterSpacing: "-0.02em" }],
         h2: ["var(--fz-h2)", { lineHeight: "var(--lh-h2)", letterSpacing: "-0.015em" }],
         h3: ["var(--fz-h3)", { lineHeight: "var(--lh-h3)", letterSpacing: "-0.01em" }],
         h4: ["var(--fz-h4)", { lineHeight: "var(--lh-h4)", letterSpacing: "-0.01em" }],
-        lead: ["var(--fz-lead)", { lineHeight: "var(--lh-lead)", letterSpacing: "-0.005em" }],
+        lead: [
+          "var(--fz-lead)",
+          { lineHeight: "var(--lh-lead)", letterSpacing: "-0.005em" },
+        ],
         body: ["clamp(15.75px, 0.55vw + 14px, 17px)", { lineHeight: "1.6" }],
         small: ["var(--fz-small)", { lineHeight: "1.4", letterSpacing: "0" }],
         micro: ["var(--fz-micro)", { lineHeight: "1.4", letterSpacing: "0.01em" }],

@@ -1,4 +1,4 @@
-export type NavigationItem = {
+type NavigationItem = {
   href: string;
   label: string;
   description: string;
@@ -14,7 +14,8 @@ export const primaryNavigation: NavigationItem[] = [
   {
     href: "/security",
     label: "Security",
-    description: "Zero-trust key orchestration, duress controls, and tamper-evident logs.",
+    description:
+      "Zero-trust key orchestration, duress controls, and tamper-evident logs.",
   },
   {
     href: "/digital-legacy",
@@ -24,7 +25,8 @@ export const primaryNavigation: NavigationItem[] = [
   {
     href: "/pricing",
     label: "Pricing",
-    description: "Choose a policy tier that fits your release cadence and assurance needs.",
+    description:
+      "Choose a policy tier that fits your release cadence and assurance needs.",
   },
   {
     href: "/contact",
@@ -42,6 +44,12 @@ export const secondaryNavigation: NavigationItem[] = [
   {
     href: "/legal/privacy",
     label: "Privacy",
-    description: "Data handling, retention, and privacy safeguards in the Torvus platform.",
+    description:
+      "Data handling, retention, and privacy safeguards in the Torvus platform.",
+  },
+  {
+    href: "/legal/terms",
+    label: "Terms",
+    description: "Service terms, acceptable use, and contractual obligations for Torvus.",
   },
 ];

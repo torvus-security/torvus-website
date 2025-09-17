@@ -152,7 +152,11 @@ function SubmitButton({
     <button
       type="submit"
       className={cn(
-        buttonClasses({ variant: "primary", size: "lg", className: "min-w-[180px] sm:whitespace-nowrap" }),
+        buttonClasses({
+          variant: "primary",
+          size: "lg",
+          className: "min-w-[180px] sm:whitespace-nowrap",
+        }),
         pending && "opacity-60",
       )}
       disabled={pending}

@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
-
 import { cn } from "@/lib/utils";
+
+import type { ReactNode } from "react";
 
 const pastelMap: Record<"cranberry" | "lagoon" | "lapis", string> = {
   cranberry: "bg-pastel-cranberry text-cranberry",
@@ -24,7 +24,14 @@ export function IconChip({ tone = "lagoon", icon, children, className }: IconChi
         className,
       )}
     >
-      {icon ? <span className="inline-flex h-4 w-4 items-center justify-center" aria-hidden="true">{icon}</span> : null}
+      {icon ? (
+        <span
+          className="inline-flex h-4 w-4 items-center justify-center"
+          aria-hidden="true"
+        >
+          {icon}
+        </span>
+      ) : null}
       <span>{children}</span>
     </span>
   );

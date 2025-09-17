@@ -16,7 +16,8 @@ export default function DevicePhone({
   float?: boolean;
   ariaLabel?: string;
 }) {
-  const accentHex = accent === "lagoon" ? "#1AAE9F" : accent === "lapis" ? "#26619C" : "#D61F69";
+  const accentHex =
+    accent === "lagoon" ? "#1AAE9F" : accent === "lapis" ? "#26619C" : "#D61F69";
   const cardBg = scheme === "dark" ? "rgba(7,12,22,0.92)" : "rgba(255,255,255,0.92)";
   const cardText = scheme === "dark" ? "#E6E7EB" : "#1F2937";
 
@@ -48,11 +49,26 @@ export default function DevicePhone({
         <rect x="12" y="12" width="336" height="696" rx="28" fill="url(#bg)" />
         <rect x="12" y="12" width="336" height="696" rx="28" fill="url(#halo)" />
 
-        <rect x="120" y="34" width="120" height="20" rx="10" fill={scheme === "dark" ? "#121826" : "#D7DBE0"} opacity="0.9" />
+        <rect
+          x="120"
+          y="34"
+          width="120"
+          height="20"
+          rx="10"
+          fill={scheme === "dark" ? "#121826" : "#D7DBE0"}
+          opacity="0.9"
+        />
 
         <g transform="translate(80, 290)">
           <rect width="200" height="72" rx="36" fill={cardBg} />
-          <text x="24" y="43" fontSize="16" fontWeight="600" fill={accentHex} letterSpacing="0.14em">
+          <text
+            x="24"
+            y="43"
+            fontSize="16"
+            fontWeight="600"
+            fill={accentHex}
+            letterSpacing="0.14em"
+          >
             POLICY
           </text>
           <circle cx="130" cy="36" r="3" fill={accentHex} />

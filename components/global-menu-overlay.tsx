@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 export default function GlobalMenuOverlay() {
   const [open, setOpen] = useState(false);
@@ -11,9 +11,6 @@ export default function GlobalMenuOverlay() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!open) {
-      return;
-    }
     setOpen(false);
   }, [pathname]);
 
@@ -75,7 +72,13 @@ export default function GlobalMenuOverlay() {
         className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white/80 backdrop-blur transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#d61f69] focus-visible:ring-offset-2"
       >
         <span className="sr-only">Open menu</span>
-        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" className="text-storm">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          className="text-storm"
+        >
           <path fill="currentColor" d="M4 7h16v2H4zm0 4h16v2H4zm0 4h16v2H4z" />
         </svg>
       </button>
@@ -99,11 +102,31 @@ export default function GlobalMenuOverlay() {
           >
             <nav className="grid gap-3 text-[16px] font-semibold text-thunder">
               <OverlayLink href="/" label="Home" onNavigate={() => setOpen(false)} />
-              <OverlayLink href="/features" label="Features" onNavigate={() => setOpen(false)} />
-              <OverlayLink href="/security" label="Security" onNavigate={() => setOpen(false)} />
-              <OverlayLink href="/digital-legacy" label="Digital Legacy" onNavigate={() => setOpen(false)} />
-              <OverlayLink href="/pricing" label="Pricing" onNavigate={() => setOpen(false)} />
-              <OverlayLink href="/contact" label="Contact" onNavigate={() => setOpen(false)} />
+              <OverlayLink
+                href="/features"
+                label="Features"
+                onNavigate={() => setOpen(false)}
+              />
+              <OverlayLink
+                href="/security"
+                label="Security"
+                onNavigate={() => setOpen(false)}
+              />
+              <OverlayLink
+                href="/digital-legacy"
+                label="Digital Legacy"
+                onNavigate={() => setOpen(false)}
+              />
+              <OverlayLink
+                href="/pricing"
+                label="Pricing"
+                onNavigate={() => setOpen(false)}
+              />
+              <OverlayLink
+                href="/contact"
+                label="Contact"
+                onNavigate={() => setOpen(false)}
+              />
             </nav>
 
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -136,7 +159,15 @@ export default function GlobalMenuOverlay() {
   );
 }
 
-function OverlayLink({ href, label, onNavigate }: { href: string; label: string; onNavigate: () => void }) {
+function OverlayLink({
+  href,
+  label,
+  onNavigate,
+}: {
+  href: string;
+  label: string;
+  onNavigate: () => void;
+}) {
   return (
     <Link
       href={href}

@@ -42,7 +42,5 @@ export function CardTitle({ className, ...props }: CardTitleProps) {
 }
 
 export function CardDescription({ className, ...props }: CardDescriptionProps) {
-  return (
-    <p className={cn("max-w-prose text-body text-thunder", className)} {...props} />
-  );
+  return <p className={cn("max-w-prose text-body text-thunder", className)} {...props} />;
 }

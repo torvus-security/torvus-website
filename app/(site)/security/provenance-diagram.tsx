@@ -20,17 +20,20 @@ export function ProvenanceDiagram() {
 
       <div className="hidden items-stretch gap-4 lg:flex">
         {stages.map((stage, index) => (
-          <FragmentedStage key={`desktop-${stage}`} label={stage} isLast={index === stages.length - 1} />
+          <FragmentedStage
+            key={`desktop-${stage}`}
+            label={stage}
+            isLast={index === stages.length - 1}
+          />
         ))}
       </div>
 
-      <div className="flex gap-4 overflow-x-auto pb-2 lg:hidden snap-x snap-mandatory" role="list">
+      <div
+        className="flex gap-4 overflow-x-auto pb-2 lg:hidden snap-x snap-mandatory"
+        role="list"
+      >
         {stages.map((stage) => (
-          <div
-            key={`mobile-${stage}`}
-            role="listitem"
-            className="snap-start"
-          >
+          <div key={`mobile-${stage}`} role="listitem" className="snap-start">
             <StagePill label={stage} />
           </div>
         ))}

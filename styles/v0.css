@@ -2,19 +2,21 @@
    Utilities only (no layout). Enforces two-tone gradients.
 */
 
-:root{
+:root {
   /* brand two-tone pairs */
-  --grad-brand-from:#22d3ee; /* cyan-400 */
-  --grad-brand-to:#10b981;   /* emerald-500 */
+  --grad-brand-from: #22d3ee; /* cyan-400 */
+  --grad-brand-to: #10b981; /* emerald-500 */
 
-  --grad-warm-from:#ec4899;  /* fuchsia-500 */
-  --grad-warm-to:#f43f5e;    /* rose-500 */
+  --grad-warm-from: #ec4899; /* fuchsia-500 */
+  --grad-warm-to: #f43f5e; /* rose-500 */
 
-  --shadow-soft:0 1px 2px rgba(2,6,23,.08),0 10px 30px rgba(2,6,23,.10);
+  --shadow-soft: 0 1px 2px rgba(2, 6, 23, 0.08), 0 10px 30px rgba(2, 6, 23, 0.1);
 }
 
-@media (prefers-color-scheme:dark){
-  :root{ --shadow-soft:0 1px 2px rgba(0,0,0,.25),0 10px 30px rgba(0,0,0,.45); }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.25), 0 10px 30px rgba(0, 0, 0, 0.45);
+  }
 }
 
 /* --- Utilities --------------------------------------------------------- */
@@ -22,23 +24,40 @@
 @tailwind utilities;
 
 /* Two-tone gradients (global) */
-.text-gradient-brand{
-  background-image:linear-gradient(90deg,var(--grad-brand-from),var(--grad-brand-to));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+.text-gradient-brand {
+  background-image: linear-gradient(90deg, var(--grad-brand-from), var(--grad-brand-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-.text-gradient-warm{
-  background-image:linear-gradient(90deg,var(--grad-warm-from),var(--grad-warm-to));
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+.text-gradient-warm {
+  background-image: linear-gradient(90deg, var(--grad-warm-from), var(--grad-warm-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Display feel (no layout shift) */
-.font-display{ font-variation-settings:"wght" 720; }
+.font-display {
+  font-variation-settings: "wght" 720;
+}
 
 /* Subtle card hover */
-.hover-card{
-  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+.hover-card {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
 }
-.hover-card:hover{ transform:translateY(-2px); box-shadow:var(--shadow-soft); border-color:hsl(215 16% 82% / .55); }
+.hover-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+  border-color: hsl(215 16% 82% / 0.55);
+}
 
-.pressable{ transition:transform .12s ease; }
-.pressable:active{ transform:translateY(0) scale(.99); }
+.pressable {
+  transition: transform 0.12s ease;
+}
+.pressable:active {
+  transform: translateY(0) scale(0.99);
+}

@@ -15,12 +15,15 @@ export function middleware(request: NextRequest) {
   });
 
   if (process.env.NODE_ENV !== "production") {
-    const pageviews = (globalThis as unknown as { __torvusPageviews?: Map<string, number> })
-      .__torvusPageviews ?? new Map<string, number>();
+    const pageviews =
+      (globalThis as unknown as { __torvusPageviews?: Map<string, number> })
+        .__torvusPageviews ?? new Map<string, number>();
     const path = request.nextUrl.pathname;
     const total = (pageviews.get(path) ?? 0) + 1;
     pageviews.set(path, total);
-    (globalThis as unknown as { __torvusPageviews: Map<string, number> }).__torvusPageviews = pageviews;
+    (
+      globalThis as unknown as { __torvusPageviews: Map<string, number> }
+    ).__torvusPageviews = pageviews;
     if (process.env.NODE_ENV === "development") {
       console.info(`[analytics] ${path} -> ${total}`);
     }
@@ -52,7 +55,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!api/og|_next/static|_next/image|favicon.ico|icon.svg).*)",
-  ],
+  matcher: ["/((?!api/og|_next/static|_next/image|favicon.ico|icon.svg).*)"],
 };

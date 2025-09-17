@@ -1,10 +1,10 @@
 import Link from "next/link";
 
+import { IconChip } from "@/components/icon-chip";
+import { Check } from "@/components/icons";
 import { SectionIntro } from "@/components/section-intro";
 import { buttonClasses } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Check } from "@/components/icons";
-import { IconChip } from "@/components/icon-chip";
 import { createMetadata } from "@/lib/metadata";
 
 import type { Metadata } from "next";
@@ -52,7 +52,10 @@ export default function PricingPage() {
   return (
     <div className="pb-24">
       <section className="heading-band band-pricing relative overflow-hidden border-b border-storm/10 bg-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-grad-divider opacity-30" aria-hidden="true" />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-grad-divider opacity-30"
+          aria-hidden="true"
+        />
         <div className="container relative space-y-8">
           <SectionIntro
             eyebrow="Pricing"
@@ -61,7 +64,11 @@ export default function PricingPage() {
           >
             <Link
               href="/waitlist"
-              className={buttonClasses({ variant: "primary", size: "lg", className: "whitespace-nowrap" })}
+              className={buttonClasses({
+                variant: "primary",
+                size: "lg",
+                className: "whitespace-nowrap",
+              })}
             >
               Join the waitlist
             </Link>
@@ -78,7 +85,10 @@ export default function PricingPage() {
                   <p className="text-[0.85rem] font-semibold uppercase tracking-[0.26em] text-cranberry">
                     {tier.name}
                   </p>
-                  <span className="inline-flex h-1.5 w-10 rounded-full bg-cranberry" aria-hidden="true" />
+                  <span
+                    className="inline-flex h-1.5 w-10 rounded-full bg-cranberry"
+                    aria-hidden="true"
+                  />
                 </div>
                 <p className="text-[1.05rem] text-thunder">{tier.audience}</p>
                 <div className="space-y-2 text-[1.02rem] text-thunder">

@@ -1,19 +1,17 @@
-import {
-  Binary,
-  ClipboardCheck,
-  Fingerprint,
-  ShieldCheck,
-  Timer,
-  Workflow,
-} from "lucide-react";
 import Link from "next/link";
 
+import { IconChip } from "@/components/icon-chip";
+import {
+  Check,
+  Key as KeyIcon,
+  Shield,
+  Timer as TimerIcon,
+  Users as UsersIcon,
+} from "@/components/icons";
 import { SectionIntro } from "@/components/section-intro";
 import { buttonClasses } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
-import { IconChip } from "@/components/icon-chip";
-import { Check } from "@/components/icons";
 
 import type { Metadata } from "next";
 
@@ -22,7 +20,7 @@ export const revalidate = 86400;
 const sections = [
   {
     id: "policy",
-    icon: Timer,
+    icon: TimerIcon,
     name: "Policy engine & automation",
     lead: "Compose inactivity windows, quorum approvals, and contextual signals. Preview outcomes before they go live.",
     bullets: [
@@ -33,7 +31,7 @@ const sections = [
   },
   {
     id: "duress",
-    icon: ShieldCheck,
+    icon: Shield,
     name: "Duress, pause, and safe fails",
     lead: "Freeze releases silently or hand over decoy packages while audit evidence continues to build.",
     bullets: [
@@ -44,7 +42,7 @@ const sections = [
   },
   {
     id: "recipients",
-    icon: Fingerprint,
+    icon: UsersIcon,
     name: "Recipient identity & verification",
     lead: "Bind recipients to verified identities. Require passkeys first with TOTP fallback only where policy demands.",
     bullets: [
@@ -55,7 +53,7 @@ const sections = [
   },
   {
     id: "provenance",
-    icon: ClipboardCheck,
+    icon: Check,
     name: "Transparency, audit, and provenance",
     lead: "Every release records who requested, who approved, and which controls passed with tamper-evident receipts.",
     bullets: [
@@ -66,7 +64,7 @@ const sections = [
   },
   {
     id: "developer",
-    icon: Workflow,
+    icon: KeyIcon,
     name: "Developer surface",
     lead: "APIs and webhooks let you orchestrate policies from CI/CD, ticketing, or custom runbooks without sacrificing control.",
     bullets: [
@@ -77,7 +75,7 @@ const sections = [
   },
   {
     id: "platform",
-    icon: Binary,
+    icon: Shield,
     name: "Platform hardening",
     lead: "Infrastructure attested through HSM-backed splits, hardware-backed secrets, and aggressive anomaly detection.",
     bullets: [
@@ -101,7 +99,10 @@ export default function FeaturesPage() {
   return (
     <div id="top" className="pb-24">
       <section className="heading-band band-home relative overflow-hidden border-b border-storm/10 bg-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-grad-divider opacity-30" aria-hidden="true" />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-grad-divider opacity-30"
+          aria-hidden="true"
+        />
         <div className="container relative space-y-8">
           <SectionIntro
             eyebrow="Platform overview"

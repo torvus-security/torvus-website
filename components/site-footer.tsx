@@ -1,24 +1,19 @@
 import Link from "next/link";
 
 import { buttonClasses } from "@/components/ui/button";
+import { primaryNavigation, secondaryNavigation } from "@/lib/navigation";
 
 const currentYear = new Date().getFullYear();
 
-const productLinks = [
-  { href: "/features", label: "Features" },
-  { href: "/digital-legacy", label: "Digital Legacy" },
-  { href: "/security", label: "Security" },
-];
+const productLinks = primaryNavigation.filter((item) =>
+  ["/features", "/digital-legacy", "/security"].includes(item.href),
+);
 
-const companyLinks = [
-  { href: "/contact", label: "Contact" },
-  { href: "/pricing", label: "Pricing" },
-];
+const companyLinks = primaryNavigation.filter((item) =>
+  ["/contact", "/pricing"].includes(item.href),
+);
 
-const legalLinks = [
-  { href: "/legal/privacy", label: "Privacy" },
-  { href: "/legal/terms", label: "Terms" },
-];
+const legalLinks = secondaryNavigation.filter((item) => item.href.startsWith("/legal"));
 
 export default function SiteFooter() {
   return (

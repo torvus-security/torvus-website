@@ -1,6 +1,12 @@
 import { cn } from "@/lib/utils";
 
-type ButtonVariant = "primary" | "secondary" | "tertiary" | "subtle" | "destructive" | "link";
+type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "subtle"
+  | "destructive"
+  | "link";
 type ButtonSize = "sm" | "md" | "lg";
 
 type ClassOptions = {

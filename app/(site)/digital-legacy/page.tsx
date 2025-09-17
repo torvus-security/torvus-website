@@ -8,9 +8,8 @@ import {
 import Link from "next/link";
 
 import DevicePhone from "@/components/device-phone";
-import { Check } from "@/components/icons";
 import { IconChip } from "@/components/icon-chip";
-import { SectionIntro } from "@/components/section-intro";
+import { Check } from "@/components/icons";
 import { buttonClasses } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
@@ -69,7 +68,10 @@ export default function DigitalLegacyPage() {
         data-mood="calm"
         className="heading-band band-legacy relative overflow-hidden border-b border-storm/10 pt-[var(--section-pt)] pb-[var(--section-pb)]"
       >
-        <div className="pointer-events-none absolute -right-20 top-6 h-56 w-56 rounded-full bg-cranberry/25 blur-[130px]" aria-hidden="true" />
+        <div
+          className="pointer-events-none absolute -right-20 top-6 h-56 w-56 rounded-full bg-cranberry/25 blur-[130px]"
+          aria-hidden="true"
+        />
         <div className="container relative flex flex-col gap-16 lg:grid lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:items-center">
           <div className="order-2 space-y-8 lg:order-2 relative scrim-light">
             <div className="flex flex-col gap-4">
@@ -80,9 +82,9 @@ export default function DigitalLegacyPage() {
                 Handover what matters with proof, empathy, and control
               </h1>
               <p className="max-w-[60ch] text-lead text-thunder">
-                Torvus Digital Legacy orchestrates estate logistics when you’re gone—without
-                sacrificing the privacy your work requires today. Executors receive clarity,
-                while intent and audit trails stay intact.
+                Torvus Digital Legacy orchestrates estate logistics when you’re
+                gone—without sacrificing the privacy your work requires today. Executors
+                receive clarity, while intent and audit trails stay intact.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -125,11 +127,17 @@ export default function DigitalLegacyPage() {
           </div>
           <div className="order-1 flex flex-col items-center gap-8 lg:order-1 lg:items-start">
             <div className="relative flex w-full max-w-[360px] justify-center rounded-[2.9rem] border border-storm/12 bg-white p-8 shadow-soft-2">
-              <div className="pointer-events-none absolute inset-0 rounded-[2.9rem] bg-[linear-gradient(145deg,rgba(214,31,105,0.12),rgba(26,174,159,0.12),rgba(38,97,156,0.15))] opacity-75" aria-hidden="true" />
+              <div
+                className="pointer-events-none absolute inset-0 rounded-[2.9rem] bg-[linear-gradient(145deg,rgba(214,31,105,0.12),rgba(26,174,159,0.12),rgba(38,97,156,0.15))] opacity-75"
+                aria-hidden="true"
+              />
               <DevicePhone scheme="light" accent="lagoon" float />
             </div>
             <div className="relative w-full max-w-[360px] overflow-hidden rounded-2xl border border-storm/12 bg-white p-7 shadow-soft-1">
-              <div className="pointer-events-none absolute inset-0 bg-grad-panel opacity-65" aria-hidden="true" />
+              <div
+                className="pointer-events-none absolute inset-0 bg-grad-panel opacity-65"
+                aria-hidden="true"
+              />
               <div className="relative space-y-3">
                 <p className="text-[0.8rem] font-semibold uppercase tracking-[0.3em] text-cranberry">
                   Estate orchestrator
@@ -179,7 +187,10 @@ export default function DigitalLegacyPage() {
       <section className="pt-[calc(var(--section-pt)*0.85)] pb-[calc(var(--section-pb)*0.85)]">
         <div className="container space-y-8">
           <div className="relative overflow-hidden rounded-3xl border border-storm/10 bg-white p-10 shadow-soft-1">
-            <div className="pointer-events-none absolute inset-0 bg-grad-panel opacity-60" aria-hidden="true" />
+            <div
+              className="pointer-events-none absolute inset-0 bg-grad-panel opacity-60"
+              aria-hidden="true"
+            />
             <h2 className="text-h3 font-semibold text-storm">Future roadmap</h2>
             <p className="mt-4 max-w-3xl text-lead text-thunder">
               Digital Legacy continues to evolve with estate professionals and
@@ -188,7 +199,10 @@ export default function DigitalLegacyPage() {
             <ul className="mt-6 space-y-3 text-[1.02rem] text-thunder">
               {roadmap.map((item) => (
                 <li key={item} className="flex items-start gap-2">
-                  <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-cranberry/70" aria-hidden="true" />
+                  <span
+                    className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-cranberry/70"
+                    aria-hidden="true"
+                  />
                   <span>{item}</span>
                 </li>
               ))}

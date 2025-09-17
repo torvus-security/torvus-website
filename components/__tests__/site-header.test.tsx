@@ -1,9 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { ReactNode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import SiteHeader from "@/components/site-header";
+
+import type { ReactNode } from "react";
 
 vi.mock("next/link", () => ({
   __esModule: true,
@@ -42,7 +43,9 @@ describe("SiteHeader global menu", () => {
     await user.click(closeButton);
 
     await waitFor(() =>
-      expect(screen.queryByRole("dialog", { name: /global navigation/i })).not.toBeInTheDocument(),
+      expect(
+        screen.queryByRole("dialog", { name: /global navigation/i }),
+      ).not.toBeInTheDocument(),
     );
   });
 
@@ -75,7 +78,9 @@ describe("SiteHeader global menu", () => {
     await user.keyboard("{Escape}");
 
     await waitFor(() =>
-      expect(screen.queryByRole("dialog", { name: /global navigation/i })).not.toBeInTheDocument(),
+      expect(
+        screen.queryByRole("dialog", { name: /global navigation/i }),
+      ).not.toBeInTheDocument(),
     );
     expect(menuButton).toHaveFocus();
   });
@@ -92,7 +97,9 @@ describe("SiteHeader global menu", () => {
     rerender(<SiteHeader />);
 
     await waitFor(() =>
-      expect(screen.queryByRole("dialog", { name: /global navigation/i })).not.toBeInTheDocument(),
+      expect(
+        screen.queryByRole("dialog", { name: /global navigation/i }),
+      ).not.toBeInTheDocument(),
     );
     expect(menuButton).toHaveAttribute("aria-expanded", "false");
   });

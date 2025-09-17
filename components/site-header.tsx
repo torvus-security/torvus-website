@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import GlobalMenuOverlay from "@/components/global-menu-overlay";
 import { buttonClasses } from "@/components/ui/button";
@@ -61,9 +61,7 @@ export default function SiteHeader() {
                   isActive ? "text-cranberry" : "text-thunder hover:text-cranberry",
                 )}
               >
-                <span className="inline-flex items-center gap-2">
-                  {link.label}
-                </span>
+                <span className="inline-flex items-center gap-2">{link.label}</span>
                 <span
                   aria-hidden="true"
                   className={cn(

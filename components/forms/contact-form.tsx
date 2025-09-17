@@ -33,7 +33,10 @@ export function ContactForm() {
       noValidate
       className="relative space-y-6 rounded-3xl border border-storm/12 bg-white/85 p-8 shadow-soft-1"
     >
-      <div className="pointer-events-none absolute inset-0 rounded-3xl bg-grad-panel opacity-60" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute inset-0 rounded-3xl bg-grad-panel opacity-60"
+        aria-hidden="true"
+      />
       <div className="relative grid gap-6 sm:grid-cols-2">
         <Field label="Name" name="name">
           <input

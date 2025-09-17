@@ -1,9 +1,9 @@
 import { ShieldCheck, Waypoints, Zap } from "lucide-react";
 
+import { IconChip } from "@/components/icon-chip";
+import { Check } from "@/components/icons";
 import { SectionIntro } from "@/components/section-intro";
 import { Card } from "@/components/ui/card";
-import { Check } from "@/components/icons";
-import { IconChip } from "@/components/icon-chip";
 import { createMetadata } from "@/lib/metadata";
 
 import { ProvenanceDiagram } from "./provenance-diagram";
@@ -178,7 +178,10 @@ export default function SecurityPage() {
       </section>
 
       <div className="py-6">
-        <div className="mx-auto h-px w-full max-w-5xl bg-grad-divider opacity-50" aria-hidden="true" />
+        <div
+          className="mx-auto h-px w-full max-w-5xl bg-grad-divider opacity-50"
+          aria-hidden="true"
+        />
       </div>
 
       <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">

@@ -3,7 +3,11 @@
     "collect": {
       "numberOfRuns": 1,
       "startServerCommand": "pnpm dev",
-      "url": ["http://localhost:3000/", "http://localhost:3000/security", "http://localhost:3000/features"]
+      "url": [
+        "http://localhost:3000/",
+        "http://localhost:3000/security",
+        "http://localhost:3000/features"
+      ]
     },
     "assert": {
       "preset": "lighthouse:recommended",

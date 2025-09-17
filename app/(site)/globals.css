@@ -20,16 +20,48 @@
   --radius-2xl: 1.75rem;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --grad-hero:
-    radial-gradient(120% 100% at 65% 5%, rgba(38, 97, 156, 0.2) 0%, rgba(11, 18, 32, 0) 60%),
-    radial-gradient(80% 70% at 0% 100%, rgba(214, 31, 105, 0.16) 0%, rgba(11, 18, 32, 0) 60%),
-    radial-gradient(70% 70% at 90% 90%, rgba(26, 174, 159, 0.12) 0%, rgba(11, 18, 32, 0) 55%);
-  --grad-panel: linear-gradient(180deg, rgba(230, 236, 242, 0.55) 0%, rgba(255, 255, 255, 0) 60%);
-  --grad-divider: conic-gradient(from 140deg at 50% 50%, rgba(38, 97, 156, 0.16) 0deg, rgba(26, 174, 159, 0) 110deg, rgba(38, 97, 156, 0.16) 220deg, rgba(26, 174, 159, 0) 360deg);
+    radial-gradient(
+      120% 100% at 65% 5%,
+      rgba(38, 97, 156, 0.2) 0%,
+      rgba(11, 18, 32, 0) 60%
+    ),
+    radial-gradient(
+      80% 70% at 0% 100%,
+      rgba(214, 31, 105, 0.16) 0%,
+      rgba(11, 18, 32, 0) 60%
+    ),
+    radial-gradient(
+      70% 70% at 90% 90%,
+      rgba(26, 174, 159, 0.12) 0%,
+      rgba(11, 18, 32, 0) 55%
+    );
+  --grad-panel: linear-gradient(
+    180deg,
+    rgba(230, 236, 242, 0.55) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  --grad-divider: conic-gradient(
+    from 140deg at 50% 50%,
+    rgba(38, 97, 156, 0.16) 0deg,
+    rgba(26, 174, 159, 0) 110deg,
+    rgba(38, 97, 156, 0.16) 220deg,
+    rgba(26, 174, 159, 0) 360deg
+  );
   --texture-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)'/%3E%3C/svg%3E");
   --section-bg: var(--color-white);
   --section-foreground: var(--color-thunder);
-  --scrim-light: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0) 100%);
-  --scrim-dark: linear-gradient(180deg, rgba(11, 18, 32, 0.72) 0%, rgba(11, 18, 32, 0.56) 40%, rgba(11, 18, 32, 0) 100%);
+  --scrim-light: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.7) 45%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --scrim-dark: linear-gradient(
+    180deg,
+    rgba(11, 18, 32, 0.72) 0%,
+    rgba(11, 18, 32, 0.56) 40%,
+    rgba(11, 18, 32, 0) 100%
+  );
   --fz-display: clamp(38px, 5.5vw, 58px);
   --lh-display: 1.08;
   --fz-h1: clamp(30px, 4vw, 42px);
@@ -325,7 +357,8 @@ select:focus-visible {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: repeating-linear-gradient(
+  background-image:
+    repeating-linear-gradient(
       0deg,
       rgba(229, 231, 235, 0.08) 0px,
       rgba(229, 231, 235, 0.08) 1px,
@@ -400,7 +433,11 @@ select:focus-visible {
 [data-card-list="ab"] > *[data-card-variant="auto"]:nth-child(even) {
   --card-bg: rgba(229, 231, 235, 0.58);
   --card-border: rgba(38, 97, 156, 0.2);
-  --card-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 65%);
+  --card-overlay: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0) 65%
+  );
   --card-overlay-opacity: 1;
   --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
   --card-hover-shadow: var(--shadow-soft-2);

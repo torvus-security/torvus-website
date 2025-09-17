@@ -55,7 +55,7 @@ export default function HomePage() {
           aria-hidden="true"
         />
         <div className="container relative flex flex-col gap-16 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center">
-          <div className="order-2 space-y-8 rounded-xl border border-white/30 bg-white/85 p-6 shadow-[0_12px_40px_rgba(11,18,32,0.12)] lg:order-1 lg:mr-10">
+          <div className="order-2 space-y-7 rounded-xl border border-white/60 bg-white p-7 shadow-[0_20px_50px_rgba(11,18,32,0.12)] lg:order-1 lg:mr-14">
             <p className="text-[0.95rem] font-semibold uppercase tracking-[0.26em] text-cranberry/80">
               Policy-based vaulting
             </p>
@@ -70,17 +70,6 @@ export default function HomePage() {
               <PrimarySubtleLink href="/waitlist" className="whitespace-nowrap">
                 Join the waitlist
               </PrimarySubtleLink>
-              <Link
-                href="/features"
-                className={buttonClasses({
-                  variant: "secondary",
-                  size: "lg",
-                  className:
-                    "whitespace-nowrap focus-visible:ring-offset-storm hover:underline",
-                })}
-              >
-                View the platform
-              </Link>
             </div>
             <p className="max-w-[65ch] text-[0.95rem] text-thunder">
               Built with zero-knowledge encryption, Australian Privacy Principles, and
@@ -218,12 +207,12 @@ export default function HomePage() {
 
       <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">
         <div className="container">
-          <div className="rounded-xl border border-storm/15 bg-storm text-white p-6 shadow-soft-2 md:p-8">
-            <div className="max-w-[65ch] space-y-6">
-              <h2 className="page-title-gradient text-h2 font-semibold">
+          <div className="rounded-xl border border-storm/15 bg-[#0B1220] text-white p-6 shadow-soft-2 md:p-8">
+            <div className="max-w-[65ch] space-y-6 text-white/90">
+              <h2 className="page-title-gradient text-h2 font-semibold text-white">
                 Plan for red lines without compromising today.
               </h2>
-              <p className="text-lead text-white">
+              <p className="text-lead">
                 Torvus aligns security, legal, and operational leadership around one
                 policy: when conditions are met, releases happen with proof; otherwise
                 nothing leaves the vault.

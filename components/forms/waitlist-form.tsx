@@ -82,7 +82,7 @@ export function WaitlistForm() {
       <div>
         <label
           htmlFor="waitlist-notes"
-          className="block text-small font-semibold text-storm/80"
+          className="block text-small font-semibold text-storm"
         >
           Additional context (optional)
         </label>
@@ -95,13 +95,13 @@ export function WaitlistForm() {
         />
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-small text-thunder/70">
+        <p className="text-small text-thunder">
           Joining the waitlist keeps you in the loop on private beta milestones. We store
           only what you submit.
         </p>
         <SubmitButton idleText="Request access" pendingText="Submitting…" />
       </div>
-      <div aria-live="polite" className="text-small text-thunder/80">
+      <div aria-live="polite" className="text-small text-thunder">
         {state.message}
       </div>
       <input type="hidden" name="submittedAt" value={submittedAt} />
@@ -129,7 +129,7 @@ function Field({ label, name, children }: FieldProps) {
   return (
     <div>
       <label
-        className="block text-small font-semibold text-storm/80"
+        className="block text-small font-semibold text-storm"
         htmlFor={`waitlist-${name}`}
       >
         {label}
@@ -152,7 +152,7 @@ function SubmitButton({
     <button
       type="submit"
       className={cn(
-        buttonClasses({ variant: "primary", size: "lg" }),
+        buttonClasses({ variant: "primary", size: "lg", className: "min-w-[180px] sm:whitespace-nowrap" }),
         pending && "opacity-60",
       )}
       disabled={pending}

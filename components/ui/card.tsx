@@ -2,19 +2,23 @@ import { forwardRef, type HTMLAttributes } from "react";
 
 import { cn } from "@/lib/utils";
 
-type CardVariant = "a" | "b" | "auto" | "emphasis";
+type CardVariant = "a" | "b" | "auto";
+type CardTone = "neutral" | "info" | "success" | "danger";
 
 type CardProps = HTMLAttributes<HTMLDivElement> & {
   variant?: CardVariant;
+  tone?: CardTone;
 };
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ className, variant = "auto", ...props }, ref) => {
+  ({ className, variant = "auto", tone = "neutral", ...props }, ref) => {
     return (
       <div
         ref={ref}
-        data-card-surface={variant}
-        className={cn("card-surface flex flex-col gap-4", className)}
+        data-card="true"
+        data-card-variant={variant}
+        data-card-tone={tone !== "neutral" ? tone : undefined}
+        className={cn("flex flex-col gap-5", className)}
         {...props}
       />
     );
@@ -39,6 +43,6 @@ export function CardTitle({ className, ...props }: CardTitleProps) {
 
 export function CardDescription({ className, ...props }: CardDescriptionProps) {
   return (
-    <p className={cn("max-w-prose text-body text-thunder/90", className)} {...props} />
+    <p className={cn("max-w-prose text-body text-thunder", className)} {...props} />
   );
 }

@@ -20,14 +20,14 @@ export default async function TermsPage() {
     <div className="pb-24">
       <article className="container space-y-6 py-16">
         <header className="space-y-2">
-          <p className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+          <p className="text-small font-semibold uppercase tracking-[0.18em] text-storm">
             Legal
           </p>
           <h1 className="text-display font-semibold text-storm">
             {frontmatter.title ?? "Terms of Use"}
           </h1>
           {updated ? (
-            <p className="text-small text-thunder/70">Last updated {updated}</p>
+            <p className="text-small text-thunder">Last updated {updated}</p>
           ) : null}
         </header>
         <div className="prose prose-slate max-w-none">{content}</div>

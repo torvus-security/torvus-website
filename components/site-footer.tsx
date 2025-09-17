@@ -39,16 +39,16 @@ export default function SiteFooter() {
                   Torvus Security
                 </span>
               </Link>
-              <p className="max-w-sm text-small text-thunder/80">
+              <p className="max-w-sm text-small text-thunder">
                 Secure digital vaulting and conditional release engineered for the moments
                 that matter most.
               </p>
             </div>
             <div className="rounded-2xl border border-storm/10 bg-mist/60 p-5">
-              <h2 className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+              <h2 className="text-small font-semibold uppercase tracking-[0.18em] text-storm">
                 Join the waitlist
               </h2>
-              <p className="mt-2 text-body text-thunder/90">
+              <p className="mt-2 text-body text-thunder">
                 We’ll keep you posted on launch milestones and private previews. No spam.
               </p>
               <Link
@@ -69,7 +69,7 @@ export default function SiteFooter() {
           <FooterColumn title="Legal" links={legalLinks} />
         </div>
 
-        <div className="flex flex-col items-start justify-between gap-4 border-t border-storm/10 pt-6 text-small text-thunder/70 sm:flex-row">
+        <div className="flex flex-col items-start justify-between gap-4 border-t border-storm/10 pt-6 text-small text-thunder sm:flex-row">
           <p>© {currentYear} Torvus Security. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-6">
             <Link href="/status" className="hover:text-storm">
@@ -96,10 +96,10 @@ type FooterColumnProps = {
 function FooterColumn({ title, links }: FooterColumnProps) {
   return (
     <div className="space-y-4">
-      <h3 className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+      <h3 className="text-small font-semibold uppercase tracking-[0.18em] text-storm">
         {title}
       </h3>
-      <ul className="space-y-3 text-body text-thunder/90">
+      <ul className="space-y-3 text-body text-thunder">
         {links.map((link) => (
           <li key={link.href}>
             <Link href={link.href} className="transition-colors hover:text-storm">

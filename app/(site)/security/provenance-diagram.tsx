@@ -1,5 +1,5 @@
-const steps = [
-  "Client-side encrypt",
+const stages = [
+  "Client-side encryption",
   "Policy sealing",
   "Oracles",
   "HSM/TEE key shares",
@@ -9,57 +9,63 @@ const steps = [
 
 export function ProvenanceDiagram() {
   return (
-    <svg
-      className="h-auto w-full max-w-4xl"
-      viewBox="0 0 900 200"
-      role="img"
-      aria-label="Client-side encrypt to policy sealing, oracles, HSM/TEE key shares, release orchestrator, recipient portal"
+    <div className="space-y-6">
+      <ol className="sr-only">
+        {stages.map((stage, index) => (
+          <li key={stage}>
+            {index + 1}. {stage}
+          </li>
+        ))}
+      </ol>
+
+      <div className="hidden items-stretch gap-4 lg:flex">
+        {stages.map((stage, index) => (
+          <FragmentedStage key={`desktop-${stage}`} label={stage} isLast={index === stages.length - 1} />
+        ))}
+      </div>
+
+      <div className="flex gap-4 overflow-x-auto pb-2 lg:hidden snap-x snap-mandatory" role="list">
+        {stages.map((stage) => (
+          <div
+            key={`mobile-${stage}`}
+            role="listitem"
+            className="snap-start"
+          >
+            <StagePill label={stage} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FragmentedStage({ label, isLast }: { label: string; isLast: boolean }) {
+  return (
+    <div className="flex items-center gap-4">
+      <StagePill label={label} />
+      {!isLast ? (
+        <div className="flex h-16 items-center" aria-hidden="true">
+          <div className="h-px w-14 bg-storm/30" />
+          <span className="ml-2 inline-flex h-8 w-8 items-center justify-center rounded-full border border-storm/25 text-storm">
+            →
+          </span>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function StagePill({ label }: { label: string }) {
+  return (
+    <div
+      className="relative flex min-w-[200px] max-w-[220px] items-center gap-3 rounded-full border border-mist/30 bg-[rgba(229,231,235,0.55)] px-6 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)]"
+      aria-label={label}
     >
-      <defs>
-        <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="rgba(38, 97, 156, 0.15)" />
-          <stop offset="100%" stopColor="rgba(26, 174, 159, 0.25)" />
-        </linearGradient>
-      </defs>
-      {steps.map((label, index) => {
-        const x = 60 + index * 130;
-        return (
-          <g key={label} transform={`translate(${x}, 70)`}>
-            <rect
-              width="140"
-              height="60"
-              rx="18"
-              fill="url(#nodeGradient)"
-              stroke="rgba(38, 97, 156, 0.4)"
-              strokeWidth="1.5"
-            />
-            <text
-              x="70"
-              y="32"
-              textAnchor="middle"
-              fontFamily="Satoshi, system-ui"
-              fontSize="14"
-              fill="rgba(11, 18, 32, 0.85)"
-            >
-              {label}
-            </text>
-            {index < steps.length - 1 ? (
-              <g transform="translate(140, 30)">
-                <line
-                  x1="0"
-                  y1="0"
-                  x2="70"
-                  y2="0"
-                  stroke="rgba(11, 18, 32, 0.35)"
-                  strokeWidth="2"
-                  strokeDasharray="4 6"
-                />
-                <polygon points="70,0 62,-4 62,4" fill="rgba(38, 97, 156, 0.65)" />
-              </g>
-            ) : null}
-          </g>
-        );
-      })}
-    </svg>
+      <span
+        className="inline-flex h-2.5 w-2.5 flex-none rounded-full bg-lagoon"
+        aria-hidden="true"
+      />
+      <span className="text-[0.95rem] font-semibold text-thunder">{label}</span>
+    </div>
   );
 }

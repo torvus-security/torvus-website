@@ -28,13 +28,13 @@ export function SectionIntro({
       {...props}
     >
       {eyebrow ? (
-        <p className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+        <p className="text-[0.95rem] font-semibold uppercase tracking-[0.26em] text-cranberry">
           {eyebrow}
         </p>
       ) : null}
       <h2 className="max-w-3xl text-h2 font-semibold text-storm">{title}</h2>
       {description ? (
-        <p className="max-w-2xl text-lead text-thunder/90">{description}</p>
+        <p className="max-w-3xl text-lead text-thunder">{description}</p>
       ) : null}
       {children}
     </div>

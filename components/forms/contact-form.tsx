@@ -31,9 +31,10 @@ export function ContactForm() {
       ref={formRef}
       action={formAction}
       noValidate
-      className="space-y-6 rounded-3xl border border-storm/10 bg-mist/50 p-8"
+      className="relative space-y-6 rounded-3xl border border-storm/12 bg-white/85 p-8 shadow-soft-1"
     >
-      <div className="grid gap-6 sm:grid-cols-2">
+      <div className="pointer-events-none absolute inset-0 rounded-3xl bg-grad-panel opacity-60" aria-hidden="true" />
+      <div className="relative grid gap-6 sm:grid-cols-2">
         <Field label="Name" name="name">
           <input
             type="text"
@@ -41,7 +42,7 @@ export function ContactForm() {
             name="name"
             required
             autoComplete="name"
-            className="h-12 w-full rounded-2xl border border-storm/15 bg-white px-4 text-body text-storm focus:border-lapis"
+            className="h-12 w-full rounded-2xl border border-storm/15 bg-white px-4 text-body text-storm transition focus:border-lapis focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lapis/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white"
           />
         </Field>
         <Field label="Email" name="email">
@@ -51,14 +52,14 @@ export function ContactForm() {
             name="email"
             required
             autoComplete="email"
-            className="h-12 w-full rounded-2xl border border-storm/15 bg-white px-4 text-body text-storm focus:border-lapis"
+            className="h-12 w-full rounded-2xl border border-storm/15 bg-white px-4 text-body text-storm transition focus:border-lapis focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lapis/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white"
           />
         </Field>
       </div>
-      <div>
+      <div className="relative">
         <label
           htmlFor="contact-message"
-          className="block text-small font-semibold text-storm/80"
+          className="block text-small font-semibold text-storm"
         >
           Message
         </label>
@@ -68,17 +69,17 @@ export function ContactForm() {
           rows={6}
           required
           placeholder="Share context, timelines, or questions."
-          className="mt-2 w-full rounded-2xl border border-storm/15 bg-white px-4 py-3 text-body text-storm focus:border-lapis"
+          className="mt-2 w-full rounded-2xl border border-storm/15 bg-white px-4 py-3 text-body text-storm transition focus:border-lapis focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lapis/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white"
         />
       </div>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-small text-thunder/70">
-          We’ll respond within two business days. Please avoid sharing secrets or
+      <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-small text-thunder">
+          We store the minimum needed to respond. Please avoid sharing secrets or
           credentials here.
         </p>
         <SubmitButton idleText="Send message" pendingText="Sending…" />
       </div>
-      <div aria-live="polite" className="text-small text-thunder/80">
+      <div aria-live="polite" className="relative text-small text-thunder">
         {state.message}
       </div>
       <input type="hidden" name="submittedAt" value={submittedAt} />
@@ -106,7 +107,7 @@ function Field({ label, name, children }: FieldProps) {
   return (
     <div>
       <label
-        className="block text-small font-semibold text-storm/80"
+        className="block text-small font-semibold text-storm"
         htmlFor={`contact-${name}`}
       >
         {label}
@@ -129,7 +130,7 @@ function SubmitButton({
     <button
       type="submit"
       className={cn(
-        buttonClasses({ variant: "primary", size: "lg" }),
+        buttonClasses({ variant: "primary", size: "lg", className: "whitespace-nowrap" }),
         pending && "opacity-60",
       )}
       disabled={pending}

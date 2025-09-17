@@ -12,6 +12,8 @@ import { SectionIntro } from "@/components/section-intro";
 import { buttonClasses } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
+import { IconChip } from "@/components/icon-chip";
+import { Check } from "@/components/icons";
 
 import type { Metadata } from "next";
 
@@ -22,7 +24,7 @@ const sections = [
     id: "policy",
     icon: Timer,
     name: "Policy engine & automation",
-    lead: "Design rules that combine inactivity timers, approvals, and contextual signals. Preview outcomes before they go live.",
+    lead: "Compose inactivity windows, quorum approvals, and contextual signals. Preview outcomes before they go live.",
     bullets: [
       "Compose predicates from time windows, inactivity grace, quorum approvals, and external signals like attested TEE oracles.",
       "Dry-run policies with simulated scenarios, showing pass/fail reasons for each predicate before deployment.",
@@ -33,7 +35,7 @@ const sections = [
     id: "duress",
     icon: ShieldCheck,
     name: "Duress, pause, and safe fails",
-    lead: "Give operators a discreet way to halt releases, surface decoy data, or escalate without alerting a coercive actor.",
+    lead: "Freeze releases silently or hand over decoy packages while audit evidence continues to build.",
     bullets: [
       "Hardware and software duress triggers freeze releases in seconds while notifying designated responders.",
       "Safe-mode content lets teams replace sensitive data with controlled narratives when working under observation.",
@@ -44,7 +46,7 @@ const sections = [
     id: "recipients",
     icon: Fingerprint,
     name: "Recipient identity & verification",
-    lead: "Bind keys to verified recipients with passkeys first, TOTP fallback where policy demands, and optional KYC workflows.",
+    lead: "Bind recipients to verified identities. Require passkeys first with TOTP fallback only where policy demands.",
     bullets: [
       "Passkeys backed by device attestation provide phishing-resistant authentication with minimal friction.",
       "Policy-based release bundling ensures each recipient only sees the sealed material they are authorised to handle.",
@@ -55,7 +57,7 @@ const sections = [
     id: "provenance",
     icon: ClipboardCheck,
     name: "Transparency, audit, and provenance",
-    lead: "Every release generates a tamper-evident certificate showing who requested, who approved, and which controls passed.",
+    lead: "Every release records who requested, who approved, and which controls passed with tamper-evident receipts.",
     bullets: [
       "Integrity-checked audit trails stored in append-only logs replicated to customer-controlled destinations.",
       "Data lineage for uploaded assets, including hashing, classification, and optional out-of-band validation events.",
@@ -98,8 +100,9 @@ export const metadata: Metadata = createMetadata({
 export default function FeaturesPage() {
   return (
     <div id="top" className="pb-24">
-      <section className="border-b border-storm/10 bg-white py-20">
-        <div className="container space-y-8">
+      <section className="heading-band band-home relative overflow-hidden border-b border-storm/10 bg-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-grad-divider opacity-30" aria-hidden="true" />
+        <div className="container relative space-y-8">
           <SectionIntro
             eyebrow="Platform overview"
             title="Conditional-access vaulting across the lifecycle"
@@ -110,7 +113,12 @@ export default function FeaturesPage() {
                 <Link
                   key={section.id}
                   href={`#${section.id}`}
-                  className={buttonClasses({ variant: "secondary", size: "sm" })}
+                  className={buttonClasses({
+                    variant: "tertiary",
+                    size: "sm",
+                    className:
+                      "border border-lagoon/40 bg-white text-lagoon hover:border-lagoon hover:bg-lagoon/10",
+                  })}
                 >
                   {section.name}
                 </Link>
@@ -120,21 +128,27 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">
         <div className="container space-y-10">
-          <div className="ab-alt grid gap-6 md:grid-cols-2">
+          <div data-card-list="ab" className="grid gap-6 md:grid-cols-2">
             {overviewCards.map((feature) => (
               <Card key={feature.id}>
-                <CardHeader className="flex items-center gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-lapis/12 text-lapis">
+                <CardHeader className="flex items-start gap-4">
+                  <div className="inline-flex h-12 w-12 flex-none items-center justify-center rounded-full bg-cranberry/15 text-cranberry">
                     <feature.icon className="h-6 w-6" aria-hidden="true" />
                   </div>
-                  <CardTitle>{feature.name}</CardTitle>
+                  <div className="space-y-3">
+                    <CardTitle className="text-h4 font-semibold text-storm">
+                      {feature.name}
+                    </CardTitle>
+                    <CardDescription className="text-thunder">
+                      {feature.lead}
+                    </CardDescription>
+                  </div>
                 </CardHeader>
-                <CardDescription>{feature.lead}</CardDescription>
                 <Link
                   href={`#${feature.id}`}
-                  className="mt-6 inline-flex items-center gap-2 text-small font-semibold text-lapis"
+                  className="mt-6 inline-flex items-center gap-2 text-[0.95rem] font-semibold text-cranberry hover:underline"
                 >
                   Explore details
                   <span aria-hidden="true">→</span>
@@ -145,21 +159,21 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      <section className="py-10">
+      <section className="pt-[calc(var(--section-pt)*0.75)] pb-[calc(var(--section-pb)*0.75)]">
         <div className="container space-y-20">
           {sections.map((section) => (
             <article key={section.id} id={section.id} className="scroll-mt-24 space-y-6">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                 <div className="space-y-3">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-lagoon/15 text-lagoon">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-cranberry/15 text-cranberry">
                     <section.icon className="h-6 w-6" aria-hidden="true" />
                   </div>
                   <h2 className="text-h2 font-semibold text-storm">{section.name}</h2>
-                  <p className="max-w-3xl text-lead text-thunder/90">{section.lead}</p>
+                  <p className="max-w-3xl text-lead text-thunder">{section.lead}</p>
                 </div>
                 <Link
                   href="#top"
-                  className="text-small font-semibold text-lapis hover:underline"
+                  className="text-[0.95rem] font-semibold text-cranberry hover:underline"
                 >
                   Back to top
                 </Link>
@@ -168,9 +182,15 @@ export default function FeaturesPage() {
                 {section.bullets.map((item) => (
                   <li
                     key={item}
-                    className="rounded-2xl border border-storm/10 bg-mist/50 p-5 text-body text-thunder/90"
+                    className="rounded-2xl border border-storm/12 bg-white/85 p-5"
                   >
-                    {item}
+                    <IconChip
+                      tone="lagoon"
+                      icon={<Check className="h-3 w-3" />}
+                      className="text-left text-thunder"
+                    >
+                      {item}
+                    </IconChip>
                   </li>
                 ))}
               </ul>

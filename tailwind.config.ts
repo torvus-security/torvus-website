@@ -30,6 +30,11 @@ const config: Config = {
         mist: "var(--color-mist)",
         white: "var(--color-white)",
         border: "rgba(11, 18, 32, 0.1)",
+        pastel: {
+          cranberry: "var(--pastel-cranberry)",
+          lagoon: "var(--pastel-lagoon)",
+          lapis: "var(--pastel-lapis)",
+        },
       },
       fontFamily: {
         sans: [
@@ -49,13 +54,14 @@ const config: Config = {
         body: ["Erode", "system-ui", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
       },
       boxShadow: {
-        soft: "0 18px 45px rgba(11, 18, 32, 0.14)",
-        focus: "0 0 0 3px rgba(38, 97, 156, 0.35)",
+        "soft-1": "var(--shadow-soft-1)",
+        "soft-2": "var(--shadow-soft-2)",
+        focus: "var(--shadow-focus)",
       },
       borderRadius: {
         lg: "1rem",
         xl: "1.25rem",
-        "2xl": "1.75rem",
+        "2xl": "var(--radius-2xl)",
         full: "9999px",
       },
       spacing: {
@@ -66,16 +72,21 @@ const config: Config = {
       maxWidth: {
         prose: "70ch",
       },
+      backgroundImage: {
+        "grad-hero": "var(--grad-hero)",
+        "grad-panel": "var(--grad-panel)",
+        "grad-divider": "var(--grad-divider)",
+      },
       fontSize: {
-        display: ["3.5rem", { lineHeight: "1.05", letterSpacing: "-0.04em" }],
-        h1: ["3rem", { lineHeight: "1.1", letterSpacing: "-0.035em" }],
-        h2: ["2.25rem", { lineHeight: "1.15", letterSpacing: "-0.03em" }],
-        h3: ["1.75rem", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
-        h4: ["1.375rem", { lineHeight: "1.25", letterSpacing: "-0.01em" }],
-        lead: ["1.375rem", { lineHeight: "1.6", letterSpacing: "-0.01em" }],
-        body: ["1.0625rem", { lineHeight: "1.7" }],
-        small: ["0.9375rem", { lineHeight: "1.5", letterSpacing: "0" }],
-        micro: ["0.8125rem", { lineHeight: "1.45", letterSpacing: "0.02em" }],
+        display: ["var(--fz-display)", { lineHeight: "var(--lh-display)", letterSpacing: "-0.03em" }],
+        h1: ["var(--fz-h1)", { lineHeight: "var(--lh-h1)", letterSpacing: "-0.02em" }],
+        h2: ["var(--fz-h2)", { lineHeight: "var(--lh-h2)", letterSpacing: "-0.015em" }],
+        h3: ["var(--fz-h3)", { lineHeight: "var(--lh-h3)", letterSpacing: "-0.01em" }],
+        h4: ["var(--fz-h4)", { lineHeight: "var(--lh-h4)", letterSpacing: "-0.01em" }],
+        lead: ["var(--fz-lead)", { lineHeight: "var(--lh-lead)", letterSpacing: "-0.005em" }],
+        body: ["clamp(15.75px, 0.55vw + 14px, 17px)", { lineHeight: "1.6" }],
+        small: ["var(--fz-small)", { lineHeight: "1.4", letterSpacing: "0" }],
+        micro: ["var(--fz-micro)", { lineHeight: "1.4", letterSpacing: "0.01em" }],
       },
       transitionTimingFunction: {
         "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",

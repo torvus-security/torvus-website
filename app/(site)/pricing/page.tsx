@@ -3,6 +3,8 @@ import Link from "next/link";
 import { SectionIntro } from "@/components/section-intro";
 import { buttonClasses } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Check } from "@/components/icons";
+import { IconChip } from "@/components/icon-chip";
 import { createMetadata } from "@/lib/metadata";
 
 import type { Metadata } from "next";
@@ -49,8 +51,9 @@ export const metadata: Metadata = createMetadata({
 export default function PricingPage() {
   return (
     <div className="pb-24">
-      <section className="border-b border-storm/10 bg-white py-20">
-        <div className="container space-y-8">
+      <section className="heading-band band-pricing relative overflow-hidden border-b border-storm/10 bg-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-grad-divider opacity-30" aria-hidden="true" />
+        <div className="container relative space-y-8">
           <SectionIntro
             eyebrow="Pricing"
             title="Private beta pricing is in motion"
@@ -58,7 +61,7 @@ export default function PricingPage() {
           >
             <Link
               href="/waitlist"
-              className={buttonClasses({ variant: "primary", size: "lg" })}
+              className={buttonClasses({ variant: "primary", size: "lg", className: "whitespace-nowrap" })}
             >
               Join the waitlist
             </Link>
@@ -66,24 +69,48 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="container grid gap-6 md:grid-cols-3">
-          {tiers.map((tier) => (
-            <Card key={tier.name} className="gap-4">
-              <p className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
-                {tier.name}
-              </p>
-              <p className="text-body text-thunder/80">{tier.audience}</p>
-              <ul className="space-y-2 text-body text-thunder/90">
-                {tier.highlights.map((item) => (
-                  <li key={item}>• {item}</li>
-                ))}
-              </ul>
-              <p className="text-small text-thunder/60">
-                Pricing announced with GA launch.
-              </p>
-            </Card>
-          ))}
+      <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">
+        <div className="container space-y-8">
+          <div data-card-list="ab" className="grid gap-6 md:grid-cols-3">
+            {tiers.map((tier) => (
+              <Card key={tier.name}>
+                <div className="flex items-center justify-between">
+                  <p className="text-[0.85rem] font-semibold uppercase tracking-[0.26em] text-cranberry">
+                    {tier.name}
+                  </p>
+                  <span className="inline-flex h-1.5 w-10 rounded-full bg-cranberry" aria-hidden="true" />
+                </div>
+                <p className="text-[1.05rem] text-thunder">{tier.audience}</p>
+                <div className="space-y-2 text-[1.02rem] text-thunder">
+                  {tier.highlights.map((item, index) => (
+                    <IconChip
+                      key={item}
+                      tone={index % 2 === 0 ? "lagoon" : "lapis"}
+                      icon={<Check className="h-3 w-3" />}
+                      className="w-full justify-start"
+                    >
+                      {item}
+                    </IconChip>
+                  ))}
+                </div>
+                <p className="text-[0.95rem] text-thunder">
+                  Pricing announced with GA launch.
+                </p>
+              </Card>
+            ))}
+          </div>
+          <div className="flex justify-center">
+            <Link
+              href="/contact"
+              className={buttonClasses({
+                variant: "primary",
+                size: "lg",
+                className: "whitespace-nowrap",
+              })}
+            >
+              Talk with Torvus about rollout
+            </Link>
+          </div>
         </div>
       </section>
     </div>

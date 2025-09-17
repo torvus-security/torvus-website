@@ -2,6 +2,8 @@ import { ShieldCheck, Waypoints, Zap } from "lucide-react";
 
 import { SectionIntro } from "@/components/section-intro";
 import { Card } from "@/components/ui/card";
+import { Check } from "@/components/icons";
+import { IconChip } from "@/components/icon-chip";
 import { createMetadata } from "@/lib/metadata";
 
 import { ProvenanceDiagram } from "./provenance-diagram";
@@ -137,44 +139,71 @@ export const metadata: Metadata = createMetadata({
 export default function SecurityPage() {
   return (
     <div className="pb-24">
-      <section className="border-b border-storm/10 bg-white py-20">
+      <section className="heading-band band-security border-b border-storm/10 bg-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
         <div className="container space-y-8">
           <SectionIntro
             eyebrow="Security overview"
             title="Policy, encryption, and provenance that assume compromise"
-            description="Torvus is engineered so no single actor—including us—can leak your data. Encryption happens before ingestion, policies govern every unwrap, and audit evidence is built-in."
           >
-            <p className="text-small text-thunder/70">
-              Contact security@torvus.security for detailed control matrices, SIGs, and
-              attestation packages.
-            </p>
+            <div className="mt-4 grid gap-2 text-[0.95rem] text-thunder">
+              {[
+                {
+                  copy: "No single actor—including us—can leak your data.",
+                  tone: "cranberry" as const,
+                },
+                {
+                  copy: "Client-side encryption before ingestion; Torvus never sees plaintext.",
+                  tone: "lagoon" as const,
+                },
+                {
+                  copy: "Policies govern every unwrap; operators cannot bypass them.",
+                  tone: "lapis" as const,
+                },
+                {
+                  copy: "Audit evidence is built-in for independent verification.",
+                  tone: "lagoon" as const,
+                },
+              ].map(({ copy, tone }) => (
+                <IconChip key={copy} tone={tone} icon={<Check className="h-3 w-3" />}>
+                  {copy}
+                </IconChip>
+              ))}
+              <p className="text-[0.95rem] text-thunder">
+                Contact security@torvus.security for detailed control matrices, SIGs, and
+                attestation packages.
+              </p>
+            </div>
           </SectionIntro>
         </div>
       </section>
 
-      <section className="py-16">
+      <div className="py-6">
+        <div className="mx-auto h-px w-full max-w-5xl bg-grad-divider opacity-50" aria-hidden="true" />
+      </div>
+
+      <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">
         <div className="container space-y-10">
           <h2 className="text-h3 font-semibold text-storm">Architecture overview</h2>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div data-card-list="ab" className="grid gap-6 md:grid-cols-3">
             {architecture.map((item) => (
-              <Card key={item.title} className="gap-4" data-card-surface="auto">
-                <p className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+              <Card key={item.title}>
+                <p className="text-[0.85rem] font-semibold uppercase tracking-[0.24em] text-cranberry/75">
                   {item.title}
                 </p>
-                <p className="text-body text-thunder/90">{item.body}</p>
+                <p className="text-body text-thunder">{item.body}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">
         <div className="container space-y-10">
           <div className="space-y-4">
             <h2 className="text-h3 font-semibold text-storm">
               Encryption & key management
             </h2>
-            <p className="max-w-3xl text-body text-thunder/80">
+            <p className="max-w-3xl text-lead text-thunder">
               Torvus treats keys as policy-bound artefacts. Client devices derive data
               keys, seal them to policy, then store ciphertext. Release orchestration
               requires quorum validation and leaves a provenance trail you can
@@ -184,27 +213,27 @@ export default function SecurityPage() {
           <div className="overflow-x-auto rounded-3xl border border-storm/10 bg-white p-6">
             <ProvenanceDiagram />
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div data-card-list="ab" className="grid gap-6 md:grid-cols-2">
             {encryption.map((item) => (
-              <Card key={item.title} className="gap-3">
-                <p className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+              <Card key={item.title}>
+                <p className="text-[0.85rem] font-semibold uppercase tracking-[0.24em] text-cranberry/75">
                   {item.title}
                 </p>
-                <p className="text-body text-thunder/90">{item.body}</p>
+                <p className="text-body text-thunder">{item.body}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">
         <div className="container space-y-10">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="space-y-3">
               <h2 className="text-h3 font-semibold text-storm">
                 Identity & access assurance
               </h2>
-              <p className="max-w-3xl text-body text-thunder/80">
+              <p className="max-w-3xl text-lead text-thunder">
                 Authentication is phishing-resistant by default, with policy-tuned
                 fallback paths only where necessary. Sessions are monitored for anomalies,
                 and emergency access requires multi-party proof.
@@ -214,110 +243,110 @@ export default function SecurityPage() {
               {[ShieldCheck, Zap, Waypoints].map((Icon, index) => (
                 <div
                   key={index}
-                  className="flex h-16 w-16 items-center justify-center rounded-full bg-lagoon/15 text-lagoon"
+                  className="flex h-16 w-16 items-center justify-center rounded-full bg-cranberry/15 text-cranberry"
                 >
                   <Icon className="h-7 w-7" aria-hidden="true" />
                 </div>
               ))}
             </div>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div data-card-list="ab" className="grid gap-6 md:grid-cols-3">
             {identity.map((item) => (
-              <Card key={item.title} className="gap-3">
-                <p className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+              <Card key={item.title}>
+                <p className="text-[0.85rem] font-semibold uppercase tracking-[0.24em] text-cranberry/75">
                   {item.title}
                 </p>
-                <p className="text-body text-thunder/90">{item.body}</p>
+                <p className="text-body text-thunder">{item.body}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">
         <div className="container space-y-10">
           <div className="space-y-3">
             <h2 className="text-h3 font-semibold text-storm">
               Duress & liveness controls
             </h2>
-            <p className="max-w-3xl text-body text-thunder/80">
+            <p className="max-w-3xl text-lead text-thunder">
               Operators can act under pressure without leaking intent. Pauses, decoys, and
               liveness checks provide breathing room while preserving evidence.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div data-card-list="ab" className="grid gap-6 md:grid-cols-3">
             {duress.map((item) => (
-              <Card key={item.title} className="gap-3" data-card-surface="b">
-                <p className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+              <Card key={item.title}>
+                <p className="text-[0.85rem] font-semibold uppercase tracking-[0.24em] text-cranberry/75">
                   {item.title}
                 </p>
-                <p className="text-body text-thunder/90">{item.body}</p>
+                <p className="text-body text-thunder">{item.body}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">
         <div className="container space-y-10">
           <div className="space-y-3">
             <h2 className="text-h3 font-semibold text-storm">
               Transparency, audit & provenance
             </h2>
-            <p className="max-w-3xl text-body text-thunder/80">
+            <p className="max-w-3xl text-lead text-thunder">
               Releases produce evidence automatically. You choose where to mirror logs and
               who can verify them, ensuring partners and regulators see exactly what
               happened.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div data-card-list="ab" className="grid gap-6 md:grid-cols-3">
             {transparency.map((item) => (
-              <Card key={item.title} className="gap-3">
-                <p className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+              <Card key={item.title}>
+                <p className="text-[0.85rem] font-semibold uppercase tracking-[0.24em] text-cranberry/75">
                   {item.title}
                 </p>
-                <p className="text-body text-thunder/90">{item.body}</p>
+                <p className="text-body text-thunder">{item.body}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">
         <div className="container space-y-10">
           <div className="space-y-3">
             <h2 className="text-h3 font-semibold text-storm">Compliance stance</h2>
-            <p className="max-w-3xl text-body text-thunder/80">
+            <p className="max-w-3xl text-lead text-thunder">
               Torvus is designed to augment your compliance programme rather than replace
               it. Ask for our latest control mappings and vendor due diligence package.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div data-card-list="ab" className="grid gap-6 md:grid-cols-3">
             {compliance.map((item) => (
-              <Card key={item.title} className="gap-3">
-                <p className="text-small font-semibold uppercase tracking-[0.18em] text-storm/70">
+              <Card key={item.title}>
+                <p className="text-[0.85rem] font-semibold uppercase tracking-[0.24em] text-cranberry/75">
                   {item.title}
                 </p>
-                <p className="text-body text-thunder/90">{item.body}</p>
+                <p className="text-body text-thunder">{item.body}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20">
+      <section className="pt-[calc(var(--section-pt)*0.85)] pb-[calc(var(--section-pb)*0.85)]">
         <div className="container space-y-8">
           <h2 className="text-h3 font-semibold text-storm">FAQs</h2>
           <div className="space-y-4">
             {faqs.map((faq) => (
               <details
                 key={faq.question}
-                className="group rounded-2xl border border-storm/10 bg-mist/40 p-5 transition-colors"
+                className="group rounded-2xl border border-storm/12 bg-white/80 p-5 transition-colors"
               >
-                <summary className="cursor-pointer list-none text-small font-semibold text-storm">
+                <summary className="cursor-pointer list-none text-[1.02rem] font-semibold text-storm">
                   {faq.question}
                 </summary>
-                <p className="mt-3 text-body text-thunder/90">{faq.answer}</p>
+                <p className="mt-3 text-body text-thunder">{faq.answer}</p>
               </details>
             ))}
           </div>

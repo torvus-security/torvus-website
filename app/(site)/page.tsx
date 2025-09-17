@@ -54,12 +54,12 @@ export default function HomePage() {
           className="pointer-events-none absolute -left-32 top-12 h-64 w-64 rounded-full bg-cranberry/25 blur-[140px]"
           aria-hidden="true"
         />
-        <div className="container relative flex flex-col gap-16 lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center">
-          <div className="order-2 space-y-8 lg:order-1 relative scrim-light text-[#1F2937]">
+        <div className="container relative flex flex-col gap-16 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-center">
+          <div className="order-2 space-y-8 rounded-xl border border-white/30 bg-white/85 p-6 shadow-[0_12px_40px_rgba(11,18,32,0.12)] lg:order-1 lg:mr-10">
             <p className="text-[0.95rem] font-semibold uppercase tracking-[0.26em] text-cranberry/80">
               Policy-based vaulting
             </p>
-            <h1 className="max-w-[18ch] text-display font-semibold text-[#1F2937]">
+            <h1 className="page-title-gradient max-w-[18ch] text-display font-semibold">
               Protect people by protecting their information.
             </h1>
             <p className="max-w-[65ch] text-lead text-thunder">
@@ -220,7 +220,7 @@ export default function HomePage() {
         <div className="container">
           <div className="rounded-xl border border-storm/15 bg-storm text-white p-6 shadow-soft-2 md:p-8">
             <div className="max-w-[65ch] space-y-6">
-              <h2 className="text-h2 font-semibold">
+              <h2 className="page-title-gradient text-h2 font-semibold">
                 Plan for red lines without compromising today.
               </h2>
               <p className="text-lead text-white">

@@ -58,6 +58,7 @@ export default function PricingPage() {
             eyebrow="Pricing"
             title="Private beta pricing is in motion"
             description="We’re onboarding teams who need conditional release today. Tell us about your use case and we’ll align you with the right tier as pricing firms up."
+            className="[&>h2]:page-title-gradient"
           >
             <PrimarySubtleLink href="/waitlist" className="whitespace-nowrap">
               Request early access

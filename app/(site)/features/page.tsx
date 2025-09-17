@@ -111,6 +111,7 @@ export default function FeaturesPage() {
             eyebrow="Platform overview"
             title="Conditional-access vaulting across the lifecycle"
             description="Start with a quick summary, then dive into the areas that matter most to your team. Each section includes controls, signals, and outcomes Torvus manages for you."
+            className="[&>h2]:page-title-gradient"
           >
             <div className="mt-6 flex flex-wrap items-center gap-3">
               {sections.map((section) => (

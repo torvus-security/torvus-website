@@ -70,8 +70,8 @@ export default function Footer() {
             <Link href="/security" className="hover:underline">
               Security posture
             </Link>
-            <a href="mailto:hello@torvus.security" className="hover:underline">
-              hello@torvus.security
+            <a href="mailto:contact@torvussecurity.com.au" className="hover:underline">
+              contact@torvussecurity.com.au
             </a>
           </div>
         </div>

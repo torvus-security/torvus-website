@@ -72,7 +72,7 @@ export default function DigitalLegacyPage() {
           aria-hidden="true"
         />
         <div className="container relative flex flex-col gap-16 lg:grid lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:items-center">
-          <div className="order-2 space-y-8 lg:order-2 relative scrim-light">
+          <div className="order-2 space-y-8 relative scrim-light bg-white/90 p-6 rounded-xl lg:order-1 lg:mr-12">
             <div className="flex flex-col gap-4">
               <p className="text-[0.95rem] font-semibold uppercase tracking-[0.26em] text-cranberry">
                 Digital Legacy

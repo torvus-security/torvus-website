@@ -1,8 +1,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
+import { createElement, type ComponentProps } from "react";
 import remarkGfm from "remark-gfm";
 
 const LEGAL_DIR = path.join(process.cwd(), "content/legal");
@@ -12,6 +14,22 @@ type LegalFrontmatter = {
   updated?: string;
 };
 
+const mdxComponents = {
+  Link: (props: ComponentProps<typeof NextLink>) => createElement(NextLink, props),
+  a: ({ href = "", ...props }: ComponentProps<"a">) => {
+    if (href.startsWith("http")) {
+      return createElement("a", {
+        href,
+        rel: props.rel ?? "noreferrer",
+        target: props.target ?? "_blank",
+        ...props,
+      });
+    }
+
+    return createElement(NextLink, { href, ...props });
+  },
+};
+
 export async function loadLegalDocument(slug: string) {
   try {
     const filePath = path.join(LEGAL_DIR, `${slug}.mdx`);
@@ -19,6 +37,7 @@ export async function loadLegalDocument(slug: string) {
 
     const { frontmatter, content } = await compileMDX<LegalFrontmatter>({
       source,
+      components: mdxComponents,
       options: {
         parseFrontmatter: true,
         mdxOptions: {

@@ -8,7 +8,7 @@ import {
   waitlistInitialState,
   type WaitlistState,
 } from "@/app/(site)/waitlist/actions";
-import { buttonClasses } from "@/components/ui/button";
+import { PrimarySoftButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function WaitlistForm() {
@@ -31,7 +31,7 @@ export function WaitlistForm() {
       ref={formRef}
       action={formAction}
       noValidate
-      className="space-y-6 rounded-3xl border border-storm/10 bg-mist/50 p-8"
+      className="space-y-6 rounded-xl border border-storm/10 bg-mist/50 p-6 md:p-6"
     >
       <div className="grid gap-6 sm:grid-cols-2">
         <Field label="Name" name="name">
@@ -41,7 +41,7 @@ export function WaitlistForm() {
             name="name"
             placeholder="Ada Lovelace"
             required
-            className="h-12 w-full rounded-2xl border border-storm/15 bg-white px-4 text-body text-storm focus:border-lapis"
+            className="h-12 w-full rounded-md border border-storm/15 bg-white px-4 text-body text-storm focus:border-lapis"
             autoComplete="name"
           />
         </Field>
@@ -52,7 +52,7 @@ export function WaitlistForm() {
             name="email"
             placeholder="you@organisation"
             required
-            className="h-12 w-full rounded-2xl border border-storm/15 bg-white px-4 text-body text-storm focus:border-lapis"
+            className="h-12 w-full rounded-md border border-storm/15 bg-white px-4 text-body text-storm focus:border-lapis"
             autoComplete="email"
           />
         </Field>
@@ -64,7 +64,7 @@ export function WaitlistForm() {
             id="waitlist-organisation"
             name="organisation"
             placeholder="Optional"
-            className="h-12 w-full rounded-2xl border border-storm/15 bg-white px-4 text-body text-storm focus:border-lapis"
+            className="h-12 w-full rounded-md border border-storm/15 bg-white px-4 text-body text-storm focus:border-lapis"
             autoComplete="organization"
           />
         </Field>
@@ -74,7 +74,7 @@ export function WaitlistForm() {
             id="waitlist-focus"
             name="focus"
             placeholder="Digital legacy, investigations, critical response..."
-            className="h-12 w-full rounded-2xl border border-storm/15 bg-white px-4 text-body text-storm focus:border-lapis"
+            className="h-12 w-full rounded-md border border-storm/15 bg-white px-4 text-body text-storm focus:border-lapis"
             autoComplete="off"
           />
         </Field>
@@ -91,7 +91,7 @@ export function WaitlistForm() {
           name="intent"
           placeholder="Share scenarios, requirements, or timelines."
           rows={4}
-          className="mt-2 w-full rounded-2xl border border-storm/15 bg-white px-4 py-3 text-body text-storm focus:border-lapis"
+          className="mt-2 w-full rounded-md border border-storm/15 bg-white px-4 py-3 text-body text-storm focus:border-lapis"
         />
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -149,19 +149,12 @@ function SubmitButton({
   const { pending } = useFormStatus();
 
   return (
-    <button
+    <PrimarySoftButton
       type="submit"
-      className={cn(
-        buttonClasses({
-          variant: "primary",
-          size: "lg",
-          className: "min-w-[180px] sm:whitespace-nowrap",
-        }),
-        pending && "opacity-60",
-      )}
+      className={cn("min-w-[180px] sm:whitespace-nowrap", pending && "opacity-60")}
       disabled={pending}
     >
       {pending ? pendingText : idleText}
-    </button>
+    </PrimarySoftButton>
   );
 }

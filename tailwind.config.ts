@@ -20,6 +20,14 @@ const config: Config = {
         xl: "4rem",
       },
     },
+    borderRadius: {
+      sm: "6px",
+      md: "10px",
+      lg: "12px",
+      xl: "14px",
+      "2xl": "18px",
+      full: "9999px",
+    },
     extend: {
       colors: {
         storm: "var(--color-storm)",
@@ -57,12 +65,6 @@ const config: Config = {
         "soft-1": "var(--shadow-soft-1)",
         "soft-2": "var(--shadow-soft-2)",
         focus: "var(--shadow-focus)",
-      },
-      borderRadius: {
-        lg: "1rem",
-        xl: "1.25rem",
-        "2xl": "var(--radius-2xl)",
-        full: "9999px",
       },
       spacing: {
         18: "4.5rem",

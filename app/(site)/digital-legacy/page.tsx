@@ -7,10 +7,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-import DevicePhone from "@/components/device-phone";
+import DevicePhoneV0 from "@/components/device-phone-v0";
 import { IconChip } from "@/components/icon-chip";
-import { Check } from "@/components/icons";
-import { buttonClasses } from "@/components/ui/button";
+import { PrimarySoftLink, buttonClasses } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
 
@@ -81,23 +80,19 @@ export default function DigitalLegacyPage() {
               <h1 className="max-w-[20ch] text-display font-semibold text-storm">
                 Handover what matters with proof, empathy, and control
               </h1>
-              <p className="max-w-[60ch] text-lead text-thunder">
+              <p className="max-w-[65ch] text-lead text-thunder">
                 Torvus Digital Legacy orchestrates estate logistics when you’re
                 gone—without sacrificing the privacy your work requires today. Executors
                 receive clarity, while intent and audit trails stay intact.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link
+              <PrimarySoftLink
                 href="/waitlist"
-                className={buttonClasses({
-                  variant: "primary",
-                  size: "lg",
-                  className: "min-w-[180px] sm:whitespace-nowrap",
-                })}
+                className="min-w-[180px] sm:whitespace-nowrap"
               >
                 Request early access
-              </Link>
+              </PrimarySoftLink>
               <Link
                 href="/contact"
                 className={buttonClasses({
@@ -109,33 +104,45 @@ export default function DigitalLegacyPage() {
                 Talk with our team
               </Link>
             </div>
-            <p className="text-[0.95rem] text-thunder">
+            <p className="max-w-[65ch] text-[0.95rem] text-thunder">
               Co-designing with estate planners, fiduciaries, and digital security teams.
             </p>
             <div className="mt-6 grid gap-2 text-[0.95rem] text-thunder">
               {[
-                "Asset inventory and intent capture.",
-                "Executor collaboration with checklists.",
-                "Death-verification predicates and estate mode orchestration.",
-                "Optional threshold key handover.",
-              ].map((item) => (
-                <IconChip key={item} tone="lagoon" icon={<Check className="h-3 w-3" />}>
-                  {item}
+                {
+                  copy: "Asset inventory and intent capture",
+                  icon: "key" as const,
+                },
+                {
+                  copy: "Executor collaboration with checklists",
+                  icon: "users" as const,
+                },
+                {
+                  copy: "Death-verification predicates and estate mode orchestration",
+                  icon: "timer" as const,
+                },
+                {
+                  copy: "Optional threshold key handover",
+                  icon: "shield" as const,
+                },
+              ].map(({ copy, icon }) => (
+                <IconChip key={copy} tone="lagoon" icon={icon}>
+                  {copy}
                 </IconChip>
               ))}
             </div>
           </div>
           <div className="order-1 flex flex-col items-center gap-8 lg:order-1 lg:items-start">
-            <div className="relative flex w-full max-w-[360px] justify-center rounded-[2.9rem] border border-storm/12 bg-white p-8 shadow-soft-2">
+            <div className="relative flex w-full max-w-[320px] justify-center rounded-xl border border-storm/15 bg-white/80 p-6 shadow-soft-2">
               <div
-                className="pointer-events-none absolute inset-0 rounded-[2.9rem] bg-[linear-gradient(145deg,rgba(214,31,105,0.12),rgba(26,174,159,0.12),rgba(38,97,156,0.15))] opacity-75"
+                className="pointer-events-none absolute inset-0 rounded-xl bg-[linear-gradient(145deg,rgba(214,31,105,0.12),rgba(26,174,159,0.12),rgba(38,97,156,0.15))] opacity-75"
                 aria-hidden="true"
               />
-              <DevicePhone scheme="light" accent="lagoon" float />
+              <DevicePhoneV0 scheme="light" accent="lagoon" />
             </div>
-            <div className="relative w-full max-w-[360px] overflow-hidden rounded-2xl border border-storm/12 bg-white p-7 shadow-soft-1">
+            <div className="relative w-full max-w-[320px] overflow-hidden rounded-lg border border-storm/15 bg-white/90 p-6 shadow-soft-1">
               <div
-                className="pointer-events-none absolute inset-0 bg-grad-panel opacity-65"
+                className="pointer-events-none absolute inset-0 bg-grad-panel opacity-60"
                 aria-hidden="true"
               />
               <div className="relative space-y-3">
@@ -154,7 +161,7 @@ export default function DigitalLegacyPage() {
                     <IconChip
                       key={item}
                       tone={index === 0 ? "lagoon" : index === 1 ? "lapis" : "cranberry"}
-                      icon={<Check className="h-3 w-3" />}
+                      icon="check"
                       className="text-left"
                     >
                       {item}
@@ -174,7 +181,7 @@ export default function DigitalLegacyPage() {
             {scope.map((item) => (
               <Card key={item.title}>
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-cranberry/15 text-cranberry">
-                  <item.icon className="h-6 w-6" aria-hidden="true" />
+                  <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-h4 font-semibold text-storm">{item.title}</h3>
                 <p className="text-body text-thunder">{item.body}</p>
@@ -186,7 +193,7 @@ export default function DigitalLegacyPage() {
 
       <section className="pt-[calc(var(--section-pt)*0.85)] pb-[calc(var(--section-pb)*0.85)]">
         <div className="container space-y-8">
-          <div className="relative overflow-hidden rounded-3xl border border-storm/10 bg-white p-10 shadow-soft-1">
+          <div className="relative overflow-hidden rounded-xl border border-storm/10 bg-white p-8 shadow-soft-1">
             <div
               className="pointer-events-none absolute inset-0 bg-grad-panel opacity-60"
               aria-hidden="true"

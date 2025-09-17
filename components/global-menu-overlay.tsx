@@ -98,7 +98,7 @@ export default function GlobalMenuOverlay() {
         >
           <div
             ref={dialogRef}
-            className="mx-auto mt-16 w-[min(680px,92vw)] rounded-2xl bg-white p-6 shadow-2xl outline-none"
+            className="mx-auto mt-16 w-[min(680px,92vw)] rounded-xl bg-white p-6 shadow-2xl outline-none"
           >
             <nav className="grid gap-3 text-[16px] font-semibold text-thunder">
               <OverlayLink href="/" label="Home" onNavigate={() => setOpen(false)} />

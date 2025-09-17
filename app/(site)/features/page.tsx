@@ -21,7 +21,7 @@ const sections = [
   {
     id: "policy",
     icon: TimerIcon,
-    name: "Policy engine & automation",
+    name: "Policy engine",
     lead: "Compose inactivity windows, quorum approvals, and contextual signals. Preview outcomes before they go live.",
     bullets: [
       "Compose predicates from time windows, inactivity grace, quorum approvals, and external signals like attested TEE oracles.",
@@ -32,7 +32,7 @@ const sections = [
   {
     id: "duress",
     icon: Shield,
-    name: "Duress, pause, and safe fails",
+    name: "Duress & decoys",
     lead: "Freeze releases silently or hand over decoy packages while audit evidence continues to build.",
     bullets: [
       "Hardware and software duress triggers freeze releases in seconds while notifying designated responders.",
@@ -43,7 +43,7 @@ const sections = [
   {
     id: "recipients",
     icon: UsersIcon,
-    name: "Recipient identity & verification",
+    name: "Recipient verification",
     lead: "Bind recipients to verified identities. Require passkeys first with TOTP fallback only where policy demands.",
     bullets: [
       "Passkeys backed by device attestation provide phishing-resistant authentication with minimal friction.",
@@ -54,7 +54,7 @@ const sections = [
   {
     id: "provenance",
     icon: Check,
-    name: "Transparency, audit, and provenance",
+    name: "Audit & provenance",
     lead: "Every release records who requested, who approved, and which controls passed with tamper-evident receipts.",
     bullets: [
       "Integrity-checked audit trails stored in append-only logs replicated to customer-controlled destinations.",
@@ -98,7 +98,7 @@ export const metadata: Metadata = createMetadata({
 export default function FeaturesPage() {
   return (
     <div id="top" className="pb-24">
-      <section className="heading-band band-home relative overflow-hidden border-b border-storm/10 bg-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
+      <section className="heading-band band-features relative overflow-hidden border-b border-storm/10 bg-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-grad-divider opacity-30"
           aria-hidden="true"
@@ -136,7 +136,11 @@ export default function FeaturesPage() {
               <Card key={feature.id}>
                 <CardHeader className="flex items-start gap-4">
                   <div className="inline-flex h-12 w-12 flex-none items-center justify-center rounded-full bg-cranberry/15 text-cranberry">
-                    <feature.icon className="h-6 w-6" aria-hidden="true" />
+                    <feature.icon
+                      className="h-6 w-6"
+                      aria-hidden="true"
+                      strokeWidth={1.5}
+                    />
                   </div>
                   <div className="space-y-3">
                     <CardTitle className="text-h4 font-semibold text-storm">
@@ -167,7 +171,11 @@ export default function FeaturesPage() {
               <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                 <div className="space-y-3">
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-cranberry/15 text-cranberry">
-                    <section.icon className="h-6 w-6" aria-hidden="true" />
+                    <section.icon
+                      className="h-6 w-6"
+                      aria-hidden="true"
+                      strokeWidth={1.5}
+                    />
                   </div>
                   <h2 className="text-h2 font-semibold text-storm">{section.name}</h2>
                   <p className="max-w-3xl text-lead text-thunder">{section.lead}</p>
@@ -180,14 +188,14 @@ export default function FeaturesPage() {
                 </Link>
               </div>
               <ul className="grid gap-4 md:grid-cols-2">
-                {section.bullets.map((item) => (
+                {section.bullets.map((item, index) => (
                   <li
                     key={item}
-                    className="rounded-2xl border border-storm/12 bg-white/85 p-5"
+                    className="rounded-lg border border-storm/12 bg-white/85 p-5"
                   >
                     <IconChip
-                      tone="lagoon"
-                      icon={<Check className="h-3 w-3" />}
+                      tone={["lagoon", "cranberry", "lapis"][index % 3]}
+                      icon="check"
                       className="text-left text-thunder"
                     >
                       {item}

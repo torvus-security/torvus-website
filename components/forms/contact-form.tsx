@@ -8,7 +8,7 @@ import {
   submitContactAction,
   type ContactState,
 } from "@/app/(site)/contact/actions";
-import { buttonClasses } from "@/components/ui/button";
+import { PrimarySoftButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function ContactForm() {
@@ -31,10 +31,10 @@ export function ContactForm() {
       ref={formRef}
       action={formAction}
       noValidate
-      className="relative space-y-6 rounded-3xl border border-storm/12 bg-white/85 p-8 shadow-soft-1"
+      className="relative space-y-6 rounded-xl border border-storm/12 bg-white/85 p-6 shadow-soft-1 md:p-6"
     >
       <div
-        className="pointer-events-none absolute inset-0 rounded-3xl bg-grad-panel opacity-60"
+        className="pointer-events-none absolute inset-0 rounded-xl bg-grad-panel opacity-60"
         aria-hidden="true"
       />
       <div className="relative grid gap-6 sm:grid-cols-2">
@@ -45,7 +45,7 @@ export function ContactForm() {
             name="name"
             required
             autoComplete="name"
-            className="h-12 w-full rounded-2xl border border-storm/15 bg-white px-4 text-body text-storm transition focus:border-lapis focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lapis/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white"
+            className="h-12 w-full rounded-md border border-storm/15 bg-white px-4 text-body text-storm transition focus:border-lapis focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lapis/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white"
           />
         </Field>
         <Field label="Email" name="email">
@@ -55,7 +55,7 @@ export function ContactForm() {
             name="email"
             required
             autoComplete="email"
-            className="h-12 w-full rounded-2xl border border-storm/15 bg-white px-4 text-body text-storm transition focus:border-lapis focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lapis/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white"
+            className="h-12 w-full rounded-md border border-storm/15 bg-white px-4 text-body text-storm transition focus:border-lapis focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lapis/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white"
           />
         </Field>
       </div>
@@ -72,7 +72,7 @@ export function ContactForm() {
           rows={6}
           required
           placeholder="Share context, timelines, or questions."
-          className="mt-2 w-full rounded-2xl border border-storm/15 bg-white px-4 py-3 text-body text-storm transition focus:border-lapis focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lapis/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white"
+          className="mt-2 w-full rounded-md border border-storm/15 bg-white px-4 py-3 text-body text-storm transition focus:border-lapis focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lapis/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white"
         />
       </div>
       <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -130,15 +130,12 @@ function SubmitButton({
   const { pending } = useFormStatus();
 
   return (
-    <button
+    <PrimarySoftButton
       type="submit"
-      className={cn(
-        buttonClasses({ variant: "primary", size: "lg", className: "whitespace-nowrap" }),
-        pending && "opacity-60",
-      )}
+      className={cn(pending && "opacity-60")}
       disabled={pending}
     >
       {pending ? pendingText : idleText}
-    </button>
+    </PrimarySoftButton>
   );
 }

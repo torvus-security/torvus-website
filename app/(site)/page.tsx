@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import DevicePhone from "@/components/device-phone";
+import DevicePhoneV0 from "@/components/device-phone-v0";
 import { IconChip } from "@/components/icon-chip";
-import { Check, Key, Shield, Timer, Users } from "@/components/icons";
+import { Key, Shield, Timer, Users } from "@/components/icons";
 import { SectionIntro } from "@/components/section-intro";
-import { buttonClasses } from "@/components/ui/button";
+import { PrimarySoftLink, buttonClasses } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
 
@@ -62,21 +62,14 @@ export default function HomePage() {
             <h1 className="max-w-[18ch] text-display font-semibold text-white">
               Protect people by protecting their information.
             </h1>
-            <p className="max-w-[60ch] text-lead text-white">
+            <p className="max-w-[65ch] text-lead text-white">
               Torvus seals sensitive disclosures behind conditional policies with live
               duress controls and independently verifiable provenance.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link
-                href="/waitlist"
-                className={buttonClasses({
-                  variant: "primary",
-                  size: "lg",
-                  className: "whitespace-nowrap",
-                })}
-              >
+              <PrimarySoftLink href="/waitlist" className="whitespace-nowrap">
                 Join the waitlist
-              </Link>
+              </PrimarySoftLink>
               <Link
                 href="/features"
                 className={buttonClasses({
@@ -89,44 +82,48 @@ export default function HomePage() {
                 View the platform
               </Link>
             </div>
-            <p className="text-[0.95rem] text-white">
+            <p className="max-w-[65ch] text-[0.95rem] text-white">
               Built with zero-knowledge encryption, Australian Privacy Principles, and
               GDPR high-assurance workflows in mind.
             </p>
             <div className="mt-6 grid gap-2 text-[0.95rem]">
               {[
                 {
-                  copy: "Policy-based release with timers, approvals, and contextual checks.",
+                  copy: "Policy-based release with timers, approvals, and contextual checks",
                   tone: "cranberry" as const,
+                  icon: "timer" as const,
                 },
                 {
-                  copy: "Duress pause and decoys that don’t tip off a coercive actor.",
+                  copy: "Duress pause and decoys that don’t tip off a coercive actor",
                   tone: "lagoon" as const,
+                  icon: "shield" as const,
                 },
                 {
-                  copy: "Verified recipients using passkeys first with TOTP fallback when required.",
+                  copy: "Verified recipients using passkeys first with TOTP fallback when required",
                   tone: "lapis" as const,
+                  icon: "users" as const,
                 },
                 {
-                  copy: "Provenance certificates captured for every unwrapping event.",
+                  copy: "Provenance certificates captured for every unwrapping event",
                   tone: "lagoon" as const,
+                  icon: "check" as const,
                 },
-              ].map(({ copy, tone }) => (
-                <IconChip key={copy} tone={tone} icon={<Check className="h-3 w-3" />}>
+              ].map(({ copy, tone, icon }) => (
+                <IconChip key={copy} tone={tone} icon={icon}>
                   {copy}
                 </IconChip>
               ))}
             </div>
           </div>
           <div className="order-1 flex flex-col items-center gap-8 lg:order-2 lg:items-end">
-            <div className="relative flex w-full max-w-[360px] justify-center rounded-[2.9rem] border border-white/15 bg-white/5 p-8 shadow-soft-2 backdrop-blur">
+            <div className="relative flex w-full max-w-[320px] justify-center rounded-xl border border-white/20 bg-white/10 p-6 shadow-soft-2 backdrop-blur">
               <div
-                className="pointer-events-none absolute inset-0 rounded-[2.9rem] bg-grad-hero opacity-85"
+                className="pointer-events-none absolute inset-0 rounded-xl bg-grad-hero opacity-80"
                 aria-hidden="true"
               />
-              <DevicePhone scheme="dark" accent="cranberry" float />
+              <DevicePhoneV0 scheme="dark" accent="cranberry" />
             </div>
-            <div className="relative w-full max-w-[360px] overflow-hidden rounded-2xl border border-white/15 bg-white/10 p-8 shadow-soft-1 backdrop-blur">
+            <div className="relative w-full max-w-[320px] overflow-hidden rounded-lg border border-white/20 bg-white/10 p-6 shadow-soft-1 backdrop-blur">
               <div
                 className="pointer-events-none absolute inset-0 bg-grad-panel opacity-55"
                 aria-hidden="true"
@@ -138,34 +135,22 @@ export default function HomePage() {
                 <h2 className="text-h3 font-semibold text-white">
                   Recipients stay verified before anything unlocks
                 </h2>
-                <p className="text-[1rem] text-white">
+                <p className="max-w-[65ch] text-[1rem] text-white">
                   Passkeys and lightweight proofing confirm identities before Torvus
                   unwraps sealed keys. Every disclosure carries provenance your
                   counterparts can trust.
                 </p>
-                <ul className="space-y-2 text-[1rem] text-white">
-                  <li className="flex items-start gap-2">
-                    <span
-                      className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-lagoon"
-                      aria-hidden="true"
-                    />
+                <div className="space-y-2 text-[0.95rem] text-white">
+                  <IconChip tone="lagoon" icon="users">
                     Multi-factor retrieval with device fingerprinting
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span
-                      className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-lagoon"
-                      aria-hidden="true"
-                    />
-                    Automatic provenance certificate for every release
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span
-                      className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-lagoon"
-                      aria-hidden="true"
-                    />
-                    Checklist mode for estate executors and teams
-                  </li>
-                </ul>
+                  </IconChip>
+                  <IconChip tone="lapis" icon="check">
+                    Automatic provenance certificates for every release
+                  </IconChip>
+                  <IconChip tone="cranberry" icon="shield">
+                    Checklist mode that keeps executors aligned and accountable
+                  </IconChip>
+                </div>
               </div>
             </div>
           </div>
@@ -200,7 +185,7 @@ export default function HomePage() {
 
       <section className="relative overflow-hidden pt-[calc(var(--section-pt)*0.8)] pb-[calc(var(--section-pb)*0.8)]">
         <div
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-grad-divider opacity-60"
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-mist/40 shadow-[0_1px_0_rgba(0,0,0,0.04)_inset]"
           aria-hidden="true"
         />
         <div className="container space-y-7 text-center">
@@ -211,34 +196,30 @@ export default function HomePage() {
             Working with journalists, NGOs, and professionals protecting critical
             missions.
           </p>
-          <p className="mx-auto max-w-3xl text-lead text-thunder">
+          <p className="mx-auto max-w-[65ch] text-lead text-thunder">
             Torvus supports collaborative handover between teams, field operators,
             counsel, and investigative partners operating under pressure. Policy-driven
             approvals, duress controls, and provenance tie every release to the right
             story.
           </p>
-          <ul className="mx-auto flex max-w-2xl flex-wrap items-center justify-center gap-4 text-[0.95rem] text-thunder">
+          <div className="mx-auto flex max-w-2xl flex-wrap items-center justify-center gap-3 text-[0.95rem] text-thunder">
             {[
               "Investigative journalism units",
               "Humanitarian response teams",
               "Critical infrastructure operators",
             ].map((item) => (
-              <li key={item} className="flex items-center gap-2">
-                <span
-                  className="inline-block h-1.5 w-1.5 rounded-full bg-cranberry"
-                  aria-hidden="true"
-                />
-                <span>{item}</span>
-              </li>
+              <IconChip key={item} tone="lagoon" icon="users" className="px-4 py-1.5">
+                {item}
+              </IconChip>
             ))}
-          </ul>
+          </div>
         </div>
       </section>
 
       <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">
         <div className="container">
-          <div className="rounded-3xl border border-storm/10 bg-storm text-white p-12 shadow-soft-2 md:p-16">
-            <div className="max-w-3xl space-y-6">
+          <div className="rounded-xl border border-storm/15 bg-storm text-white p-6 shadow-soft-2 md:p-8">
+            <div className="max-w-[65ch] space-y-6">
               <h2 className="text-h2 font-semibold">
                 Plan for red lines without compromising today.
               </h2>

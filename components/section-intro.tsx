@@ -34,7 +34,7 @@ export function SectionIntro({
       ) : null}
       <h2 className="max-w-3xl text-h2 font-semibold text-storm">{title}</h2>
       {description ? (
-        <p className="max-w-3xl text-lead text-thunder">{description}</p>
+        <p className="max-w-[65ch] text-lead text-thunder">{description}</p>
       ) : null}
       {children}
     </div>

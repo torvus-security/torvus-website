@@ -1,7 +1,5 @@
-import Link from "next/link";
-
 import { SectionIntro } from "@/components/section-intro";
-import { buttonClasses } from "@/components/ui/button";
+import { PrimarySoftLink } from "@/components/ui/button";
 import { createMetadata } from "@/lib/metadata";
 
 import type { Metadata } from "next";
@@ -26,12 +24,9 @@ export default function StatusPage() {
             title="Infrastructure transparency"
             description="Live availability, maintenance notices, and incident post-mortems live on our public status page."
           >
-            <Link
-              href={STATUS_URL}
-              className={buttonClasses({ variant: "primary", size: "lg" })}
-            >
+            <PrimarySoftLink href={STATUS_URL}>
               Visit status.torvus.security
-            </Link>
+            </PrimarySoftLink>
           </SectionIntro>
         </div>
       </section>

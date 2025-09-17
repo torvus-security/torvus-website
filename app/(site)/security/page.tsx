@@ -1,7 +1,6 @@
 import { ShieldCheck, Waypoints, Zap } from "lucide-react";
 
 import { IconChip } from "@/components/icon-chip";
-import { Check } from "@/components/icons";
 import { SectionIntro } from "@/components/section-intro";
 import { Card } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
@@ -148,23 +147,27 @@ export default function SecurityPage() {
             <div className="mt-4 grid gap-2 text-[0.95rem] text-thunder">
               {[
                 {
-                  copy: "No single actor—including us—can leak your data.",
+                  copy: "No single actor—including us—can leak your data",
                   tone: "cranberry" as const,
+                  icon: "shield" as const,
                 },
                 {
-                  copy: "Client-side encryption before ingestion; Torvus never sees plaintext.",
+                  copy: "Client-side encryption before ingestion; Torvus never sees plaintext",
                   tone: "lagoon" as const,
+                  icon: "timer" as const,
                 },
                 {
-                  copy: "Policies govern every unwrap; operators cannot bypass them.",
+                  copy: "Policies govern every unwrap; operators cannot bypass them",
                   tone: "lapis" as const,
+                  icon: "key" as const,
                 },
                 {
-                  copy: "Audit evidence is built-in for independent verification.",
+                  copy: "Audit evidence is built-in for independent verification",
                   tone: "lagoon" as const,
+                  icon: "check" as const,
                 },
-              ].map(({ copy, tone }) => (
-                <IconChip key={copy} tone={tone} icon={<Check className="h-3 w-3" />}>
+              ].map(({ copy, tone, icon }) => (
+                <IconChip key={copy} tone={tone} icon={icon}>
                   {copy}
                 </IconChip>
               ))}
@@ -213,7 +216,7 @@ export default function SecurityPage() {
               independently verify.
             </p>
           </div>
-          <div className="overflow-x-auto rounded-3xl border border-storm/10 bg-white p-6">
+          <div className="overflow-x-auto rounded-xl border border-storm/10 bg-white p-6">
             <ProvenanceDiagram />
           </div>
           <div data-card-list="ab" className="grid gap-6 md:grid-cols-2">
@@ -248,7 +251,7 @@ export default function SecurityPage() {
                   key={index}
                   className="flex h-16 w-16 items-center justify-center rounded-full bg-cranberry/15 text-cranberry"
                 >
-                  <Icon className="h-7 w-7" aria-hidden="true" />
+                  <Icon className="h-7 w-7" aria-hidden="true" strokeWidth={1.5} />
                 </div>
               ))}
             </div>
@@ -344,7 +347,7 @@ export default function SecurityPage() {
             {faqs.map((faq) => (
               <details
                 key={faq.question}
-                className="group rounded-2xl border border-storm/12 bg-white/80 p-5 transition-colors"
+                className="group rounded-lg border border-storm/12 bg-white/80 p-5 transition-colors"
               >
                 <summary className="cursor-pointer list-none text-[1.02rem] font-semibold text-storm">
                   {faq.question}

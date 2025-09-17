@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { buttonClasses } from "@/components/ui/button";
+import { PrimarySoftLink } from "@/components/ui/button";
 import { primaryNavigation, secondaryNavigation } from "@/lib/navigation";
 
 const currentYear = new Date().getFullYear();
@@ -39,23 +39,16 @@ export default function SiteFooter() {
                 that matter most.
               </p>
             </div>
-            <div className="rounded-2xl border border-storm/10 bg-mist/60 p-5">
+            <div className="rounded-lg border border-storm/10 bg-mist/60 p-5">
               <h2 className="text-small font-semibold uppercase tracking-[0.18em] text-storm">
                 Join the waitlist
               </h2>
               <p className="mt-2 text-body text-thunder">
                 We’ll keep you posted on launch milestones and private previews. No spam.
               </p>
-              <Link
-                href="/waitlist"
-                className={buttonClasses({
-                  variant: "primary",
-                  size: "md",
-                  className: "mt-4 w-full sm:w-auto",
-                })}
-              >
+              <PrimarySoftLink href="/waitlist" className="mt-4 w-full sm:w-auto">
                 Join now
-              </Link>
+              </PrimarySoftLink>
             </div>
           </div>
 

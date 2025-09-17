@@ -1,9 +1,6 @@
-import Link from "next/link";
-
 import { IconChip } from "@/components/icon-chip";
-import { Check } from "@/components/icons";
 import { SectionIntro } from "@/components/section-intro";
-import { buttonClasses } from "@/components/ui/button";
+import { PrimarySoftLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
 
@@ -62,16 +59,9 @@ export default function PricingPage() {
             title="Private beta pricing is in motion"
             description="We’re onboarding teams who need conditional release today. Tell us about your use case and we’ll align you with the right tier as pricing firms up."
           >
-            <Link
-              href="/waitlist"
-              className={buttonClasses({
-                variant: "primary",
-                size: "lg",
-                className: "whitespace-nowrap",
-              })}
-            >
-              Join the waitlist
-            </Link>
+            <PrimarySoftLink href="/waitlist" className="whitespace-nowrap">
+              Request early access
+            </PrimarySoftLink>
           </SectionIntro>
         </div>
       </section>
@@ -96,7 +86,7 @@ export default function PricingPage() {
                     <IconChip
                       key={item}
                       tone={index % 2 === 0 ? "lagoon" : "lapis"}
-                      icon={<Check className="h-3 w-3" />}
+                      icon="check"
                       className="w-full justify-start"
                     >
                       {item}
@@ -110,16 +100,9 @@ export default function PricingPage() {
             ))}
           </div>
           <div className="flex justify-center">
-            <Link
-              href="/contact"
-              className={buttonClasses({
-                variant: "primary",
-                size: "lg",
-                className: "whitespace-nowrap",
-              })}
-            >
+            <PrimarySoftLink href="/contact" className="whitespace-nowrap">
               Talk with Torvus about rollout
-            </Link>
+            </PrimarySoftLink>
           </div>
         </div>
       </section>

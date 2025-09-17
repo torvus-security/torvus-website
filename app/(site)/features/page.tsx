@@ -13,9 +13,12 @@ import { buttonClasses } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
 
+import type { ChipTone } from "@/components/icon-chip";
 import type { Metadata } from "next";
 
 export const revalidate = 86400;
+
+const toneCycle: readonly ChipTone[] = ["lagoon", "cranberry", "lapis"];
 
 const sections = [
   {
@@ -194,7 +197,7 @@ export default function FeaturesPage() {
                     className="rounded-lg border border-storm/12 bg-white/85 p-5"
                   >
                     <IconChip
-                      tone={["lagoon", "cranberry", "lapis"][index % 3]}
+                      tone={toneCycle[index % toneCycle.length]}
                       icon="check"
                       className="text-left text-thunder"
                     >

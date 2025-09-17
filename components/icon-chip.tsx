@@ -74,8 +74,10 @@ const glyphs: Record<ChipGlyph, JSX.Element> = {
   ),
 };
 
+type ChipTone = "cranberry" | "lagoon" | "lapis";
+
 type IconChipProps = {
-  tone?: "cranberry" | "lagoon" | "lapis";
+  tone?: ChipTone;
   icon?: ChipGlyph | ReactElement;
   children: ReactNode;
   className?: string;
@@ -108,3 +110,5 @@ export function IconChip({ tone = "lagoon", icon, children, className }: IconChi
 function isChipGlyph(value: unknown): value is ChipGlyph {
   return typeof value === "string" && value in glyphs;
 }
+
+export type { ChipTone };

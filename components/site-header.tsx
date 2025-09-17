@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import { Brand } from "@/components/brand";
 import GlobalMenuOverlay from "@/components/global-menu-overlay";
-import { PrimarySoftLink } from "@/components/ui/button";
+import { PrimarySubtleLink } from "@/components/ui/button";
 import { primaryNavigation } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
 
@@ -72,9 +72,9 @@ export default function SiteHeader() {
           >
             Waitlist
           </Link>
-          <PrimarySoftLink href="/waitlist" className="hidden lg:inline-flex">
+          <PrimarySubtleLink href="/waitlist" className="hidden lg:inline-flex">
             Join the waitlist
-          </PrimarySoftLink>
+          </PrimarySubtleLink>
         </div>
       </div>
     </header>

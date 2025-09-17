@@ -8,7 +8,7 @@ import {
   submitContactAction,
   type ContactState,
 } from "@/app/(site)/contact/actions";
-import { PrimarySoftButton } from "@/components/ui/button";
+import { PrimarySubtleButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function ContactForm() {
@@ -130,12 +130,12 @@ function SubmitButton({
   const { pending } = useFormStatus();
 
   return (
-    <PrimarySoftButton
+    <PrimarySubtleButton
       type="submit"
       className={cn(pending && "opacity-60")}
       disabled={pending}
     >
       {pending ? pendingText : idleText}
-    </PrimarySoftButton>
+    </PrimarySubtleButton>
   );
 }

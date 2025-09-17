@@ -8,7 +8,7 @@ import {
   waitlistInitialState,
   type WaitlistState,
 } from "@/app/(site)/waitlist/actions";
-import { PrimarySoftButton } from "@/components/ui/button";
+import { PrimarySubtleButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function WaitlistForm() {
@@ -149,12 +149,12 @@ function SubmitButton({
   const { pending } = useFormStatus();
 
   return (
-    <PrimarySoftButton
+    <PrimarySubtleButton
       type="submit"
       className={cn("min-w-[180px] sm:whitespace-nowrap", pending && "opacity-60")}
       disabled={pending}
     >
       {pending ? pendingText : idleText}
-    </PrimarySoftButton>
+    </PrimarySubtleButton>
   );
 }

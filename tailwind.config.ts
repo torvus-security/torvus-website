@@ -20,15 +20,14 @@ const config: Config = {
         xl: "4rem",
       },
     },
-    borderRadius: {
-      sm: "6px",
-      md: "10px",
-      lg: "12px",
-      xl: "14px",
-      "2xl": "18px",
-      full: "9999px",
-    },
     extend: {
+      borderRadius: {
+        sm: "6px",
+        md: "10px",
+        lg: "12px",
+        xl: "14px",
+        "2xl": "18px",
+      },
       colors: {
         storm: "var(--color-storm)",
         thunder: "var(--color-thunder)",

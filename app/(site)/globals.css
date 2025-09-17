@@ -64,7 +64,7 @@
   );
   --fz-display: clamp(38px, 5.5vw, 58px);
   --lh-display: 1.08;
-  --fz-h1: clamp(28px, 3.8vw, 40px);
+  --fz-h1: clamp(28px, 3.6vw, 38px);
   --lh-h1: 1.14;
   --fz-h2: clamp(22px, 2.8vw, 32px);
   --lh-h2: 1.18;
@@ -199,7 +199,12 @@ h4,
 }
 
 .scrim-light::before {
-  background: var(--scrim-light);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.82) 40%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 .scrim-dark::before {

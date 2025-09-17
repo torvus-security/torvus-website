@@ -1,6 +1,6 @@
 import { IconChip } from "@/components/icon-chip";
 import { SectionIntro } from "@/components/section-intro";
-import { PrimarySoftLink } from "@/components/ui/button";
+import { PrimarySubtleLink } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
 
@@ -59,9 +59,9 @@ export default function PricingPage() {
             title="Private beta pricing is in motion"
             description="We’re onboarding teams who need conditional release today. Tell us about your use case and we’ll align you with the right tier as pricing firms up."
           >
-            <PrimarySoftLink href="/waitlist" className="whitespace-nowrap">
+            <PrimarySubtleLink href="/waitlist" className="whitespace-nowrap">
               Request early access
-            </PrimarySoftLink>
+            </PrimarySubtleLink>
           </SectionIntro>
         </div>
       </section>
@@ -100,9 +100,9 @@ export default function PricingPage() {
             ))}
           </div>
           <div className="flex justify-center">
-            <PrimarySoftLink href="/contact" className="whitespace-nowrap">
+            <PrimarySubtleLink href="/contact" className="whitespace-nowrap">
               Talk with Torvus about rollout
-            </PrimarySoftLink>
+            </PrimarySubtleLink>
           </div>
         </div>
       </section>

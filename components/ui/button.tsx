@@ -58,48 +58,45 @@ type InteractiveProps = {
   className?: string;
 };
 
-const primarySoftBase =
-  "group relative inline-flex items-center justify-center whitespace-nowrap rounded-full px-6 py-2.5 text-[15.5px] font-semibold tracking-[0.01em] text-white " +
-  "shadow-[0_6px_18px_rgba(214,31,105,0.22)] bg-[linear-gradient(180deg,#DE2E77_0%,#C51C5E_100%)] border border-white/20 transition-all duration-200 ease-out " +
-  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D61F69] focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:pointer-events-none disabled:opacity-60 " +
-  "hover:saturate-[1.02] hover:shadow-[0_8px_24px_rgba(214,31,105,0.28)] active:translate-y-[0.5px]";
+const primarySubtleBase =
+  "inline-flex items-center justify-center whitespace-nowrap rounded-full px-5 md:px-6 py-2 text-[15px] font-semibold text-white " +
+  "bg-[linear-gradient(180deg,#DF3A80_0%,#C62866_100%)] shadow-[0_4px_12px_rgba(214,31,105,0.16)] ring-1 ring-white/15 " +
+  "hover:shadow-[0_6px_16px_rgba(214,31,105,0.20)] active:translate-y-[0.5px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D61F69] focus-visible:ring-offset-2 " +
+  "disabled:pointer-events-none disabled:opacity-60";
 
-function PrimarySoftHighlight() {
-  return (
-    <span className="pointer-events-none absolute inset-0 rounded-full ring-1 ring-white/15">
-      <span className="absolute inset-x-1 top-0 h-2/5 rounded-full bg-white/10 blur-[6px]" />
-    </span>
-  );
-}
-
-export function PrimarySoftButton({
+export function PrimarySubtleButton({
   children,
   className,
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button {...props} className={cn(primarySoftBase, className)}>
-      <PrimarySoftHighlight />
-      <span className="relative">{children}</span>
+    <button
+      {...props}
+      className={cn(primarySubtleBase, "min-w-[160px] sm:min-w-[180px]", className)}
+    >
+      {children ?? "Join the waitlist"}
     </button>
   );
 }
 
-type PrimarySoftLinkProps = InteractiveProps &
+type PrimarySubtleLinkProps = InteractiveProps &
   Omit<ComponentProps<typeof Link>, "children" | "className" | "href"> & {
     href: string;
   };
 
-export function PrimarySoftLink({
+export function PrimarySubtleLink({
   children,
   className,
   href,
   ...props
-}: PrimarySoftLinkProps) {
+}: PrimarySubtleLinkProps) {
   return (
-    <Link href={href} className={cn(primarySoftBase, className)} {...props}>
-      <PrimarySoftHighlight />
-      <span className="relative">{children}</span>
+    <Link
+      href={href}
+      className={cn(primarySubtleBase, "min-w-[160px] sm:min-w-[180px]", className)}
+      {...props}
+    >
+      {children ?? "Join the waitlist"}
     </Link>
   );
 }

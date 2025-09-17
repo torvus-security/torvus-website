@@ -1,7 +1,7 @@
 import "./(site)/fonts.css";
 import "./(site)/globals.css";
 import "./(site)/motion.css";
-import SiteFooter from "@/components/site-footer";
+import Footer from "@/components/footer";
 import SiteHeader from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { siteConfig } from "@/lib/site-config";
@@ -57,7 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main id="main-content" className="flex-1">
           {children}
         </main>
-        <SiteFooter />
+        <Footer />
       </body>
     </html>
   );

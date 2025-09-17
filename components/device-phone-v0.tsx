@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import cn from "clsx";
 
 type Scheme = "dark" | "light";
 type Accent = "cranberry" | "lagoon" | "lapis";
@@ -18,11 +18,12 @@ export default function DevicePhoneV0({
 }) {
   const accents = { cranberry: "#D61F69", lagoon: "#1AAE9F", lapis: "#26619C" } as const;
   const accentHex = accents[accent];
+  const text = scheme === "dark" ? "#FFFFFF" : "#1F2937";
   const bg0 = scheme === "dark" ? "#0B1220" : "#FFFFFF";
   const bg1 = scheme === "dark" ? "#18263C" : "#F2F6FA";
   const bezel = scheme === "dark" ? "#D9DEE5" : "#E4E8EE";
   const cardBg = scheme === "dark" ? "rgba(7,12,22,0.92)" : "rgba(255,255,255,0.92)";
-  const cardText = scheme === "dark" ? "#E6E7EB" : "#1F2937";
+  const tint = scheme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)";
 
   return (
     <div
@@ -39,7 +40,11 @@ export default function DevicePhoneV0({
 
       <div className="absolute inset-0 rounded-[36px] border border-white/40 bg-white/10 backdrop-blur-sm shadow-[0_20px_50px_rgba(11,18,32,0.2)]" />
 
-      <svg viewBox="0 0 390 780" className="relative z-10 h-full w-full rounded-[28px]">
+      <svg
+        viewBox="0 0 390 780"
+        className="relative z-10 h-full w-full rounded-[28px]"
+        aria-hidden="true"
+      >
         <defs>
           <linearGradient id="scr" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor={bg0} />
@@ -55,40 +60,91 @@ export default function DevicePhoneV0({
 
         <rect x="150" y="36" width="90" height="20" rx="10" fill={bezel} opacity="0.9" />
 
-        <g transform="translate(95, 300)">
-          <rect width="200" height="64" rx="32" fill={cardBg} />
+        <g transform="translate(24, 80)">
+          <rect
+            width="342"
+            height="36"
+            rx="10"
+            fill={scheme === "dark" ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)"}
+          />
+          <g transform="translate(10, 9)">
+            <polygon points="8,0 16,8 8,16 0,8" fill="#D61F69" />
+            <text
+              x="26"
+              y="12"
+              fontSize="14"
+              fontWeight="600"
+              fill={text}
+              letterSpacing="0.01em"
+            >
+              Torvus <tspan fontWeight="500">Security</tspan>
+            </text>
+          </g>
+        </g>
+
+        <g transform="translate(95, 150)">
+          <rect width="200" height="56" rx="28" fill={cardBg} />
           <text
             x="20"
-            y="39"
-            fontSize="15"
+            y="34"
+            fontSize="14"
             fontWeight="700"
             fill={accentHex}
             letterSpacing="0.14em"
           >
             POLICY
           </text>
-          <circle cx="120" cy="33" r="3" fill={accentHex} />
-          <text x="135" y="39" fontSize="15" fontWeight="600" fill={cardText}>
+          <circle cx="118" cy="30" r="3" fill={accentHex} />
+          <text x="133" y="34" fontSize="14" fontWeight="600" fill={text}>
             Active
           </text>
         </g>
 
-        <g transform="translate(55, 388)">
-          <rect
-            width="280"
-            height="54"
-            rx="12"
-            fill={scheme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)"}
-          />
-          <rect
-            y="70"
-            width="220"
-            height="54"
-            rx="12"
-            fill={scheme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)"}
-          />
+        <g transform="translate(40, 240)">
+          <g transform="translate(0, 0)">
+            <rect width="140" height="60" rx="12" fill={tint} />
+            <g transform="translate(12, 18)" fill={text}>
+              <rect x="0" y="8" width="20" height="14" rx="2" />
+              <circle cx="10" cy="15" r="3" fill={accentHex} />
+            </g>
+            <text x="38" y="36" fontSize="14" fill={text}>
+              Vaults
+            </text>
+          </g>
+          <g transform="translate(170, 0)">
+            <rect width="140" height="60" rx="12" fill={tint} />
+            <g transform="translate(12, 18)" fill={text}>
+              <circle cx="10" cy="12" r="6" />
+              <circle cx="20" cy="16" r="5" opacity="0.6" />
+            </g>
+            <text x="38" y="36" fontSize="14" fill={text}>
+              Recipients
+            </text>
+          </g>
+          <g transform="translate(0, 76)">
+            <rect width="140" height="60" rx="12" fill={tint} />
+            <g transform="translate(12, 18)" fill={text}>
+              <rect x="0" y="0" width="18" height="22" rx="2" />
+              <rect x="4" y="5" width="10" height="2" fill={accentHex} />
+            </g>
+            <text x="38" y="36" fontSize="14" fill={text}>
+              Policies
+            </text>
+          </g>
+          <g transform="translate(170, 76)">
+            <rect width="140" height="60" rx="12" fill={tint} />
+            <g transform="translate(12, 18)" fill={text}>
+              <circle cx="11" cy="12" r="10" />
+              <rect x="10" y="6" width="2" height="7" fill={accentHex} />
+              <rect x="11" y="12" width="6" height="2" />
+            </g>
+            <text x="38" y="36" fontSize="14" fill={text}>
+              Check-ins
+            </text>
+          </g>
         </g>
       </svg>
+
       <style jsx>{`
         @keyframes float {
           0% {

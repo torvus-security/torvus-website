@@ -9,7 +9,7 @@ import Link from "next/link";
 
 import DevicePhoneV0 from "@/components/device-phone-v0";
 import { IconChip } from "@/components/icon-chip";
-import { PrimarySoftLink, buttonClasses } from "@/components/ui/button";
+import { PrimarySubtleLink, buttonClasses } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
 
@@ -87,12 +87,12 @@ export default function DigitalLegacyPage() {
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <PrimarySoftLink
+              <PrimarySubtleLink
                 href="/waitlist"
                 className="min-w-[180px] sm:whitespace-nowrap"
               >
                 Request early access
-              </PrimarySoftLink>
+              </PrimarySubtleLink>
               <Link
                 href="/contact"
                 className={buttonClasses({

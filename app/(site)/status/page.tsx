@@ -1,5 +1,5 @@
 import { SectionIntro } from "@/components/section-intro";
-import { PrimarySoftLink } from "@/components/ui/button";
+import { PrimarySubtleLink } from "@/components/ui/button";
 import { createMetadata } from "@/lib/metadata";
 
 import type { Metadata } from "next";
@@ -24,9 +24,9 @@ export default function StatusPage() {
             title="Infrastructure transparency"
             description="Live availability, maintenance notices, and incident post-mortems live on our public status page."
           >
-            <PrimarySoftLink href={STATUS_URL}>
+            <PrimarySubtleLink href={STATUS_URL}>
               Visit status.torvus.security
-            </PrimarySoftLink>
+            </PrimarySubtleLink>
           </SectionIntro>
         </div>
       </section>

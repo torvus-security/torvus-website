@@ -4,7 +4,7 @@ import DevicePhoneV0 from "@/components/device-phone-v0";
 import { IconChip } from "@/components/icon-chip";
 import { Key, Shield, Timer, Users } from "@/components/icons";
 import { SectionIntro } from "@/components/section-intro";
-import { PrimarySoftLink, buttonClasses } from "@/components/ui/button";
+import { PrimarySubtleLink, buttonClasses } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
 
@@ -48,28 +48,28 @@ export default function HomePage() {
       <section
         data-mood="storm"
         data-gridlines="storm"
-        className="heading-band band-home relative overflow-hidden border-b border-white/10 pt-[var(--section-pt)] pb-[var(--section-pb)] text-white"
+        className="heading-band band-home relative overflow-hidden border-b border-white/10 pt-[var(--section-pt)] pb-[var(--section-pb)]"
       >
         <div
           className="pointer-events-none absolute -left-32 top-12 h-64 w-64 rounded-full bg-cranberry/25 blur-[140px]"
           aria-hidden="true"
         />
         <div className="container relative flex flex-col gap-16 lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center">
-          <div className="order-2 space-y-8 lg:order-1 relative scrim-light">
+          <div className="order-2 space-y-8 lg:order-1 relative scrim-light text-[#1F2937]">
             <p className="text-[0.95rem] font-semibold uppercase tracking-[0.26em] text-cranberry/80">
               Policy-based vaulting
             </p>
-            <h1 className="max-w-[18ch] text-display font-semibold text-white">
+            <h1 className="max-w-[18ch] text-display font-semibold text-[#1F2937]">
               Protect people by protecting their information.
             </h1>
-            <p className="max-w-[65ch] text-lead text-white">
+            <p className="max-w-[65ch] text-lead text-thunder">
               Torvus seals sensitive disclosures behind conditional policies with live
               duress controls and independently verifiable provenance.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <PrimarySoftLink href="/waitlist" className="whitespace-nowrap">
+              <PrimarySubtleLink href="/waitlist" className="whitespace-nowrap">
                 Join the waitlist
-              </PrimarySoftLink>
+              </PrimarySubtleLink>
               <Link
                 href="/features"
                 className={buttonClasses({
@@ -82,7 +82,7 @@ export default function HomePage() {
                 View the platform
               </Link>
             </div>
-            <p className="max-w-[65ch] text-[0.95rem] text-white">
+            <p className="max-w-[65ch] text-[0.95rem] text-thunder">
               Built with zero-knowledge encryption, Australian Privacy Principles, and
               GDPR high-assurance workflows in mind.
             </p>
@@ -115,7 +115,7 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <div className="order-1 flex flex-col items-center gap-8 lg:order-2 lg:items-end">
+          <div className="order-1 flex flex-col items-center gap-8 text-white lg:order-2 lg:items-end">
             <div className="relative flex w-full max-w-[320px] justify-center rounded-xl border border-white/20 bg-white/10 p-6 shadow-soft-2 backdrop-blur">
               <div
                 className="pointer-events-none absolute inset-0 rounded-xl bg-grad-hero opacity-80"

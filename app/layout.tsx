@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import SiteHeader from "@/components/site-header";
 import { StructuredData } from "@/components/structured-data";
 import { siteConfig } from "@/lib/site-config";
+import Script from "next/script";
 
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
@@ -48,6 +49,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           crossOrigin="anonymous"
         />
         <StructuredData />
+        <Script
+          id="microsoft-clarity"
+          strategy="afterInteractive"
+          type="text/javascript"
+        >
+          {`
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "tchy0bk855");
+          `}
+        </Script>
       </head>
       <body className="flex min-h-dvh flex-col bg-white font-body text-thunder antialiased">
         <a href="#main-content" className="skip-link">

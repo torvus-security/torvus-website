@@ -1,4 +1,5 @@
-import { WaitlistForm } from "@/components/forms/waitlist-form";
+import Script from "next/script";
+
 import { SectionIntro } from "@/components/section-intro";
 import { createMetadata } from "@/lib/metadata";
 
@@ -28,7 +29,17 @@ export default function WaitlistPage() {
 
       <section className="py-16">
         <div className="container">
-          <WaitlistForm />
+          <div className="overflow-hidden rounded-xl border border-storm/10 bg-white p-3 shadow-sm md:p-6">
+            <div
+              data-fillout-id="eAbjuSPKYNus"
+              data-fillout-embed-type="standard"
+              data-fillout-inherit-parameters="true"
+              data-fillout-dynamic-resize="true"
+              style={{ width: "100%", height: "500px" }}
+            />
+          </div>
+
+          <Script src="https://server.fillout.com/embed/v1/" strategy="lazyOnload" />
         </div>
       </section>
     </div>

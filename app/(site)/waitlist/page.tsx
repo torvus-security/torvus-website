@@ -1,3 +1,4 @@
+import { FilloutWaitlistEmbed } from "@/components/fillout-waitlist-embed";
 import { SectionIntro } from "@/components/section-intro";
 import { createMetadata } from "@/lib/metadata";
 
@@ -13,8 +14,6 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default function WaitlistPage() {
-  const formUrl = "https://form.fillout.com/t/eAbjuSPKYNus";
-
   return (
     <div className="pb-24">
       <section className="border-b border-storm/10 bg-white py-20">
@@ -30,14 +29,7 @@ export default function WaitlistPage() {
       <section className="py-16">
         <div className="container">
           <div className="overflow-hidden rounded-xl border border-storm/10 bg-white p-3 shadow-sm md:p-6">
-            <iframe
-              src={formUrl}
-              title="Torvus waitlist form"
-              className="h-[900px] w-full rounded-lg border"
-              loading="lazy"
-              referrerPolicy="no-referrer"
-              allow="camera; microphone"
-            />
+            <FilloutWaitlistEmbed className="h-[900px] w-full rounded-lg border" />
           </div>
         </div>
       </section>

@@ -51,6 +51,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           crossOrigin="anonymous"
         />
         <StructuredData />
+        <Script
+          id="cookieyes"
+          type="text/javascript"
+          strategy="afterInteractive"
+          src="https://cdn-cookieyes.com/client_data/0bcbca25e25835d971a02335/script.js"
+        />
         <Script id="microsoft-clarity" strategy="afterInteractive" type="text/javascript">
           {`(function(c,l,a,r,i,t,y){
   c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

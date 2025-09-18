@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-const BASE_URL = "https://form.fillout.com/t/eAbjuSPKYNus";
+const BASE_URL = "https://forms.fillout.com/t/eAbjuSPKYNus";
 
 type FilloutWaitlistEmbedProps = {
   className?: string;
@@ -24,8 +24,18 @@ export function FilloutWaitlistEmbed({ className }: FilloutWaitlistEmbedProps) {
       return;
     }
 
-    if (window.gtag && GA_ID) {
+    let isMounted = true;
+
+    const updateClientId = () => {
+      if (!GA_ID || typeof window.gtag !== "function") {
+        return false;
+      }
+
       window.gtag("get", GA_ID, "client_id", (clientId: string) => {
+        if (!isMounted) {
+          return;
+        }
+
         if (!clientId) {
           setSrc(BASE_URL);
           return;
@@ -35,9 +45,28 @@ export function FilloutWaitlistEmbed({ className }: FilloutWaitlistEmbedProps) {
         url.searchParams.set("cid", clientId);
         setSrc(url.toString());
       });
-    } else {
+
+      return true;
+    };
+
+    if (!updateClientId()) {
       setSrc(BASE_URL);
+
+      const interval = window.setInterval(() => {
+        if (updateClientId()) {
+          window.clearInterval(interval);
+        }
+      }, 1000);
+
+      return () => {
+        isMounted = false;
+        window.clearInterval(interval);
+      };
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -47,6 +76,7 @@ export function FilloutWaitlistEmbed({ className }: FilloutWaitlistEmbedProps) {
       className={className}
       loading="lazy"
       referrerPolicy="no-referrer"
+      sandbox="allow-forms allow-popups allow-same-origin allow-scripts"
       allow="camera; microphone"
     />
   );

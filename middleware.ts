@@ -2,6 +2,17 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const JSON_LD_HASH = "sha256-13Mu0NUzfvJHyN7KVhqxHjBb9z4aNRJDjxeJ4sTXgD8=";
+const DEFAULT_POSTHOG_HOST = "https://us.i.posthog.com";
+
+function getPosthogOrigin() {
+  const rawHost = process.env.POSTHOG_INGESTION_HOST ?? DEFAULT_POSTHOG_HOST;
+
+  try {
+    return new URL(rawHost).origin;
+  } catch {
+    return new URL(DEFAULT_POSTHOG_HOST).origin;
+  }
+}
 
 export function middleware(request: NextRequest) {
   const nonce = crypto.randomUUID().replace(/-/g, "");
@@ -29,13 +40,37 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  const posthogOrigin = getPosthogOrigin();
+
+  const scriptSrc = [
+    "'self'",
+    `'nonce-${nonce}'`,
+    JSON_LD_HASH,
+    "https://cdn-cookieyes.com",
+    "https://www.googletagmanager.com",
+    "https://www.google-analytics.com",
+    "https://www.clarity.ms",
+    posthogOrigin,
+  ];
+
+  const connectSrc = [
+    "'self'",
+    "https://www.google-analytics.com",
+    "https://region1.google-analytics.com",
+    "https://stats.g.doubleclick.net",
+    "https://www.clarity.ms",
+    "https://c.bing.com",
+    "https://log.cookieyes.com",
+    posthogOrigin,
+  ];
+
   const csp = [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' ${JSON_LD_HASH}`,
+    `script-src ${scriptSrc.join(" ")}`,
     "style-src 'self'",
     "img-src 'self' data:",
     "font-src 'self'",
-    "connect-src 'self'",
+    `connect-src ${connectSrc.join(" ")}`,
     "frame-src 'self' https://*.fillout.com",
     "frame-ancestors 'none'",
     "base-uri 'none'",

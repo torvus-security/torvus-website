@@ -36,6 +36,7 @@ export function middleware(request: NextRequest) {
     "img-src 'self' data:",
     "font-src 'self'",
     "connect-src 'self'",
+    "frame-src 'self' https://*.fillout.com",
     "frame-ancestors 'none'",
     "base-uri 'none'",
     "form-action 'self'",

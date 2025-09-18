@@ -1,5 +1,3 @@
-import Script from "next/script";
-
 import { SectionIntro } from "@/components/section-intro";
 import { createMetadata } from "@/lib/metadata";
 
@@ -15,6 +13,8 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default function WaitlistPage() {
+  const formUrl = "https://form.fillout.com/t/eAbjuSPKYNus";
+
   return (
     <div className="pb-24">
       <section className="border-b border-storm/10 bg-white py-20">
@@ -30,16 +30,15 @@ export default function WaitlistPage() {
       <section className="py-16">
         <div className="container">
           <div className="overflow-hidden rounded-xl border border-storm/10 bg-white p-3 shadow-sm md:p-6">
-            <div
-              data-fillout-id="eAbjuSPKYNus"
-              data-fillout-embed-type="standard"
-              data-fillout-inherit-parameters="true"
-              data-fillout-dynamic-resize="true"
-              style={{ width: "100%", height: "500px" }}
+            <iframe
+              src={formUrl}
+              title="Torvus waitlist form"
+              className="h-[900px] w-full rounded-lg border"
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              allow="camera; microphone"
             />
           </div>
-
-          <Script src="https://server.fillout.com/embed/v1/" strategy="lazyOnload" />
         </div>
       </section>
     </div>

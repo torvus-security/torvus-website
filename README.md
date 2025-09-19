@@ -7,13 +7,13 @@ pnpm install
 pnpm dev
 ```
 
-- Marketing entrypoint lives at `app/(site)/page.tsx` (re-exported through `app/page.tsx`).
+- Marketing entrypoint lives at `app/page.tsx` (marketing pages live alongside it in `app/(site)/**`).
 - Shared gradients/hover helpers live in `styles/v0.css` (pure CSS utilities).
 - Global typography/palette is defined in `app/(site)/globals.css`; fonts load through `next/font/local` in `app/fonts.ts`.
 
 ## Customising content
 
-1. Update hero + sections in `app/(site)/page.tsx` and supporting pages in `app/(site)/**`.
+1. Update hero + sections in `app/page.tsx` and supporting pages in `app/(site)/**`.
 2. Use the helpers in `styles/v0.css` (`.text-gradient-hero`, `.hover-card`, `.pressable`) to keep gradients two-tone and interactions consistent.
 3. Add new navigation links via `lib/navigation.ts` and update footer copy in `components/footer.tsx`.
 

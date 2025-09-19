@@ -9,11 +9,13 @@ const staticPaths: SitePath[] = [
   "/features",
   "/security",
   "/digital-legacy",
+  "/pricing",
   "/use-cases",
   "/waitlist",
   "/faq",
   "/contact",
   "/status",
+  "/trust",
   "/legal/privacy",
   "/legal/terms",
 ];

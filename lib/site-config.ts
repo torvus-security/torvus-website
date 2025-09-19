@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Torvus Security",
   description:
-    "Policy-driven digital vaulting with encryption, provenance, and controlled release for teams that protect critical information.",
+    "Policy-driven digital vaulting with Digital Legacy orchestration, encryption, provenance, and controlled release for teams that protect critical information.",
   url: "https://www.torvussecurity.com",
   keywords: [
     "digital vault",
@@ -22,10 +22,12 @@ export type SitePath =
   | "/security"
   | "/features"
   | "/digital-legacy"
+  | "/pricing"
   | "/use-cases"
   | "/waitlist"
   | "/faq"
   | "/contact"
+  | "/trust"
   | "/legal/privacy"
   | "/legal/terms"
   | "/status";

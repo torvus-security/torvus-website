@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import { trackEvent } from "@/lib/analytics";
 
 declare global {
   interface Window {
@@ -9,6 +11,7 @@ declare global {
 }
 
 const BASE_URL = "https://forms.fillout.com/t/eAbjuSPKYNus";
+const FILL_OUT_ORIGIN = new URL(BASE_URL).origin;
 
 type FilloutWaitlistEmbedProps = {
   className?: string;
@@ -16,6 +19,15 @@ type FilloutWaitlistEmbedProps = {
 
 export function FilloutWaitlistEmbed({ className }: FilloutWaitlistEmbedProps) {
   const [src, setSrc] = useState(BASE_URL);
+  const submissionTracked = useRef(false);
+
+  const trackSubmission = () => {
+    if (submissionTracked.current) {
+      return;
+    }
+    submissionTracked.current = true;
+    trackEvent("waitlist_submit", { source: "fillout" });
+  };
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -43,6 +55,9 @@ export function FilloutWaitlistEmbed({ className }: FilloutWaitlistEmbedProps) {
         const url = new URL(BASE_URL);
         url.searchParams.set("cid", clientId);
         setSrc(url.toString());
+        if (url.pathname.toLowerCase().includes("thank")) {
+          trackSubmission();
+        }
       });
 
       return true;
@@ -66,6 +81,35 @@ export function FilloutWaitlistEmbed({ className }: FilloutWaitlistEmbedProps) {
     };
   }, []);
 
+  useEffect(() => {
+    if (submissionTracked.current) {
+      return;
+    }
+    if (src.toLowerCase().includes("thank")) {
+      trackSubmission();
+    }
+  }, [src]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const handleMessage = (event: MessageEvent) => {
+      if (!isFilloutOrigin(event.origin)) {
+        return;
+      }
+      if (isSubmissionMessage(event.data)) {
+        trackSubmission();
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, []);
+
   return (
     <iframe
       src={src}
@@ -77,4 +121,30 @@ export function FilloutWaitlistEmbed({ className }: FilloutWaitlistEmbedProps) {
       allow="camera; microphone; geolocation"
     />
   );
+}
+
+function isFilloutOrigin(origin: string) {
+  return origin === FILL_OUT_ORIGIN || origin.endsWith(".fillout.com");
+}
+
+function isSubmissionMessage(data: unknown) {
+  if (!data) return false;
+  if (typeof data === "string") {
+    const lower = data.toLowerCase();
+    return (
+      lower.includes("thank") || lower.includes("success") || lower.includes("submitted")
+    );
+  }
+  if (typeof data === "object") {
+    const payload = data as Record<string, unknown>;
+    const type = typeof payload.type === "string" ? payload.type.toLowerCase() : "";
+    const name =
+      typeof payload.eventName === "string" ? payload.eventName.toLowerCase() : "";
+    const status = typeof payload.status === "string" ? payload.status.toLowerCase() : "";
+    if (type.includes("submit") || type.includes("thank")) return true;
+    if (name.includes("submit")) return true;
+    if (status.includes("success") || status.includes("submitted")) return true;
+    if ("submissionId" in payload) return true;
+  }
+  return false;
 }

@@ -1,15 +1,15 @@
 # Analytics Stub
 
-Third-party analytics are intentionally omitted. The plan is to introduce a self-hosted or privacy-preserving module that can be toggled per environment.
+Analytics now use Google Analytics 4 and PostHog with minimal event capture. Scripts load with the middleware-provided nonce so CSP remains intact.
 
-Current state:
+Current events:
 
-- No tracking requests are sent from the marketing site.
-- Middleware provides a hook (`x-torvus-csp-nonce`) to safely inject future first-party scripts.
-- When analytics are required we will prefer self-hosted solutions (e.g., PostHog, Plausible) or bespoke measurement via server-side logging.
+- `dl_page_view` fires on the Digital Legacy page and mirrors a pageview call.
+- `pricing_cta_click` captures tier + CTA label from the pricing cards.
+- `waitlist_submit` triggers when the Fillout embed surfaces a thank-you state (message listener fallback).
 
-Open questions:
+Scripts honour the CSP `nonce` header (`x-torvus-csp-nonce`). Configure the following public environment variables when deploying:
 
-- Which Preview/Prod environments should receive metrics?
-- Do we want to store session data in Torvus infrastructure or a separate lake?
-- How does analytics reconcile with CSP and privacy commitments?
+- `NEXT_PUBLIC_GA_ID`
+- `NEXT_PUBLIC_POSTHOG_KEY`
+- `NEXT_PUBLIC_POSTHOG_HOST`

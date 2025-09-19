@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 import { PrimarySubtleLink, buttonClasses } from "@/components/ui/button";

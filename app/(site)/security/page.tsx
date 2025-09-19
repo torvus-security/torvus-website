@@ -48,6 +48,21 @@ const encryption = [
   },
 ];
 
+const digitalLegacyAssurances = [
+  {
+    title: "Digital Legacy Kit hardening",
+    body: "Inventory prompts support redaction, rehearsal, and approval workflows so sensitive artefacts stay sealed while you test policies with executors.",
+  },
+  {
+    title: "Executor verification & audit",
+    body: "Professional and Enterprise tiers layer KYC, passkey enforcement, and duress-aware approvals so every action is attributable and reversible.",
+  },
+  {
+    title: "Threshold custody & crypto handover",
+    body: "Optional key splits keep wallets and passphrases in quorum custody. Shares live in HSM-backed vaults with automatic provenance when retrieved.",
+  },
+];
+
 const identity = [
   {
     title: "Passkeys first",
@@ -167,7 +182,7 @@ export default function SecurityPage() {
                 Client-side encryption before ingestion with optional hardware attestation
               </IconChip>
               <IconChip tone="lapis" icon="key">
-                Split custody envelope keys with quorum and duress awareness
+                Digital Legacy Kit adds rehearsals and threshold key custody
               </IconChip>
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -225,6 +240,15 @@ export default function SecurityPage() {
           </div>
           <CardGrid items={encryption} columns={2} tone="info" />
         </div>
+      </section>
+
+      <section className="py-[calc(var(--section-pt)*0.8)] bg-gradient-to-br from-white via-pastel-lagoon/20 to-white">
+        <SectionGrid
+          title="Digital Legacy assurances"
+          description="The Digital Legacy Kit inherits the core Torvus control plane and adds estate-specific safeguards for inventory, executors, and custody."
+          items={digitalLegacyAssurances}
+          iconCluster
+        />
       </section>
 
       <section className="py-[calc(var(--section-pt)*0.85)] bg-gradient-to-br from-white via-pastel-lagoon/20 to-white">

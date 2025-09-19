@@ -1,19 +1,34 @@
 type NavigationItem = {
   href: string;
   label: string;
-  description: string;
+  description?: string;
+  external?: boolean;
 };
+
+export const productNavigation: NavigationItem[] = [
+  {
+    href: "/pricing#individual",
+    label: "Torvus Individual",
+    description: "Personal vault with Digital Legacy Kit basics for solo operators.",
+  },
+  {
+    href: "/pricing#professional",
+    label: "Torvus Professional",
+    description:
+      "Advanced policies, executor KYC, and provenance controls for journalists and planners.",
+  },
+  {
+    href: "/pricing#enterprise",
+    label: "Torvus Enterprise",
+    description: "Custom estate-mode workflows with dedicated support and assurances.",
+  },
+];
 
 export const primaryNavigation: NavigationItem[] = [
   {
-    href: "/product",
-    label: "Product",
-    description: "Understand the Torvus vault, policy engine, and control center.",
-  },
-  {
-    href: "/security",
-    label: "Security",
-    description: "Hardening approach, attestations, and zero-knowledge guarantees.",
+    href: "/digital-legacy",
+    label: "Digital Legacy",
+    description: "Plan controlled estate disclosures with the Digital Legacy Kit.",
   },
   {
     href: "/features",
@@ -21,13 +36,18 @@ export const primaryNavigation: NavigationItem[] = [
     description: "Compose policies, duress modes, and recipient verification paths.",
   },
   {
-    href: "/digital-legacy",
-    label: "Digital Legacy",
-    description: "Plan estate disclosures and contingencies with Torvus Digital Legacy.",
+    href: "/security",
+    label: "Security",
+    description: "Hardening approach, attestations, and zero-knowledge guarantees.",
+  },
+  {
+    href: "/pricing",
+    label: "Pricing",
+    description: "Compare Torvus Individual, Professional, and Enterprise tiers.",
   },
   {
     href: "/use-cases",
-    label: "Use Cases",
+    label: "Use cases",
     description: "See how journalists, lawyers, and individuals apply Torvus day to day.",
   },
   {
@@ -42,20 +62,20 @@ export const primaryNavigation: NavigationItem[] = [
   },
 ];
 
-export const secondaryNavigation: NavigationItem[] = [
-  {
-    href: "/status",
-    label: "Status",
-    description: "Live uptime, incident history, and transparency commitments.",
-  },
-  {
-    href: "/legal/privacy",
-    label: "Privacy",
-    description: "How Torvus handles personal information and encrypted data.",
-  },
-  {
-    href: "/legal/terms",
-    label: "Terms",
-    description: "Service terms, acceptable use, and contractual obligations.",
-  },
-];
+export const footerNavigation = {
+  product: [
+    { href: "/pricing#individual", label: "Torvus Individual" },
+    { href: "/pricing#professional", label: "Torvus Professional" },
+    { href: "/pricing#enterprise", label: "Torvus Enterprise" },
+    { href: "/digital-legacy", label: "Digital Legacy" },
+  ],
+  trust: [
+    { href: "/security", label: "Security" },
+    { href: "/trust-center", label: "Trust Center" },
+    { href: "/status", label: "Status" },
+  ],
+  policies: [
+    { href: "/legal/privacy", label: "Privacy" },
+    { href: "/legal/terms", label: "Terms" },
+  ],
+};

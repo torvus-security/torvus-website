@@ -62,11 +62,13 @@ body {
   min-height: 100vh;
   background-color: var(--section-bg);
   color: var(--section-foreground);
-  font-family: var(--font-satoshi), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-erode), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: clamp(15.5px, 0.4vw + 13.8px, 17px);
   line-height: 1.6;
   letter-spacing: 0.01em;
   font-feature-settings: "kern", "liga", "clig";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -91,7 +93,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-erode), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-satoshi), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--color-storm);
   font-weight: 600;
 }

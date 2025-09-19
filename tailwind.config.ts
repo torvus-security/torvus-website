@@ -45,21 +45,21 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
-          'var(--font-satoshi)',
-          'system-ui',
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'sans-serif',
-        ],
-        display: [
           'var(--font-erode)',
           'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
           'sans-serif',
         ],
-        body: [
+        display: [
           'var(--font-satoshi)',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'sans-serif',
+        ],
+        body: [
+          'var(--font-erode)',
           'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',

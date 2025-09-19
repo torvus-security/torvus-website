@@ -22,10 +22,12 @@ export type SitePath =
   | "/security"
   | "/features"
   | "/digital-legacy"
+  | "/pricing"
   | "/use-cases"
   | "/waitlist"
   | "/faq"
   | "/contact"
+  | "/trust-center"
   | "/legal/privacy"
   | "/legal/terms"
   | "/status";

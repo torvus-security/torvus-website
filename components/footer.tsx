@@ -1,18 +1,7 @@
 import Link from "next/link";
 
 import { PrimarySubtleLink } from "@/components/ui/button";
-import { primaryNavigation, secondaryNavigation } from "@/lib/navigation";
-
-const productSet = new Set(["/product", "/features", "/digital-legacy", "/use-cases"]);
-const trustSet = new Set(["/security", "/faq", "/contact"]);
-
-const productLinks = primaryNavigation
-  .filter((link) => productSet.has(link.href))
-  .map(({ href, label }) => ({ href, label }));
-const trustLinks = primaryNavigation
-  .filter((link) => trustSet.has(link.href))
-  .map(({ href, label }) => ({ href, label }));
-const resources = secondaryNavigation.map(({ href, label }) => ({ href, label }));
+import { footerNavigation } from "@/lib/navigation";
 
 const currentYear = new Date().getFullYear();
 
@@ -48,9 +37,9 @@ export default function Footer() {
           </div>
 
           <nav className="grid grid-cols-2 gap-8 text-[15px] md:col-span-7 md:grid-cols-3">
-            <FooterLinks title="PRODUCT" links={productLinks} />
-            <FooterLinks title="TRUST" links={trustLinks} />
-            <FooterLinks title="RESOURCES" links={resources} />
+            <FooterLinks title="PRODUCT" links={footerNavigation.product} />
+            <FooterLinks title="TRUST" links={footerNavigation.trust} />
+            <FooterLinks title="POLICIES" links={footerNavigation.policies} />
           </nav>
         </div>
 
@@ -58,10 +47,16 @@ export default function Footer() {
           <div>© {currentYear} Torvus Security.</div>
           <div className="flex flex-wrap items-center gap-5">
             <Link href="/security" className="hover:underline">
-              Security posture
+              Security
+            </Link>
+            <Link href="/trust-center" className="hover:underline">
+              Trust Center
             </Link>
             <Link href="/status" className="hover:underline">
               Status
+            </Link>
+            <Link href="/digital-legacy" className="hover:underline">
+              Digital Legacy
             </Link>
             <a href="mailto:hello@torvussecurity.com" className="hover:underline">
               hello@torvussecurity.com

@@ -1,3 +1,4 @@
+import { AnalyticsScripts } from "@/components/analytics-scripts";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { StructuredData } from "@/components/structured-data";
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={`${satoshi.variable} ${erode.variable}`}>
       <head>
         <StructuredData />
+        <AnalyticsScripts />
       </head>
       <body className="flex min-h-dvh flex-col bg-white font-sans text-[17px] text-thunder antialiased md:text-base">
         <a href="#main-content" className="skip-link">

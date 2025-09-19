@@ -36,7 +36,7 @@ const encryption = [
   },
   {
     title: "Key derivation & sealing",
-    body: "Per-item data keys are wrapped with envelope keys. Policy metadata (conditions, recipients, approvals) is sealed and integrity-protected to prevent tampering.",
+    body: "Per-item data keys are wrapped with envelope keys. Policy metadata (conditions, recipients, approvals) is sealed and integrity-protected to prevent tampering. Digital Legacy estates add staged KMS hardening with a customer-managed key roadmap.",
   },
   {
     title: "Split custody",
@@ -170,6 +170,12 @@ export default function SecurityPage() {
                 Split custody envelope keys with quorum and duress awareness
               </IconChip>
             </div>
+            <p className="mt-4 max-w-prose text-[0.95rem] text-thunder">
+              Digital Legacy release paths inherit the same controls: envelope keys reside
+              in segregated KMS clusters today with hardware-backed customer key
+              management on the roadmap, and every estate event produces provenance
+              receipts that executors and beneficiaries can independently verify.
+            </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <PrimarySubtleLink href="/waitlist" />
               <Link

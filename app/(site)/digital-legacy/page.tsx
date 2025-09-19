@@ -1,56 +1,82 @@
-import {
-  CalendarClock,
-  ClipboardList,
-  KeyRound,
-  Layers3,
-  UsersRound,
-} from "lucide-react";
 import Link from "next/link";
 
-import { IconChip } from "@/components/icon-chip";
-import { PhoneMock } from "@/components/phone-mock";
+import { AnalyticsEvent } from "@/components/analytics-event";
+import { SectionIntro } from "@/components/section-intro";
 import { PrimarySubtleLink, buttonClasses } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
 
 import type { Metadata } from "next";
 
 export const revalidate = 86400;
 
-const scope = [
+const capabilities = [
   {
-    icon: ClipboardList,
     title: "Asset inventory & intent capture",
-    body: "Map passwords, documents, media, crypto keys, and messages. Define who should receive each asset and under what circumstances.",
+    body: "Catalogue accounts, archives, crypto wallets, and instructions. Attach context and successor notes that stay encrypted until release.",
   },
   {
-    icon: UsersRound,
-    title: "Legacy agents",
-    body: "Assign trusted agents or executors. Early access focuses on human verification; KYC/IDV integrations arrive in the roadmap.",
+    title: "Legacy agents & executor KYC",
+    body: "Nominate trusted people or professionals. Torvus verifies their identity and keeps them in readiness mode with periodic check-ins.",
   },
   {
-    icon: CalendarClock,
     title: "Death verification predicate",
-    body: "Combine inactivity windows, notarised certificates, and third-party attestations before any estate release proceeds.",
+    body: "Blend inactivity timers, human attestations, and probate evidence before estate mode begins. Manual review today, registry integrations tomorrow.",
   },
   {
-    icon: Layers3,
     title: "Estate mode orchestrator",
-    body: "Bundle assets by recipient, generate checklists, and stage releases over time so sensitive data arrives when it’s actionable.",
+    body: "Stage releases per recipient with checklists, provenance certificates, and redaction controls. Executors stay accountable across every step.",
   },
   {
-    icon: KeyRound,
     title: "Optional crypto key handover",
-    body: "Support threshold handover for wallets and seed phrases. Split keys between recipients and professional custodians.",
+    body: "Distribute Shamir-style threshold splits. No single party ever holds the full secret without the quorum you define.",
+  },
+  {
+    title: "Duress pause",
+    body: "Freeze timers, alert trusted contacts, and optionally serve decoy material without tipping off a coercive actor.",
+  },
+  {
+    title: "Recipient verification",
+    body: "Recipients must pass passkey-first authentication or high-assurance fallbacks before any data decrypts.",
+  },
+  {
+    title: "Audit & provenance",
+    body: "Every action emits a tamper-evident certificate so families, lawyers, and auditors can prove what happened and when.",
   },
 ];
 
-const roadmap = [
-  "Executor and beneficiary workspaces with collaborative approvals.",
-  "Structured KYC and biometrics for high-assurance estate transfers.",
-  "Notary and legal firm integrations for witness signatures.",
-  "API webhooks to sync estate state with trust & estate platforms.",
-  "Regional data residency controls beyond Australia and the EU.",
+const tiers = [
+  {
+    id: "individual",
+    name: "Torvus Individual",
+    summary: "Free or low-cost core, ideal for personal estates and family archives.",
+    features: [
+      "Digital Legacy basics with guided inventory templates.",
+      "Two executors with email and passkey verification.",
+      "Standard audit history and provenance receipts.",
+    ],
+  },
+  {
+    id: "professional",
+    name: "Torvus Professional",
+    summary: "For journalists, NGOs, and estate planners who need advanced policies.",
+    features: [
+      "Advanced policy composer with multi-signal predicates.",
+      "Executor and recipient KYC with redaction-ready dry runs.",
+      "Extended audit exports and integration hooks.",
+    ],
+  },
+  {
+    id: "enterprise",
+    name: "Torvus Enterprise",
+    summary:
+      "Custom programs for organisations with regulated or high-assurance requirements.",
+    features: [
+      "Custom estate-mode workflows, attestations, and reporting.",
+      "SSO/SAML, delegated administration, and bespoke onboarding.",
+      "Dedicated support with DPA/BAA options.",
+    ],
+  },
 ];
 
 export const metadata: Metadata = createMetadata({
@@ -63,127 +89,84 @@ export const metadata: Metadata = createMetadata({
 export default function DigitalLegacyPage() {
   return (
     <div className="pb-24">
-      <section className="relative overflow-hidden border-b border-storm/10 bg-gradient-to-br from-white via-pastel-lapis/30 to-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
+      <AnalyticsEvent event="dl_page_view" pagePath="/digital-legacy" />
+      <section className="relative overflow-hidden border-b border-storm/10 bg-gradient-to-br from-white via-pastel-lapis/40 to-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
         <div
-          className="pointer-events-none absolute -right-20 top-6 h-56 w-56 rounded-full bg-lapis/25 blur-[130px]"
+          className="pointer-events-none absolute -right-24 top-12 h-80 w-80 rounded-full bg-pastel-lapis/50 blur-[160px]"
           aria-hidden="true"
         />
-        <div className="container relative flex flex-col items-center gap-16 lg:flex-row lg:items-start lg:justify-center">
-          <div className="relative order-2 w-full max-w-xl space-y-8 rounded-xl bg-white/92 p-6 shadow-soft-1 lg:order-1 lg:mr-12">
-            <div className="flex flex-col gap-4">
-              <p className="text-[0.95rem] font-semibold uppercase tracking-[0.26em] text-lapis">
-                Digital Legacy
-              </p>
-              <h1 className="text-gradient-lapis max-w-[20ch] text-display font-semibold text-storm">
-                Handover what matters with proof, empathy, and control
-              </h1>
-              <p className="max-w-[65ch] text-lead text-thunder">
-                Torvus Digital Legacy orchestrates estate logistics when you’re
-                gone—without sacrificing the privacy your work requires today. Executors
-                receive clarity, while intent and audit trails stay intact.
-              </p>
-            </div>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <PrimarySubtleLink
-                href="/waitlist"
-                className="min-w-[180px] sm:whitespace-nowrap"
-              />
-              <Link
-                href="/contact"
-                className={buttonClasses({
-                  variant: "secondary",
-                  size: "lg",
-                  className:
-                    "whitespace-nowrap border-lapis/45 text-lapis hover:bg-pastel-lapis/35",
-                })}
-              >
-                Talk with our team
-              </Link>
-            </div>
-            <p className="max-w-[65ch] text-[0.95rem] text-thunder">
-              Co-designing with estate planners, fiduciaries, and digital security teams.
-            </p>
-            <div className="mt-6 grid gap-2 text-[0.95rem] text-thunder">
-              {[
-                {
-                  copy: "Asset inventory and intent capture",
-                  icon: "key" as const,
-                },
-                {
-                  copy: "Executor collaboration with checklists",
-                  icon: "users" as const,
-                },
-                {
-                  copy: "Death-verification predicates and estate mode orchestration",
-                  icon: "timer" as const,
-                },
-                {
-                  copy: "Optional threshold key handover",
-                  icon: "shield" as const,
-                },
-              ].map(({ copy, icon }) => (
-                <IconChip key={copy} tone="lapis" icon={icon}>
-                  {copy}
-                </IconChip>
-              ))}
-            </div>
+        <div className="container relative space-y-8">
+          <p className="text-[0.9rem] font-semibold uppercase tracking-[0.26em] text-lapis">
+            Digital Legacy
+          </p>
+          <h1 className="text-display font-semibold text-storm">
+            Digital Legacy, by Torvus
+          </h1>
+          <p className="max-w-prose text-lead text-thunder">
+            A privacy-first digital estate platform that inventories assets, verifies
+            executors, and releases information only when your policy says it’s time.
+          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <PrimarySubtleLink href="/waitlist" className="w-full sm:w-auto">
+              Join the waitlist
+            </PrimarySubtleLink>
+            <Link
+              href="/pricing"
+              className={buttonClasses({
+                variant: "secondary",
+                size: "sm",
+                className: "border-lagoon/45 text-lagoon",
+              })}
+            >
+              Compare tiers
+            </Link>
           </div>
-          <div className="order-1 flex flex-col items-center gap-8 lg:order-1 lg:items-center">
-            <div className="relative flex w-full max-w-[320px] justify-center rounded-xl border border-lapis/35 bg-white/85 p-6 shadow-soft-2">
-              <div
-                className="pointer-events-none absolute inset-0 rounded-xl bg-[linear-gradient(145deg,rgba(38,97,156,0.18),rgba(14,32,68,0.16))] opacity-80"
-                aria-hidden="true"
-              />
-              <PhoneMock scheme="light" accent="lapis" />
-            </div>
-            <div className="relative w-full max-w-[320px] overflow-hidden rounded-lg border border-lapis/35 bg-white/92 p-6 shadow-soft-1">
-              <div
-                className="pointer-events-none absolute inset-0 bg-grad-panel opacity-60"
-                aria-hidden="true"
-              />
-              <div className="relative space-y-3">
-                <p className="text-[0.8rem] font-semibold uppercase tracking-[0.3em] text-lapis">
-                  Estate orchestrator
-                </p>
-                <h2 className="text-gradient-lapis text-h4 font-semibold text-storm">
-                  Bundle recipients into traceable, policy-backed checklists.
-                </h2>
-                <div className="grid gap-2 text-[1.02rem] text-thunder">
-                  {[
-                    "Executors verify identity before any release stage proceeds.",
-                    "Notary audits, attestations, and quorum approvals stay attached to each task.",
-                    "Executors and beneficiaries see provenance without exposing plaintext.",
-                  ].map((item, index) => (
-                    <IconChip
-                      key={item}
-                      tone={index === 0 ? "lapis" : index === 1 ? "lagoon" : "cranberry"}
-                      icon="check"
-                      className="text-left"
-                    >
-                      {item}
-                    </IconChip>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+          <p className="max-w-prose text-[0.95rem] text-thunder">
+            Executors and beneficiaries always receive provenance records. Torvus
+            operators never see your plaintext.
+          </p>
         </div>
       </section>
 
       <section className="pt-[calc(var(--section-pt)*0.9)] pb-[calc(var(--section-pb)*0.9)]">
-        <div className="container space-y-10">
-          <h2 className="text-h3 font-semibold text-storm">v1 scope</h2>
-          <div data-card-list="ab" className="grid gap-6 md:grid-cols-2">
-            {scope.map((item) => (
-              <Card
-                key={item.title}
-                className="hover-card pressable border border-lapis/25 bg-white/92"
-              >
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-lapis/15 text-lapis">
-                  <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-h4 font-semibold text-storm">{item.title}</h3>
-                <p className="text-body text-thunder">{item.body}</p>
+        <div className="container space-y-8">
+          <SectionIntro
+            title="What Digital Legacy is"
+            description="A verifiable, policy-driven estate release platform that protects your privacy today while preparing trusted handover for tomorrow."
+            eyebrow="Overview"
+          />
+          <div className="space-y-4 text-body text-thunder">
+            <p>
+              Torvus Digital Legacy combines encrypted asset storage with policy
+              orchestration. You decide who should receive each item, what verification
+              they must pass, and how long Torvus should wait before initiating release.
+            </p>
+            <p>
+              Executors receive checklists with provenance so they can evidence every step
+              without exposing secrets. You can pause, revise, or revoke at any time
+              before the policy is fulfilled.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="capabilities"
+        className="bg-gradient-to-br from-white via-mist/60 to-white py-[calc(var(--section-pt)*0.8)]"
+      >
+        <div className="container space-y-8">
+          <SectionIntro
+            eyebrow="Key capabilities"
+            title="The toolkit behind Digital Legacy"
+            description="From intent capture to duress response, each component is built for high-assurance release orchestration."
+          />
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {capabilities.map((item) => (
+              <Card key={item.title} className="border-storm/12">
+                <CardHeader>
+                  <CardTitle>{item.title}</CardTitle>
+                  <CardDescription>{item.body}</CardDescription>
+                </CardHeader>
               </Card>
             ))}
           </div>
@@ -192,33 +175,121 @@ export default function DigitalLegacyPage() {
 
       <section className="pt-[calc(var(--section-pt)*0.85)] pb-[calc(var(--section-pb)*0.85)]">
         <div className="container space-y-8">
-          <div className="relative overflow-hidden rounded-xl border border-storm/10 bg-white p-8 shadow-soft-1">
-            <div
-              className="pointer-events-none absolute inset-0 bg-grad-panel opacity-60"
-              aria-hidden="true"
-            />
-            <h2 className="text-gradient-hero text-h3 font-semibold text-storm">
-              Future roadmap
-            </h2>
-            <p className="mt-4 max-w-3xl text-lead text-thunder">
-              Digital Legacy continues to evolve with estate professionals and
-              fiduciaries. Here’s what is currently in flight.
+          <SectionIntro
+            eyebrow="Policy mechanics"
+            title="How the release policy works"
+            description="Policies combine inactivity thresholds, grace windows, and verification steps so no single signal can trigger estate mode."
+          />
+          <div className="grid gap-6 md:grid-cols-2">
+            {[
+              "Configure inactivity timers with reminders and escalation paths.",
+              "Require executor attestations, probate confirmation, or third-party verification before release.",
+              "Set grace windows to cancel or pause if circumstances change.",
+              "Simulate the policy end-to-end with dry runs before going live.",
+            ].map((item) => (
+              <div
+                key={item}
+                className="flex gap-3 rounded-2xl border border-storm/12 bg-white/95 p-5 shadow-soft-1"
+              >
+                <span
+                  className="mt-[0.3rem] inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-lagoon"
+                  aria-hidden="true"
+                />
+                <span className="text-body text-thunder">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gradient-to-br from-white via-pastel-cranberry/25 to-white py-[calc(var(--section-pt)*0.8)]">
+        <div className="container space-y-8">
+          <SectionIntro
+            eyebrow="Security & privacy"
+            title="Engineered for zero-knowledge control"
+            description="Encryption at rest with customer-specific keys, hardware-backed KMS on the roadmap, and a zero-knowledge design so Torvus never handles your plaintext."
+          />
+          <div className="grid gap-4 text-body text-thunder">
+            <p>
+              Every vault item is encrypted client-side before it reaches Torvus. We
+              operate with strict separation between compute and key management, and
+              roadmap customer-managed keys via Hardware Security Modules.
             </p>
-            <ul className="mt-6 space-y-3 text-[1.02rem] text-thunder">
-              {roadmap.map((item) => (
-                <li key={item} className="flex items-start gap-2">
-                  <span
-                    className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-cranberry/70"
-                    aria-hidden="true"
-                  />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 text-[0.95rem] text-thunder">
-              Want to influence the roadmap? Email legacy@torvussecurity.com with context
-              about your estate planning workflows.
+            <p>
+              Provenance logs are tamper-evident and exportable. External auditors can
+              verify chain-of-custody without seeing sensitive content. Learn more on our{" "}
+              <Link href="/security" className="font-semibold text-lapis hover:underline">
+                Security page
+              </Link>
+              .
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="pt-[calc(var(--section-pt)*0.85)] pb-[calc(var(--section-pb)*0.85)]">
+        <div className="container space-y-10">
+          <SectionIntro
+            eyebrow="Tiers"
+            title="Choose the tier that meets your estate needs"
+            description="Start personal, upgrade for professional oversight, or partner with Torvus for enterprise rollouts."
+          />
+          <div className="grid gap-6 md:grid-cols-3">
+            {tiers.map((tier) => (
+              <Card key={tier.id} id={tier.id} className="h-full border-storm/12">
+                <CardHeader>
+                  <CardTitle>{tier.name}</CardTitle>
+                  <CardDescription>{tier.summary}</CardDescription>
+                </CardHeader>
+                <ul className="space-y-2 text-[0.95rem] text-thunder">
+                  {tier.features.map((feature) => (
+                    <li key={feature} className="flex gap-3">
+                      <span
+                        className="mt-[0.35rem] inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-lagoon"
+                        aria-hidden="true"
+                      />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center gap-4">
+            <PrimarySubtleLink href="/waitlist" className="w-full sm:w-auto">
+              Join the waitlist
+            </PrimarySubtleLink>
+            <Link
+              href="https://platform.torvussecurity.com"
+              className="text-[0.95rem] font-semibold text-lapis hover:underline"
+            >
+              Go to platform signup
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gradient-to-br from-white via-mist/60 to-white py-[calc(var(--section-pt)*0.8)]">
+        <div className="container space-y-8">
+          <SectionIntro
+            eyebrow="Get started"
+            title="Ready to prepare your Digital Legacy?"
+            description="Request access to the waitlist today. We’ll guide you through inventory, policy design, and executor onboarding."
+          />
+          <div className="flex flex-wrap items-center gap-4">
+            <PrimarySubtleLink href="/waitlist" className="w-full sm:w-auto">
+              Join the waitlist
+            </PrimarySubtleLink>
+            <Link
+              href="https://platform.torvussecurity.com"
+              className={buttonClasses({
+                variant: "tertiary",
+                size: "sm",
+                className: "border-lagoon/45 text-lagoon",
+              })}
+            >
+              Go to platform signup
+            </Link>
           </div>
         </div>
       </section>

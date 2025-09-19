@@ -5,11 +5,13 @@ import type { MetadataRoute } from "next";
 
 const staticPaths: SitePath[] = [
   "/",
+  "/product",
   "/features",
   "/security",
   "/digital-legacy",
-  "/pricing",
+  "/use-cases",
   "/waitlist",
+  "/faq",
   "/contact",
   "/status",
   "/legal/privacy",

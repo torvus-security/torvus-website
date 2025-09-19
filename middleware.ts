@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 
 const JSON_LD_HASH = "sha256-13Mu0NUzfvJHyN7KVhqxHjBb9z4aNRJDjxeJ4sTXgD8=";
 const DEFAULT_POSTHOG_HOST = "https://us.i.posthog.com";
+const DEVICE_PERMISSION_ORIGINS = ['"https://forms.fillout.com"', '"https://*.fillout.com"'];
 
 function getPosthogOrigin() {
   const rawHost = process.env.POSTHOG_INGESTION_HOST ?? DEFAULT_POSTHOG_HOST;
@@ -77,6 +78,12 @@ export function middleware(request: NextRequest) {
     "form-action 'self'",
   ].join("; ");
 
+  const permissionsPolicy = [
+    `camera=(self ${DEVICE_PERMISSION_ORIGINS.join(" ")})`,
+    `microphone=(self ${DEVICE_PERMISSION_ORIGINS.join(" ")})`,
+    `geolocation=(self ${DEVICE_PERMISSION_ORIGINS.join(" ")})`,
+  ].join(", ");
+
   response.headers.set("Content-Security-Policy", csp);
   response.headers.set(
     "Strict-Transport-Security",
@@ -84,7 +91,7 @@ export function middleware(request: NextRequest) {
   );
   response.headers.set("X-Content-Type-Options", "nosniff");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-  response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  response.headers.set("Permissions-Policy", permissionsPolicy);
   response.headers.set("X-Frame-Options", "DENY");
 
   return response;

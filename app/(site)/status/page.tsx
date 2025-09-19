@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 
 export const revalidate = 3600;
 
-const STATUS_URL = "https://status.torvus.security";
+const STATUS_URL = "https://status.torvussecurity.com";
 
 export const metadata: Metadata = createMetadata({
   title: "Status",
@@ -23,9 +23,10 @@ export default function StatusPage() {
             eyebrow="Status"
             title="Infrastructure transparency"
             description="Live availability, maintenance notices, and incident post-mortems live on our public status page."
+            className="[&>h2]:text-gradient-hero"
           >
             <PrimarySubtleLink href={STATUS_URL}>
-              Visit status.torvus.security
+              Visit status.torvussecurity.com
             </PrimarySubtleLink>
           </SectionIntro>
         </div>

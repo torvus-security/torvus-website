@@ -1,5 +1,7 @@
 "use server";
 
+import { randomUUID } from "node:crypto";
+
 import { z } from "zod";
 
 import { rateLimit } from "@/lib/rate-limit";
@@ -62,13 +64,15 @@ export async function submitContactAction(
   }
 
   const payload = {
+    id: randomUUID(),
     name: sanitizeInput(name),
     email: sanitizeInput(email),
     message: sanitizeInput(message, { allowNewlines: true }),
     submittedAt: new Date().toISOString(),
   };
 
-  console.info("contact.submit", payload);
+  // TODO: Route payload to the messaging queue / CRM integration instead of logging.
+  void payload;
 
   return {
     status: "success",

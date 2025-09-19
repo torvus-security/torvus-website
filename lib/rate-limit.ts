@@ -1,8 +1,19 @@
-import { createHash, createHmac } from "node:crypto";
+import { createHash, createHmac, randomBytes } from "node:crypto";
 
 import { cookies, headers } from "next/headers";
 
-const SECRET = process.env.RATE_LIMIT_SECRET ?? "torvus-dev-secret";
+const SECRET = (() => {
+  const configured = process.env.RATE_LIMIT_SECRET?.trim();
+  if (configured && configured.length > 0) {
+    return configured;
+  }
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("RATE_LIMIT_SECRET is required in production");
+  }
+  // In non-production environments we fall back to an ephemeral secret so
+  // developers can test rate limiting without leaking a predictable key.
+  return randomBytes(32).toString("hex");
+})();
 
 type RateLimitOptions = {
   key: string;

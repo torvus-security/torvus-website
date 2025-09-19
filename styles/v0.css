@@ -1,16 +1,5 @@
-/* styles/v0.css
-   Utilities only (no layout). Enforces two-tone gradients.
-*/
-
 :root {
-  /* brand two-tone pairs */
-  --grad-brand-from: #22d3ee; /* cyan-400 */
-  --grad-brand-to: #10b981; /* emerald-500 */
-
-  --grad-warm-from: #ec4899; /* fuchsia-500 */
-  --grad-warm-to: #f43f5e; /* rose-500 */
-
-  --shadow-soft: 0 1px 2px rgba(2, 6, 23, 0.08), 0 10px 30px rgba(2, 6, 23, 0.1);
+  --shadow-soft: 0 1px 2px rgba(2, 6, 23, 0.08), 0 8px 28px rgba(2, 6, 23, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,45 +8,62 @@
   }
 }
 
-/* --- Utilities --------------------------------------------------------- */
-@tailwind base;
-@tailwind utilities;
-
-/* Two-tone gradients (global) */
-.text-gradient-brand {
-  background-image: linear-gradient(90deg, var(--grad-brand-from), var(--grad-brand-to));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.text-gradient-warm {
-  background-image: linear-gradient(90deg, var(--grad-warm-from), var(--grad-warm-to));
+.text-gradient-hero {
+  background-image: linear-gradient(92deg, var(--grad-hero-from), var(--grad-hero-to));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Display feel (no layout shift) */
-.font-display {
-  font-variation-settings: "wght" 720;
+.text-gradient-accent {
+  background-image: linear-gradient(92deg, var(--grad-accent-from), var(--grad-accent-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* Subtle card hover */
+.text-gradient-lapis {
+  background-image: linear-gradient(92deg, rgba(38, 97, 156, 0.9), rgba(21, 41, 82, 0.95));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .hover-card {
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  will-change: transform;
 }
+
 .hover-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-soft);
-  border-color: hsl(215 16% 82% / 0.55);
+  border-color: rgba(15, 23, 42, 0.15);
 }
 
 .pressable {
   transition: transform 0.12s ease;
 }
+
 .pressable:active {
   transform: translateY(0) scale(0.99);
+}
+
+.focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.92), 0 0 0 4px rgba(59, 130, 246, 0.55);
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-panel {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .modal-panel {
+    background: rgba(15, 23, 42, 0.95);
+  }
 }

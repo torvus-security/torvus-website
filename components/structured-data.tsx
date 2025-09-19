@@ -1,18 +1,11 @@
-import { headers } from "next/headers";
-
 import { getStructuredDataJson } from "@/lib/structured-data";
 
 export function StructuredData() {
-  const nonce = headers().get("x-torvus-csp-nonce") ?? "";
-
-  if (!nonce) {
-    return null;
-  }
-
   return (
     <script
-      nonce={nonce}
+      id="torvus-structured-data"
       type="application/ld+json"
+      suppressHydrationWarning
       dangerouslySetInnerHTML={{ __html: getStructuredDataJson() }}
     />
   );

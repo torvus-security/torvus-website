@@ -18,12 +18,11 @@ export function FilloutWaitlistEmbed({ className }: FilloutWaitlistEmbedProps) {
   const [src, setSrc] = useState(BASE_URL);
 
   useEffect(() => {
-    const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
-
     if (typeof window === "undefined") {
       return;
     }
 
+    const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
     let isMounted = true;
 
     const updateClientId = () => {
@@ -49,23 +48,21 @@ export function FilloutWaitlistEmbed({ className }: FilloutWaitlistEmbedProps) {
       return true;
     };
 
-    if (!updateClientId()) {
-      setSrc(BASE_URL);
-
-      const interval = window.setInterval(() => {
-        if (updateClientId()) {
-          window.clearInterval(interval);
-        }
-      }, 1000);
-
+    if (updateClientId()) {
       return () => {
         isMounted = false;
-        window.clearInterval(interval);
       };
     }
 
+    const interval = window.setInterval(() => {
+      if (updateClientId()) {
+        window.clearInterval(interval);
+      }
+    }, 1200);
+
     return () => {
       isMounted = false;
+      window.clearInterval(interval);
     };
   }, []);
 
@@ -77,7 +74,7 @@ export function FilloutWaitlistEmbed({ className }: FilloutWaitlistEmbedProps) {
       loading="lazy"
       referrerPolicy="no-referrer"
       sandbox="allow-forms allow-popups allow-same-origin allow-scripts"
-      allow="camera; microphone"
+      allow="camera; microphone; geolocation"
     />
   );
 }

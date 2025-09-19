@@ -6,32 +6,39 @@ type NavigationItem = {
 
 export const primaryNavigation: NavigationItem[] = [
   {
-    href: "/features",
-    label: "Features",
-    description:
-      "Instrument policies, recipients, and approvals from the Torvus command center.",
+    href: "/product",
+    label: "Product",
+    description: "Understand the Torvus vault, policy engine, and control center.",
   },
   {
     href: "/security",
     label: "Security",
-    description:
-      "Zero-trust key orchestration, duress controls, and tamper-evident logs.",
+    description: "Hardening approach, attestations, and zero-knowledge guarantees.",
+  },
+  {
+    href: "/features",
+    label: "How it works",
+    description: "Compose policies, duress modes, and recipient verification paths.",
   },
   {
     href: "/digital-legacy",
     label: "Digital Legacy",
-    description: "Plan estate disclosures and contingencies without compromising today.",
+    description: "Plan estate disclosures and contingencies with Torvus Digital Legacy.",
   },
   {
-    href: "/pricing",
-    label: "Pricing",
-    description:
-      "Choose a policy tier that fits your release cadence and assurance needs.",
+    href: "/use-cases",
+    label: "Use Cases",
+    description: "See how journalists, lawyers, and individuals apply Torvus day to day.",
+  },
+  {
+    href: "/faq",
+    label: "FAQ",
+    description: "Key answers about rollout, recovery, and operational models.",
   },
   {
     href: "/contact",
     label: "Contact",
-    description: "Reach Torvus for security reviews, partnerships, or tailored rollouts.",
+    description: "Talk with Torvus about security reviews or tailored onboarding.",
   },
 ];
 
@@ -39,17 +46,16 @@ export const secondaryNavigation: NavigationItem[] = [
   {
     href: "/status",
     label: "Status",
-    description: "Live uptime, incident history, and resilience commitments.",
+    description: "Live uptime, incident history, and transparency commitments.",
   },
   {
     href: "/legal/privacy",
     label: "Privacy",
-    description:
-      "Data handling, retention, and privacy safeguards in the Torvus platform.",
+    description: "How Torvus handles personal information and encrypted data.",
   },
   {
     href: "/legal/terms",
     label: "Terms",
-    description: "Service terms, acceptable use, and contractual obligations for Torvus.",
+    description: "Service terms, acceptable use, and contractual obligations.",
   },
 ];

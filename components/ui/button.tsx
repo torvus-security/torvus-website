@@ -54,7 +54,7 @@ export function buttonClasses({
 }
 
 type InteractiveProps = {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
 };
 
@@ -74,7 +74,7 @@ export function PrimarySubtleButton({
       {...props}
       className={cn(primarySubtleBase, "min-w-[160px] sm:min-w-[180px]", className)}
     >
-      {children ?? "Join the waitlist"}
+      {children ?? "Sign up for updates"}
     </button>
   );
 }
@@ -96,7 +96,7 @@ export function PrimarySubtleLink({
       className={cn(primarySubtleBase, "min-w-[160px] sm:min-w-[180px]", className)}
       {...props}
     >
-      {children ?? "Join the waitlist"}
+      {children ?? "Sign up for updates"}
     </Link>
   );
 }

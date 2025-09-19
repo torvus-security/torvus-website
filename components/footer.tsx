@@ -3,20 +3,16 @@ import Link from "next/link";
 import { PrimarySubtleLink } from "@/components/ui/button";
 import { primaryNavigation, secondaryNavigation } from "@/lib/navigation";
 
-const productPaths = new Set(["/features", "/security", "/digital-legacy"]);
-const companyPaths = new Set(["/pricing", "/contact"]);
-const statusPath = "/status";
-const securityPath = "/security";
+const productSet = new Set(["/product", "/features", "/digital-legacy", "/use-cases"]);
+const trustSet = new Set(["/security", "/faq", "/contact"]);
 
 const productLinks = primaryNavigation
-  .filter((link) => productPaths.has(link.href))
+  .filter((link) => productSet.has(link.href))
   .map(({ href, label }) => ({ href, label }));
-const companyLinks = primaryNavigation
-  .filter((link) => companyPaths.has(link.href))
+const trustLinks = primaryNavigation
+  .filter((link) => trustSet.has(link.href))
   .map(({ href, label }) => ({ href, label }));
-const legalLinks = secondaryNavigation.map(({ href, label }) => ({ href, label }));
-const statusLink = secondaryNavigation.find((link) => link.href === statusPath);
-const securityLink = primaryNavigation.find((link) => link.href === securityPath);
+const resources = secondaryNavigation.map(({ href, label }) => ({ href, label }));
 
 const currentYear = new Date().getFullYear();
 
@@ -27,52 +23,48 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-12">
           <div className="space-y-6 md:col-span-5">
             <div className="inline-flex items-center gap-2 font-semibold text-[#0B1220]">
-              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2L22 12L12 22L2 12Z" fill="#D61F69" />
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 1.5 22.5 12 12 22.5 1.5 12Z" fill="#D61F69" />
               </svg>
               <span>
                 Torvus <span className="font-normal">Security</span>
               </span>
             </div>
-            <p className="max-w-[40ch] text-[15px] leading-6 text-[#1F2937]">
-              Secure digital vaulting and conditional release engineered for the moments
-              that matter most.
+            <p className="max-w-[42ch] text-[15px] leading-6 text-[#1F2937]">
+              Safeguard disclosures with policy-based release, duress controls, and
+              independently verifiable provenance.
             </p>
             <div className="space-y-3 rounded-lg border border-black/10 p-4">
               <div className="text-[12px] font-semibold tracking-[0.18em] text-[#1F2937]/80">
-                JOIN THE WAITLIST
+                STAY INFORMED
               </div>
               <p className="text-[15px] leading-6 text-[#1F2937]">
-                We’ll keep you posted on launch milestones and private previews. No spam.
+                Sign up for product updates, security notes, and private preview cohorts.
               </p>
               <PrimarySubtleLink href="/waitlist" className="mt-1 w-full sm:w-auto">
-                Join now
+                Sign up for updates
               </PrimarySubtleLink>
             </div>
           </div>
 
           <nav className="grid grid-cols-2 gap-8 text-[15px] md:col-span-7 md:grid-cols-3">
             <FooterLinks title="PRODUCT" links={productLinks} />
-            <FooterLinks title="COMPANY" links={companyLinks} />
-            <FooterLinks title="LEGAL" links={legalLinks} />
+            <FooterLinks title="TRUST" links={trustLinks} />
+            <FooterLinks title="RESOURCES" links={resources} />
           </nav>
         </div>
 
         <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-black/5 pt-6 text-[14px] text-[#1F2937]/80">
           <div>© {currentYear} Torvus Security.</div>
-          <div className="flex gap-6">
-            {statusLink ? (
-              <Link href={statusLink.href} className="hover:underline">
-                {statusLink.label}
-              </Link>
-            ) : null}
-            {securityLink ? (
-              <Link href={securityLink.href} className="hover:underline">
-                Security posture
-              </Link>
-            ) : null}
-            <a href="mailto:contact@torvussecurity.com.au" className="hover:underline">
-              contact@torvussecurity.com.au
+          <div className="flex flex-wrap items-center gap-5">
+            <Link href="/security" className="hover:underline">
+              Security posture
+            </Link>
+            <Link href="/status" className="hover:underline">
+              Status
+            </Link>
+            <a href="mailto:hello@torvussecurity.com" className="hover:underline">
+              hello@torvussecurity.com
             </a>
           </div>
         </div>

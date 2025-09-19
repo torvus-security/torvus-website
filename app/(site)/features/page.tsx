@@ -9,7 +9,7 @@ import {
   Users as UsersIcon,
 } from "@/components/icons";
 import { SectionIntro } from "@/components/section-intro";
-import { buttonClasses } from "@/components/ui/button";
+import { PrimarySubtleLink, buttonClasses } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
 
@@ -101,7 +101,7 @@ export const metadata: Metadata = createMetadata({
 export default function FeaturesPage() {
   return (
     <div id="top" className="pb-24">
-      <section className="heading-band band-features relative overflow-hidden border-b border-storm/10 bg-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
+      <section className="relative overflow-hidden border-b border-storm/10 bg-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-grad-divider opacity-30"
           aria-hidden="true"
@@ -111,7 +111,7 @@ export default function FeaturesPage() {
             eyebrow="Platform overview"
             title="Conditional-access vaulting across the lifecycle"
             description="Start with a quick summary, then dive into the areas that matter most to your team. Each section includes controls, signals, and outcomes Torvus manages for you."
-            className="[&>h2]:page-title-gradient"
+            className="[&>h2]:text-gradient-hero"
           >
             <div className="mt-6 flex flex-wrap items-center gap-3">
               {sections.map((section) => (
@@ -122,12 +122,15 @@ export default function FeaturesPage() {
                     variant: "tertiary",
                     size: "sm",
                     className:
-                      "border border-lagoon/40 bg-white text-lagoon hover:border-lagoon hover:bg-lagoon/10",
+                      "border border-lagoon/45 bg-white text-lagoon hover:border-lagoon hover:bg-lagoon/10",
                   })}
                 >
                   {section.name}
                 </Link>
               ))}
+            </div>
+            <div className="mt-5">
+              <PrimarySubtleLink href="/waitlist" />
             </div>
           </SectionIntro>
         </div>
@@ -137,7 +140,10 @@ export default function FeaturesPage() {
         <div className="container space-y-10">
           <div data-card-list="ab" className="grid gap-6 md:grid-cols-2">
             {overviewCards.map((feature) => (
-              <Card key={feature.id}>
+              <Card
+                key={feature.id}
+                className="hover-card pressable border border-storm/12 bg-white/92"
+              >
                 <CardHeader className="flex items-start gap-4">
                   <div className="inline-flex h-12 w-12 flex-none items-center justify-center rounded-full bg-cranberry/15 text-cranberry">
                     <feature.icon
@@ -181,7 +187,9 @@ export default function FeaturesPage() {
                       strokeWidth={1.5}
                     />
                   </div>
-                  <h2 className="text-h2 font-semibold text-storm">{section.name}</h2>
+                  <h2 className="text-gradient-accent text-h2 font-semibold text-storm">
+                    {section.name}
+                  </h2>
                   <p className="max-w-3xl text-lead text-thunder">{section.lead}</p>
                 </div>
                 <Link
@@ -195,7 +203,7 @@ export default function FeaturesPage() {
                 {section.bullets.map((item, index) => (
                   <li
                     key={item}
-                    className="rounded-lg border border-storm/12 bg-white/85 p-5"
+                    className="hover-card pressable rounded-lg border border-storm/12 bg-white/90 p-5"
                   >
                     <IconChip
                       tone={toneCycle[index % toneCycle.length]}

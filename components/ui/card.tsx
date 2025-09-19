@@ -10,6 +10,13 @@ type CardProps = HTMLAttributes<HTMLDivElement> & {
   tone?: CardTone;
 };
 
+const toneClassNames: Record<CardTone, string> = {
+  neutral: "",
+  info: "border-lapis/35 bg-pastel-lapis/35",
+  success: "border-emerald-200/60 bg-emerald-50/70",
+  danger: "border-cranberry/30 bg-pastel-cranberry/30",
+};
+
 export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant = "auto", tone = "neutral", ...props }, ref) => {
     return (
@@ -18,7 +25,11 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         data-card="true"
         data-card-variant={variant}
         data-card-tone={tone !== "neutral" ? tone : undefined}
-        className={cn("flex flex-col gap-5", className)}
+        className={cn(
+          "group/card relative flex flex-col gap-5 rounded-3xl border border-storm/12 bg-white/95 p-6 shadow-[0_20px_45px_rgba(14,23,38,0.08)] backdrop-blur-sm transition",
+          toneClassNames[tone],
+          className,
+        )}
         {...props}
       />
     );

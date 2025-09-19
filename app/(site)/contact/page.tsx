@@ -16,7 +16,7 @@ export const metadata: Metadata = createMetadata({
 export default function ContactPage() {
   return (
     <div className="pb-24">
-      <section className="heading-band band-home relative overflow-hidden border-b border-storm/10 bg-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
+      <section className="relative overflow-hidden border-b border-storm/10 bg-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
         <div
           className="pointer-events-none absolute inset-0 bg-grad-panel opacity-40"
           aria-hidden="true"
@@ -30,6 +30,7 @@ export default function ContactPage() {
             eyebrow="Contact"
             title="Let’s talk about protecting your most critical information"
             description="Use the form below for product conversations, security reviews, or partnership ideas. We store the minimum needed to respond."
+            className="[&>h2]:text-gradient-hero"
           />
         </div>
       </section>

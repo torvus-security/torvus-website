@@ -7,12 +7,12 @@ const structuredData = [
     name: siteConfig.name,
     url: siteConfig.url,
     logo: `${siteConfig.url}/icon.svg`,
-    sameAs: ["https://status.torvus.security"],
+    sameAs: ["https://status.torvussecurity.com"],
     contactPoint: [
       {
         "@type": "ContactPoint",
         contactType: "support",
-        email: "hello@torvus.security",
+        email: "hello@torvussecurity.com",
       },
     ],
   },

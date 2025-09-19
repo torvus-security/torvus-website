@@ -4,7 +4,7 @@ type BrandProps = {
   compact?: boolean;
 };
 
-export function Brand({ compact = false }: BrandProps) {
+export default function Brand({ compact = false }: BrandProps) {
   return (
     <Link
       href="/"

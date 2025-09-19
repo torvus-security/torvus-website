@@ -1,20 +1,29 @@
 "use client";
 
 import cn from "clsx";
+import Image from "next/image";
+
+import type { ReactNode } from "react";
 
 type Scheme = "dark" | "light";
 type Accent = "cranberry" | "lagoon" | "lapis";
 
-export default function DevicePhoneV0({
+export function PhoneMock({
   scheme = "dark",
   accent = "cranberry",
-  float = true,
+  narrow = true,
   ariaLabel = "Phone mockup",
+  src,
+  alt,
+  children,
 }: {
   scheme?: Scheme;
   accent?: Accent;
-  float?: boolean;
+  narrow?: boolean;
   ariaLabel?: string;
+  src?: string;
+  alt?: string;
+  children?: ReactNode;
 }) {
   const accents = { cranberry: "#D61F69", lagoon: "#1AAE9F", lapis: "#26619C" } as const;
   const accentHex = accents[accent];
@@ -30,12 +39,14 @@ export default function DevicePhoneV0({
       aria-label={ariaLabel}
       role="img"
       className={cn(
-        "relative mx-auto h-[560px] w-[280px] md:h-[600px] md:w-[300px]",
-        float && "animate-[float_10s_ease-in-out_infinite]",
+        "relative mx-auto",
+        narrow ? "h-[600px] w-[280px]" : "h-[520px] w-[320px]",
+        "md:h-[620px] md:w-[300px]",
+        "animate-[float_10s_ease-in-out_infinite]",
       )}
     >
-      <div className="absolute inset-0 rounded-[36px] bg-white/30 blur-[1px] opacity-35" />
-      <div className="absolute inset-[6px] rounded-[32px] bg-white/20 blur-[0.5px] opacity-35" />
+      <div className="absolute inset-0 rounded-[36px] bg-white/30 blur-[1px] opacity-30" />
+      <div className="absolute inset-[6px] rounded-[32px] bg-white/20 blur-[0.5px] opacity-40" />
       <div className="absolute inset-[12px] rounded-[28px] bg-white/10 opacity-30" />
 
       <div className="absolute inset-0 rounded-[36px] border border-white/40 bg-white/10 backdrop-blur-sm shadow-[0_20px_50px_rgba(11,18,32,0.2)]" />
@@ -145,16 +156,34 @@ export default function DevicePhoneV0({
         </g>
       </svg>
 
+      {src ? (
+        <div className="pointer-events-none absolute inset-[52px] z-10 overflow-hidden rounded-[22px]">
+          <Image
+            src={src}
+            alt={alt ?? ariaLabel}
+            fill
+            className="object-cover"
+            sizes="246px"
+            priority={false}
+          />
+        </div>
+      ) : null}
+      {!src && children ? (
+        <div className="pointer-events-none absolute inset-[52px] z-10 flex h-[510px] w-[246px] items-center justify-center overflow-hidden rounded-[22px]">
+          {children}
+        </div>
+      ) : null}
+
       <style jsx>{`
         @keyframes float {
           0% {
-            transform: translateY(0);
+            transform: translate3d(0, 0, 0);
           }
           50% {
-            transform: translateY(-6px);
+            transform: translate3d(0, -6px, 0);
           }
           100% {
-            transform: translateY(0);
+            transform: translate3d(0, 0, 0);
           }
         }
       `}</style>

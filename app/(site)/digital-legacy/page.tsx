@@ -7,8 +7,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-import DevicePhoneV0 from "@/components/device-phone-v0";
 import { IconChip } from "@/components/icon-chip";
+import { PhoneMock } from "@/components/phone-mock";
 import { PrimarySubtleLink, buttonClasses } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { createMetadata } from "@/lib/metadata";
@@ -63,21 +63,18 @@ export const metadata: Metadata = createMetadata({
 export default function DigitalLegacyPage() {
   return (
     <div className="pb-24">
-      <section
-        data-mood="calm"
-        className="heading-band band-legacy relative overflow-hidden border-b border-storm/10 pt-[var(--section-pt)] pb-[var(--section-pb)]"
-      >
+      <section className="relative overflow-hidden border-b border-storm/10 bg-gradient-to-br from-white via-pastel-lapis/30 to-white pt-[var(--section-pt)] pb-[var(--section-pb)]">
         <div
-          className="pointer-events-none absolute -right-20 top-6 h-56 w-56 rounded-full bg-cranberry/25 blur-[130px]"
+          className="pointer-events-none absolute -right-20 top-6 h-56 w-56 rounded-full bg-lapis/25 blur-[130px]"
           aria-hidden="true"
         />
-        <div className="container relative flex flex-col gap-16 lg:grid lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:items-center">
-          <div className="order-2 space-y-8 relative scrim-light bg-white/90 p-6 rounded-xl lg:order-1 lg:mr-12">
+        <div className="container relative flex flex-col items-center gap-16 lg:flex-row lg:items-start lg:justify-center">
+          <div className="relative order-2 w-full max-w-xl space-y-8 rounded-xl bg-white/92 p-6 shadow-soft-1 lg:order-1 lg:mr-12">
             <div className="flex flex-col gap-4">
-              <p className="text-[0.95rem] font-semibold uppercase tracking-[0.26em] text-cranberry">
+              <p className="text-[0.95rem] font-semibold uppercase tracking-[0.26em] text-lapis">
                 Digital Legacy
               </p>
-              <h1 className="max-w-[20ch] text-display font-semibold text-storm">
+              <h1 className="text-gradient-lapis max-w-[20ch] text-display font-semibold text-storm">
                 Handover what matters with proof, empathy, and control
               </h1>
               <p className="max-w-[65ch] text-lead text-thunder">
@@ -90,15 +87,14 @@ export default function DigitalLegacyPage() {
               <PrimarySubtleLink
                 href="/waitlist"
                 className="min-w-[180px] sm:whitespace-nowrap"
-              >
-                Request early access
-              </PrimarySubtleLink>
+              />
               <Link
                 href="/contact"
                 className={buttonClasses({
                   variant: "secondary",
                   size: "lg",
-                  className: "whitespace-nowrap hover:underline",
+                  className:
+                    "whitespace-nowrap border-lapis/45 text-lapis hover:bg-pastel-lapis/35",
                 })}
               >
                 Talk with our team
@@ -126,30 +122,30 @@ export default function DigitalLegacyPage() {
                   icon: "shield" as const,
                 },
               ].map(({ copy, icon }) => (
-                <IconChip key={copy} tone="lagoon" icon={icon}>
+                <IconChip key={copy} tone="lapis" icon={icon}>
                   {copy}
                 </IconChip>
               ))}
             </div>
           </div>
-          <div className="order-1 flex flex-col items-center gap-8 lg:order-1 lg:items-start">
-            <div className="relative flex w-full max-w-[320px] justify-center rounded-xl border border-storm/15 bg-white/80 p-6 shadow-soft-2">
+          <div className="order-1 flex flex-col items-center gap-8 lg:order-1 lg:items-center">
+            <div className="relative flex w-full max-w-[320px] justify-center rounded-xl border border-lapis/35 bg-white/85 p-6 shadow-soft-2">
               <div
-                className="pointer-events-none absolute inset-0 rounded-xl bg-[linear-gradient(145deg,rgba(214,31,105,0.12),rgba(26,174,159,0.12),rgba(38,97,156,0.15))] opacity-75"
+                className="pointer-events-none absolute inset-0 rounded-xl bg-[linear-gradient(145deg,rgba(38,97,156,0.18),rgba(14,32,68,0.16))] opacity-80"
                 aria-hidden="true"
               />
-              <DevicePhoneV0 scheme="light" accent="lagoon" />
+              <PhoneMock scheme="light" accent="lapis" />
             </div>
-            <div className="relative w-full max-w-[320px] overflow-hidden rounded-lg border border-storm/15 bg-white/90 p-6 shadow-soft-1">
+            <div className="relative w-full max-w-[320px] overflow-hidden rounded-lg border border-lapis/35 bg-white/92 p-6 shadow-soft-1">
               <div
                 className="pointer-events-none absolute inset-0 bg-grad-panel opacity-60"
                 aria-hidden="true"
               />
               <div className="relative space-y-3">
-                <p className="text-[0.8rem] font-semibold uppercase tracking-[0.3em] text-cranberry">
+                <p className="text-[0.8rem] font-semibold uppercase tracking-[0.3em] text-lapis">
                   Estate orchestrator
                 </p>
-                <h2 className="text-h4 font-semibold text-storm">
+                <h2 className="text-gradient-lapis text-h4 font-semibold text-storm">
                   Bundle recipients into traceable, policy-backed checklists.
                 </h2>
                 <div className="grid gap-2 text-[1.02rem] text-thunder">
@@ -160,7 +156,7 @@ export default function DigitalLegacyPage() {
                   ].map((item, index) => (
                     <IconChip
                       key={item}
-                      tone={index === 0 ? "lagoon" : index === 1 ? "lapis" : "cranberry"}
+                      tone={index === 0 ? "lapis" : index === 1 ? "lagoon" : "cranberry"}
                       icon="check"
                       className="text-left"
                     >
@@ -179,8 +175,11 @@ export default function DigitalLegacyPage() {
           <h2 className="text-h3 font-semibold text-storm">v1 scope</h2>
           <div data-card-list="ab" className="grid gap-6 md:grid-cols-2">
             {scope.map((item) => (
-              <Card key={item.title}>
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-cranberry/15 text-cranberry">
+              <Card
+                key={item.title}
+                className="hover-card pressable border border-lapis/25 bg-white/92"
+              >
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-lapis/15 text-lapis">
                   <item.icon className="h-6 w-6" aria-hidden="true" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-h4 font-semibold text-storm">{item.title}</h3>
@@ -198,7 +197,9 @@ export default function DigitalLegacyPage() {
               className="pointer-events-none absolute inset-0 bg-grad-panel opacity-60"
               aria-hidden="true"
             />
-            <h2 className="text-h3 font-semibold text-storm">Future roadmap</h2>
+            <h2 className="text-gradient-hero text-h3 font-semibold text-storm">
+              Future roadmap
+            </h2>
             <p className="mt-4 max-w-3xl text-lead text-thunder">
               Digital Legacy continues to evolve with estate professionals and
               fiduciaries. Here’s what is currently in flight.
@@ -215,7 +216,7 @@ export default function DigitalLegacyPage() {
               ))}
             </ul>
             <p className="mt-6 text-[0.95rem] text-thunder">
-              Want to influence the roadmap? Email legacy@torvus.security with context
+              Want to influence the roadmap? Email legacy@torvussecurity.com with context
               about your estate planning workflows.
             </p>
           </div>

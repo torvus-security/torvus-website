@@ -32,10 +32,6 @@ export default function Header() {
 
   const productPath = PRODUCT_PATH;
   const mainNavigation = primaryNavigation.filter((item) => item.href !== productPath);
-  const productPath = "/product";
-
-  const mainNavigation = primaryNavigation.filter((item) => item.href !== productPath);
-
 
   const openProductMenu = () =>
     setMenu((prev) => ({
@@ -52,7 +48,6 @@ export default function Header() {
     if (pathname !== productPath) {
       router.push(productPath);
     }
-    router.push(productPath);
   };
 
   useEffect(() => {
@@ -63,7 +58,6 @@ export default function Header() {
       closeProductMenu();
       keepMenuOpenOnProductRef.current = false;
       setMenu({ open: false, focusIndex: 0 });
-
     }
 
     function handleKey(event: KeyboardEvent) {
@@ -72,8 +66,6 @@ export default function Header() {
       if (event.key === "Escape") {
         event.preventDefault();
         closeProductMenu();
-        keepMenuOpenOnProductRef.current = false;
-        setMenu({ open: false, focusIndex: 0 });
         desktopButtonRef.current?.focus();
         return;
       }
@@ -107,6 +99,14 @@ export default function Header() {
   }, [menu.open]);
 
   useEffect(() => {
+    const shouldKeepOpen = keepMenuOpenOnProductRef.current && pathname === productPath;
+
+    setMenu((prev) =>
+      shouldKeepOpen
+        ? { open: true, focusIndex: prev.focusIndex ?? 0 }
+        : { open: false, focusIndex: 0 },
+    );
+
     setMenu((prev) => {
       if (keepMenuOpenOnProductRef.current && pathname === productPath) {
         return { open: true, focusIndex: prev.focusIndex ?? 0 };
@@ -393,7 +393,6 @@ type ProductMenuProps = {
   onOpen: () => void;
   onClose: () => void;
   onProductNavigate: () => void;
-
   productHref: string;
   buttonRef: MutableRefObject<HTMLButtonElement | null>;
   menuRef: MutableRefObject<HTMLDivElement | null>;

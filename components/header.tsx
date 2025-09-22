@@ -18,7 +18,6 @@ const CTA = {
 };
 
 const PRODUCT_PATH = "/product" as const;
-
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
@@ -31,7 +30,8 @@ export default function Header() {
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const keepMenuOpenOnProductRef = useRef(false);
 
-  const productPath = "/product";
+  const productPath = PRODUCT_PATH;
+  const mainNavigation = primaryNavigation.filter((item) => item.href !== productPath);
 
   const openProductMenu = () =>
     setMenu((prev) => ({
@@ -45,7 +45,9 @@ export default function Header() {
 
   const navigateToProduct = () => {
     keepMenuOpenOnProductRef.current = true;
-    router.push(productPath);
+    if (pathname !== productPath) {
+      router.push(productPath);
+    }
   };
 
   useEffect(() => {
@@ -111,6 +113,32 @@ export default function Header() {
 
     keepMenuOpenOnProductRef.current = false;
   }, [pathname, productPath]);
+    setMenu((prev) => {
+      if (keepMenuOpenOnProductRef.current && pathname === productPath) {
+        return { open: true, focusIndex: prev.focusIndex ?? 0 };
+      }
+
+      return { open: false, focusIndex: 0 };
+    });
+
+    setMobileProductsOpen((_prev) => {
+      if (keepMenuOpenOnProductRef.current && pathname === productPath) {
+        return true;
+      }
+
+      return false;
+    });
+
+    keepMenuOpenOnProductRef.current = false;
+  }, [pathname, productPath]);
+
+    const shouldKeepOpen = keepMenuOpenOnProductRef.current && pathname === productPath;
+
+    setMenu((prev) => {
+      if (shouldKeepOpen) {
+        return { open: true, focusIndex: prev.focusIndex };
+      }
+
     setMobileProductsOpen(false);
     setMenu((prev) => {
       if (keepMenuOpenOnProductRef.current && pathname === productPath) {
@@ -129,6 +157,11 @@ export default function Header() {
 
       return { open: false, focusIndex: 0 };
     });
+
+    setMobileProductsOpen(shouldKeepOpen);
+
+    keepMenuOpenOnProductRef.current = false;
+  }, [pathname, productPath]);
   }, [pathname]);
 
   useEffect(() => {

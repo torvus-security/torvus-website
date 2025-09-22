@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type MutableRefObject } from "react";
 
 import BrandLogo from "@/components/brand";
@@ -24,6 +24,7 @@ type ProductMenuState = {
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const [menu, setMenu] = useState<ProductMenuState>({ open: false, focusIndex: 0 });
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
 
@@ -31,12 +32,31 @@ export default function Header() {
   const mobileButtonRef = useRef<HTMLButtonElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const keepMenuOpenOnProductRef = useRef(false);
+
+  const productPath = "/product";
+
+  const openProductMenu = () =>
+    setMenu((prev) => ({
+      open: true,
+      focusIndex: prev.open ? prev.focusIndex : 0,
+    }));
+  const closeProductMenu = () => {
+    keepMenuOpenOnProductRef.current = false;
+    setMenu({ open: false, focusIndex: 0 });
+  };
+
+  const navigateToProduct = () => {
+    keepMenuOpenOnProductRef.current = true;
+    router.push(productPath);
+  };
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
       if (!menu.open) return;
       if (menuRef.current?.contains(event.target as Node)) return;
       if (desktopButtonRef.current?.contains(event.target as Node)) return;
+      keepMenuOpenOnProductRef.current = false;
       setMenu({ open: false, focusIndex: 0 });
     }
 
@@ -44,6 +64,7 @@ export default function Header() {
       if (!menu.open) return;
       if (event.key === "Escape") {
         event.preventDefault();
+        keepMenuOpenOnProductRef.current = false;
         setMenu({ open: false, focusIndex: 0 });
         desktopButtonRef.current?.focus();
       } else if (event.key === "ArrowDown") {
@@ -73,8 +94,24 @@ export default function Header() {
   }, [menu.open]);
 
   useEffect(() => {
-    setMenu({ open: false, focusIndex: 0 });
     setMobileProductsOpen(false);
+    setMenu((prev) => {
+      if (keepMenuOpenOnProductRef.current && pathname === productPath) {
+        keepMenuOpenOnProductRef.current = false;
+        return {
+          open: true,
+          focusIndex: prev.focusIndex ?? 0,
+        };
+      }
+
+      keepMenuOpenOnProductRef.current = false;
+
+      if (!prev.open && prev.focusIndex === 0) {
+        return prev;
+      }
+
+      return { open: false, focusIndex: 0 };
+    });
   }, [pathname]);
 
   useEffect(() => {
@@ -95,13 +132,10 @@ export default function Header() {
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
           <ProductMenu
             menu={menu}
-            onToggle={() =>
-              setMenu((prev) => ({
-                open: !prev.open,
-                focusIndex: prev.open ? prev.focusIndex : 0,
-              }))
-            }
-            onClose={() => setMenu({ open: false, focusIndex: 0 })}
+            onOpen={openProductMenu}
+            onClose={closeProductMenu}
+            onProductNavigate={navigateToProduct}
+            productHref={productPath}
             buttonRef={desktopButtonRef}
             menuRef={menuRef}
             itemRefs={itemRefs}
@@ -132,7 +166,10 @@ export default function Header() {
             aria-expanded={mobileProductsOpen}
             aria-controls="mobile-products"
             className="inline-flex items-center whitespace-nowrap rounded-full border border-storm/15 bg-white px-3 py-1.5 text-[0.9rem] font-semibold text-storm/80 transition hover:border-lagoon/40 hover:text-storm"
-            onClick={() => setMobileProductsOpen((prev) => !prev)}
+            onClick={() => {
+              navigateToProduct();
+              setMobileProductsOpen((prev) => !prev);
+            }}
           >
             Products
             <span className="ml-2 inline-flex h-4 w-4 items-center justify-center">
@@ -199,8 +236,10 @@ function NavLink({ item, pathname }: NavLinkProps) {
 
 type ProductMenuProps = {
   menu: ProductMenuState;
-  onToggle: () => void;
+  onOpen: () => void;
   onClose: () => void;
+  onProductNavigate: () => void;
+  productHref: string;
   buttonRef: MutableRefObject<HTMLButtonElement | null>;
   menuRef: MutableRefObject<HTMLDivElement | null>;
   itemRefs: MutableRefObject<(HTMLAnchorElement | null)[]>;
@@ -209,8 +248,10 @@ type ProductMenuProps = {
 
 function ProductMenu({
   menu,
-  onToggle,
+  onOpen,
   onClose,
+  onProductNavigate,
+  productHref,
   buttonRef,
   menuRef,
   itemRefs,
@@ -221,15 +262,19 @@ function ProductMenu({
       <button
         ref={buttonRef}
         type="button"
+        data-href={productHref}
         className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-storm/15 bg-white/80 px-3 py-1.5 text-[0.95rem] font-semibold text-storm/80 transition hover:border-lagoon/40 hover:text-storm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lagoon focus-visible:ring-offset-2 focus-visible:ring-offset-white"
         aria-haspopup="true"
         aria-expanded={menu.open}
         aria-controls="desktop-product-menu"
-        onClick={() => onToggle()}
+        onClick={() => {
+          onProductNavigate();
+          onOpen();
+        }}
         onKeyDown={(event) => {
           if (event.key === "ArrowDown" && !menu.open) {
             event.preventDefault();
-            onToggle();
+            onOpen();
           }
         }}
       >

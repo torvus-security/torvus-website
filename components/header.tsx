@@ -66,6 +66,8 @@ export default function Header() {
       if (event.key === "Escape") {
         event.preventDefault();
         closeProductMenu();
+        keepMenuOpenOnProductRef.current = false;
+        setMenu({ open: false, focusIndex: 0 });
         desktopButtonRef.current?.focus();
         return;
       }
@@ -107,6 +109,10 @@ export default function Header() {
         : { open: false, focusIndex: 0 },
     );
 
+    setMobileProductsOpen(shouldKeepOpen);
+
+    keepMenuOpenOnProductRef.current = false;
+  }, [pathname, productPath]);
     setMenu((prev) => {
       if (keepMenuOpenOnProductRef.current && pathname === productPath) {
         return { open: true, focusIndex: prev.focusIndex ?? 0 };
@@ -202,7 +208,6 @@ export default function Header() {
         className="border-t border-black/5 bg-white/90 py-3 lg:hidden"
         aria-label="Primary"
       >
-
         <div className="container mx-auto flex flex-col gap-3 px-5">
           <div className="flex items-center gap-3 overflow-x-auto">
             <button

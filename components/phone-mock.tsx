@@ -33,10 +33,14 @@ export function PhoneMock({
   const bezel = scheme === "dark" ? "#D9DEE5" : "#E4E8EE";
   const cardBg = scheme === "dark" ? "rgba(7,12,22,0.92)" : "rgba(255,255,255,0.92)";
   const tint = scheme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)";
+  const NARROW_SCREEN_INSET = 48;
+  const WIDE_SCREEN_INSET = 44;
   const dimensions = narrow
     ? "h-[560px] w-[260px] md:h-[600px] md:w-[280px]"
     : "h-[480px] w-[280px] md:h-[520px] md:w-[300px]";
-  const screenInset = narrow ? "inset-[48px]" : "inset-[44px]";
+  const screenInset = narrow
+    ? `inset-[${NARROW_SCREEN_INSET}px]`
+    : `inset-[${WIDE_SCREEN_INSET}px]`;
 
   return (
     <div

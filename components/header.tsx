@@ -18,7 +18,6 @@ const CTA = {
 };
 
 const PRODUCT_PATH = "/product" as const;
-
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
@@ -34,6 +33,8 @@ export default function Header() {
   const productPath = PRODUCT_PATH;
   const mainNavigation = primaryNavigation.filter((item) => item.href !== productPath);
   const productPath = "/product";
+
+  const mainNavigation = primaryNavigation.filter((item) => item.href !== productPath);
 
 
   const openProductMenu = () =>
@@ -62,6 +63,7 @@ export default function Header() {
       closeProductMenu();
       keepMenuOpenOnProductRef.current = false;
       setMenu({ open: false, focusIndex: 0 });
+
     }
 
     function handleKey(event: KeyboardEvent) {
@@ -105,6 +107,25 @@ export default function Header() {
   }, [menu.open]);
 
   useEffect(() => {
+    setMenu((prev) => {
+      if (keepMenuOpenOnProductRef.current && pathname === productPath) {
+        return { open: true, focusIndex: prev.focusIndex ?? 0 };
+      }
+
+      return { open: false, focusIndex: 0 };
+    });
+
+    setMobileProductsOpen((_prev) => {
+      if (keepMenuOpenOnProductRef.current && pathname === productPath) {
+        return true;
+      }
+
+      return false;
+    });
+
+    keepMenuOpenOnProductRef.current = false;
+  }, [pathname, productPath]);
+
     const shouldKeepOpen = keepMenuOpenOnProductRef.current && pathname === productPath;
 
     setMenu((prev) => {
@@ -181,6 +202,7 @@ export default function Header() {
         className="border-t border-black/5 bg-white/90 py-3 lg:hidden"
         aria-label="Primary"
       >
+
         <div className="container mx-auto flex flex-col gap-3 px-5">
           <div className="flex items-center gap-3 overflow-x-auto">
             <button
@@ -371,6 +393,7 @@ type ProductMenuProps = {
   onOpen: () => void;
   onClose: () => void;
   onProductNavigate: () => void;
+
   productHref: string;
   buttonRef: MutableRefObject<HTMLButtonElement | null>;
   menuRef: MutableRefObject<HTMLDivElement | null>;

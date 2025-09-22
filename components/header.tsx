@@ -17,6 +17,7 @@ const CTA = {
   label: "Join the waitlist",
 };
 
+const PRODUCT_PATH = "/product" as const;
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
@@ -29,6 +30,8 @@ export default function Header() {
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const keepMenuOpenOnProductRef = useRef(false);
 
+  const productPath = PRODUCT_PATH;
+  const mainNavigation = primaryNavigation.filter((item) => item.href !== productPath);
   const productPath = "/product";
 
   const mainNavigation = primaryNavigation.filter((item) => item.href !== productPath);
@@ -46,6 +49,9 @@ export default function Header() {
 
   const navigateToProduct = () => {
     keepMenuOpenOnProductRef.current = true;
+    if (pathname !== productPath) {
+      router.push(productPath);
+    }
     router.push(productPath);
   };
 
@@ -54,9 +60,7 @@ export default function Header() {
       if (!menu.open) return;
       if (menuRef.current?.contains(event.target as Node)) return;
       if (desktopButtonRef.current?.contains(event.target as Node)) return;
-
       closeProductMenu();
-
       keepMenuOpenOnProductRef.current = false;
       setMenu({ open: false, focusIndex: 0 });
 
@@ -103,7 +107,6 @@ export default function Header() {
   }, [menu.open]);
 
   useEffect(() => {
-
     setMenu((prev) => {
       if (keepMenuOpenOnProductRef.current && pathname === productPath) {
         return { open: true, focusIndex: prev.focusIndex ?? 0 };
@@ -123,6 +126,13 @@ export default function Header() {
     keepMenuOpenOnProductRef.current = false;
   }, [pathname, productPath]);
 
+    const shouldKeepOpen = keepMenuOpenOnProductRef.current && pathname === productPath;
+
+    setMenu((prev) => {
+      if (shouldKeepOpen) {
+        return { open: true, focusIndex: prev.focusIndex };
+      }
+
     setMobileProductsOpen(false);
     setMenu((prev) => {
       if (keepMenuOpenOnProductRef.current && pathname === productPath) {
@@ -141,6 +151,11 @@ export default function Header() {
 
       return { open: false, focusIndex: 0 };
     });
+
+    setMobileProductsOpen(shouldKeepOpen);
+
+    keepMenuOpenOnProductRef.current = false;
+  }, [pathname, productPath]);
   }, [pathname]);
 
   useEffect(() => {
@@ -188,6 +203,48 @@ export default function Header() {
         aria-label="Primary"
       >
 
+        <div className="container mx-auto flex flex-col gap-3 px-5">
+          <div className="flex items-center gap-3 overflow-x-auto">
+            <button
+              ref={mobileButtonRef}
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={mobileProductsOpen}
+              aria-controls="mobile-products"
+              className="inline-flex items-center whitespace-nowrap rounded-full border border-storm/15 bg-white px-3 py-1.5 text-[0.9rem] font-semibold text-storm/80 transition hover:border-lagoon/40 hover:text-storm"
+              onClick={() => {
+                setMobileProductsOpen((prev) => {
+                  const next = !prev;
+                  if (next) {
+                    navigateToProduct();
+                  } else {
+                    keepMenuOpenOnProductRef.current = false;
+                  }
+                  return next;
+                });
+              }}
+            >
+              Products
+              <span className="ml-2 inline-flex h-4 w-4 items-center justify-center">
+                <svg
+                  aria-hidden="true"
+                  className={cn(
+                    "h-4 w-4 transition-transform",
+                    mobileProductsOpen ? "rotate-180" : "rotate-0",
+                  )}
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M5 7.5 10 12.5 15 7.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+              </span>
+            </button>
+            {mainNavigation.map((item) => (
+              <LinkChip key={item.href} item={item} pathname={pathname} />
         <div className="container mx-auto flex items-center gap-3 overflow-x-auto px-5">
           <button
             ref={mobileButtonRef}

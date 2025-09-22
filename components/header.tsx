@@ -17,10 +17,7 @@ const CTA = {
   label: "Join the waitlist",
 };
 
-type ProductMenuState = {
-  open: boolean;
-  focusIndex: number;
-};
+const PRODUCT_PATH = "/product" as const;
 
 export default function Header() {
   const pathname = usePathname();
@@ -34,7 +31,10 @@ export default function Header() {
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const keepMenuOpenOnProductRef = useRef(false);
 
+  const productPath = PRODUCT_PATH;
+  const mainNavigation = primaryNavigation.filter((item) => item.href !== productPath);
   const productPath = "/product";
+
 
   const openProductMenu = () =>
     setMenu((prev) => ({
@@ -48,6 +48,9 @@ export default function Header() {
 
   const navigateToProduct = () => {
     keepMenuOpenOnProductRef.current = true;
+    if (pathname !== productPath) {
+      router.push(productPath);
+    }
     router.push(productPath);
   };
 
@@ -56,25 +59,33 @@ export default function Header() {
       if (!menu.open) return;
       if (menuRef.current?.contains(event.target as Node)) return;
       if (desktopButtonRef.current?.contains(event.target as Node)) return;
+      closeProductMenu();
       keepMenuOpenOnProductRef.current = false;
       setMenu({ open: false, focusIndex: 0 });
     }
 
     function handleKey(event: KeyboardEvent) {
       if (!menu.open) return;
+
       if (event.key === "Escape") {
         event.preventDefault();
+        closeProductMenu();
         keepMenuOpenOnProductRef.current = false;
         setMenu({ open: false, focusIndex: 0 });
         desktopButtonRef.current?.focus();
-      } else if (event.key === "ArrowDown") {
+        return;
+      }
+
+      if (event.key === "ArrowDown") {
         event.preventDefault();
         setMenu((prev) => {
           const nextIndex = (prev.focusIndex + 1) % productNavigation.length;
           itemRefs.current[nextIndex]?.focus();
           return { open: true, focusIndex: nextIndex };
         });
-      } else if (event.key === "ArrowUp") {
+      }
+
+      if (event.key === "ArrowUp") {
         event.preventDefault();
         setMenu((prev) => {
           const nextIndex =
@@ -94,6 +105,13 @@ export default function Header() {
   }, [menu.open]);
 
   useEffect(() => {
+    const shouldKeepOpen = keepMenuOpenOnProductRef.current && pathname === productPath;
+
+    setMenu((prev) => {
+      if (shouldKeepOpen) {
+        return { open: true, focusIndex: prev.focusIndex };
+      }
+
     setMobileProductsOpen(false);
     setMenu((prev) => {
       if (keepMenuOpenOnProductRef.current && pathname === productPath) {
@@ -112,6 +130,11 @@ export default function Header() {
 
       return { open: false, focusIndex: 0 };
     });
+
+    setMobileProductsOpen(shouldKeepOpen);
+
+    keepMenuOpenOnProductRef.current = false;
+  }, [pathname, productPath]);
   }, [pathname]);
 
   useEffect(() => {
@@ -141,7 +164,7 @@ export default function Header() {
             itemRefs={itemRefs}
             pathname={pathname}
           />
-          {primaryNavigation.map((item) => (
+          {mainNavigation.map((item) => (
             <NavLink key={item.href} item={item} pathname={pathname} />
           ))}
         </nav>
@@ -158,6 +181,48 @@ export default function Header() {
         className="border-t border-black/5 bg-white/90 py-3 lg:hidden"
         aria-label="Primary"
       >
+        <div className="container mx-auto flex flex-col gap-3 px-5">
+          <div className="flex items-center gap-3 overflow-x-auto">
+            <button
+              ref={mobileButtonRef}
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={mobileProductsOpen}
+              aria-controls="mobile-products"
+              className="inline-flex items-center whitespace-nowrap rounded-full border border-storm/15 bg-white px-3 py-1.5 text-[0.9rem] font-semibold text-storm/80 transition hover:border-lagoon/40 hover:text-storm"
+              onClick={() => {
+                setMobileProductsOpen((prev) => {
+                  const next = !prev;
+                  if (next) {
+                    navigateToProduct();
+                  } else {
+                    keepMenuOpenOnProductRef.current = false;
+                  }
+                  return next;
+                });
+              }}
+            >
+              Products
+              <span className="ml-2 inline-flex h-4 w-4 items-center justify-center">
+                <svg
+                  aria-hidden="true"
+                  className={cn(
+                    "h-4 w-4 transition-transform",
+                    mobileProductsOpen ? "rotate-180" : "rotate-0",
+                  )}
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M5 7.5 10 12.5 15 7.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+              </span>
+            </button>
+            {mainNavigation.map((item) => (
+              <LinkChip key={item.href} item={item} pathname={pathname} />
         <div className="container mx-auto flex items-center gap-3 overflow-x-auto px-5">
           <button
             ref={mobileButtonRef}
@@ -205,11 +270,54 @@ export default function Header() {
               </Link>
             ))}
           </div>
-        ) : null}
+
+          {mobileProductsOpen ? (
+            <div
+              id="mobile-products"
+              role="menu"
+              aria-label="Products"
+              className="grid gap-2 rounded-2xl border border-storm/10 bg-white p-3 shadow-sm"
+            >
+              {productNavigation.map((item) => {
+                const itemPath = getPathname(item.href);
+                const isActive = pathname === itemPath;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    role="menuitem"
+                    aria-current={isActive ? "page" : undefined}
+                    className={cn(
+                      "flex flex-col gap-1 rounded-xl px-3 py-2 text-left transition",
+                      isActive
+                        ? "bg-pastel-lagoon/60 text-storm"
+                        : "text-storm/80 hover:bg-mist/60 hover:text-storm",
+                    )}
+                    onClick={() => {
+                      setMobileProductsOpen(false);
+                    }}
+                  >
+                    <span className="text-[0.95rem] font-semibold">{item.label}</span>
+                    {item.description ? (
+                      <span className="text-[0.8rem] text-thunder/75">
+                        {item.description}
+                      </span>
+                    ) : null}
+                  </Link>
+                );
+              })}
+            </div>
+          ) : null}
+        </div>
       </nav>
     </header>
   );
 }
+
+type ProductMenuState = {
+  open: boolean;
+  focusIndex: number;
+};
 
 type NavLinkProps = {
   item: NavigationLink;
@@ -227,6 +335,30 @@ function NavLink({ item, pathname }: NavLinkProps) {
         isActive
           ? "border-cranberry text-cranberry"
           : "text-storm/70 hover:border-lagoon/60 hover:text-storm",
+      )}
+    >
+      {item.label}
+    </Link>
+  );
+}
+
+type LinkChipProps = {
+  item: NavigationLink;
+  pathname: string;
+};
+
+function LinkChip({ item, pathname }: LinkChipProps) {
+  const itemPath = getPathname(item.href);
+  const isActive = pathname === itemPath;
+  return (
+    <Link
+      href={item.href}
+      aria-current={isActive ? "page" : undefined}
+      className={cn(
+        "inline-flex items-center whitespace-nowrap rounded-full border px-3 py-1.5 text-[0.9rem] font-semibold transition",
+        isActive
+          ? "border-cranberry bg-pastel-cranberry/40 text-cranberry"
+          : "border-storm/10 bg-white text-storm/70 hover:border-lagoon/40 hover:text-storm",
       )}
     >
       {item.label}
@@ -316,7 +448,7 @@ function ProductMenu({
                       "flex flex-col gap-1 rounded-xl px-3 py-2 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lagoon focus-visible:ring-offset-2 focus-visible:ring-offset-white",
                       isActive
                         ? "bg-pastel-lagoon/60 text-storm"
-                        : "hover:bg-mist/60 text-storm/80 hover:text-storm",
+                        : "text-storm/80 hover:bg-mist/60 hover:text-storm",
                     )}
                     onClick={() => {
                       onClose();
@@ -336,30 +468,6 @@ function ProductMenu({
         </div>
       ) : null}
     </div>
-  );
-}
-
-type LinkChipProps = {
-  item: NavigationLink;
-  pathname: string;
-};
-
-function LinkChip({ item, pathname }: LinkChipProps) {
-  const itemPath = getPathname(item.href);
-  const isActive = pathname === itemPath;
-  return (
-    <Link
-      href={item.href}
-      aria-current={isActive ? "page" : undefined}
-      className={cn(
-        "inline-flex items-center whitespace-nowrap rounded-full border px-3 py-1.5 text-[0.9rem] font-semibold transition",
-        isActive
-          ? "border-cranberry bg-pastel-cranberry/40 text-cranberry"
-          : "border-storm/10 bg-white text-storm/70 hover:border-lagoon/40 hover:text-storm",
-      )}
-    >
-      {item.label}
-    </Link>
   );
 }
 

@@ -33,6 +33,8 @@ export default function Header() {
 
   const productPath = PRODUCT_PATH;
   const mainNavigation = primaryNavigation.filter((item) => item.href !== productPath);
+  const productPath = "/product";
+
 
   const openProductMenu = () =>
     setMenu((prev) => ({
@@ -49,6 +51,7 @@ export default function Header() {
     if (pathname !== productPath) {
       router.push(productPath);
     }
+    router.push(productPath);
   };
 
   useEffect(() => {
@@ -57,6 +60,8 @@ export default function Header() {
       if (menuRef.current?.contains(event.target as Node)) return;
       if (desktopButtonRef.current?.contains(event.target as Node)) return;
       closeProductMenu();
+      keepMenuOpenOnProductRef.current = false;
+      setMenu({ open: false, focusIndex: 0 });
     }
 
     function handleKey(event: KeyboardEvent) {
@@ -65,6 +70,8 @@ export default function Header() {
       if (event.key === "Escape") {
         event.preventDefault();
         closeProductMenu();
+        keepMenuOpenOnProductRef.current = false;
+        setMenu({ open: false, focusIndex: 0 });
         desktopButtonRef.current?.focus();
         return;
       }
@@ -105,6 +112,18 @@ export default function Header() {
         return { open: true, focusIndex: prev.focusIndex };
       }
 
+    setMobileProductsOpen(false);
+    setMenu((prev) => {
+      if (keepMenuOpenOnProductRef.current && pathname === productPath) {
+        keepMenuOpenOnProductRef.current = false;
+        return {
+          open: true,
+          focusIndex: prev.focusIndex ?? 0,
+        };
+      }
+
+      keepMenuOpenOnProductRef.current = false;
+
       if (!prev.open && prev.focusIndex === 0) {
         return prev;
       }
@@ -116,6 +135,7 @@ export default function Header() {
 
     keepMenuOpenOnProductRef.current = false;
   }, [pathname, productPath]);
+  }, [pathname]);
 
   useEffect(() => {
     if (menu.open) {
@@ -138,6 +158,7 @@ export default function Header() {
             onOpen={openProductMenu}
             onClose={closeProductMenu}
             onProductNavigate={navigateToProduct}
+            productHref={productPath}
             buttonRef={desktopButtonRef}
             menuRef={menuRef}
             itemRefs={itemRefs}
@@ -202,6 +223,51 @@ export default function Header() {
             </button>
             {mainNavigation.map((item) => (
               <LinkChip key={item.href} item={item} pathname={pathname} />
+        <div className="container mx-auto flex items-center gap-3 overflow-x-auto px-5">
+          <button
+            ref={mobileButtonRef}
+            type="button"
+            aria-haspopup="true"
+            aria-expanded={mobileProductsOpen}
+            aria-controls="mobile-products"
+            className="inline-flex items-center whitespace-nowrap rounded-full border border-storm/15 bg-white px-3 py-1.5 text-[0.9rem] font-semibold text-storm/80 transition hover:border-lagoon/40 hover:text-storm"
+            onClick={() => {
+              navigateToProduct();
+              setMobileProductsOpen((prev) => !prev);
+            }}
+          >
+            Products
+            <span className="ml-2 inline-flex h-4 w-4 items-center justify-center">
+              <svg
+                aria-hidden="true"
+                className={cn(
+                  "h-4 w-4 transition-transform",
+                  mobileProductsOpen ? "rotate-180" : "rotate-0",
+                )}
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path d="M5 7.5 10 12.5 15 7.5" stroke="currentColor" strokeWidth="1.5" />
+              </svg>
+            </span>
+          </button>
+          {primaryNavigation.map((item) => (
+            <LinkChip key={item.href} item={item} pathname={pathname} />
+          ))}
+        </div>
+        {mobileProductsOpen ? (
+          <div
+            id="mobile-products"
+            className="container mx-auto mt-3 flex flex-wrap gap-3 px-5"
+          >
+            {productNavigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="inline-flex flex-1 min-w-[140px] items-center justify-center whitespace-nowrap rounded-xl border border-storm/10 bg-white px-3 py-2 text-[0.9rem] font-semibold text-storm/80 transition hover:border-lagoon/40 hover:text-storm"
+              >
+                {item.label}
+              </Link>
             ))}
           </div>
 
@@ -305,6 +371,7 @@ type ProductMenuProps = {
   onOpen: () => void;
   onClose: () => void;
   onProductNavigate: () => void;
+  productHref: string;
   buttonRef: MutableRefObject<HTMLButtonElement | null>;
   menuRef: MutableRefObject<HTMLDivElement | null>;
   itemRefs: MutableRefObject<(HTMLAnchorElement | null)[]>;
@@ -316,6 +383,7 @@ function ProductMenu({
   onOpen,
   onClose,
   onProductNavigate,
+  productHref,
   buttonRef,
   menuRef,
   itemRefs,
@@ -326,6 +394,7 @@ function ProductMenu({
       <button
         ref={buttonRef}
         type="button"
+        data-href={productHref}
         className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-storm/15 bg-white/80 px-3 py-1.5 text-[0.95rem] font-semibold text-storm/80 transition hover:border-lagoon/40 hover:text-storm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lagoon focus-visible:ring-offset-2 focus-visible:ring-offset-white"
         aria-haspopup="true"
         aria-expanded={menu.open}

@@ -33,6 +33,14 @@ export function PhoneMock({
   const bezel = scheme === "dark" ? "#D9DEE5" : "#E4E8EE";
   const cardBg = scheme === "dark" ? "rgba(7,12,22,0.92)" : "rgba(255,255,255,0.92)";
   const tint = scheme === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)";
+  const NARROW_SCREEN_INSET = 48;
+  const WIDE_SCREEN_INSET = 44;
+  const dimensions = narrow
+    ? "h-[560px] w-[260px] md:h-[600px] md:w-[280px]"
+    : "h-[480px] w-[280px] md:h-[520px] md:w-[300px]";
+  const screenInset = narrow
+    ? `inset-[${NARROW_SCREEN_INSET}px]`
+    : `inset-[${WIDE_SCREEN_INSET}px]`;
 
   return (
     <div
@@ -40,8 +48,7 @@ export function PhoneMock({
       role="img"
       className={cn(
         "relative mx-auto",
-        narrow ? "h-[600px] w-[280px]" : "h-[520px] w-[320px]",
-        "md:h-[620px] md:w-[300px]",
+        dimensions,
         "animate-[float_10s_ease-in-out_infinite]",
       )}
     >
@@ -157,7 +164,12 @@ export function PhoneMock({
       </svg>
 
       {src ? (
-        <div className="pointer-events-none absolute inset-[52px] z-10 overflow-hidden rounded-[22px]">
+        <div
+          className={cn(
+            "pointer-events-none absolute z-10 overflow-hidden rounded-[22px]",
+            screenInset,
+          )}
+        >
           <Image
             src={src}
             alt={alt ?? ariaLabel}
@@ -169,7 +181,12 @@ export function PhoneMock({
         </div>
       ) : null}
       {!src && children ? (
-        <div className="pointer-events-none absolute inset-[52px] z-10 flex h-[510px] w-[246px] items-center justify-center overflow-hidden rounded-[22px]">
+        <div
+          className={cn(
+            "pointer-events-none absolute z-10 flex h-full w-full items-center justify-center overflow-hidden rounded-[22px]",
+            screenInset,
+          )}
+        >
           {children}
         </div>
       ) : null}

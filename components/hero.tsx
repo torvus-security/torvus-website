@@ -39,84 +39,91 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      <div className="container relative grid gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center">
-        <div className="space-y-7 rounded-2xl border border-white/60 bg-white/90 p-8 shadow-[0_22px_60px_rgba(11,18,32,0.12)] backdrop-blur-sm">
-          <p className="text-[0.9rem] font-semibold uppercase tracking-[0.26em] text-lapis">
-            Digital Legacy Kit
-          </p>
-          <h1 className="text-display font-semibold text-storm">
-            Preserve your intent and release it only when it truly matters.
-          </h1>
-          <p className="max-w-[60ch] text-lead text-thunder">
-            Torvus Digital Legacy seals assets, instructions, and crypto secrets behind
-            policy-orchestrated releases so executors only receive what you intend—after
-            verification and with provenance.
-          </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <PrimarySubtleLink href="/waitlist" className="w-full sm:w-auto">
-              Join the waitlist
-            </PrimarySubtleLink>
-            <Link
-              href="/digital-legacy"
-              className={buttonClasses({
-                variant: "tertiary",
-                size: "sm",
-                className: "border-lapis/45 text-lapis",
-              })}
-            >
-              Explore Digital Legacy
-            </Link>
+      <div className="container relative">
+        <div className="mx-auto flex w-full flex-col items-center gap-12 lg:max-w-none lg:flex-row lg:items-stretch lg:justify-center">
+          <div className="flex w-full lg:max-w-[560px] lg:flex-1">
+            <div className="flex h-full w-full flex-col space-y-7 rounded-2xl border border-white/60 bg-white/90 p-8 shadow-[0_22px_60px_rgba(11,18,32,0.12)] backdrop-blur-sm">
+              <p className="text-[0.9rem] font-semibold uppercase tracking-[0.26em] text-lapis">
+                Digital Legacy Kit
+              </p>
+              <h1 className="text-display font-semibold text-storm">
+                Preserve your intent and release it only when it truly matters.
+              </h1>
+              <p className="max-w-[60ch] text-lead text-thunder">
+                Torvus Digital Legacy seals assets, instructions, and crypto secrets
+                behind policy-orchestrated releases so executors only receive what you
+                intend—after verification and with provenance.
+              </p>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <PrimarySubtleLink href="/waitlist" className="w-full sm:w-auto">
+                  Join the waitlist
+                </PrimarySubtleLink>
+                <Link
+                  href="/digital-legacy"
+                  className={buttonClasses({
+                    variant: "tertiary",
+                    size: "sm",
+                    className: "border-lapis/45 text-lapis",
+                  })}
+                >
+                  Explore Digital Legacy
+                </Link>
+              </div>
+              <p className="max-w-[60ch] text-[0.94rem] text-thunder">
+                Zero-knowledge encryption, duress controls, and executors with verified
+                identities. No plaintext ever leaves your vault without the conditions you
+                set.
+              </p>
+              <div className="mt-6 grid gap-2 text-[0.92rem]">
+                {highlights.map((item) => (
+                  <IconChip key={item.copy} tone={item.tone} icon={item.icon}>
+                    {item.copy}
+                  </IconChip>
+                ))}
+              </div>
+            </div>
           </div>
-          <p className="max-w-[60ch] text-[0.94rem] text-thunder">
-            Zero-knowledge encryption, duress controls, and executors with verified
-            identities. No plaintext ever leaves your vault without the conditions you
-            set.
-          </p>
-          <div className="mt-6 grid gap-2 text-[0.92rem]">
-            {highlights.map((item) => (
-              <IconChip key={item.copy} tone={item.tone} icon={item.icon}>
-                {item.copy}
-              </IconChip>
-            ))}
-          </div>
-        </div>
 
-        <div className="flex flex-col items-center gap-8">
-          <DeviceMock />
-          <div className="w-full max-w-[340px] space-y-4 rounded-2xl border border-storm/10 bg-white/95 p-6 shadow-soft-1">
-            <p className="text-[0.8rem] font-semibold uppercase tracking-[0.3em] text-lapis">
-              Estate orchestrator
-            </p>
-            <h2 className="text-h4 font-semibold text-storm">
-              Executors receive policy-backed checklists with provenance.
-            </h2>
-            <ul className="space-y-2 text-[0.95rem] text-thunder">
-              <li className="flex gap-3">
-                <span
-                  className="mt-[0.4rem] inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-lapis"
-                  aria-hidden="true"
-                />
-                <span>
-                  Per-recipient bundles with redaction controls before anything unlocks.
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <span
-                  className="mt-[0.4rem] inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-lagoon"
-                  aria-hidden="true"
-                />
-                <span>
-                  Verified executors complete step-by-step check-ins monitored by Torvus.
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <span
-                  className="mt-[0.4rem] inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-cranberry"
-                  aria-hidden="true"
-                />
-                <span>All actions produce tamper-evident provenance certificates.</span>
-              </li>
-            </ul>
+          <div className="flex w-full flex-col items-center gap-8 lg:max-w-[480px] lg:flex-1 lg:justify-center">
+            <div className="flex w-full flex-1 items-center justify-center">
+              <DeviceMock />
+            </div>
+            <div className="w-full max-w-[340px] space-y-4 rounded-2xl border border-storm/10 bg-white/95 p-6 shadow-soft-1 lg:self-center">
+              <p className="text-[0.8rem] font-semibold uppercase tracking-[0.3em] text-lapis">
+                Estate orchestrator
+              </p>
+              <h2 className="text-h4 font-semibold text-storm">
+                Executors receive policy-backed checklists with provenance.
+              </h2>
+              <ul className="space-y-2 text-[0.95rem] text-thunder">
+                <li className="flex gap-3">
+                  <span
+                    className="mt-[0.4rem] inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-lapis"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    Per-recipient bundles with redaction controls before anything unlocks.
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span
+                    className="mt-[0.4rem] inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-lagoon"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    Verified executors complete step-by-step check-ins monitored by
+                    Torvus.
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span
+                    className="mt-[0.4rem] inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-cranberry"
+                    aria-hidden="true"
+                  />
+                  <span>All actions produce tamper-evident provenance certificates.</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

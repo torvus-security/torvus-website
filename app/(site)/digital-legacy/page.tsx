@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { AnalyticsEvent } from "@/components/analytics-event";
+import { DeviceMock } from "@/components/device-mock";
 import { SectionIntro } from "@/components/section-intro";
 import { PrimarySubtleLink, buttonClasses } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -95,36 +96,90 @@ export default function DigitalLegacyPage() {
           className="pointer-events-none absolute -right-24 top-12 h-80 w-80 rounded-full bg-pastel-lapis/50 blur-[160px]"
           aria-hidden="true"
         />
-        <div className="container relative space-y-8">
-          <p className="text-[0.9rem] font-semibold uppercase tracking-[0.26em] text-lapis">
-            Digital Legacy
-          </p>
-          <h1 className="text-display font-semibold text-storm">
-            Digital Legacy, by Torvus
-          </h1>
-          <p className="max-w-prose text-lead text-thunder">
-            A privacy-first digital estate platform that inventories assets, verifies
-            executors, and releases information only when your policy says it’s time.
-          </p>
-          <div className="flex flex-wrap items-center gap-3">
-            <PrimarySubtleLink href="/waitlist" className="w-full sm:w-auto">
-              Join the waitlist
-            </PrimarySubtleLink>
-            <Link
-              href="/pricing"
-              className={buttonClasses({
-                variant: "secondary",
-                size: "sm",
-                className: "border-lagoon/45 text-lagoon",
-              })}
-            >
-              Compare tiers
-            </Link>
+        <div className="container relative">
+          <div className="mx-auto flex w-full flex-col items-center gap-12 lg:max-w-none lg:flex-row lg:items-stretch lg:justify-center">
+            <div className="flex w-full lg:max-w-[560px] lg:flex-1">
+              <div className="flex h-full w-full flex-col gap-6 rounded-2xl border border-white/60 bg-white/90 p-8 shadow-[0_22px_60px_rgba(11,18,32,0.12)] backdrop-blur-sm">
+                <div className="space-y-4">
+                  <p className="text-[0.9rem] font-semibold uppercase tracking-[0.26em] text-lapis">
+                    Digital Legacy
+                  </p>
+                  <h1 className="text-display font-semibold text-storm">
+                    Digital Legacy, by Torvus
+                  </h1>
+                  <p className="max-w-prose text-lead text-thunder">
+                    A privacy-first digital estate platform that inventories assets,
+                    verifies executors, and releases information only when your policy
+                    says it’s time.
+                  </p>
+                </div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <PrimarySubtleLink href="/waitlist" className="w-full sm:w-auto">
+                    Join the waitlist
+                  </PrimarySubtleLink>
+                  <Link
+                    href="/pricing"
+                    className={buttonClasses({
+                      variant: "secondary",
+                      size: "sm",
+                      className: "border-lagoon/45 text-lagoon",
+                    })}
+                  >
+                    Compare tiers
+                  </Link>
+                </div>
+                <p className="max-w-prose text-[0.95rem] text-thunder">
+                  Executors and beneficiaries always receive provenance records. Torvus
+                  operators never see your plaintext.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex w-full flex-col items-center gap-8 lg:max-w-[480px] lg:flex-1 lg:justify-center">
+              <div className="flex w-full flex-1 items-center justify-center">
+                <DeviceMock />
+              </div>
+              <div className="w-full max-w-[340px] space-y-4 rounded-2xl border border-storm/10 bg-white/95 p-6 shadow-soft-1 lg:self-center">
+                <p className="text-[0.8rem] font-semibold uppercase tracking-[0.3em] text-lapis">
+                  Estate orchestrator
+                </p>
+                <h2 className="text-h4 font-semibold text-storm">
+                  Executors receive policy-backed checklists with provenance.
+                </h2>
+                <ul className="space-y-2 text-[0.95rem] text-thunder">
+                  <li className="flex gap-3">
+                    <span
+                      className="mt-[0.4rem] inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-lapis"
+                      aria-hidden="true"
+                    />
+                    <span>
+                      Per-recipient bundles with redaction controls before anything
+                      unlocks.
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span
+                      className="mt-[0.4rem] inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-lagoon"
+                      aria-hidden="true"
+                    />
+                    <span>
+                      Verified executors complete step-by-step check-ins monitored by
+                      Torvus.
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span
+                      className="mt-[0.4rem] inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-cranberry"
+                      aria-hidden="true"
+                    />
+                    <span>
+                      All actions produce tamper-evident provenance certificates.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <p className="max-w-prose text-[0.95rem] text-thunder">
-            Executors and beneficiaries always receive provenance records. Torvus
-            operators never see your plaintext.
-          </p>
         </div>
       </section>
 

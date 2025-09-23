@@ -41,3 +41,7 @@ pnpm dev
 
 - `/api/health` responds with `{ status: "ok" }` for uptime checks.
 - Security headers are documented in `docs/SECURITY_HEADERS.md`; update the JSON-LD hash if structured data changes.
+
+## Reports
+
+- [2025-09-23 Security Audit](./docs/reports/torvus-security-audit-2025-09-23.md)

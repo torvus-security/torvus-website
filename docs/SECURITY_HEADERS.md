@@ -11,7 +11,7 @@ Current headers:
 - `Permissions-Policy`: `camera=(self "https://forms.fillout.com" "https://*.fillout.com"), microphone=(self "https://forms.fillout.com" "https://*.fillout.com"), geolocation=(self "https://forms.fillout.com" "https://*.fillout.com")`
 - `X-Frame-Options`: `DENY`
 
-The JSON-LD script rendered from `components/structured-data.tsx` is static. Its SHA-256 hash is `sha256-13Mu0NUzfvJHyN7KVhqxHjBb9z4aNRJDjxeJ4sTXgD8=`. When the structured data changes, recompute the hash before updating `middleware.ts`:
+The JSON-LD script rendered from `components/structured-data.tsx` is static. Its SHA-256 hash is `sha256-iKfJdZ3BA2wK3+KXCWFa8PBhc1dyVqzJxa5XCVGWPhY=`. When the structured data changes, recompute the hash before updating `middleware.ts`:
 
 ```bash
 node - <<'NODE'
@@ -30,12 +30,7 @@ const structuredData = [
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Torvus Security",
-    url: "https://platform.torvussecurity.com",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://platform.torvussecurity.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    url: "https://platform.torvussecurity.com"
   }
 ];
 const json = JSON.stringify(structuredData);

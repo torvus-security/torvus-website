@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+// @ts-expect-error - upstream types do not yet expose named helpers
 import { injectAxe, checkA11y } from "@axe-core/playwright";
 
 const WAITLIST_CTA = /Sign up for updates/i;

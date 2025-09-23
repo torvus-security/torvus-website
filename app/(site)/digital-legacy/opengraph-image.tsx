@@ -55,7 +55,7 @@ export default function DigitalLegacyOg() {
           </div>
         </div>
         <div style={{ fontSize: "26px", fontWeight: 500, color: "#BBF7D0" }}>
-          torvussecurity.com/digital-legacy
+          platform.torvussecurity.com/digital-legacy
         </div>
       </div>
     ),

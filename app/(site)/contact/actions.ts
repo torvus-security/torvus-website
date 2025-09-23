@@ -2,8 +2,10 @@
 
 import { randomUUID } from "node:crypto";
 
+import { headers } from "next/headers";
 import { z } from "zod";
 
+import { notifyContactSubmission, persistContactSubmission } from "@/lib/contact-sink";
 import { rateLimit } from "@/lib/rate-limit";
 import { sanitizeInput } from "@/lib/sanitize";
 
@@ -63,16 +65,32 @@ export async function submitContactAction(
     };
   }
 
+  const requestHeaders = headers();
   const payload = {
     id: randomUUID(),
     name: sanitizeInput(name),
     email: sanitizeInput(email),
     message: sanitizeInput(message, { allowNewlines: true }),
     submittedAt: new Date().toISOString(),
+    userAgent: requestHeaders.get("user-agent"),
+    referer: requestHeaders.get("referer"),
   };
 
-  // TODO: Route payload to the messaging queue / CRM integration instead of logging.
-  void payload;
+  try {
+    await persistContactSubmission(payload);
+  } catch (error) {
+    console.error("Failed to persist contact submission", error);
+    return {
+      status: "error",
+      message: "Please try again later.",
+    };
+  }
+
+  try {
+    await notifyContactSubmission(payload);
+  } catch (error) {
+    console.error("Failed to send contact notification", error);
+  }
 
   return {
     status: "success",

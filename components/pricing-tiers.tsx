@@ -54,7 +54,7 @@ const tiers: Tier[] = [
     ],
     cta: {
       label: "Contact sales",
-      href: "mailto:security@torvussecurity.com",
+      href: "#enterprise-contact",
       variant: "link",
     },
   },

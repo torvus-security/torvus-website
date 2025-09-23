@@ -57,7 +57,7 @@ export default function OgImage() {
           </div>
         </div>
         <div style={{ fontSize: "26px", fontWeight: 500, color: "#A5F3FC" }}>
-          www.torvussecurity.com
+          platform.torvussecurity.com
         </div>
       </div>
     ),

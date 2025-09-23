@@ -67,7 +67,7 @@ export async function GET(request: Request) {
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 22 }}>
           <span style={{ color: "rgba(229, 231, 235, 0.8)", fontWeight: 500 }}>
-            torvussecurity.com
+            platform.torvussecurity.com
           </span>
           <span style={{ color: "rgba(229, 231, 235, 0.8)", fontWeight: 500 }}>
             Protect people by protecting their information.

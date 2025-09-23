@@ -21,8 +21,8 @@ const structuredData = [
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Torvus Security",
-    url: "https://www.torvussecurity.com",
-    logo: "https://www.torvussecurity.com/icon.svg",
+    url: "https://platform.torvussecurity.com",
+    logo: "https://platform.torvussecurity.com/icon.svg",
     sameAs: ["https://status.torvussecurity.com"],
     contactPoint: [{"@type":"ContactPoint","contactType":"support","email":"hello@torvussecurity.com"}]
   },
@@ -30,10 +30,10 @@ const structuredData = [
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Torvus Security",
-    url: "https://www.torvussecurity.com",
+    url: "https://platform.torvussecurity.com",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://www.torvussecurity.com/search?q={search_term_string}",
+      target: "https://platform.torvussecurity.com/search?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   }

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const JSON_LD_HASH = "sha256-13Mu0NUzfvJHyN7KVhqxHjBb9z4aNRJDjxeJ4sTXgD8=";
+const JSON_LD_HASH = "sha256-iKfJdZ3BA2wK3+KXCWFa8PBhc1dyVqzJxa5XCVGWPhY=";
 const DEFAULT_POSTHOG_HOST = "https://us.i.posthog.com";
 const DEVICE_PERMISSION_ORIGINS = ['"https://forms.fillout.com"', '"https://*.fillout.com"'];
 
